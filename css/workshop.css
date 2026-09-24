@@ -1,0 +1,1368 @@
+/* =====================================================================
+   ASHTECH — workshop.css
+   ===================================================================== */
+@layer pages {
+
+  .source-tip {
+    font-size: var(--step-0) !important;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Anatomy of a tag ---------- */
+  .tag-anatomy {
+    display: grid;
+    gap: var(--space-l);
+    padding: var(--space-l);
+    background: var(--ink);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+  }
+
+  .tag-anatomy__code {
+    max-width: none;
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    font-size: clamp(1.1rem, 3.4vw, 2.2rem);
+    color: #d6e4ff;
+    text-align: center;
+    line-height: 1.8;
+  }
+
+  .part {
+    padding: 0.05em 0.25em;
+    border-radius: 8px;
+    cursor: help;
+    transition: background-color 0.2s, color 0.2s, scale 0.2s var(--ease-bounce);
+    display: inline-block;
+  }
+
+  .part--open, .part--close { color: #ff8f7a; }
+  .part--attr { color: #ffd166; }
+  .part--value { color: #9be07f; }
+  .part--content { color: var(--white); }
+
+  .part:hover,
+  .part:focus-visible {
+    scale: 1.12;
+    background: rgb(255 255 255 / 0.12);
+    outline: none;
+  }
+
+  .tag-anatomy__notes {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: var(--space-s);
+  }
+
+  .note {
+    padding: var(--space-s) var(--space-m);
+    background: #2a3a6e;
+    color: #d6e4ff;
+    border-radius: var(--r-md);
+    border-top: 6px solid var(--c);
+    font-size: 0.92rem;
+    transition: background-color 0.2s, translate 0.2s var(--ease-bounce);
+  }
+
+  .note b {
+    display: block;
+    color: var(--white);
+  }
+
+  .note code {
+    background: rgb(255 255 255 / 0.15);
+    color: inherit;
+  }
+
+  .note--open, .note--close { --c: #ff8f7a; }
+  .note--attr { --c: #ffd166; }
+  .note--value { --c: #9be07f; }
+  .note--content { --c: var(--white); }
+
+  /* Hovering a part of the code lights up its note */
+  .tag-anatomy:has(.part--open:is(:hover, :focus-visible)) .note--open,
+  .tag-anatomy:has(.part--attr:is(:hover, :focus-visible)) .note--attr,
+  .tag-anatomy:has(.part--value:is(:hover, :focus-visible)) .note--value,
+  .tag-anatomy:has(.part--content:is(:hover, :focus-visible)) .note--content,
+  .tag-anatomy:has(.part--close:is(:hover, :focus-visible)) .note--close {
+    background: var(--c);
+    color: var(--ink);
+    translate: 0 -6px;
+  }
+
+  .tag-anatomy:has(.part--open:is(:hover, :focus-visible)) .note--open b,
+  .tag-anatomy:has(.part--attr:is(:hover, :focus-visible)) .note--attr b,
+  .tag-anatomy:has(.part--value:is(:hover, :focus-visible)) .note--value b,
+  .tag-anatomy:has(.part--content:is(:hover, :focus-visible)) .note--content b,
+  .tag-anatomy:has(.part--close:is(:hover, :focus-visible)) .note--close b {
+    color: var(--ink);
+  }
+
+  /* ---------- The box model, in 3D ---------- */
+  .boxlab {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-l);
+    padding: var(--space-l);
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+    perspective: 1200px;
+    overflow: hidden;
+  }
+
+  .boxlab__stage {
+    transform-style: preserve-3d;
+    transition: transform 0.9s var(--ease-bounce);
+  }
+
+  .layer {
+    position: relative;
+    display: grid;
+    place-items: center;
+    padding: 2.2rem 2.6rem;
+    border-radius: var(--r-sm);
+    transform-style: preserve-3d;
+    transition: transform 0.9s var(--ease-bounce);
+  }
+
+  .layer > span {
+    position: absolute;
+    top: 0.3rem;
+    left: 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .layer--margin {
+    background: repeating-linear-gradient(45deg, #ffe0c2 0 8px, #fff1e3 8px 16px);
+    outline: 2px dashed #e39a4f;
+  }
+
+  .layer--border {
+    background: var(--ink);
+    color: var(--white);
+    padding: 2rem;
+  }
+
+  .layer--padding {
+    background: #c9f0b8;
+    color: var(--ink);
+  }
+
+  .layer--content {
+    padding: 0.5rem;
+    background: #bfe0ff;
+    outline: 2px solid var(--blue);
+  }
+
+  .layer--content img {
+    width: 110px;
+  }
+
+  /* 3D switched on: tilt the whole stage, then lift each layer a bit higher */
+  #explode:checked ~ .boxlab__stage {
+    transform: rotateX(55deg) rotateZ(-30deg) scale(0.8);
+  }
+
+  #explode:checked ~ .boxlab__stage .layer--border,
+  #explode:checked ~ .boxlab__stage .layer--padding,
+  #explode:checked ~ .boxlab__stage .layer--content {
+    transform: translateZ(45px);
+    box-shadow: 0 0 0 1px rgb(27 42 85 / 0.2);
+  }
+
+  #explode:checked + .boxlab__toggle {
+    background: var(--grass-light);
+  }
+
+  #explode:focus-visible + .boxlab__toggle {
+    outline: 4px solid var(--yellow);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 560px) {
+    .layer { padding: 1.8rem 1rem; }
+    .layer--border { padding: 1.6rem 0.8rem; }
+  }
+
+  /* ---------- Shared lab controls ---------- */
+  .flexlab,
+  .gridlab {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "controls code"
+      "stage stage";
+    gap: var(--space-l);
+    padding: var(--space-l);
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+  }
+
+  .lab-controls {
+    grid-area: controls;
+    display: grid;
+    gap: var(--space-m);
+    align-content: start;
+  }
+
+  .lab-controls fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-inline-size: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .lab-controls legend {
+    width: 100%;
+    margin-bottom: 0.3rem;
+    padding: 0;
+    font-weight: 700;
+  }
+
+  .lab-controls label {
+    padding: 0.25rem 0.8rem;
+    font-family: ui-monospace, Consolas, monospace;
+    font-size: 0.9rem;
+    background: var(--sky);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-pill);
+    cursor: pointer;
+    transition: background-color 0.15s, translate 0.15s;
+  }
+
+  .lab-controls label:hover {
+    translate: 0 -2px;
+  }
+
+  .lab-code {
+    grid-area: code;
+    align-self: start;
+    font-size: 1rem;
+    padding: var(--space-m);
+    background: var(--ink);
+    color: #d6e4ff;
+    border-radius: var(--r-md);
+    overflow-x: auto;
+  }
+
+  .lab-code b {
+    color: var(--yellow);
+    font-weight: 700;
+  }
+
+  @media (max-width: 760px) {
+    .flexlab,
+    .gridlab {
+      grid-template-columns: 1fr;
+      grid-template-areas: "controls" "code" "stage";
+      padding: var(--space-m);
+    }
+  }
+
+  /* ---------- Flexbox lab ---------- */
+  .flexlab__row {
+    grid-area: stage;
+    display: flex;
+    gap: var(--space-m);
+    min-height: 200px;
+    padding: var(--space-m);
+    border: 3px dashed var(--ink-soft);
+    border-radius: var(--r-md);
+    background:
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 40px 40px,
+      var(--sky);
+  }
+
+  .flexlab__big {
+    --size: 110px;
+  }
+
+  /* Each radio sets one value on the row and prints it in the code box */
+  .flexlab:has(#jc-flex-start:checked) .flexlab__row { justify-content: flex-start; }
+  .flexlab:has(#jc-center:checked) .flexlab__row { justify-content: center; }
+  .flexlab:has(#jc-flex-end:checked) .flexlab__row { justify-content: flex-end; }
+  .flexlab:has(#jc-space-between:checked) .flexlab__row { justify-content: space-between; }
+  .flexlab:has(#jc-space-evenly:checked) .flexlab__row { justify-content: space-evenly; }
+  .flexlab:has(#ai-flex-start:checked) .flexlab__row { align-items: flex-start; }
+  .flexlab:has(#ai-center:checked) .flexlab__row { align-items: center; }
+  .flexlab:has(#ai-flex-end:checked) .flexlab__row { align-items: flex-end; }
+
+  .flexlab:has(#jc-flex-start:checked) .out-jc::after { content: "flex-start"; }
+  .flexlab:has(#jc-center:checked) .out-jc::after { content: "center"; }
+  .flexlab:has(#jc-flex-end:checked) .out-jc::after { content: "flex-end"; }
+  .flexlab:has(#jc-space-between:checked) .out-jc::after { content: "space-between"; }
+  .flexlab:has(#jc-space-evenly:checked) .out-jc::after { content: "space-evenly"; }
+  .flexlab:has(#ai-flex-start:checked) .out-ai::after { content: "flex-start"; }
+  .flexlab:has(#ai-center:checked) .out-ai::after { content: "center"; }
+  .flexlab:has(#ai-flex-end:checked) .out-ai::after { content: "flex-end"; }
+
+  /* The chosen label, and keyboard focus, for every lab */
+  .flexlab:has(#jc-flex-start:checked) [for="jc-flex-start"],
+  .flexlab:has(#jc-center:checked) [for="jc-center"],
+  .flexlab:has(#jc-flex-end:checked) [for="jc-flex-end"],
+  .flexlab:has(#jc-space-between:checked) [for="jc-space-between"],
+  .flexlab:has(#jc-space-evenly:checked) [for="jc-space-evenly"],
+  .flexlab:has(#ai-flex-start:checked) [for="ai-flex-start"],
+  .flexlab:has(#ai-center:checked) [for="ai-center"],
+  .flexlab:has(#ai-flex-end:checked) [for="ai-flex-end"],
+  .gridlab:has(#cols-1:checked) [for="cols-1"],
+  .gridlab:has(#cols-2:checked) [for="cols-2"],
+  .gridlab:has(#cols-3:checked) [for="cols-3"],
+  .gridlab:has(#cols-4:checked) [for="cols-4"] {
+    background: var(--yellow);
+    box-shadow: 0 3px 0 var(--ink);
+  }
+
+  .flexlab:has(input:focus-visible) .lab-controls,
+  .gridlab:has(input:focus-visible) .lab-controls {
+    outline: 3px dashed var(--blue);
+    outline-offset: 6px;
+    border-radius: var(--r-sm);
+  }
+
+  /* ---------- Grid lab ---------- */
+  .gridlab__grid {
+    grid-area: stage;
+    list-style: none;
+    padding: var(--space-m);
+    display: grid;
+    gap: 1rem;
+    border: 3px dashed var(--ink-soft);
+    border-radius: var(--r-md);
+    background: var(--sky);
+  }
+
+  .gridlab__grid li {
+    display: grid;
+    place-items: center;
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-sm);
+  }
+
+  .gridlab__grid img {
+    width: 88px;
+  }
+
+  .gridlab:has(#cols-1:checked) .gridlab__grid { grid-template-columns: repeat(1, 1fr); }
+  .gridlab:has(#cols-2:checked) .gridlab__grid { grid-template-columns: repeat(2, 1fr); }
+  .gridlab:has(#cols-3:checked) .gridlab__grid { grid-template-columns: repeat(3, 1fr); }
+  .gridlab:has(#cols-4:checked) .gridlab__grid { grid-template-columns: repeat(4, 1fr); }
+
+  .gridlab:has(#cols-1:checked) .out-cols::after { content: "1"; }
+  .gridlab:has(#cols-2:checked) .out-cols::after { content: "2"; }
+  .gridlab:has(#cols-3:checked) .out-cols::after { content: "3"; }
+  .gridlab:has(#cols-4:checked) .out-cols::after { content: "4"; }
+
+  /* ---------- Tables ---------- */
+  .table-scroll {
+    overflow-x: auto;
+    border: var(--line);
+    border-radius: var(--r-md);
+    box-shadow: var(--lift);
+    background: var(--white);
+  }
+
+  .sel-table,
+  .words-table {
+    width: 100%;
+    min-width: 680px;
+    border-collapse: collapse;
+  }
+
+  .sel-table th,
+  .words-table th {
+    padding: 0.7rem 1rem;
+    text-align: left;
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--step-1);
+    background: var(--ink);
+    color: var(--white);
+  }
+
+  .sel-table td,
+  .words-table td {
+    padding: 0.6rem 1rem;
+    border-top: 1px solid var(--grid);
+    vertical-align: top;
+  }
+
+  .sel-table tbody tr:nth-child(even),
+  .words-table tbody tr:nth-child(even) {
+    background: var(--sky);
+  }
+
+  .sel-table tbody tr:hover,
+  .words-table tbody tr:hover {
+    background: var(--yellow-soft);
+  }
+
+  .sel-table td:first-child code,
+  .words-table td:first-child code {
+    white-space: nowrap;
+  }
+
+  /* Give the example tags a bit of personality */
+  .words-table del { color: var(--red-deep); }
+  .words-table ins { color: var(--grass-deep); text-decoration-thickness: 2px; }
+  .words-table u { text-decoration: var(--red) wavy underline; }
+  .words-table q { font-style: italic; }
+  .words-table var { font-family: Georgia, serif; color: var(--blue); }
+  .words-table samp { background: var(--ink); color: #9be07f; padding: 0 0.3em; border-radius: 4px; }
+
+  /* ---------- Colour swatches ---------- */
+  .swatches {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+    gap: var(--space-m);
+  }
+
+  .swatches li {
+    display: grid;
+    gap: 0.2rem;
+    padding: 110px var(--space-m) var(--space-m);
+    background: linear-gradient(var(--sw) 0 96px, var(--white) 96px);
+    border: var(--line);
+    border-radius: var(--r-md);
+    box-shadow: var(--lift);
+    transition: translate 0.2s var(--ease-bounce);
+  }
+
+  .swatches li:hover {
+    translate: 0 -6px;
+  }
+
+  .swatches code {
+    font-size: 0.85rem;
+    justify-self: start;
+  }
+
+  .swatches span {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- @supports checks ---------- */
+  .checks {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-s);
+  }
+
+  .check {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem 1rem;
+    padding: var(--space-s) var(--space-m);
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-md);
+  }
+
+  .check b {
+    min-width: 14rem;
+  }
+
+  .yes {
+    display: none;
+    color: var(--grass-deep);
+    font-weight: 700;
+  }
+
+  .no {
+    color: var(--red-deep);
+    font-weight: 700;
+  }
+
+  .yes::before { content: "✔ "; }
+  .no::before { content: "✘ "; }
+}
+
+/* @supports blocks sit outside the layer so they're easy to find */
+@supports selector(:has(a)) {
+  .check--has .yes { display: inline; }
+  .check--has .no { display: none; }
+}
+
+@supports (animation-timeline: scroll()) {
+  .check--scroll .yes { display: inline; }
+  .check--scroll .no { display: none; }
+}
+
+@supports (view-transition-name: none) {
+  .check--vt .yes { display: inline; }
+  .check--vt .no { display: none; }
+}
+
+/* =====================================================================
+   THE NEWER LABS (the ones marked JS) and teacher tools
+   ===================================================================== */
+@layer pages {
+
+  /* ---------- Lab index ---------- */
+  .lab-index {
+    margin-top: var(--space-m);
+    padding: var(--space-m) var(--space-l);
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+  }
+
+  .lab-index__title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    margin-bottom: var(--space-s);
+  }
+
+  /* The labs go from easy to harder, so they are numbered */
+  .lab-index ol {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 0.4rem var(--space-l);
+    padding-left: 1.6rem;
+  }
+
+  .lab-index li::marker {
+    font-family: var(--font-display);
+    color: var(--red);
+  }
+
+  .lab-tag {
+    display: inline-block;
+    padding: 0 0.4em;
+    font-family: ui-monospace, Consolas, monospace;
+    font-size: 0.72em;
+    font-weight: 700;
+    line-height: 1.4;
+    vertical-align: 0.15em;
+    color: var(--ink);
+    background: #f7df1e;
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+  }
+
+  h2 .lab-tag {
+    font-size: 0.45em;
+    vertical-align: 0.5em;
+  }
+
+  .workshop-why {
+    margin-top: var(--space-l);
+    display: grid;
+    gap: var(--space-s);
+  }
+
+  .teacher-hint {
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Present button + full-screen mode ---------- */
+  .lab > .section-head {
+    position: relative;
+    padding-right: 8rem;
+  }
+
+  .present {
+    position: absolute;
+    top: 0.3rem;
+    right: 0;
+    padding: 0.4rem 1rem;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--ink);
+    border: var(--line);
+    border-radius: var(--r-pill);
+    cursor: pointer;
+  }
+
+  /* :fullscreen matches the lab while it fills the screen */
+  .lab:fullscreen {
+    overflow: auto;
+    padding: var(--space-xl);
+    background-color: var(--sky);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 28px 28px;
+    font-size: 1.2rem;
+  }
+
+  .lab:fullscreen .teach {
+    display: none;
+  }
+
+  @media (max-width: 600px) {
+    .lab > .section-head { padding-right: 0; }
+    .present { display: none; }
+  }
+
+  /* ---------- "Try this" and "For teachers" ---------- */
+  .try {
+    margin-top: var(--space-m);
+    padding: var(--space-m) var(--space-l);
+    background: var(--yellow-soft);
+    border: var(--line);
+    border-radius: var(--r-md);
+  }
+
+  .try__title {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+  }
+
+  .try ol {
+    padding-left: 1.4rem;
+    display: grid;
+    gap: 0.3rem;
+    margin-top: 0.3rem;
+  }
+
+  .teach {
+    margin-top: var(--space-m);
+    border: 3px solid var(--grass-deep);
+    border-radius: var(--r-md);
+    background: #effae9;
+  }
+
+  .teach summary {
+    padding: 0.6rem 1rem;
+    font-weight: 700;
+    color: var(--grass-deep);
+    cursor: pointer;
+  }
+
+  .teach[open] summary {
+    border-bottom: 2px dashed var(--grass-deep);
+  }
+
+  .teach__body {
+    display: grid;
+    gap: 0.4rem;
+    padding: var(--space-s) var(--space-m) var(--space-m);
+  }
+
+  .teach__body ul {
+    padding-left: 1.4rem;
+  }
+
+  /* ---------- Code Lab ---------- */
+  .codelab {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "presets presets"
+      "editors preview";
+    gap: var(--space-m);
+    padding: var(--space-m);
+    background: var(--ink);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+  }
+
+  .codelab__presets {
+    grid-area: presets;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .chip-btn {
+    padding: 0.3rem 0.9rem;
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--ink);
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-pill);
+    cursor: pointer;
+  }
+
+  .chip-btn[aria-pressed="true"] {
+    background: var(--yellow);
+    box-shadow: 0 0 0 3px var(--yellow);
+  }
+
+  .codelab__editors {
+    grid-area: editors;
+    display: grid;
+    gap: var(--space-s);
+  }
+
+  .codelab__editor {
+    display: grid;
+  }
+
+  .codelab__editor label {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    color: var(--yellow);
+  }
+
+  .codelab__editor label span {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: #b7c4e8;
+    margin-left: 0.4rem;
+  }
+
+  .codelab textarea {
+    min-height: 220px;
+    padding: 0.8rem;
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: #e6edff;
+    background: #0f1a3a;
+    border: 2px solid #34457a;
+    border-radius: var(--r-sm);
+    resize: vertical;
+    tab-size: 2;
+    caret-color: var(--yellow);
+  }
+
+  .codelab textarea:focus {
+    outline: 3px solid var(--yellow);
+    border-color: transparent;
+  }
+
+  .codelab__preview {
+    grid-area: preview;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    overflow: hidden;
+    border-radius: var(--r-md);
+    background: var(--white);
+  }
+
+  /* A tiny pretend browser window */
+  .codelab__bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    background: #dfe5f2;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .codelab__bar span {
+    width: 12px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--red);
+  }
+
+  .codelab__bar span:nth-child(2) { background: var(--yellow); }
+  .codelab__bar span:nth-child(3) { background: var(--grass); margin-right: 0.5rem; }
+
+  .codelab iframe {
+    width: 100%;
+    height: 100%;
+    min-height: 420px;
+    border: 0;
+  }
+
+  .codelab__noscript {
+    grid-column: 1 / -1;
+    color: var(--white);
+  }
+
+  @media (max-width: 860px) {
+    .codelab {
+      grid-template-columns: 1fr;
+      grid-template-areas: "presets" "editors" "preview";
+    }
+    .codelab iframe { min-height: 320px; }
+  }
+
+  /* ---------- Measure the box ---------- */
+  .measure {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);
+    grid-template-areas:
+      "controls stage"
+      "maths maths";
+    gap: var(--space-l);
+    padding: var(--space-l);
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+  }
+
+  .measure__controls { grid-area: controls; }
+
+  .measure__controls,
+  .mixer__controls,
+  .studio__controls {
+    display: grid;
+    gap: 0.2rem;
+    align-content: start;
+  }
+
+  .measure__controls label,
+  .mixer__controls label,
+  .studio__controls label {
+    font-weight: 700;
+    font-family: ui-monospace, Consolas, monospace;
+  }
+
+  output {
+    color: var(--red);
+    font-weight: 700;
+  }
+
+  .measure__controls input[type="range"],
+  .mixer__controls input[type="range"],
+  .studio__controls input[type="range"] {
+    width: 100%;
+    margin-bottom: 0.4rem;
+  }
+
+  .measure__controls fieldset,
+  .studio__controls fieldset {
+    border: 2px solid var(--grid);
+    border-radius: var(--r-sm);
+    padding: 0.5rem 0.8rem;
+    display: grid;
+    gap: 0.2rem;
+    min-inline-size: 0;
+  }
+
+  .measure__controls fieldset label {
+    font-weight: 500;
+  }
+
+  .measure__stage {
+    grid-area: stage;
+    display: grid;
+    place-items: center;
+    min-height: 320px;
+    background: var(--sky);
+    border-radius: var(--r-md);
+    overflow: auto;
+  }
+
+  /* The margin can't be seen, so we show it as an orange striped area */
+  .measure__margin {
+    background: repeating-linear-gradient(45deg, #ffe0c2 0 8px, #fff1e3 8px 16px);
+    outline: 2px dashed #e39a4f;
+    transition: padding 0.2s;
+  }
+
+  .measure__box {
+    display: grid;
+    place-items: center;
+    border-style: solid;
+    border-color: var(--ink);
+    background: #c9f0b8;       /* padding colour */
+    transition: width 0.2s, padding 0.2s, border-width 0.2s;
+    overflow: hidden;
+  }
+
+  .measure__box img {
+    width: 100%;
+    max-width: 96px;
+    background: #bfe0ff;       /* content colour */
+  }
+
+  .measure__maths {
+    grid-area: maths;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: var(--space-m);
+    align-items: start;
+  }
+
+  .measure__sum {
+    font-size: var(--step-1);
+    line-height: 1.5;
+  }
+
+  .measure__sum strong {
+    color: var(--red);
+  }
+
+  @media (max-width: 760px) {
+    .measure,
+    .measure__maths {
+      grid-template-columns: 1fr;
+    }
+    .measure {
+      grid-template-areas: "controls" "stage" "maths";
+    }
+  }
+
+  /* ---------- Selector Detective ---------- */
+  .detective {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    gap: var(--space-m);
+    align-items: start;
+  }
+
+  .detective__scene,
+  .detective__code,
+  .detective__panel {
+    padding: var(--space-m);
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-md);
+    box-shadow: var(--lift);
+  }
+
+  .detective__scene h3 {
+    font-size: var(--step-1);
+    margin-top: 0.3rem;
+  }
+
+  .detective__scene ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-block: 0.4rem 0.8rem;
+  }
+
+  .detective__scene .box {
+    padding: 0.4rem 0.8rem;
+    background: var(--sky);
+    border: 2px dashed var(--ink-soft);
+    border-radius: var(--r-sm);
+    margin-bottom: 0.8rem;
+  }
+
+  .detective__scene .mon {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    font-weight: 700;
+    border: 2px solid var(--ink);
+    border-radius: var(--r-pill);
+    background: #e6e8f0;
+    transition: scale 0.2s var(--ease-bounce), box-shadow 0.2s, background-color 0.2s;
+  }
+
+  .detective__scene .fire { background: #fbd3b4; }
+  .detective__scene .water { background: #cddcfb; }
+  .detective__scene .grass { background: #d6efc6; }
+  .detective__scene .electric { background: #fcefb0; }
+  .detective__scene .ice { background: #d5f1f0; }
+  .detective__scene .ghost { background: #d9cfe6; }
+
+  /* JavaScript adds .is-picked to everything your selector finds */
+  .detective__scene .is-picked {
+    scale: 1.12;
+    box-shadow: 0 0 0 4px var(--yellow), 0 0 0 7px var(--ink);
+    animation: picked 0.4s var(--ease-bounce);
+  }
+
+  .detective__scene .is-picked:not(.mon) {
+    outline: 4px solid var(--yellow);
+    box-shadow: none;
+    scale: 1;
+  }
+
+  @keyframes picked {
+    from { scale: 0.8; }
+  }
+
+  .detective__code pre {
+    font-size: 0.8rem;
+    line-height: 1.5;
+    overflow-x: auto;
+    color: var(--ink);
+  }
+
+  .detective__label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  #det-input {
+    width: 100%;
+    padding: 0.6rem 0.9rem;
+    font-family: ui-monospace, Consolas, monospace;
+    font-size: var(--step-1);
+    border: var(--line);
+    border-radius: var(--r-sm);
+    background: var(--sky);
+    caret-color: var(--red);
+  }
+
+  .detective__result {
+    min-height: 3rem;
+    margin-block: 0.4rem var(--space-m);
+    font-weight: 500;
+  }
+
+  .detective__result.is-error { color: var(--red-deep); }
+  .detective__result.is-solved { color: var(--grass-deep); font-weight: 700; }
+
+  .missions {
+    padding-left: 1.5rem;
+    display: grid;
+    gap: 4px;
+  }
+
+  .missions button {
+    width: 100%;
+    padding: 0.3rem 0.6rem;
+    text-align: left;
+    color: var(--ink);
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: var(--r-sm);
+    cursor: pointer;
+  }
+
+  .missions .is-current button {
+    background: var(--yellow-soft);
+    border-color: var(--ink);
+  }
+
+  .missions .is-done button {
+    text-decoration: line-through;
+    text-decoration-color: var(--grass-deep);
+    color: var(--ink-soft);
+  }
+
+  .missions .is-done::marker {
+    content: "✔ ";
+    color: var(--grass-deep);
+  }
+
+  .detective__score {
+    margin-top: var(--space-s);
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+  }
+
+  @media (max-width: 1000px) {
+    .detective { grid-template-columns: 1fr 1fr; }
+    .detective__panel { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 640px) {
+    .detective { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Specificity Showdown ---------- */
+  .showdown {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: var(--space-m);
+    align-items: stretch;
+  }
+
+  .showdown__rule {
+    display: grid;
+    align-content: start;
+    gap: 0.5rem;
+    padding: var(--space-m);
+    border: var(--line);
+    border-radius: var(--r-md);
+    box-shadow: var(--lift);
+  }
+
+  .showdown__rule--red { background: #ffe3dc; }
+  .showdown__rule--blue { background: #dde8ff; }
+
+  .showdown__rule label {
+    font-weight: 700;
+  }
+
+  .showdown__rule input {
+    min-width: 0;
+    padding: 0.5rem 0.8rem;
+    font-family: ui-monospace, Consolas, monospace;
+    font-size: var(--step-1);
+    border: var(--line);
+    border-radius: var(--r-sm);
+  }
+
+  .score__cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    text-align: center;
+  }
+
+  .score__cols span {
+    display: grid;
+    padding: 0.3rem;
+    font-size: 0.8rem;
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-sm);
+  }
+
+  .score__cols b {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--step-3);
+    line-height: 1.1;
+  }
+
+  .score__note {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--red-deep);
+  }
+
+  .showdown__arena {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    gap: 0.5rem;
+    padding: var(--space-m);
+    text-align: center;
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-md);
+  }
+
+  .showdown__vs {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    color: var(--ink-soft);
+  }
+
+  #pika {
+    font-family: var(--font-display);
+    font-size: var(--step-5);
+    color: var(--ink);
+    transition: color 0.3s;
+  }
+
+  #pika.wins-1 { color: #d62828; animation: picked 0.4s var(--ease-bounce); }
+  #pika.wins-2 { color: #1f5fd6; animation: picked-too 0.4s var(--ease-bounce); }
+
+  @keyframes picked-too {
+    from { scale: 0.8; }
+  }
+
+  .showdown__html {
+    font-size: 0.8rem;
+    white-space: pre-wrap;
+  }
+
+  .showdown__verdict {
+    font-weight: 700;
+    font-size: var(--step-1);
+  }
+
+  @media (max-width: 860px) {
+    .showdown { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Colour Mixer ---------- */
+  .mixer {
+    --mix: hsl(210 70% 55%);
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: var(--space-l);
+    padding: var(--space-l);
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+  }
+
+  /* A rainbow track makes the hue slider easy to understand */
+  .mixer__hue {
+    appearance: none;
+    height: 18px;
+    border: 2px solid var(--ink);
+    border-radius: var(--r-pill);
+    background: linear-gradient(90deg, red, yellow, lime, cyan, blue, magenta, red);
+  }
+
+  .mixer__swatch {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    max-width: 280px;
+    width: 100%;
+    margin-inline: auto;
+    border: var(--line);
+    border-radius: var(--r-lg);
+    /* A checkerboard behind, so see-through colours are easy to spot */
+    background: repeating-conic-gradient(#eef1f7 0 25%, #fff 0 50%) 0 0 / 24px 24px;
+  }
+
+  /* The Pokémon shape: a mask cut from Mew's picture, filled with your colour */
+  .mixer__mon {
+    width: 80%;
+    aspect-ratio: 1;
+    background: var(--mix);
+    mask: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/151.png") center / contain no-repeat;
+  }
+
+  .mixer__codes {
+    display: grid;
+    gap: 0.3rem;
+    margin-top: var(--space-m);
+  }
+
+  .mixer__codes div {
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    align-items: center;
+  }
+
+  .mixer__codes dt {
+    font-weight: 700;
+  }
+
+  .mixer__game {
+    display: grid;
+    align-content: start;
+    gap: 0.6rem;
+  }
+
+  .mixer__target {
+    display: grid;
+    place-items: end start;
+    height: 120px;
+    padding: 0.6rem;
+    background: var(--goal, var(--t-water));
+    border: var(--line);
+    border-radius: var(--r-md);
+  }
+
+  .mixer__game meter {
+    width: 100%;
+    height: 18px;
+  }
+
+  @media (max-width: 960px) {
+    .mixer { grid-template-columns: 1fr 1fr; }
+    .mixer__game { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 600px) {
+    .mixer { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Move Studio ---------- */
+  .studio {
+    display: grid;
+    grid-template-columns: minmax(240px, 1fr) minmax(0, 1.6fr);
+    grid-template-areas:
+      "controls stage"
+      "controls code";
+    gap: var(--space-m) var(--space-l);
+    padding: var(--space-l);
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+  }
+
+  .studio__controls {
+    grid-area: controls;
+    gap: var(--space-s);
+  }
+
+  .studio__controls select {
+    margin-bottom: 0.4rem;
+    padding: 0.35rem 0.5rem;
+    border: 2px solid var(--ink);
+    border-radius: var(--r-sm);
+    background: var(--sky);
+  }
+
+  .studio__buttons {
+    display: flex;
+    gap: var(--space-s);
+  }
+
+  .studio__stage {
+    grid-area: stage;
+    position: relative;
+    display: grid;
+    place-items: center;
+    min-height: 300px;
+    overflow: hidden;
+    border-radius: var(--r-md);
+    background:
+      radial-gradient(ellipse 40% 10% at 50% 80%, #8fcf6a, transparent),
+      linear-gradient(#cfeaff 0 70%, #e7f5d4 70%);
+  }
+
+  /* Where Pikachu "really" is in the layout: transforms never move this */
+  .studio__ghost {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border: 3px dashed rgb(27 42 85 / 0.4);
+    border-radius: var(--r-sm);
+  }
+
+  #st-mon {
+    width: 160px;
+    filter: drop-shadow(4px 4px 0 var(--ink));
+    transition: transform 0.2s;
+  }
+
+  .studio__code {
+    grid-area: code;
+  }
+
+  /* The five animations you can pick. They use translate/rotate/scale,
+     which stack on top of the transform from the sliders. */
+  @keyframes hop {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -90px; }
+  }
+
+  @keyframes spin {
+    to { rotate: 1turn; }
+  }
+
+  @keyframes wobble {
+    25% { rotate: -15deg; }
+    75% { rotate: 15deg; }
+  }
+
+  @keyframes pulse {
+    50% { scale: 1.3; }
+  }
+
+  @keyframes zoom-across {
+    0% { translate: -250px 0; }
+    100% { translate: 250px 0; }
+  }
+
+  @media (max-width: 760px) {
+    .studio {
+      grid-template-columns: 1fr;
+      grid-template-areas: "stage" "controls" "code";
+    }
+  }
+}
+
+@layer pages {
+  /* In the Measure lab the code box sits in a plain grid, not the "code" area */
+  .measure__maths .lab-code {
+    grid-area: auto;
+  }
+}

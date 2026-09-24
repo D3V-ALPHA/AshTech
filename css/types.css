@@ -1,0 +1,399 @@
+/* =====================================================================
+   ASHTECH — types.css
+   ===================================================================== */
+@layer pages {
+
+  /* ---------- The type triangle ---------- */
+  .triangle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: center;
+  }
+
+  .triangle__text p + p,
+  .triangle__text ol + p {
+    margin-top: var(--space-m);
+  }
+
+  .triangle__text > p:first-of-type {
+    margin-top: var(--space-m);
+  }
+
+  .triangle__list {
+    margin-top: var(--space-m);
+    padding-left: 1.6rem;
+    display: grid;
+    gap: 0.6rem;
+    font-size: var(--step-1);
+  }
+
+  /* ::marker styles the number of each list item */
+  .triangle__list li::marker {
+    font-family: var(--font-display);
+    color: var(--red);
+  }
+
+  .triangle__list .type {
+    font-size: 0.95rem;
+    vertical-align: 2px;
+  }
+
+  .wheel {
+    --r: 150px; /* the radius of the circle */
+    position: relative;
+    width: min(100%, 420px);
+    aspect-ratio: 1;
+    justify-self: center;
+    border-radius: 50%;
+    border: 4px solid var(--ink);
+    box-shadow: var(--lift);
+  }
+
+  .wheel__spin {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    /* Coloured ring: a white circle painted on top of a three-colour conic gradient */
+    background:
+      radial-gradient(circle, var(--white) 0 55%, transparent 56%),
+      conic-gradient(from -60deg, var(--t-fire) 0 120deg, var(--t-grass) 0 240deg, var(--t-water) 0);
+    animation: spin 24s linear infinite;
+  }
+
+  .wheel:hover .wheel__spin,
+  .wheel:hover .wheel__slot img {
+    animation-play-state: paused;
+  }
+
+  .wheel__ring {
+    position: absolute;
+    inset: 22%;
+    border-radius: 50%;
+    border: 5px dashed var(--ink);
+  }
+
+  /* Arrow heads: a triangle cut out with clip-path, placed on the ring */
+  .wheel__arrow {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 26px;
+    height: 26px;
+    margin: -13px 0 0 -13px;
+    background: var(--ink);
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+    transform: rotate(var(--a)) translateY(calc(var(--r) * -0.62)) ;
+  }
+
+  /* Each Pokémon is spun to its spot, pushed out, then spun back upright */
+  .wheel__slot {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 36%;
+    translate: -50% -50%;
+    transform: rotate(calc(var(--i) * 120deg)) translateY(calc(var(--r) * -0.78)) rotate(calc(var(--i) * -120deg));
+  }
+
+  .wheel__slot img {
+    width: 100%;
+    filter: drop-shadow(4px 4px 0 var(--ink));
+    /* Turning backwards at the same speed keeps each Pokémon upright */
+    animation: spin 24s linear infinite reverse;
+  }
+
+  @keyframes spin {
+    to { rotate: 1turn; }
+  }
+
+  @media (max-width: 760px) {
+    .triangle { grid-template-columns: 1fr; }
+    .wheel { --r: 120px; width: min(100%, 330px); }
+  }
+
+  /* ---------- 18 type tiles ---------- */
+  .tiles {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--space-m);
+  }
+
+  .tile {
+    position: relative;
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    grid-template-rows: 2.8rem auto;
+    column-gap: var(--space-s);
+    padding: var(--space-s) var(--space-m) var(--space-m);
+    background: linear-gradient(var(--c) 0 3.4rem, var(--white) 3.4rem);
+    border: var(--line);
+    border-radius: var(--r-md);
+    box-shadow: var(--lift);
+  }
+
+  .tile img {
+    width: 96px;
+    margin: -22px -12px -10px -16px;
+    transition: translate 0.3s var(--ease-bounce);
+  }
+
+  .tile:hover img {
+    translate: 0 -10px;
+  }
+
+  .tile h3 {
+    align-self: center;
+    min-height: 2.6rem;
+    display: flex;
+    align-items: center;
+    color: var(--white);
+    -webkit-text-stroke: 5px var(--ink);
+    paint-order: stroke fill;
+    font-size: var(--step-2);
+  }
+
+  .tile p {
+    grid-column: 1 / -1;
+    margin-top: var(--space-s);
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+
+  /* ---------- The type chart table ---------- */
+  .chart-scroll {
+    max-height: 78vh;
+    overflow: auto;
+    border: var(--line);
+    border-radius: var(--r-md);
+    box-shadow: var(--lift);
+    background: var(--white);
+    overscroll-behavior: contain;
+  }
+
+  .chart {
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 0.85rem;
+    min-width: 900px;
+    width: 100%;
+  }
+
+  .chart caption {
+    caption-side: top;
+    text-align: left;
+    padding: var(--space-s) var(--space-m);
+    font-weight: 500;
+    background: var(--yellow-soft);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .chart th,
+  .chart td {
+    text-align: center;
+    padding: 0.3rem;
+    border-right: 1px solid var(--grid);
+    border-bottom: 1px solid var(--grid);
+  }
+
+  .chart td {
+    width: 44px;
+    height: 34px;
+    font-weight: 700;
+  }
+
+  /* Sticky header row and sticky first column */
+  .chart thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--white);
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .chart tbody th {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background: var(--white);
+    border-right: 2px solid var(--ink);
+    text-align: left;
+  }
+
+  .chart thead th:first-child {
+    left: 0;
+    z-index: 3;
+  }
+
+  .chart .type {
+    font-size: 0.72rem;
+    padding: 0.05rem 0.45rem;
+  }
+
+  .chart abbr {
+    text-decoration: none;
+  }
+
+  /* The corner cell, split by a diagonal line */
+  .corner {
+    display: grid;
+    width: 92px;
+    height: 44px;
+    font-size: 0.7rem;
+    background: linear-gradient(to top right, transparent calc(50% - 1px), var(--ink) 50%, transparent calc(50% + 1px));
+  }
+
+  .corner span:first-child { align-self: end; justify-self: start; }
+  .corner span:last-child { align-self: start; justify-self: end; grid-row: 1; }
+
+  .x2 { background: #c9f0b8; color: #1d5a14; }
+  .x05 { background: #ffd6cc; color: #8a2408; }
+  .x0 { background: var(--ink); color: var(--white); }
+
+  /* Row highlight */
+  .chart tbody tr:hover > * {
+    box-shadow: inset 0 0 0 100px rgb(255 203 5 / 0.35);
+  }
+
+  /* Column highlight: :has() notices WHICH column is hovered */
+  .chart:has(tbody td:nth-child(2):hover) :is(thead th, tbody td):nth-child(2),
+  .chart:has(tbody td:nth-child(3):hover) :is(thead th, tbody td):nth-child(3),
+  .chart:has(tbody td:nth-child(4):hover) :is(thead th, tbody td):nth-child(4),
+  .chart:has(tbody td:nth-child(5):hover) :is(thead th, tbody td):nth-child(5),
+  .chart:has(tbody td:nth-child(6):hover) :is(thead th, tbody td):nth-child(6),
+  .chart:has(tbody td:nth-child(7):hover) :is(thead th, tbody td):nth-child(7),
+  .chart:has(tbody td:nth-child(8):hover) :is(thead th, tbody td):nth-child(8),
+  .chart:has(tbody td:nth-child(9):hover) :is(thead th, tbody td):nth-child(9),
+  .chart:has(tbody td:nth-child(10):hover) :is(thead th, tbody td):nth-child(10),
+  .chart:has(tbody td:nth-child(11):hover) :is(thead th, tbody td):nth-child(11),
+  .chart:has(tbody td:nth-child(12):hover) :is(thead th, tbody td):nth-child(12),
+  .chart:has(tbody td:nth-child(13):hover) :is(thead th, tbody td):nth-child(13),
+  .chart:has(tbody td:nth-child(14):hover) :is(thead th, tbody td):nth-child(14),
+  .chart:has(tbody td:nth-child(15):hover) :is(thead th, tbody td):nth-child(15),
+  .chart:has(tbody td:nth-child(16):hover) :is(thead th, tbody td):nth-child(16),
+  .chart:has(tbody td:nth-child(17):hover) :is(thead th, tbody td):nth-child(17),
+  .chart:has(tbody td:nth-child(18):hover) :is(thead th, tbody td):nth-child(18),
+  .chart:has(tbody td:nth-child(19):hover) :is(thead th, tbody td):nth-child(19) {
+    box-shadow: inset 0 0 0 100px rgb(255 203 5 / 0.35);
+  }
+
+  .chart tbody td:hover {
+    outline: 3px solid var(--ink);
+    outline-offset: -3px;
+  }
+
+  .chart tfoot td {
+    text-align: left;
+    padding: var(--space-s) var(--space-m);
+    background: var(--sky);
+    height: auto;
+    font-weight: 500;
+  }
+
+  .key {
+    display: inline-block;
+    min-width: 2rem;
+    margin: 0 0.3rem 0 1rem;
+    padding: 0.1rem 0.4rem;
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 700;
+    background: var(--white);
+  }
+
+  .key:first-child { margin-left: 0; }
+
+  /* ---------- Glossary: a <dl> laid out as a grid ---------- */
+  .glossary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-m);
+  }
+
+  .glossary div {
+    padding: var(--space-m);
+    border-left: 8px solid var(--red);
+    background: var(--white);
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+  }
+
+  .glossary dt {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+  }
+
+  .glossary dfn {
+    font-style: normal;
+  }
+
+  .glossary dd {
+    margin-top: 0.3rem;
+  }
+
+  /* ---------- FAQ with <details> that open smoothly ---------- */
+  .faq {
+    interpolate-size: allow-keywords; /* lets "height: auto" animate */
+  }
+
+  .faq details {
+    margin-top: var(--space-s);
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-md);
+    overflow: hidden;
+  }
+
+  .faq summary {
+    display: flex;
+    align-items: center;
+    gap: var(--space-s);
+    padding: var(--space-m);
+    font-weight: 700;
+    font-size: var(--step-1);
+    cursor: pointer;
+    list-style: none; /* hide the default triangle */
+  }
+
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* Our own marker: a little Poké Ball that rolls when opened */
+  .faq summary::before {
+    content: "";
+    flex-shrink: 0;
+    width: 26px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 3px solid var(--ink);
+    background:
+      radial-gradient(circle, var(--white) 0 18%, var(--ink) 19% 30%, transparent 31%),
+      linear-gradient(var(--red) 0 44%, var(--ink) 44% 56%, var(--white) 56%);
+    transition: rotate 0.4s var(--ease-bounce);
+  }
+
+  .faq details[open] summary::before {
+    rotate: 180deg;
+  }
+
+  .faq summary:hover {
+    background: var(--yellow-soft);
+  }
+
+  .faq details::details-content {
+    block-size: 0;
+    overflow: hidden;
+    transition: block-size 0.4s ease, content-visibility 0.4s allow-discrete;
+  }
+
+  .faq details[open]::details-content {
+    block-size: auto;
+  }
+
+  .faq details p {
+    padding: 0 var(--space-m) var(--space-m) calc(var(--space-m) + 26px + var(--space-s));
+  }
+}

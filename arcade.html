@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Three Pokémon games made with only HTML and CSS: a guessing game, a battle and a catching game.">
+  <meta name="theme-color" content="#e3350d">
+  <title>Arcade | AshTech</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/arcade.css">
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pokedex.html">Pokédex</a></li>
+          <li><a href="types.html">Types</a></li>
+          <li><a href="evolution.html">Evolution</a></li>
+          <li><a href="regions.html">Regions</a></li>
+          <li><a href="arcade.html" aria-current="page">Arcade</a></li>
+          <li><a href="theater.html">Theater</a></li>
+          <li><a href="academy.html">Academy</a></li>
+          <li><a href="workshop.html">Workshop</a></li>
+          <li><a href="teachers.html">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<header class="page-head wrap">
+  <div>
+    <h1 class="logo-type">Arcade</h1>
+    <p>Pick a cartridge and slot it in. All three games are made with only HTML and CSS: no JavaScript at all. Each game page explains the trick it uses.</p>
+  </div>
+  <img class="page-head__art" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/137.png" alt="Porygon, a Pokémon made of computer code" width="220" height="220">
+</header>
+
+<section class="wrap carts" aria-label="Games">
+  <a class="cart" href="quiz.html" style="--cart: #2f6fd0;">
+    <span class="cart__label">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="" width="160" height="160" loading="lazy">
+    </span>
+    <span class="cart__body">
+      <strong>Who’s That Pokémon?</strong>
+      <span>Guess the Pokémon from its shadow. Eight rounds, one score.</span>
+      <span class="cart__level">Easy</span>
+    </span>
+  </a>
+  <a class="cart" href="battle.html" style="--cart: #e3350d;">
+    <span class="cart__label">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/130.png" alt="" width="160" height="160" loading="lazy">
+    </span>
+    <span class="cart__body">
+      <strong>Battle!</strong>
+      <span>Pikachu against a wild Gyarados. Choose the right moves to win.</span>
+      <span class="cart__level">Medium</span>
+    </span>
+  </a>
+  <a class="cart" href="catch.html" style="--cart: #2f7a3a;">
+    <span class="cart__label">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="" width="160" height="160" loading="lazy">
+    </span>
+    <span class="cart__body">
+      <strong>Safari Catch</strong>
+      <span>Tap the Pokémon before they hide back in the tall grass.</span>
+      <span class="cart__level">Fast</span>
+    </span>
+  </a>
+</section>
+
+<section class="section wrap" aria-labelledby="tricks-title">
+  <div class="section-head">
+    <h2 id="tricks-title">The secret: CSS can remember things</h2>
+    <p>Web pages usually need JavaScript to remember what you clicked. Our games use a clever trick instead.</p>
+  </div>
+  <div class="trick">
+    <div class="trick__demo">
+      <!-- A tiny live demo of the checkbox trick -->
+      <input type="checkbox" id="demo-switch" class="visually-hidden">
+      <label for="demo-switch" class="switch"><span class="visually-hidden">Turn the light on</span></label>
+      <span class="bulb" aria-hidden="true"></span>
+      <p class="trick__caption">Tap the switch!</p>
+    </div>
+    <div class="trick__code">
+      <pre><code>&lt;input type="checkbox" id="light"&gt;
+&lt;label for="light"&gt;Switch&lt;/label&gt;</code></pre>
+      <pre><code>#light:checked ~ .bulb {
+  background: yellow;
+}</code></pre>
+      <p>A <code>&lt;label&gt;</code> with a <code>for</code> attribute clicks its checkbox for you, even when the checkbox is hidden. Then the <code>:checked</code> selector lets CSS change anything that comes after it. That’s how every game on this page remembers your moves.</p>
+    </div>
+  </div>
+</section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pokedex.html">Pokédex</a></li>
+            <li><a href="types.html">Types</a></li>
+            <li><a href="evolution.html">Evolution</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+            <li><a href="theater.html">Theater</a></li>
+            <li><a href="academy.html">Academy</a></li>
+            <li><a href="workshop.html">Workshop</a></li>
+            <li><a href="teachers.html">Teachers</a></li>
+            <li><a href="handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

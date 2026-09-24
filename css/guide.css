@@ -1,0 +1,99 @@
+/* =====================================================================
+   ASHTECH — guide.css  (learn.md, shown as a readable web page)
+   ===================================================================== */
+@layer pages {
+  .prose {
+    max-width: 860px;
+    padding: var(--space-l) var(--space-xl) var(--space-xl);
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+    line-height: 1.7;
+  }
+
+  .prose > * + * {
+    margin-top: var(--space-m);
+  }
+
+  .prose h2 {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-m);
+    font-size: var(--step-4);
+    border-top: 4px dotted var(--grid);
+  }
+
+  .prose h3 {
+    margin-top: var(--space-l);
+    font-size: var(--step-2);
+    color: var(--red-deep);
+  }
+
+  .prose h4 {
+    margin-top: var(--space-m);
+  }
+
+  .prose ul,
+  .prose ol {
+    padding-left: 1.5rem;
+  }
+
+  .prose li + li {
+    margin-top: 0.3rem;
+  }
+
+  .prose hr {
+    display: none; /* the h2 lines already separate the sections */
+  }
+
+  .prose pre {
+    padding: var(--space-m);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: #e6edff;
+    background: var(--ink);
+    border-radius: var(--r-md);
+    overflow-x: auto;
+  }
+
+  .prose pre code {
+    background: none;
+    padding: 0;
+  }
+
+  .prose .table-scroll {
+    overflow-x: auto;
+    border: 2px solid var(--ink);
+    border-radius: var(--r-sm);
+  }
+
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  .prose th,
+  .prose td {
+    padding: 0.5rem 0.8rem;
+    text-align: left;
+    vertical-align: top;
+    border-top: 1px solid var(--grid);
+  }
+
+  .prose th {
+    background: var(--sky);
+  }
+
+  .prose blockquote {
+    padding: var(--space-s) var(--space-m);
+    border-left: 6px solid var(--yellow);
+    background: var(--yellow-soft);
+  }
+
+  @media (max-width: 640px) {
+    .prose {
+      padding: var(--space-m);
+    }
+  }
+}

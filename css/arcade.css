@@ -1,0 +1,200 @@
+/* =====================================================================
+   ASHTECH — arcade.css
+   ===================================================================== */
+@layer pages {
+
+  /* ---------- Game cartridges ---------- */
+  .carts {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: var(--space-xl) var(--space-l);
+    padding-top: var(--space-xl);
+  }
+
+  .cart {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    padding: 34px 20px 20px;
+    color: var(--ink);
+    text-decoration: none;
+    background: linear-gradient(#b9bcc8, #9a9eae);
+    border: 4px solid var(--ink);
+    /* A cartridge: the top-right corner is cut off */
+    clip-path: polygon(0 0, 88% 0, 100% 7%, 100% 100%, 0 100%);
+    border-radius: 12px 0 12px 12px;
+    transition: translate 0.35s var(--ease-bounce), rotate 0.35s var(--ease-bounce);
+  }
+
+  /* The ridges along the top */
+  .cart::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    right: 20%;
+    height: 12px;
+    background: repeating-linear-gradient(90deg, #7d8193 0 6px, transparent 6px 12px);
+    border-radius: 3px;
+  }
+
+  /* Hover: the cartridge lifts, as if you're about to plug it in */
+  .cart:hover {
+    translate: 0 -14px;
+    rotate: -2deg;
+    color: var(--ink);
+  }
+
+  .cart:nth-child(2):hover { rotate: 2deg; }
+
+  .cart__label {
+    display: grid;
+    place-items: center;
+    height: 200px;
+    border: 3px solid var(--ink);
+    border-radius: 8px;
+    background:
+      radial-gradient(circle at 50% 60%, rgb(255 255 255 / 0.35) 0 35%, transparent 36%),
+      repeating-conic-gradient(from 0deg at 50% 60%, rgb(255 255 255 / 0.12) 0 10deg, transparent 10deg 20deg),
+      var(--cart);
+    overflow: hidden;
+  }
+
+  .cart__label img {
+    width: 170px;
+    filter: drop-shadow(4px 4px 0 var(--ink));
+    transition: scale 0.35s var(--ease-bounce);
+  }
+
+  .cart:hover .cart__label img {
+    scale: 1.12;
+  }
+
+  .cart__body {
+    display: grid;
+    gap: 0.4rem;
+    margin-top: 1rem;
+    padding: 0.9rem 1rem;
+    background: var(--white);
+    border: 3px solid var(--ink);
+    border-radius: 8px;
+  }
+
+  .cart__body strong {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--step-2);
+    line-height: 1.1;
+  }
+
+  .cart__level {
+    justify-self: start;
+    padding: 0 0.6rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-pill);
+  }
+
+  /* ---------- The checkbox trick demo ---------- */
+  .trick {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: var(--space-l);
+    align-items: center;
+    padding: var(--space-l);
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+  }
+
+  .trick__demo {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-m);
+  }
+
+  /* A toggle switch drawn with a label and its ::after */
+  .switch {
+    position: relative;
+    width: 96px;
+    height: 50px;
+    border: var(--line);
+    border-radius: var(--r-pill);
+    background: #cfd5e6;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    order: 2;
+  }
+
+  .switch::after {
+    content: "";
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 36px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--white);
+    border: 3px solid var(--ink);
+    transition: translate 0.3s var(--ease-bounce);
+  }
+
+  .bulb {
+    width: 90px;
+    aspect-ratio: 1;
+    border-radius: 50% 50% 45% 45%;
+    border: var(--line);
+    background: #e8ebf3;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    order: 1;
+  }
+
+  #demo-switch:checked + .switch {
+    background: var(--grass-light);
+  }
+
+  #demo-switch:checked + .switch::after {
+    translate: 46px 0;
+  }
+
+  #demo-switch:checked ~ .bulb {
+    background: var(--yellow);
+    box-shadow: 0 0 40px 12px rgb(255 203 5 / 0.8);
+  }
+
+  #demo-switch:focus-visible + .switch {
+    outline: 4px solid var(--yellow);
+    outline-offset: 4px;
+  }
+
+  .trick__caption {
+    order: 3;
+    font-weight: 700;
+  }
+
+  pre {
+    padding: var(--space-m);
+    background: var(--ink);
+    color: #d6e4ff;
+    border-radius: var(--r-md);
+    overflow-x: auto;
+    tab-size: 2;
+  }
+
+  pre + pre {
+    margin-top: var(--space-s);
+  }
+
+  .trick__code p {
+    margin-top: var(--space-m);
+  }
+
+  @media (max-width: 760px) {
+    .trick {
+      grid-template-columns: 1fr;
+    }
+  }
+}

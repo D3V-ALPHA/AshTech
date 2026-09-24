@@ -1,0 +1,299 @@
+/* =====================================================================
+   ASHTECH — card.css  (the printable trainer card)
+   ===================================================================== */
+@layer pages {
+  .tcard {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    grid-template-areas:
+      "top top"
+      "photo info"
+      "photo dream"
+      "stats badges";
+    --team: var(--red);
+    gap: var(--space-m) var(--space-l);
+    max-width: 820px;
+    margin-inline: auto;
+    padding: 0 var(--space-l) var(--space-l);
+    border: 5px solid var(--ink);
+    border-radius: var(--r-lg);
+    box-shadow: 12px 12px 0 var(--ink);
+    overflow: hidden;
+    /* A subtle holographic shimmer, like a special trading card */
+    background:
+      linear-gradient(115deg, transparent 30%, rgb(255 255 255 / 0.7) 45%, transparent 60%) 0 0 / 300% 100% no-repeat,
+      radial-gradient(circle at 100% 100%, #d9f0ff, transparent 60%),
+      linear-gradient(135deg, #fffbe8, #fff);
+    animation: shimmer 5s ease-in-out infinite, deal 0.9s var(--ease-bounce) both;
+  }
+
+  @keyframes shimmer {
+    0%, 60% { background-position: 150% 0, 0 0, 0 0; }
+    100% { background-position: -60% 0, 0 0, 0 0; }
+  }
+
+  /* The card flips in, like it's being dealt */
+  @keyframes deal {
+    from { transform: perspective(900px) rotateY(-80deg) scale(0.7); opacity: 0; }
+  }
+
+  .tcard__top {
+    grid-area: top;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-inline: calc(var(--space-l) * -1);
+    padding: var(--space-m) var(--space-l);
+    background: repeating-linear-gradient(-45deg, var(--red) 0 22px, #ef4b24 22px 44px);
+    color: var(--white);
+    border-bottom: 5px solid var(--ink);
+    /* The trainer's own team colour, set by JavaScript as --team */
+    box-shadow: 0 12px 0 var(--team), 0 17px 0 var(--ink);
+    margin-bottom: 17px;
+  }
+
+  .tcard__top h2 {
+    font-size: var(--step-4);
+    -webkit-text-stroke: 7px var(--ink);
+    paint-order: stroke fill;
+  }
+
+  .tcard__top p {
+    font-weight: 700;
+  }
+
+  .tcard__photo {
+    grid-area: photo;
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    padding: var(--space-s);
+    border: 3px dashed var(--ink-soft);
+    border-radius: var(--r-md);
+    background: var(--sky);
+    text-align: center;
+  }
+
+  .tcard__photo {
+    position: relative;
+    overflow: hidden;
+    min-height: 240px;
+  }
+
+  .tcard__photo img {
+    width: 150px;
+    opacity: 0.25;
+    filter: grayscale(1);
+  }
+
+  /* JavaScript adds these classes once it knows your photo or partner */
+  .tcard.has-partner .tcard__photo img {
+    width: 180px;
+    opacity: 1;
+    filter: drop-shadow(4px 4px 0 var(--ink));
+  }
+
+  .tcard.has-photo .tcard__photo img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+    filter: none;
+  }
+
+  .tcard:is(.has-photo, .has-partner) .tcard__photo p {
+    display: none;
+  }
+
+  .tcard:is(.has-photo, .has-partner) .tcard__photo {
+    border-style: solid;
+    border-color: var(--ink);
+  }
+
+  .tcard__photo p {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  .tcard__info {
+    grid-area: info;
+    display: grid;
+    align-content: center;
+    gap: var(--space-m);
+  }
+
+  .tcard__info div {
+    display: grid;
+    grid-template-columns: 7rem 1fr;
+    align-items: end;
+  }
+
+  .tcard__info dt {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+  }
+
+  /* Every <dd> sits on a dotted line, like a form you fill in by hand */
+  .tcard__info dd {
+    min-height: 2rem;
+    border-bottom: 3px dotted var(--ink);
+    font-weight: 700;
+    font-size: var(--step-1);
+    overflow-wrap: anywhere;
+  }
+
+  .tcard__dream {
+    grid-area: dream;
+    font-style: italic;
+    color: var(--ink-soft);
+  }
+
+  .tcard__dream:not(:empty)::before { content: "“"; }
+  .tcard__dream:not(:empty)::after { content: "”"; }
+
+  .tcard__types {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 0.3rem;
+  }
+
+  meter {
+    width: 100%;
+    height: 16px;
+    appearance: none;
+    border: 2px solid var(--ink);
+    border-radius: var(--r-pill);
+    background: var(--white);
+    overflow: hidden;
+  }
+
+  meter::-webkit-meter-bar { background: var(--white); border: 0; height: 100%; }
+  meter::-webkit-meter-optimum-value { background: var(--grass); }
+  meter::-webkit-meter-suboptimum-value { background: var(--yellow); }
+  meter::-webkit-meter-even-less-good-value { background: var(--red); }
+  meter::-moz-meter-bar { background: var(--grass); }
+
+  .tcard__stats {
+    grid-area: stats;
+    display: grid;
+    gap: 0.3rem;
+    align-content: center;
+    font-weight: 700;
+  }
+
+  .tcard__stats span {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  /* Styling <progress> for every browser */
+  progress {
+    width: 100%;
+    height: 16px;
+    appearance: none;
+    border: 2px solid var(--ink);
+    border-radius: var(--r-pill);
+    background: var(--white);
+    overflow: hidden;
+  }
+
+  progress::-webkit-progress-bar { background: var(--white); }
+  progress::-webkit-progress-value { background: linear-gradient(90deg, var(--red), var(--yellow)); }
+  progress::-moz-progress-bar { background: linear-gradient(90deg, var(--red), var(--yellow)); }
+
+  .tcard__badges {
+    grid-area: badges;
+  }
+
+  .tcard__badges p {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+  }
+
+  .tcard__badges ul {
+    list-style: none;
+    padding: 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0.4rem;
+    background: #2a2f45;
+    border-radius: var(--r-md);
+  }
+
+  .tcard__badges li {
+    display: grid;
+    place-items: center;
+  }
+
+  /* Badges you haven't won yet are grey… until you hover them */
+  .tcard__badges .badge {
+    /* zoom shrinks the badge AND its space. (The Soul badge's heart is a
+       clip-path drawn for 64px, so we zoom instead of changing --size.) */
+    zoom: 0.66;
+    filter: grayscale(1) brightness(0.55);
+  }
+
+  .tcard__badges li:hover .badge {
+    filter: none drop-shadow(0 0 8px var(--yellow));
+  }
+
+  .card-help {
+    max-width: 820px;
+    margin: var(--space-xl) auto 0;
+    display: grid;
+    gap: var(--space-m);
+  }
+
+  .card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-m);
+  }
+
+  .card-actions button:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+
+  .card-actions__status {
+    font-weight: 700;
+  }
+
+  @media (max-width: 700px) {
+    .tcard {
+      grid-template-columns: 1fr;
+      grid-template-areas: "top" "photo" "info" "dream" "stats" "badges";
+    }
+
+    .tcard__badges ul {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+/* ---------- Print: only the card, on a landscape page ---------- */
+@media print {
+  @page {
+    size: landscape;
+    margin: 1cm;
+  }
+
+  .page-head,
+  .card-help {
+    display: none !important;
+  }
+
+  .tcard {
+    box-shadow: none;
+    animation: none;
+    /* Browsers skip background colours when printing unless we ask nicely */
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A turn-based Pokémon battle, Pikachu against a wild Gyarados, built with only HTML and CSS.">
+  <meta name="theme-color" content="#e3350d">
+  <title>Pokémon Battle | AshTech Arcade</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/games.css">
+  <link rel="stylesheet" href="css/battle.css">
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pokedex.html">Pokédex</a></li>
+          <li><a href="types.html">Types</a></li>
+          <li><a href="evolution.html">Evolution</a></li>
+          <li><a href="regions.html">Regions</a></li>
+          <li><a href="arcade.html" aria-current="page">Arcade</a></li>
+          <li><a href="theater.html">Theater</a></li>
+          <li><a href="academy.html">Academy</a></li>
+          <li><a href="workshop.html">Workshop</a></li>
+          <li><a href="teachers.html">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<header class="page-head wrap">
+  <div>
+    <h1 class="logo-type">Battle!</h1>
+    <p>A wild Gyarados blocks the path! You have Pikachu and 4 turns. Pick your moves wisely. Hint: think about <a href="types.html">types</a>.</p>
+  </div>
+  <img class="page-head__art" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/130.png" alt="Gyarados" width="220" height="220">
+</header>
+
+<div class="wrap game">
+  <form class="battle screen" aria-label="Battle">
+    <!-- 4 turns × 4 moves = 16 hidden radio buttons. They hold the whole game's memory. -->
+    <input type="radio" name="t1" id="t1-tb" class="visually-hidden">
+    <input type="radio" name="t1" id="t1-qa" class="visually-hidden">
+    <input type="radio" name="t1" id="t1-it" class="visually-hidden">
+    <input type="radio" name="t1" id="t1-gr" class="visually-hidden">
+    <input type="radio" name="t2" id="t2-tb" class="visually-hidden">
+    <input type="radio" name="t2" id="t2-qa" class="visually-hidden">
+    <input type="radio" name="t2" id="t2-it" class="visually-hidden">
+    <input type="radio" name="t2" id="t2-gr" class="visually-hidden">
+    <input type="radio" name="t3" id="t3-tb" class="visually-hidden">
+    <input type="radio" name="t3" id="t3-qa" class="visually-hidden">
+    <input type="radio" name="t3" id="t3-it" class="visually-hidden">
+    <input type="radio" name="t3" id="t3-gr" class="visually-hidden">
+    <input type="radio" name="t4" id="t4-tb" class="visually-hidden">
+    <input type="radio" name="t4" id="t4-qa" class="visually-hidden">
+    <input type="radio" name="t4" id="t4-it" class="visually-hidden">
+    <input type="radio" name="t4" id="t4-gr" class="visually-hidden">
+
+    <div class="arena">
+      <div class="infobox infobox--foe">
+        <p><b>Gyarados</b> <span>Lv 30</span></p>
+        <div class="hp"><span>HP</span><i class="hp__bar hp__bar--foe"></i></div>
+      </div>
+
+      <div class="foe">
+        <span class="platform"></span>
+        <img class="foe__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/130.gif" alt="Wild Gyarados">
+        <span class="fx fx-1" aria-hidden="true"><i class="fx__tb"></i><i class="fx__qa"></i><i class="fx__it"></i><i class="fx__gr"></i></span>
+        <span class="fx fx-2" aria-hidden="true"><i class="fx__tb"></i><i class="fx__qa"></i><i class="fx__it"></i><i class="fx__gr"></i></span>
+        <span class="fx fx-3" aria-hidden="true"><i class="fx__tb"></i><i class="fx__qa"></i><i class="fx__it"></i><i class="fx__gr"></i></span>
+        <span class="fx fx-4" aria-hidden="true"><i class="fx__tb"></i><i class="fx__qa"></i><i class="fx__it"></i><i class="fx__gr"></i></span>
+      </div>
+
+      <div class="me">
+        <span class="platform"></span>
+        <img class="me__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/back/25.gif" alt="Your Pikachu, seen from behind">
+      </div>
+
+      <div class="infobox infobox--me">
+        <p><b>Pikachu</b> <span>Lv 25</span></p>
+        <div class="hp"><span>HP</span><i class="hp__bar hp__bar--me"></i></div>
+        <p class="hp__num" aria-hidden="true"><span class="hp__now"></span> / 100</p>
+      </div>
+
+      <!-- The opening "battle wipe" -->
+      <div class="wipe" aria-hidden="true"><span></span><span></span></div>
+    </div>
+
+    <div class="console">
+      <div class="textbox log-area" aria-live="polite">
+        <div class="log log-0"><p class="type-in">A wild Gyarados appeared! What will Pikachu do?</p></div>
+      <div class="log log-1">
+        <p class="type-in"><span class="use use-tb">Pikachu used Thunderbolt! It’s super effective!</span><span class="use use-qa">Pikachu used Quick Attack! A speedy hit!</span><span class="use use-it">Pikachu used Iron Tail! It’s not very effective…</span><span class="use use-gr">Pikachu used Growl! Gyarados looks less scary. But Growl does no damage!</span></p>
+        <p class="log__foe">
+          <span class="foe-act">Gyarados used Bite!</span>
+          <span class="foe-faint">The wild Gyarados fainted!</span>
+        </p>
+      </div>
+      <div class="log log-2">
+        <p class="type-in"><span class="use use-tb">Pikachu used Thunderbolt! It’s super effective!</span><span class="use use-qa">Pikachu used Quick Attack! A speedy hit!</span><span class="use use-it">Pikachu used Iron Tail! It’s not very effective…</span><span class="use use-gr">Pikachu used Growl! Gyarados looks less scary. But Growl does no damage!</span></p>
+        <p class="log__foe">
+          <span class="foe-act">Gyarados used Aqua Tail!</span>
+          <span class="foe-faint">The wild Gyarados fainted!</span>
+        </p>
+      </div>
+      <div class="log log-3">
+        <p class="type-in"><span class="use use-tb">Pikachu used Thunderbolt! It’s super effective!</span><span class="use use-qa">Pikachu used Quick Attack! A speedy hit!</span><span class="use use-it">Pikachu used Iron Tail! It’s not very effective…</span><span class="use use-gr">Pikachu used Growl! Gyarados looks less scary. But Growl does no damage!</span></p>
+        <p class="log__foe">
+          <span class="foe-act">Gyarados used Twister!</span>
+          <span class="foe-faint">The wild Gyarados fainted!</span>
+        </p>
+      </div>
+      <div class="log log-4">
+        <p class="type-in"><span class="use use-tb">Pikachu used Thunderbolt! It’s super effective!</span><span class="use use-qa">Pikachu used Quick Attack! A speedy hit!</span><span class="use use-it">Pikachu used Iron Tail! It’s not very effective…</span><span class="use use-gr">Pikachu used Growl! Gyarados looks less scary. But Growl does no damage!</span></p>
+        <p class="log__foe">
+          <span class="foe-act">Gyarados used Hyper Beam!</span>
+          <span class="foe-faint">The wild Gyarados fainted!</span>
+        </p>
+      </div>
+      </div>
+      <div class="menus">
+      <fieldset class="menu menu-1">
+        <legend class="visually-hidden">Turn 1: choose a move</legend>
+        <label for="t1-tb" class="move" style="--c: var(--t-electric);">Thunderbolt<small>electric</small></label>
+        <label for="t1-qa" class="move" style="--c: var(--t-normal);">Quick Attack<small>normal</small></label>
+        <label for="t1-it" class="move" style="--c: var(--t-steel);">Iron Tail<small>steel</small></label>
+        <label for="t1-gr" class="move" style="--c: var(--t-normal);">Growl<small>normal</small></label>
+        <a class="move move--run" href="arcade.html">Run<small>leave</small></a>
+      </fieldset>
+      <fieldset class="menu menu-2">
+        <legend class="visually-hidden">Turn 2: choose a move</legend>
+        <label for="t2-tb" class="move" style="--c: var(--t-electric);">Thunderbolt<small>electric</small></label>
+        <label for="t2-qa" class="move" style="--c: var(--t-normal);">Quick Attack<small>normal</small></label>
+        <label for="t2-it" class="move" style="--c: var(--t-steel);">Iron Tail<small>steel</small></label>
+        <label for="t2-gr" class="move" style="--c: var(--t-normal);">Growl<small>normal</small></label>
+        <a class="move move--run" href="arcade.html">Run<small>leave</small></a>
+      </fieldset>
+      <fieldset class="menu menu-3">
+        <legend class="visually-hidden">Turn 3: choose a move</legend>
+        <label for="t3-tb" class="move" style="--c: var(--t-electric);">Thunderbolt<small>electric</small></label>
+        <label for="t3-qa" class="move" style="--c: var(--t-normal);">Quick Attack<small>normal</small></label>
+        <label for="t3-it" class="move" style="--c: var(--t-steel);">Iron Tail<small>steel</small></label>
+        <label for="t3-gr" class="move" style="--c: var(--t-normal);">Growl<small>normal</small></label>
+        <a class="move move--run" href="arcade.html">Run<small>leave</small></a>
+      </fieldset>
+      <fieldset class="menu menu-4">
+        <legend class="visually-hidden">Turn 4: choose a move</legend>
+        <label for="t4-tb" class="move" style="--c: var(--t-electric);">Thunderbolt<small>electric</small></label>
+        <label for="t4-qa" class="move" style="--c: var(--t-normal);">Quick Attack<small>normal</small></label>
+        <label for="t4-it" class="move" style="--c: var(--t-steel);">Iron Tail<small>steel</small></label>
+        <label for="t4-gr" class="move" style="--c: var(--t-normal);">Growl<small>normal</small></label>
+        <a class="move move--run" href="arcade.html">Run<small>leave</small></a>
+      </fieldset>
+      </div>
+    </div>
+
+    <div class="ending ending--win">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="" width="180" height="180">
+      <h2>You won!</h2>
+      <p>Electric moves are 4× strong against Gyarados, because it is both Water <em>and</em> Flying type.</p>
+      <button type="reset" class="btn">Battle again</button>
+      <span class="confetti" aria-hidden="true"></span>
+      <span class="confetti confetti--2" aria-hidden="true"></span>
+    </div>
+    <div class="ending ending--lose">
+      <h2>Pikachu fainted…</h2>
+      <p>Don’t give up! Look at the <a href="types.html">type chart</a>: which of Pikachu’s moves is strongest against Water and Flying?</p>
+      <button type="reset" class="btn">Try again</button>
+    </div>
+  </form>
+
+  <aside class="game-rules">
+    <h2>How it works</h2>
+    <ul>
+      <li>Every move button is a <code>&lt;label&gt;</code> for one of 16 hidden radio buttons.</li>
+      <li>Each checked radio sets a CSS variable, like <code>--d1: 60</code>, for the damage done that turn.</li>
+      <li>The HP bars are worked out with <code>calc()</code>, <code>clamp()</code> and <code>max()</code>, then animated with a <code>transition</code>.</li>
+      <li>Even the HP number is CSS: a <code>counter</code> is set to the HP value and shown with <code>content</code>.</li>
+    </ul>
+    <p><a href="arcade.html">Back to the Arcade</a></p>
+  </aside>
+</div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pokedex.html">Pokédex</a></li>
+            <li><a href="types.html">Types</a></li>
+            <li><a href="evolution.html">Evolution</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+            <li><a href="theater.html">Theater</a></li>
+            <li><a href="academy.html">Academy</a></li>
+            <li><a href="workshop.html">Workshop</a></li>
+            <li><a href="teachers.html">Teachers</a></li>
+            <li><a href="handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

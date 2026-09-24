@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Help Pokémon evolve with the press of a button, and meet all eight of Eevee’s evolutions.">
+  <meta name="theme-color" content="#e3350d">
+  <title>Evolution | AshTech</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/evolution.css">
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress-bar" aria-hidden="true"></div>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pokedex.html">Pokédex</a></li>
+          <li><a href="types.html">Types</a></li>
+          <li><a href="evolution.html" aria-current="page">Evolution</a></li>
+          <li><a href="regions.html">Regions</a></li>
+          <li><a href="arcade.html">Arcade</a></li>
+          <li><a href="theater.html">Theater</a></li>
+          <li><a href="academy.html">Academy</a></li>
+          <li><a href="workshop.html">Workshop</a></li>
+          <li><a href="teachers.html">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<header class="page-head wrap">
+  <div>
+    <h1 class="logo-type">Evolution</h1>
+    <p>When some Pokémon grow stronger, they suddenly change shape and become a new Pokémon. That’s called <dfn>evolution</dfn>. Press <b>Evolve</b> and watch it happen!</p>
+  </div>
+  <img class="page-head__art" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="Eevee, the Pokémon with the most evolutions" width="220" height="220">
+</header>
+
+<!-- ============ EVOLUTION LAB ============ -->
+<section class="section wrap" aria-labelledby="lab-title">
+  <div class="section-head">
+    <h2 id="lab-title">The evolution lab</h2>
+    <p>Each button is a <code>&lt;label&gt;</code> for a hidden radio button. Checking a new radio shows the next Pokémon and plays the animation.</p>
+  </div>
+  <div class="chains">
+    <article class="chain" style="--c: var(--t-grass);" aria-labelledby="bulba-title">
+      <h3 id="bulba-title" class="visually-hidden">Bulbasaur’s evolution</h3>
+      <input type="radio" name="bulba" id="bulba-1" class="visually-hidden" checked>
+      <input type="radio" name="bulba" id="bulba-2" class="visually-hidden">
+      <input type="radio" name="bulba" id="bulba-3" class="visually-hidden">
+    
+      <div class="chain__stage">
+        <img class="mon mon-1" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="Bulbasaur" width="240" height="240" loading="lazy">
+        <img class="mon mon-2" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png" alt="Ivysaur" width="240" height="240" loading="lazy">
+        <img class="mon mon-3" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png" alt="Venusaur" width="240" height="240" loading="lazy">
+        <span class="sparkles" aria-hidden="true"></span>
+      </div>
+    
+      <div class="chain__talk" aria-live="polite">
+        <p class="msg msg-1"><span>This is <b>Bulbasaur</b>. Press the button to help it evolve.</span></p>
+        <p class="msg msg-2"><span class="msg__a">What? <b>Bulbasaur</b> is evolving!</span><span class="msg__b">Congratulations! Your Bulbasaur evolved into <b>Ivysaur</b>!</span></p>
+        <p class="msg msg-3"><span class="msg__a">What? <b>Ivysaur</b> is evolving!</span><span class="msg__b">Congratulations! Your Ivysaur evolved into <b>Venusaur</b>!</span></p>
+      </div>
+    
+      <div class="chain__controls">
+        <label for="bulba-2" class="btn evolve evolve-2">Evolve <small>Level 16</small></label>
+        <label for="bulba-3" class="btn evolve evolve-3">Evolve <small>Level 32</small></label>
+        <label for="bulba-1" class="btn btn--light restart">Start again</label>
+      </div>
+    
+      <ol class="chain__steps">
+        <li><b>Bulbasaur</b><small>Start</small></li>
+        <li><b>Ivysaur</b><small>Level 16</small></li>
+        <li><b>Venusaur</b><small>Level 32</small></li>
+      </ol>
+    </article>
+    <article class="chain" style="--c: var(--t-fire);" aria-labelledby="charm-title">
+      <h3 id="charm-title" class="visually-hidden">Charmander’s evolution</h3>
+      <input type="radio" name="charm" id="charm-1" class="visually-hidden" checked>
+      <input type="radio" name="charm" id="charm-2" class="visually-hidden">
+      <input type="radio" name="charm" id="charm-3" class="visually-hidden">
+    
+      <div class="chain__stage">
+        <img class="mon mon-1" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png" alt="Charmander" width="240" height="240" loading="lazy">
+        <img class="mon mon-2" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png" alt="Charmeleon" width="240" height="240" loading="lazy">
+        <img class="mon mon-3" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png" alt="Charizard" width="240" height="240" loading="lazy">
+        <span class="sparkles" aria-hidden="true"></span>
+      </div>
+    
+      <div class="chain__talk" aria-live="polite">
+        <p class="msg msg-1"><span>This is <b>Charmander</b>. Press the button to help it evolve.</span></p>
+        <p class="msg msg-2"><span class="msg__a">What? <b>Charmander</b> is evolving!</span><span class="msg__b">Congratulations! Your Charmander evolved into <b>Charmeleon</b>!</span></p>
+        <p class="msg msg-3"><span class="msg__a">What? <b>Charmeleon</b> is evolving!</span><span class="msg__b">Congratulations! Your Charmeleon evolved into <b>Charizard</b>!</span></p>
+      </div>
+    
+      <div class="chain__controls">
+        <label for="charm-2" class="btn evolve evolve-2">Evolve <small>Level 16</small></label>
+        <label for="charm-3" class="btn evolve evolve-3">Evolve <small>Level 36</small></label>
+        <label for="charm-1" class="btn btn--light restart">Start again</label>
+      </div>
+    
+      <ol class="chain__steps">
+        <li><b>Charmander</b><small>Start</small></li>
+        <li><b>Charmeleon</b><small>Level 16</small></li>
+        <li><b>Charizard</b><small>Level 36</small></li>
+      </ol>
+    </article>
+    <article class="chain" style="--c: var(--t-water);" aria-labelledby="squirt-title">
+      <h3 id="squirt-title" class="visually-hidden">Squirtle’s evolution</h3>
+      <input type="radio" name="squirt" id="squirt-1" class="visually-hidden" checked>
+      <input type="radio" name="squirt" id="squirt-2" class="visually-hidden">
+      <input type="radio" name="squirt" id="squirt-3" class="visually-hidden">
+    
+      <div class="chain__stage">
+        <img class="mon mon-1" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png" alt="Squirtle" width="240" height="240" loading="lazy">
+        <img class="mon mon-2" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png" alt="Wartortle" width="240" height="240" loading="lazy">
+        <img class="mon mon-3" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png" alt="Blastoise" width="240" height="240" loading="lazy">
+        <span class="sparkles" aria-hidden="true"></span>
+      </div>
+    
+      <div class="chain__talk" aria-live="polite">
+        <p class="msg msg-1"><span>This is <b>Squirtle</b>. Press the button to help it evolve.</span></p>
+        <p class="msg msg-2"><span class="msg__a">What? <b>Squirtle</b> is evolving!</span><span class="msg__b">Congratulations! Your Squirtle evolved into <b>Wartortle</b>!</span></p>
+        <p class="msg msg-3"><span class="msg__a">What? <b>Wartortle</b> is evolving!</span><span class="msg__b">Congratulations! Your Wartortle evolved into <b>Blastoise</b>!</span></p>
+      </div>
+    
+      <div class="chain__controls">
+        <label for="squirt-2" class="btn evolve evolve-2">Evolve <small>Level 16</small></label>
+        <label for="squirt-3" class="btn evolve evolve-3">Evolve <small>Level 36</small></label>
+        <label for="squirt-1" class="btn btn--light restart">Start again</label>
+      </div>
+    
+      <ol class="chain__steps">
+        <li><b>Squirtle</b><small>Start</small></li>
+        <li><b>Wartortle</b><small>Level 16</small></li>
+        <li><b>Blastoise</b><small>Level 36</small></li>
+      </ol>
+    </article>
+    <article class="chain" style="--c: var(--t-electric);" aria-labelledby="pichu-title">
+      <h3 id="pichu-title" class="visually-hidden">Pichu’s evolution</h3>
+      <input type="radio" name="pichu" id="pichu-1" class="visually-hidden" checked>
+      <input type="radio" name="pichu" id="pichu-2" class="visually-hidden">
+      <input type="radio" name="pichu" id="pichu-3" class="visually-hidden">
+    
+      <div class="chain__stage">
+        <img class="mon mon-1" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/172.png" alt="Pichu" width="240" height="240" loading="lazy">
+        <img class="mon mon-2" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Pikachu" width="240" height="240" loading="lazy">
+        <img class="mon mon-3" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/26.png" alt="Raichu" width="240" height="240" loading="lazy">
+        <span class="sparkles" aria-hidden="true"></span>
+      </div>
+    
+      <div class="chain__talk" aria-live="polite">
+        <p class="msg msg-1"><span>This is <b>Pichu</b>. Press the button to help it evolve.</span></p>
+        <p class="msg msg-2"><span class="msg__a">What? <b>Pichu</b> is evolving!</span><span class="msg__b">Congratulations! Your Pichu evolved into <b>Pikachu</b>!</span></p>
+        <p class="msg msg-3"><span class="msg__a">What? <b>Pikachu</b> is evolving!</span><span class="msg__b">Congratulations! Your Pikachu evolved into <b>Raichu</b>!</span></p>
+      </div>
+    
+      <div class="chain__controls">
+        <label for="pichu-2" class="btn evolve evolve-2">Evolve <small>Friendship</small></label>
+        <label for="pichu-3" class="btn evolve evolve-3">Evolve <small>Thunder Stone</small></label>
+        <label for="pichu-1" class="btn btn--light restart">Start again</label>
+      </div>
+    
+      <ol class="chain__steps">
+        <li><b>Pichu</b><small>Start</small></li>
+        <li><b>Pikachu</b><small>Friendship</small></li>
+        <li><b>Raichu</b><small>Thunder Stone</small></li>
+      </ol>
+    </article>
+    <article class="chain" style="--c: var(--t-dragon);" aria-labelledby="dratini-title">
+      <h3 id="dratini-title" class="visually-hidden">Dratini’s evolution</h3>
+      <input type="radio" name="dratini" id="dratini-1" class="visually-hidden" checked>
+      <input type="radio" name="dratini" id="dratini-2" class="visually-hidden">
+      <input type="radio" name="dratini" id="dratini-3" class="visually-hidden">
+    
+      <div class="chain__stage">
+        <img class="mon mon-1" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/147.png" alt="Dratini" width="240" height="240" loading="lazy">
+        <img class="mon mon-2" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/148.png" alt="Dragonair" width="240" height="240" loading="lazy">
+        <img class="mon mon-3" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png" alt="Dragonite" width="240" height="240" loading="lazy">
+        <span class="sparkles" aria-hidden="true"></span>
+      </div>
+    
+      <div class="chain__talk" aria-live="polite">
+        <p class="msg msg-1"><span>This is <b>Dratini</b>. Press the button to help it evolve.</span></p>
+        <p class="msg msg-2"><span class="msg__a">What? <b>Dratini</b> is evolving!</span><span class="msg__b">Congratulations! Your Dratini evolved into <b>Dragonair</b>!</span></p>
+        <p class="msg msg-3"><span class="msg__a">What? <b>Dragonair</b> is evolving!</span><span class="msg__b">Congratulations! Your Dragonair evolved into <b>Dragonite</b>!</span></p>
+      </div>
+    
+      <div class="chain__controls">
+        <label for="dratini-2" class="btn evolve evolve-2">Evolve <small>Level 30</small></label>
+        <label for="dratini-3" class="btn evolve evolve-3">Evolve <small>Level 55</small></label>
+        <label for="dratini-1" class="btn btn--light restart">Start again</label>
+      </div>
+    
+      <ol class="chain__steps">
+        <li><b>Dratini</b><small>Start</small></li>
+        <li><b>Dragonair</b><small>Level 30</small></li>
+        <li><b>Dragonite</b><small>Level 55</small></li>
+      </ol>
+    </article>
+    <article class="chain" style="--c: var(--t-ghost);" aria-labelledby="gastly-title">
+      <h3 id="gastly-title" class="visually-hidden">Gastly’s evolution</h3>
+      <input type="radio" name="gastly" id="gastly-1" class="visually-hidden" checked>
+      <input type="radio" name="gastly" id="gastly-2" class="visually-hidden">
+      <input type="radio" name="gastly" id="gastly-3" class="visually-hidden">
+    
+      <div class="chain__stage">
+        <img class="mon mon-1" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/92.png" alt="Gastly" width="240" height="240" loading="lazy">
+        <img class="mon mon-2" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/93.png" alt="Haunter" width="240" height="240" loading="lazy">
+        <img class="mon mon-3" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png" alt="Gengar" width="240" height="240" loading="lazy">
+        <span class="sparkles" aria-hidden="true"></span>
+      </div>
+    
+      <div class="chain__talk" aria-live="polite">
+        <p class="msg msg-1"><span>This is <b>Gastly</b>. Press the button to help it evolve.</span></p>
+        <p class="msg msg-2"><span class="msg__a">What? <b>Gastly</b> is evolving!</span><span class="msg__b">Congratulations! Your Gastly evolved into <b>Haunter</b>!</span></p>
+        <p class="msg msg-3"><span class="msg__a">What? <b>Haunter</b> is evolving!</span><span class="msg__b">Congratulations! Your Haunter evolved into <b>Gengar</b>!</span></p>
+      </div>
+    
+      <div class="chain__controls">
+        <label for="gastly-2" class="btn evolve evolve-2">Evolve <small>Level 25</small></label>
+        <label for="gastly-3" class="btn evolve evolve-3">Evolve <small>Trade</small></label>
+        <label for="gastly-1" class="btn btn--light restart">Start again</label>
+      </div>
+    
+      <ol class="chain__steps">
+        <li><b>Gastly</b><small>Start</small></li>
+        <li><b>Haunter</b><small>Level 25</small></li>
+        <li><b>Gengar</b><small>Trade</small></li>
+      </ol>
+    </article>
+    <article class="chain" style="--c: var(--t-water);" aria-labelledby="karp-title">
+      <h3 id="karp-title" class="visually-hidden">Magikarp’s evolution</h3>
+      <input type="radio" name="karp" id="karp-1" class="visually-hidden" checked>
+      <input type="radio" name="karp" id="karp-2" class="visually-hidden">
+    
+      <div class="chain__stage">
+        <img class="mon mon-1" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/129.png" alt="Magikarp" width="240" height="240" loading="lazy">
+        <img class="mon mon-2" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/130.png" alt="Gyarados" width="240" height="240" loading="lazy">
+        <span class="sparkles" aria-hidden="true"></span>
+      </div>
+    
+      <div class="chain__talk" aria-live="polite">
+        <p class="msg msg-1"><span>This is <b>Magikarp</b>. Press the button to help it evolve.</span></p>
+        <p class="msg msg-2"><span class="msg__a">What? <b>Magikarp</b> is evolving!</span><span class="msg__b">Congratulations! Your Magikarp evolved into <b>Gyarados</b>!</span></p>
+      </div>
+    
+      <div class="chain__controls">
+        <label for="karp-2" class="btn evolve evolve-2">Evolve <small>Level 20</small></label>
+        <label for="karp-1" class="btn btn--light restart">Start again</label>
+      </div>
+    
+      <ol class="chain__steps">
+        <li><b>Magikarp</b><small>Start</small></li>
+        <li><b>Gyarados</b><small>Level 20</small></li>
+      </ol>
+    </article>
+  </div>
+</section>
+
+<!-- ============ EEVEE ============ -->
+<section class="section wrap eevee" aria-labelledby="eevee-title">
+  <div class="section-head">
+    <h2 id="eevee-title">Eevee’s eight paths</h2>
+    <p>Eevee can evolve into eight different Pokémon, more than any other. It all depends on which stone it touches, what time it is, and how much it loves its trainer.</p>
+  </div>
+  <div class="eevee__wheel">
+    <img class="eevee__center" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="Eevee" width="220" height="220">
+    <ul>
+      <li style="--i: 0; --c: var(--t-water);">
+        <img class="eevee__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/134.png" alt="" width="120" height="120" loading="lazy">
+        <b>Vaporeon</b>
+        <span><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/water-stone.png" alt="" width="30" height="30">Water Stone</span>
+      </li>
+      <li style="--i: 1; --c: var(--t-electric);">
+        <img class="eevee__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/135.png" alt="" width="120" height="120" loading="lazy">
+        <b>Jolteon</b>
+        <span><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/thunder-stone.png" alt="" width="30" height="30">Thunder Stone</span>
+      </li>
+      <li style="--i: 2; --c: var(--t-fire);">
+        <img class="eevee__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/136.png" alt="" width="120" height="120" loading="lazy">
+        <b>Flareon</b>
+        <span><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/fire-stone.png" alt="" width="30" height="30">Fire Stone</span>
+      </li>
+      <li style="--i: 3; --c: var(--t-psychic);">
+        <img class="eevee__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/196.png" alt="" width="120" height="120" loading="lazy">
+        <b>Espeon</b>
+        <span><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/soothe-bell.png" alt="" width="30" height="30">Friendship in the day</span>
+      </li>
+      <li style="--i: 4; --c: var(--t-dark);">
+        <img class="eevee__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/197.png" alt="" width="120" height="120" loading="lazy">
+        <b>Umbreon</b>
+        <span><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/soothe-bell.png" alt="" width="30" height="30">Friendship at night</span>
+      </li>
+      <li style="--i: 5; --c: var(--t-grass);">
+        <img class="eevee__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/470.png" alt="" width="120" height="120" loading="lazy">
+        <b>Leafeon</b>
+        <span><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/leaf-stone.png" alt="" width="30" height="30">Leaf Stone</span>
+      </li>
+      <li style="--i: 6; --c: var(--t-ice);">
+        <img class="eevee__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/471.png" alt="" width="120" height="120" loading="lazy">
+        <b>Glaceon</b>
+        <span><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ice-stone.png" alt="" width="30" height="30">Ice Stone</span>
+      </li>
+      <li style="--i: 7; --c: var(--t-fairy);">
+        <img class="eevee__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/700.png" alt="" width="120" height="120" loading="lazy">
+        <b>Sylveon</b>
+        <span><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/soothe-bell.png" alt="" width="30" height="30">Friendship + a Fairy move</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ WAYS TO EVOLVE ============ -->
+<section class="section wrap" aria-labelledby="ways-title">
+  <div class="section-head">
+    <h2 id="ways-title">Ways to evolve</h2>
+    <p>There are lots of ways to make a Pokémon evolve. These are the most common ones.</p>
+  </div>
+  <div class="ways-scroll">
+    <table class="ways">
+      <caption class="visually-hidden">Evolution methods with examples</caption>
+      <thead>
+        <tr>
+          <th scope="col">Method</th>
+          <th scope="col">What you do</th>
+          <th scope="col">Example</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <!-- rowspan="2" makes this cell stretch down over two rows -->
+          <th scope="rowgroup" rowspan="2"><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/rare-candy.png" alt="" width="30" height="30"> Level up</th>
+          <td rowspan="2">Win battles until your Pokémon reaches a certain level.</td>
+          <td>Charmander becomes Charmeleon at level 16</td>
+        </tr>
+        <tr>
+          <td>Magikarp becomes Gyarados at level 20</td>
+        </tr>
+        <tr>
+          <th scope="row"><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/thunder-stone.png" alt="" width="30" height="30"> Evolution stone</th>
+          <td>Use a special stone on your Pokémon.</td>
+          <td>Pikachu + Thunder Stone = Raichu</td>
+        </tr>
+        <tr>
+          <th scope="row"><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/soothe-bell.png" alt="" width="30" height="30"> Friendship</th>
+          <td>Take care of your Pokémon until it really loves you.</td>
+          <td>Pichu becomes Pikachu</td>
+        </tr>
+        <tr>
+          <th scope="row"><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" alt="" width="30" height="30"> Trade</th>
+          <td>Swap your Pokémon with a friend.</td>
+          <td>Haunter becomes Gengar</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tip">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png" alt="" width="64" height="64">
+    <p><b>Did you know?</b> Some Pokémon never evolve at all. Ditto, Lapras and the legendary Mew stay the same forever. They’re already amazing just as they are.</p>
+  </div>
+</section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pokedex.html">Pokédex</a></li>
+            <li><a href="types.html">Types</a></li>
+            <li><a href="evolution.html">Evolution</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+            <li><a href="theater.html">Theater</a></li>
+            <li><a href="academy.html">Academy</a></li>
+            <li><a href="workshop.html">Workshop</a></li>
+            <li><a href="teachers.html">Teachers</a></li>
+            <li><a href="handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

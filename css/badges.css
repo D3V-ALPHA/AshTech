@@ -1,0 +1,114 @@
+/* =====================================================================
+   ASHTECH — badges.css
+   The eight Kanto gym badges, drawn with pure CSS shapes.
+   Shared by regions.html and trainer-card.html.
+   Tricks used: clip-path (polygon, path), border-radius, conic and
+   radial gradients, and one "shine" animation for all of them.
+   ===================================================================== */
+@layer components {
+  .badge {
+    --size: 64px;
+    position: relative;
+    display: inline-block;
+    width: var(--size);
+    aspect-ratio: 1;
+    filter: drop-shadow(3px 3px 0 var(--ink));
+    transition: scale 0.3s var(--ease-bounce), rotate 0.3s var(--ease-bounce);
+  }
+
+  /* The shape itself lives on ::before, so the drop-shadow filter on the
+     parent can follow the clipped outline. */
+  .badge::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--fill);
+    clip-path: var(--shape);
+    border-radius: var(--round, 0);
+    rotate: var(--turn, 0deg);
+  }
+
+  /* The shine: a white stripe that slides across, clipped to the shape */
+  .badge::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    clip-path: var(--shape);
+    border-radius: var(--round, 0);
+    rotate: var(--turn, 0deg);
+    background: linear-gradient(115deg, transparent 35%, rgb(255 255 255 / 0.85) 45%, transparent 55%) no-repeat;
+    background-size: 250% 100%;
+    background-position: 150% 0;
+  }
+
+  .badge:hover,
+  li:hover > .badge {
+    scale: 1.2;
+    rotate: -8deg;
+  }
+
+  .badge:hover::after,
+  li:hover > .badge::after {
+    animation: shine 0.8s ease-out;
+  }
+
+  @keyframes shine {
+    from { background-position: 150% 0; }
+    to { background-position: -60% 0; }
+  }
+
+  /* Boulder: a grey octagon */
+  .badge--boulder {
+    --fill: linear-gradient(145deg, #e3e3e3, #8a8f99);
+    --shape: polygon(30% 0, 70% 0, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0 70%, 0 30%);
+  }
+
+  /* Cascade: a raindrop = a square with 3 round corners, turned 45° */
+  .badge--cascade {
+    --fill: linear-gradient(145deg, #bfe9ff, #3a8fe0);
+    --round: 0 50% 50% 50%;
+    --turn: 45deg;
+    --shape: none;
+    scale: 0.8;
+  }
+
+  /* Thunder: an eight-point star */
+  .badge--thunder {
+    --fill: conic-gradient(#ffb347, #ffd76e, #ff9a2e, #ffd76e, #ffb347);
+    --shape: polygon(50% 0, 61% 26%, 85% 15%, 74% 39%, 100% 50%, 74% 61%, 85% 85%, 61% 74%, 50% 100%, 39% 74%, 15% 85%, 26% 61%, 0 50%, 26% 39%, 15% 15%, 39% 26%);
+  }
+
+  /* Rainbow: a flower made with a rainbow conic gradient */
+  .badge--rainbow {
+    --fill: radial-gradient(circle, #6fbf4f 0 20%, transparent 21%),
+            conic-gradient(#ff6b6b, #ffd93d, #6bcb77, #4d96ff, #b06bff, #ff6b6b);
+    --shape: polygon(50% 0, 62% 20%, 85% 15%, 80% 38%, 100% 50%, 80% 62%, 85% 85%, 62% 80%, 50% 100%, 38% 80%, 15% 85%, 20% 62%, 0 50%, 20% 38%, 15% 15%, 38% 20%);
+    --round: 30%;
+  }
+
+  /* Soul: a pink heart drawn with a clip-path "path" */
+  .badge--soul {
+    --fill: linear-gradient(145deg, #ffc2dc, #e0508f);
+    --shape: path("M32 58 L7 33 A13.5 13.5 0 0 1 32 12 A13.5 13.5 0 0 1 57 33 Z");
+  }
+
+  /* Marsh: golden rings from a repeating radial gradient */
+  .badge--marsh {
+    --fill: repeating-radial-gradient(circle, #ffe27a 0 5px, #d4a017 5px 9px);
+    --round: 50%;
+    --shape: none;
+  }
+
+  /* Volcano: a flame shape */
+  .badge--volcano {
+    --fill: linear-gradient(to top, #d62828 20%, #ff8c42 60%, #ffd166);
+    --shape: polygon(50% 0, 65% 25%, 85% 20%, 80% 50%, 95% 70%, 75% 100%, 25% 100%, 5% 70%, 20% 50%, 15% 20%, 35% 25%);
+  }
+
+  /* Earth: a leaf = two opposite rounded corners */
+  .badge--earth {
+    --fill: linear-gradient(145deg, #a5e38a, #2f8f3a);
+    --round: 0 100% 0 100%;
+    --shape: none;
+  }
+}

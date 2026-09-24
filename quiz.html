@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A silhouette guessing game with eight rounds, built with only HTML and CSS.">
+  <meta name="theme-color" content="#e3350d">
+  <title>Who’s That Pokémon? | AshTech Arcade</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/games.css">
+  <link rel="stylesheet" href="css/quiz.css">
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pokedex.html">Pokédex</a></li>
+          <li><a href="types.html">Types</a></li>
+          <li><a href="evolution.html">Evolution</a></li>
+          <li><a href="regions.html">Regions</a></li>
+          <li><a href="arcade.html" aria-current="page">Arcade</a></li>
+          <li><a href="theater.html">Theater</a></li>
+          <li><a href="academy.html">Academy</a></li>
+          <li><a href="workshop.html">Workshop</a></li>
+          <li><a href="teachers.html">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<header class="page-head wrap">
+  <div>
+    <h1 class="logo-type">Who’s That Pokémon?</h1>
+    <p>A Pokémon is hiding in the shadows. Can you tell who it is just from its shape? There are 8 rounds.</p>
+  </div>
+</header>
+
+<div class="wrap game">
+  <!-- The whole game is one form. A reset button puts every radio and checkbox back to the start. -->
+  <form class="quiz screen">
+    <div class="rays" aria-hidden="true"></div>
+
+    <section class="round" aria-labelledby="round-1">
+      <h2 id="round-1" class="round__num">Round 1 <small>of 8</small></h2>
+      <div class="stage" aria-hidden="true">
+        <img class="stage__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="" width="300" height="300">
+        <p class="stage__name">It’s Pikachu!</p>
+      </div>
+      <fieldset class="choices">
+        <legend>Who’s that Pokémon? <span class="hint">Hint: Look at those pointy ears and zig-zag tail.</span></legend>
+        <input type="radio" name="r1" id="r1-0" value="Pikachu" class="visually-hidden right">
+        <label for="r1-0">Pikachu</label>
+        <input type="radio" name="r1" id="r1-1" value="Raichu" class="visually-hidden">
+        <label for="r1-1">Raichu</label>
+        <input type="radio" name="r1" id="r1-2" value="Pichu" class="visually-hidden">
+        <label for="r1-2">Pichu</label>
+        <input type="radio" name="r1" id="r1-3" value="Jolteon" class="visually-hidden">
+        <label for="r1-3">Jolteon</label>
+      </fieldset>
+      <p class="verdict verdict--right" aria-live="polite">Correct! That’s <b>Pikachu</b>.</p>
+      <p class="verdict verdict--wrong" aria-live="polite">Not quite. It was <b>Pikachu</b>.</p>
+      <input type="checkbox" id="next-1" class="next visually-hidden">
+      <label for="next-1" class="btn next-btn">Next Pokémon</label>
+    </section>
+    
+    <section class="round" aria-labelledby="round-2">
+      <h2 id="round-2" class="round__num">Round 2 <small>of 8</small></h2>
+      <div class="stage" aria-hidden="true">
+        <img class="stage__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png" alt="" width="300" height="300">
+        <p class="stage__name">It’s Charizard!</p>
+      </div>
+      <fieldset class="choices">
+        <legend>Who’s that Pokémon? <span class="hint">Hint: Big wings, and a flame on its tail.</span></legend>
+        <input type="radio" name="r2" id="r2-0" value="Dragonite" class="visually-hidden">
+        <label for="r2-0">Dragonite</label>
+        <input type="radio" name="r2" id="r2-1" value="Charizard" class="visually-hidden right">
+        <label for="r2-1">Charizard</label>
+        <input type="radio" name="r2" id="r2-2" value="Gyarados" class="visually-hidden">
+        <label for="r2-2">Gyarados</label>
+        <input type="radio" name="r2" id="r2-3" value="Charmeleon" class="visually-hidden">
+        <label for="r2-3">Charmeleon</label>
+      </fieldset>
+      <p class="verdict verdict--right" aria-live="polite">Correct! That’s <b>Charizard</b>.</p>
+      <p class="verdict verdict--wrong" aria-live="polite">Not quite. It was <b>Charizard</b>.</p>
+      <input type="checkbox" id="next-2" class="next visually-hidden">
+      <label for="next-2" class="btn next-btn">Next Pokémon</label>
+    </section>
+    
+    <section class="round" aria-labelledby="round-3">
+      <h2 id="round-3" class="round__num">Round 3 <small>of 8</small></h2>
+      <div class="stage" aria-hidden="true">
+        <img class="stage__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png" alt="" width="300" height="300">
+        <p class="stage__name">It’s Gengar!</p>
+      </div>
+      <fieldset class="choices">
+        <legend>Who’s that Pokémon? <span class="hint">Hint: That wide grin gives it away.</span></legend>
+        <input type="radio" name="r3" id="r3-0" value="Haunter" class="visually-hidden">
+        <label for="r3-0">Haunter</label>
+        <input type="radio" name="r3" id="r3-1" value="Jigglypuff" class="visually-hidden">
+        <label for="r3-1">Jigglypuff</label>
+        <input type="radio" name="r3" id="r3-2" value="Gengar" class="visually-hidden right">
+        <label for="r3-2">Gengar</label>
+        <input type="radio" name="r3" id="r3-3" value="Snorlax" class="visually-hidden">
+        <label for="r3-3">Snorlax</label>
+      </fieldset>
+      <p class="verdict verdict--right" aria-live="polite">Correct! That’s <b>Gengar</b>.</p>
+      <p class="verdict verdict--wrong" aria-live="polite">Not quite. It was <b>Gengar</b>.</p>
+      <input type="checkbox" id="next-3" class="next visually-hidden">
+      <label for="next-3" class="btn next-btn">Next Pokémon</label>
+    </section>
+    
+    <section class="round" aria-labelledby="round-4">
+      <h2 id="round-4" class="round__num">Round 4 <small>of 8</small></h2>
+      <div class="stage" aria-hidden="true">
+        <img class="stage__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="" width="300" height="300">
+        <p class="stage__name">It’s Eevee!</p>
+      </div>
+      <fieldset class="choices">
+        <legend>Who’s that Pokémon? <span class="hint">Hint: A fluffy collar and long ears.</span></legend>
+        <input type="radio" name="r4" id="r4-0" value="Meowth" class="visually-hidden">
+        <label for="r4-0">Meowth</label>
+        <input type="radio" name="r4" id="r4-1" value="Growlithe" class="visually-hidden">
+        <label for="r4-1">Growlithe</label>
+        <input type="radio" name="r4" id="r4-2" value="Vulpix" class="visually-hidden">
+        <label for="r4-2">Vulpix</label>
+        <input type="radio" name="r4" id="r4-3" value="Eevee" class="visually-hidden right">
+        <label for="r4-3">Eevee</label>
+      </fieldset>
+      <p class="verdict verdict--right" aria-live="polite">Correct! That’s <b>Eevee</b>.</p>
+      <p class="verdict verdict--wrong" aria-live="polite">Not quite. It was <b>Eevee</b>.</p>
+      <input type="checkbox" id="next-4" class="next visually-hidden">
+      <label for="next-4" class="btn next-btn">Next Pokémon</label>
+    </section>
+    
+    <section class="round" aria-labelledby="round-5">
+      <h2 id="round-5" class="round__num">Round 5 <small>of 8</small></h2>
+      <div class="stage" aria-hidden="true">
+        <img class="stage__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/143.png" alt="" width="300" height="300">
+        <p class="stage__name">It’s Snorlax!</p>
+      </div>
+      <fieldset class="choices">
+        <legend>Who’s that Pokémon? <span class="hint">Hint: It’s probably asleep right now.</span></legend>
+        <input type="radio" name="r5" id="r5-0" value="Snorlax" class="visually-hidden right">
+        <label for="r5-0">Snorlax</label>
+        <input type="radio" name="r5" id="r5-1" value="Lapras" class="visually-hidden">
+        <label for="r5-1">Lapras</label>
+        <input type="radio" name="r5" id="r5-2" value="Blastoise" class="visually-hidden">
+        <label for="r5-2">Blastoise</label>
+        <input type="radio" name="r5" id="r5-3" value="Onix" class="visually-hidden">
+        <label for="r5-3">Onix</label>
+      </fieldset>
+      <p class="verdict verdict--right" aria-live="polite">Correct! That’s <b>Snorlax</b>.</p>
+      <p class="verdict verdict--wrong" aria-live="polite">Not quite. It was <b>Snorlax</b>.</p>
+      <input type="checkbox" id="next-5" class="next visually-hidden">
+      <label for="next-5" class="btn next-btn">Next Pokémon</label>
+    </section>
+    
+    <section class="round" aria-labelledby="round-6">
+      <h2 id="round-6" class="round__num">Round 6 <small>of 8</small></h2>
+      <div class="stage" aria-hidden="true">
+        <img class="stage__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="" width="300" height="300">
+        <p class="stage__name">It’s Bulbasaur!</p>
+      </div>
+      <fieldset class="choices">
+        <legend>Who’s that Pokémon? <span class="hint">Hint: There’s a bulb on its back.</span></legend>
+        <input type="radio" name="r6" id="r6-0" value="Squirtle" class="visually-hidden">
+        <label for="r6-0">Squirtle</label>
+        <input type="radio" name="r6" id="r6-1" value="Bulbasaur" class="visually-hidden right">
+        <label for="r6-1">Bulbasaur</label>
+        <input type="radio" name="r6" id="r6-2" value="Oddish" class="visually-hidden">
+        <label for="r6-2">Oddish</label>
+        <input type="radio" name="r6" id="r6-3" value="Chikorita" class="visually-hidden">
+        <label for="r6-3">Chikorita</label>
+      </fieldset>
+      <p class="verdict verdict--right" aria-live="polite">Correct! That’s <b>Bulbasaur</b>.</p>
+      <p class="verdict verdict--wrong" aria-live="polite">Not quite. It was <b>Bulbasaur</b>.</p>
+      <input type="checkbox" id="next-6" class="next visually-hidden">
+      <label for="next-6" class="btn next-btn">Next Pokémon</label>
+    </section>
+    
+    <section class="round" aria-labelledby="round-7">
+      <h2 id="round-7" class="round__num">Round 7 <small>of 8</small></h2>
+      <div class="stage" aria-hidden="true">
+        <img class="stage__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/54.png" alt="" width="300" height="300">
+        <p class="stage__name">It’s Psyduck!</p>
+      </div>
+      <fieldset class="choices">
+        <legend>Who’s that Pokémon? <span class="hint">Hint: It’s holding its aching head.</span></legend>
+        <input type="radio" name="r7" id="r7-0" value="Golduck" class="visually-hidden">
+        <label for="r7-0">Golduck</label>
+        <input type="radio" name="r7" id="r7-1" value="Piplup" class="visually-hidden">
+        <label for="r7-1">Piplup</label>
+        <input type="radio" name="r7" id="r7-2" value="Totodile" class="visually-hidden">
+        <label for="r7-2">Totodile</label>
+        <input type="radio" name="r7" id="r7-3" value="Psyduck" class="visually-hidden right">
+        <label for="r7-3">Psyduck</label>
+      </fieldset>
+      <p class="verdict verdict--right" aria-live="polite">Correct! That’s <b>Psyduck</b>.</p>
+      <p class="verdict verdict--wrong" aria-live="polite">Not quite. It was <b>Psyduck</b>.</p>
+      <input type="checkbox" id="next-7" class="next visually-hidden">
+      <label for="next-7" class="btn next-btn">Next Pokémon</label>
+    </section>
+    
+    <section class="round" aria-labelledby="round-8">
+      <h2 id="round-8" class="round__num">Round 8 <small>of 8</small></h2>
+      <div class="stage" aria-hidden="true">
+        <img class="stage__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/151.png" alt="" width="300" height="300">
+        <p class="stage__name">It’s Mew!</p>
+      </div>
+      <fieldset class="choices">
+        <legend>Who’s that Pokémon? <span class="hint">Hint: Tiny, floaty, with a very long tail.</span></legend>
+        <input type="radio" name="r8" id="r8-0" value="Mewtwo" class="visually-hidden">
+        <label for="r8-0">Mewtwo</label>
+        <input type="radio" name="r8" id="r8-1" value="Jigglypuff" class="visually-hidden">
+        <label for="r8-1">Jigglypuff</label>
+        <input type="radio" name="r8" id="r8-2" value="Mew" class="visually-hidden right">
+        <label for="r8-2">Mew</label>
+        <input type="radio" name="r8" id="r8-3" value="Togepi" class="visually-hidden">
+        <label for="r8-3">Togepi</label>
+      </fieldset>
+      <p class="verdict verdict--right" aria-live="polite">Correct! That’s <b>Mew</b>.</p>
+      <p class="verdict verdict--wrong" aria-live="polite">Not quite. It was <b>Mew</b>.</p>
+      <input type="checkbox" id="next-8" class="next visually-hidden">
+      <label for="next-8" class="btn next-btn">See my score</label>
+    </section>
+
+    <section class="results" aria-labelledby="results-title">
+      <h2 id="results-title">Your score</h2>
+      <!-- The number is made by a CSS counter that counts correct answers -->
+      <p class="results__score"><span class="results__num"></span> out of 8</p>
+      <p class="results__perfect">A perfect score! You’re a real Pokémon Professor.</p>
+      <p class="results__good">Great trainer work! Play again and try for all 8.</p>
+      <button type="reset" class="btn">Play again</button>
+      <span class="confetti" aria-hidden="true"></span>
+      <span class="confetti confetti--2" aria-hidden="true"></span>
+    </section>
+  </form>
+
+  <aside class="game-rules">
+    <h2>How it works</h2>
+    <ol>
+      <li>Each answer is a radio button, hidden behind its label.</li>
+      <li>When a radio is <code>:checked</code>, CSS turns the shadow into the real picture.</li>
+      <li>The “Next” button is a checkbox. <code>:has()</code> and the <code>+</code> selector show the round after it.</li>
+      <li>Your score is a <code>counter()</code> that counts every checked right answer.</li>
+    </ol>
+    <p><a href="arcade.html">Back to the Arcade</a></p>
+  </aside>
+</div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pokedex.html">Pokédex</a></li>
+            <li><a href="types.html">Types</a></li>
+            <li><a href="evolution.html">Evolution</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+            <li><a href="theater.html">Theater</a></li>
+            <li><a href="academy.html">Academy</a></li>
+            <li><a href="workshop.html">Workshop</a></li>
+            <li><a href="teachers.html">Teachers</a></li>
+            <li><a href="handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

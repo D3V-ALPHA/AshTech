@@ -1,0 +1,391 @@
+/* =====================================================================
+   ASHTECH — handbook.css
+   One page, two looks: a comfy reading page on screen, and a proper
+   little book when it's printed or saved as a PDF (see @media print).
+   ===================================================================== */
+@layer pages {
+
+  .handbook-head__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-s);
+  }
+
+  .handbook {
+    display: grid;
+    gap: var(--space-xl);
+    max-width: 900px;
+  }
+
+  /* ---------- Contents ---------- */
+  .contents {
+    padding: var(--space-l);
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+  }
+
+  .contents ol {
+    columns: 2 16rem;
+    column-gap: var(--space-xl);
+    padding-left: 1.6rem;
+    margin-top: var(--space-s);
+  }
+
+  .contents li {
+    padding-block: 0.15rem;
+    break-inside: avoid;
+  }
+
+  .contents li::marker {
+    font-family: var(--font-display);
+    color: var(--red);
+  }
+
+  /* ---------- Chapters ---------- */
+  .chapter {
+    padding: var(--space-l) var(--space-l) var(--space-xl);
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+    font-size: 1.15rem;
+    line-height: 1.65;
+  }
+
+  .chapter > * + * {
+    margin-top: var(--space-m);
+  }
+
+  .chapter__head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    padding-bottom: var(--space-s);
+    border-bottom: 4px dotted var(--grid);
+  }
+
+  .chapter__num {
+    font-weight: 700;
+    color: var(--red);
+  }
+
+  .chapter__head h2 {
+    grid-column: 1;
+    font-size: var(--step-4);
+  }
+
+  .chapter__mon {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+    width: 96px;
+    margin-bottom: -12px;
+  }
+
+  .chapter pre {
+    padding: var(--space-m);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: #e6edff;
+    background: var(--ink);
+    border-radius: var(--r-md);
+    overflow-x: auto;
+  }
+
+  .chapter pre b {
+    color: var(--yellow);
+  }
+
+  /* ---------- Diagrams ---------- */
+  .diagram {
+    display: grid;
+    justify-items: center;
+    padding: var(--space-m);
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0 / 22px 22px,
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0 / 22px 22px,
+      var(--sky);
+    border: 3px solid var(--ink);
+    border-radius: var(--r-md);
+    overflow-x: auto;
+  }
+
+  /* Before Mermaid draws, the diagram is shown as its text code */
+  .diagram .mermaid {
+    width: 100%;            /* fill the frame, so the drawing has room to grow */
+    text-align: center;
+    margin: 0;
+    padding: 0;
+    background: none;       /* undo the dark code-box look from ".chapter pre" */
+    border-radius: 0;
+    overflow: visible;
+    font-family: ui-monospace, Consolas, monospace;
+    font-size: 0.85rem;
+    color: var(--ink);
+    white-space: pre;
+  }
+
+  /* After Mermaid has drawn, it adds data-processed to the element */
+  .diagram .mermaid[data-processed] {
+    font-family: var(--font-body);
+    white-space: normal;
+  }
+
+  .diagram svg {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* ---------- Remember / Try it boxes ---------- */
+  .remember,
+  .try {
+    padding: var(--space-s) var(--space-m);
+    border: 3px solid var(--ink);
+    border-radius: var(--r-md);
+  }
+
+  .remember {
+    background: var(--yellow-soft);
+  }
+
+  .try {
+    background: #e3f5da;
+  }
+
+  .checklist {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .checklist li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+  }
+
+  .checklist li::before {
+    content: "";
+    flex-shrink: 0;
+    width: 24px;
+    aspect-ratio: 1;
+    border: 3px solid var(--ink);
+    border-radius: 6px;
+    background: var(--white);
+  }
+
+  /* ---------- Quiz ---------- */
+  .quiz__list {
+    padding-left: 1.6rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .quiz__list summary {
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .quiz__list details p {
+    margin-top: 0.3rem;
+    padding: 0.3rem 0.8rem;
+    background: #e3f5da;
+    border-radius: var(--r-sm);
+  }
+
+  /* ---------- Certificate ---------- */
+  .certificate {
+    text-align: center;
+    border: 10px double var(--ink);
+    background:
+      radial-gradient(circle at 50% 0%, var(--yellow-soft), transparent 60%),
+      var(--white);
+  }
+
+  .certificate h2 {
+    font-size: var(--step-4);
+    color: var(--yellow);
+    -webkit-text-stroke: 0.18em var(--logo-blue);
+    paint-order: stroke fill;
+  }
+
+  .certificate p {
+    margin-inline: auto;
+  }
+
+  .certificate__line {
+    width: 70%;
+    height: 3rem;
+    border-bottom: 3px dotted var(--ink);
+  }
+
+  .certificate__sign {
+    display: flex;
+    justify-content: space-around;
+    gap: var(--space-l);
+    margin-top: var(--space-xl) !important;
+  }
+
+  .certificate__sign span {
+    width: 35%;
+    padding-top: 0.4rem;
+    border-top: 3px solid var(--ink);
+    font-weight: 700;
+  }
+
+  /* The cover is only for the printed book */
+  .cover {
+    display: none;
+  }
+
+  @media (max-width: 640px) {
+    .chapter {
+      padding: var(--space-m);
+      font-size: 1.05rem;
+    }
+    .chapter__mon {
+      width: 64px;
+    }
+  }
+}
+
+/* =====================================================================
+   PRINT / PDF: turn the page into a real book
+   ===================================================================== */
+@media print {
+  @page {
+    size: A4;
+    margin: 16mm 16mm 20mm;
+
+    /* Page numbers in the bottom margin (newer browsers) */
+    @bottom-center {
+      content: "AshTech Kids’ Handbook, page " counter(page);
+      font-family: "Lexend", sans-serif;
+      font-size: 9pt;
+      color: #46547f;
+    }
+  }
+
+  /* No page number on the cover */
+  @page :first {
+    @bottom-center { content: none; }
+  }
+
+  html {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .page-head,
+  .handbook-why {
+    display: none !important;
+  }
+
+  .cover {
+    display: grid;
+    justify-items: center;
+    align-content: center;
+    min-height: 255mm;
+    text-align: center;
+    border: 6px solid #1b2a55;
+    border-radius: 18px;
+    background: radial-gradient(circle at 50% 30%, #fff1b0, #eef6ff 70%);
+    break-after: page;
+  }
+
+  .cover img {
+    width: 80mm;
+  }
+
+  .cover__route {
+    font-family: "Lilita One", sans-serif;
+    font-size: 30pt;
+    color: #e3350d;
+  }
+
+  .cover__title {
+    font-family: "Lilita One", sans-serif;
+    font-weight: 400;
+    font-size: 40pt;
+    line-height: 1.05;
+    color: #ffcb05;
+    -webkit-text-stroke: 7px #3c5aa6;
+    paint-order: stroke fill;
+    max-width: 150mm;
+  }
+
+  .cover__sub {
+    margin-top: 6mm;
+    font-size: 15pt;
+  }
+
+  .cover__for {
+    max-width: 120mm;
+    margin-top: 14mm;
+    font-size: 11pt;
+    color: #46547f;
+  }
+
+  .handbook {
+    max-width: none;
+    width: auto;
+    gap: 0;
+  }
+
+  .contents {
+    break-after: page;
+    box-shadow: none;
+  }
+
+  /* Every chapter starts on a new page */
+  .chapter {
+    break-before: page;
+    box-shadow: none;
+    border: 0;
+    padding: 0;
+    font-size: 13pt;
+  }
+
+  .diagram,
+  .remember,
+  .try,
+  pre {
+    break-inside: avoid;
+  }
+
+  /* Mermaid sets a small max-width on each drawing; on paper we want them big */
+  .diagram svg {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    max-height: 165mm;
+  }
+
+  .diagram {
+    padding: 8mm;
+  }
+
+  .chapter a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Don't print web addresses after links in the book */
+  .chapter a[href]::after {
+    content: none !important;
+  }
+
+  /* Quiz answers are shown on paper (details can't be clicked on paper!) */
+  .quiz__list details::details-content {
+    content-visibility: visible;
+    display: block;
+  }
+
+  .certificate {
+    border: 10px double #1b2a55;
+    padding: 20mm 12mm;
+    margin-top: 0;
+  }
+}

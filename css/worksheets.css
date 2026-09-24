@@ -1,0 +1,282 @@
+/* =====================================================================
+   ASHTECH — worksheets.css
+   Each worksheet is one A4 sheet of paper, on screen AND when printed.
+   ===================================================================== */
+@layer pages {
+  .sheets {
+    display: grid;
+    justify-items: center;
+    gap: var(--space-xl);
+  }
+
+  .sheet {
+    width: min(100%, 210mm);
+    min-height: 297mm;
+    padding: 14mm;
+    background: var(--white);
+    border: 1px solid var(--grid);
+    box-shadow: 0 10px 30px rgb(27 42 85 / 0.18);
+    font-size: 11.5pt;
+    line-height: 1.5;
+  }
+
+  /* ---------- Sheet header with name, class and date ---------- */
+  .sheet__head {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 4mm;
+    align-items: center;
+    padding-bottom: 4mm;
+    margin-bottom: 6mm;
+    border-bottom: 3px solid var(--ink);
+  }
+
+  .sheet__head img {
+    width: 22mm;
+  }
+
+  .sheet__kicker {
+    font-weight: 700;
+    color: var(--red);
+    font-size: 10pt;
+  }
+
+  .sheet__head h2 {
+    font-size: 20pt;
+  }
+
+  .sheet__who {
+    display: grid;
+    gap: 1.5mm;
+    font-size: 10pt;
+  }
+
+  .sheet__who div {
+    display: grid;
+    grid-template-columns: 11mm 38mm;
+    align-items: end;
+  }
+
+  .sheet__who dt {
+    font-weight: 700;
+  }
+
+  .sheet__who dd {
+    height: 6mm;
+    border-bottom: 1.5px solid var(--ink);
+  }
+
+  /* ---------- Tasks ---------- */
+  .tasks {
+    padding-left: 7mm;
+    display: grid;
+    gap: 6mm;
+  }
+
+  .tasks > li::marker {
+    font-family: var(--font-display);
+    font-size: 14pt;
+    color: var(--red);
+  }
+
+  .tasks > li > * + * {
+    margin-top: 2.5mm;
+  }
+
+  .code {
+    padding: 3mm 4mm;
+    font-family: ui-monospace, Consolas, monospace;
+    font-size: 10.5pt;
+    line-height: 1.9;
+    background: var(--sky);
+    border: 1.5px solid var(--ink);
+    border-radius: 3mm;
+    white-space: pre-wrap;
+  }
+
+  .big-code {
+    font-family: ui-monospace, Consolas, monospace;
+    font-size: 13pt;
+    white-space: nowrap;
+    text-align: center;
+    padding: 3mm;
+  }
+
+  /* A letter in a circle, pointing at part of the code */
+  .lbl {
+    display: inline-grid;
+    place-items: center;
+    width: 6mm;
+    height: 6mm;
+    margin-right: 1mm;
+    font-family: var(--font-body);
+    font-size: 9pt;
+    font-weight: 700;
+    color: var(--white);
+    background: var(--red);
+    border-radius: 50%;
+    vertical-align: super;
+  }
+
+  /* A gap to write in */
+  .blank {
+    display: inline-block;
+    width: var(--w, 7em);
+    border-bottom: 1.5px solid var(--ink);
+    vertical-align: -2px;
+  }
+
+  /* Ruled writing lines: each <span> is one line to write on.
+     (Simple borders print more reliably than gradients in PDF viewers.) */
+  .lines span {
+    display: block;
+    height: 9mm;
+    border-bottom: 1px solid #9aa6c8;
+  }
+
+  .draw {
+    height: var(--h, 60mm);
+    border: 1.5px dashed var(--ink-soft);
+    border-radius: 3mm;
+  }
+
+  .wordbank {
+    padding: 1.5mm 3mm;
+    background: var(--yellow-soft);
+    border-radius: 2mm;
+    font-size: 10.5pt;
+  }
+
+  .match {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10.5pt;
+  }
+
+  .match td,
+  .match th {
+    padding: 2mm 3mm;
+    border: 1px solid #b9c4de;
+    text-align: left;
+  }
+
+  .match th {
+    background: var(--sky);
+  }
+
+  .match .box {
+    width: 30mm;
+  }
+
+  .match .box--wide {
+    width: 70mm;
+  }
+
+  .match--lines td {
+    border: 0;
+    padding-block: 3mm;
+  }
+
+  .match--lines .gap {
+    width: 40%;
+  }
+
+  .match--lines td:first-child,
+  .match--lines td:last-child {
+    border: 1.5px solid var(--ink);
+    border-radius: 2mm;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  /* The box model as four nested squares to label */
+  .boxdiagram,
+  .boxdiagram div {
+    display: grid;
+    place-items: center;
+    padding: 6mm;
+    border: 1.5px solid var(--ink);
+  }
+
+  .boxdiagram {
+    width: 110mm;
+    margin-inline: auto;
+    border-style: dashed;
+    background: #fff5ec;
+  }
+
+  .boxdiagram > div { background: var(--ink); }
+  .boxdiagram > div > div { background: #e7f7de; }
+  .boxdiagram > div > div > div { background: #e2efff; padding: 5mm 12mm; }
+
+  .rows {
+    display: grid;
+    grid-template-columns: 32mm 1fr;
+    gap: 2mm 3mm;
+    align-items: center;
+  }
+
+  .row-box {
+    height: 13mm;
+    border: 1.5px dashed var(--ink-soft);
+    border-radius: 2mm;
+  }
+
+  .checks {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 2mm;
+  }
+
+  .answers {
+    display: grid;
+    gap: 4mm;
+  }
+
+  .answers dt {
+    font-family: var(--font-display);
+    font-size: 13pt;
+  }
+}
+
+/* ---------- Printing: one worksheet per sheet of paper ---------- */
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .page-head {
+    display: none !important;
+  }
+
+  .sheets {
+    display: block;
+    width: auto;
+    margin: 0;
+  }
+
+  .sheet {
+    width: 210mm;
+    height: 297mm;
+    min-height: 0;
+    overflow: hidden;
+    border: 0;
+    box-shadow: none;
+    break-after: page;
+  }
+
+  .sheet:last-child {
+    break-after: auto;
+  }
+
+  a[href]::after {
+    content: none !important;
+  }
+}

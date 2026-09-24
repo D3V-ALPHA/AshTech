@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A picture guide to HTML and CSS for young learners, full of diagrams. Read it online or download the PDF.">
+  <meta name="theme-color" content="#e3350d">
+  <title>Kids’ Handbook to HTML and CSS | AshTech</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/handbook.css">
+
+  <!-- This page uses a little JavaScript. Look for "Why JavaScript?" on the page to see what it does. -->
+  <script src="js/handbook.js" defer></script>
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pokedex.html">Pokédex</a></li>
+          <li><a href="types.html">Types</a></li>
+          <li><a href="evolution.html">Evolution</a></li>
+          <li><a href="regions.html">Regions</a></li>
+          <li><a href="arcade.html">Arcade</a></li>
+          <li><a href="theater.html">Theater</a></li>
+          <li><a href="academy.html">Academy</a></li>
+          <li><a href="workshop.html">Workshop</a></li>
+          <li><a href="teachers.html" aria-current="page">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<header class="page-head wrap handbook-head">
+  <div>
+    <h1 class="logo-type">Kids’ Handbook</h1>
+    <p>Your pocket guide to HTML and CSS, with lots of diagrams and hardly any long words. Read it here, or download it to keep.</p>
+    <p class="handbook-head__buttons">
+      <a class="btn" href="handbook.pdf" download>Download the PDF</a>
+      <a class="btn btn--light" href="teachers.html">For teachers</a>
+    </p>
+  </div>
+  <img class="page-head__art" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/63.png" alt="Abra, reading quietly" width="220" height="220">
+</header>
+
+<!-- The cover only appears when the handbook is printed or saved as a PDF -->
+<div class="cover" aria-hidden="true">
+  <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="" width="360" height="360">
+  <p class="cover__route">AshTech</p>
+  <h2 class="cover__title">Kids’ Handbook to HTML &amp; CSS</h2>
+  <p class="cover__sub">A picture guide for young web builders</p>
+  <p class="cover__for">Made for the students of Sir Syed School &amp; College Campus-V, and curious trainers everywhere.</p>
+</div>
+
+<div class="wrap handbook">
+  <nav class="contents" aria-labelledby="contents-title">
+    <h2 id="contents-title">What’s inside</h2>
+    <ol>
+      <li><a href="#web">What is a website?</a></li>
+      <li><a href="#three">The three languages of the web</a></li>
+      <li><a href="#tag">Your first tag</a></li>
+      <li><a href="#skeleton">The skeleton of every page</a></li>
+      <li><a href="#lists">Lists, links and pictures</a></li>
+      <li><a href="#forms">Forms: asking questions</a></li>
+      <li><a href="#css">Meet CSS</a></li>
+      <li><a href="#selectors">Choosing what to style</a></li>
+      <li><a href="#box">Every element is a box</a></li>
+      <li><a href="#layout">Flexbox and grid: lining things up</a></li>
+      <li><a href="#colour">Colours and fonts</a></li>
+      <li><a href="#animation">Making things move</a></li>
+      <li><a href="#cascade">When two rules argue</a></li>
+      <li><a href="#games">How AshTech’s games remember</a></li>
+      <li><a href="#build">Build your own page</a></li>
+      <li><a href="#next">What comes next?</a></li>
+      <li><a href="#quiz">Quick quiz</a></li>
+    </ol>
+  </nav>
+
+  <aside class="why-js handbook-why">
+    <span class="why-js__badge" aria-hidden="true">JS</span>
+    <div>
+      <h2>Why JavaScript here?</h2>
+      <p>The diagrams are written as text in a little language called <b>Mermaid</b>. A JavaScript library reads that text and draws the pictures. If JavaScript is switched off, you’ll see the text version instead. Look closely, and you can read it too!</p>
+    </div>
+  </aside>
+
+<section class="chapter" id="web" aria-labelledby="web-title">
+  <header class="chapter__head">
+    <p class="chapter__num">Chapter 1</p>
+    <h2 id="web-title">What is a website?</h2>
+    <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/137.png" alt="" width="96" height="96" loading="lazy">
+  </header>
+  <p>A website is a set of files that live on a computer far away, called a <b>server</b>. When you visit a website, your <b>browser</b> (Chrome, Edge, Safari…) asks the server for those files, then builds the page for you. It happens in less than a second!</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+sequenceDiagram
+    actor You
+    participant B as Your browser
+    participant S as A server far away
+    You->>B: Type an address or click a link
+    B->>S: Please send me the page!
+    S-->>B: Here are the HTML, CSS and pictures
+    B->>B: Build the page
+    B-->>You: Ta-da! A web page
+    </pre>
+  </figure>
+  <div class="remember"><b>Remember:</b> the browser is like a chef. The files are the recipe. The web page is the meal.</div>
+</section>
+
+<section class="chapter" id="three" aria-labelledby="three-title">
+  <header class="chapter__head">
+    <p class="chapter__num">Chapter 2</p>
+    <h2 id="three-title">The three languages of the web</h2>
+    <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="" width="96" height="96" loading="lazy">
+  </header>
+  <p>Web pages are written in three languages. Each one has its own job. AshTech is made almost entirely of the first two!</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+mindmap
+  root((A web page))
+    HTML
+      The skeleton
+      Says what things ARE
+      Headings, pictures, links
+    CSS
+      The clothes and paint
+      Says how things LOOK
+      Colours, sizes, animation
+    JavaScript
+      The muscles and brain
+      Makes things DO stuff
+      Sliders, downloads, games
+    </pre>
+  </figure>
+  <div class="remember"><b>Remember:</b> <b>HTML</b> = what it is. <b>CSS</b> = how it looks. <b>JavaScript</b> = what it does.</div>
+</section>
+
+<section class="chapter" id="tag" aria-labelledby="tag-title">
+  <header class="chapter__head">
+    <p class="chapter__num">Chapter 3</p>
+    <h2 id="tag-title">Your first tag</h2>
+    <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/66.png" alt="" width="96" height="96" loading="lazy">
+  </header>
+  <p>HTML is made of <b>tags</b>. A tag is a word inside angle brackets, like <code>&lt;p&gt;</code>. Most tags come in pairs: one to <b>open</b> and one to <b>close</b>. The closing tag has a slash <code>/</code>.</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart LR
+    A["#60;p#62;<br/>opening tag"] --> B["Pikachu is yellow<br/>content"] --> C["#60;/p#62;<br/>closing tag"]
+    </pre>
+  </figure>
+  <p>Tags can also have <b>attributes</b>: extra information inside the opening tag.</p>
+<pre><code>&lt;a <b>href="pokedex.html"</b>&gt;Open the Pokédex&lt;/a&gt;</code></pre>
+<div class="try"><b>Try it:</b> in the Workshop’s <a href="workshop.html#lab-code">Code Lab</a>, change the words between <code>&lt;h2&gt;</code> and <code>&lt;/h2&gt;</code> to your own name.</div>
+</section>
+
+<section class="chapter" id="skeleton" aria-labelledby="skeleton-title">
+  <header class="chapter__head">
+    <p class="chapter__num">Chapter 4</p>
+    <h2 id="skeleton-title">The skeleton of every page</h2>
+    <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/92.png" alt="" width="96" height="96" loading="lazy">
+  </header>
+  <p>Every web page has the same bones. Tags go <b>inside</b> other tags, like boxes inside boxes. We call this <b>nesting</b>.</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart TD
+    n1["#60;html#62;<br/>the whole page"] --> n2["#60;head#62;<br/>info ABOUT the page"]
+    n1 --> n3["#60;body#62;<br/>everything you SEE"]
+    n2 --> n4["#60;title#62;<br/>name in the tab"]
+    n2 --> n5["#60;link#62;<br/>brings in the CSS"]
+    n3 --> n6["#60;header#62;"]
+    n3 --> n7["#60;main#62;"]
+    n3 --> n8["#60;footer#62;"]
+    n7 --> n9["#60;h1#62; big title"]
+    n7 --> n10["#60;p#62; paragraph"]
+    n7 --> n11["#60;img#62; picture"]
+    </pre>
+  </figure>
+  <div class="remember"><b>Remember:</b> close tags in the opposite order you opened them. <code>&lt;p&gt;&lt;b&gt;Hi&lt;/b&gt;&lt;/p&gt;</code> ✔ &nbsp; <code>&lt;p&gt;&lt;b&gt;Hi&lt;/p&gt;&lt;/b&gt;</code> ✘</div>
+</section>
+
+<section class="chapter" id="lists" aria-labelledby="lists-title">
+  <header class="chapter__head">
+    <p class="chapter__num">Chapter 5</p>
+    <h2 id="lists-title">Lists, links and pictures</h2>
+    <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png" alt="" width="96" height="96" loading="lazy">
+  </header>
+  <p>Three tags you will use all the time. Lists keep things tidy, links take you places, and pictures make everything more fun.</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart TD
+    Q{"Does the order matter?"} -->|"Yes, like steps"| OL["#60;ol#62;<br/>numbered list"]
+    Q -->|"No, like a shopping list"| UL["#60;ul#62;<br/>bullet list"]
+    Q -->|"Words and what they mean"| DL["#60;dl#62;<br/>description list"]
+    </pre>
+  </figure>
+  <pre><code>&lt;ul&gt;
+  &lt;li&gt;Bulbasaur&lt;/li&gt;
+  &lt;li&gt;Charmander&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;a href="types.html"&gt;Learn the types&lt;/a&gt;
+
+&lt;img src="pikachu.png" alt="Pikachu waving"&gt;</code></pre>
+<div class="remember"><b>Remember:</b> always give pictures <code>alt</code> words. People who can’t see the picture hear the <code>alt</code> words read aloud instead.</div>
+</section>
+
+<section class="chapter" id="forms" aria-labelledby="forms-title">
+  <header class="chapter__head">
+    <p class="chapter__num">Chapter 6</p>
+    <h2 id="forms-title">Forms: asking questions</h2>
+    <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/113.png" alt="" width="96" height="96" loading="lazy">
+  </header>
+  <p>Forms let people type answers, tick boxes and press buttons. The Academy page is one big form! Every box needs a <code>&lt;label&gt;</code>, joined to it with matching <code>for</code> and <code>id</code>.</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart LR
+    L["#60;label#62;<br/>Your name"] -.->|"for = id"| I["#60;input#62;<br/>you type here"]
+    I --> B["#60;button#62;<br/>Submit"]
+    B --> N["The next page gets<br/>?name=Ash"]
+    </pre>
+  </figure>
+  <p>Some input types you can try: <code>text</code>, <code>number</code>, <code>date</code>, <code>color</code>, <code>range</code>, <code>checkbox</code> and <code>radio</code>.</p>
+<div class="try"><b>Try it:</b> fill in the <a href="academy.html">Academy</a> form, then look at the address bar after you submit. Can you find your name in it?</div>
+</section>
+
+<section class="chapter" id="css" aria-labelledby="css-title">
+  <header class="chapter__head">
+    <p class="chapter__num">Chapter 7</p>
+    <h2 id="css-title">Meet CSS</h2>
+    <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png" alt="" width="96" height="96" loading="lazy">
+  </header>
+  <p>CSS changes how things look. A CSS <b>rule</b> has a <b>selector</b> (who to style), then curly brackets holding <b>properties</b> (what to change) and <b>values</b> (what to change them to).</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart LR
+    S["h1<br/>SELECTOR<br/>who to style"] --> O["{"] --> P["color:<br/>PROPERTY<br/>what to change"] --> V["red;<br/>VALUE<br/>change it to this"] --> C["}"]
+    </pre>
+  </figure>
+  <pre><code>h1 {
+  color: red;
+  font-size: 40px;
+}</code></pre>
+<div class="remember"><b>Remember:</b> every line inside the curly brackets ends with a semicolon <code>;</code>. Forgetting one is the number one CSS mistake!</div>
+</section>
+
+<section class="chapter" id="selectors" aria-labelledby="selectors-title">
+  <header class="chapter__head">
+    <p class="chapter__num">Chapter 8</p>
+    <h2 id="selectors-title">Choosing what to style</h2>
+    <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png" alt="" width="96" height="96" loading="lazy">
+  </header>
+  <p>Selectors are how CSS points at things. There are lots of them, but these four do most of the work.</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart TD
+    Q{"What do you want to style?"} -->|"Every one of a tag"| T["p { }<br/>tag selector"]
+    Q -->|"A group of things"| C[".fire { }<br/>class selector"]
+    Q -->|"One special thing"| I["#35;partner { }<br/>id selector"]
+    Q -->|"Things inside things"| D["nav a { }<br/>descendant selector"]
+    </pre>
+  </figure>
+  <div class="try"><b>Try it:</b> play <a href="workshop.html#lab-detective">Selector Detective</a> in the Workshop and solve all eight missions.</div>
+</section>
+
+<section class="chapter" id="box" aria-labelledby="box-title">
+  <header class="chapter__head">
+    <p class="chapter__num">Chapter 9</p>
+    <h2 id="box-title">Every element is a box</h2>
+    <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" alt="" width="96" height="96" loading="lazy">
+  </header>
+  <p>Everything on a web page is a box, even round things! Each box has four layers, like a Squirtle in its shell.</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart TB
+    subgraph M["MARGIN: space outside"]
+      subgraph B["BORDER: the edge"]
+        subgraph P["PADDING: space inside"]
+          C["CONTENT: Pikachu!"]
+        end
+      end
+    end
+    style M fill:#ffe0c2,stroke:#e39a4f,stroke-dasharray:6 4
+    style B fill:#1b2a55,color:#ffffff,stroke:#1b2a55
+    style P fill:#c9f0b8,stroke:#2f7a3a
+    style C fill:#bfe0ff,stroke:#2a75bb
+    </pre>
+  </figure>
+  <div class="try"><b>Try it:</b> slide the numbers in <a href="workshop.html#lab-measure">Measure the box</a> and watch the maths change.</div>
+</section>
+
+<section class="chapter" id="layout" aria-labelledby="layout-title">
+  <header class="chapter__head">
+    <p class="chapter__num">Chapter 10</p>
+    <h2 id="layout-title">Flexbox and grid: lining things up</h2>
+    <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/81.png" alt="" width="96" height="96" loading="lazy">
+  </header>
+  <p>CSS has two super tools for putting boxes where you want them. How do you choose?</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart TD
+    Q{"How should the boxes line up?"} -->|"In ONE line: a row or a column"| F["display: flex"]
+    Q -->|"In rows AND columns, like the Pokédex"| G["display: grid"]
+    F --> F1["justify-content<br/>align-items<br/>gap"]
+    G --> G1["grid-template-columns<br/>gap"]
+    </pre>
+  </figure>
+  <pre><code>.team {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}</code></pre>
+</section>
+
+<section class="chapter" id="colour" aria-labelledby="colour-title">
+  <header class="chapter__head">
+    <p class="chapter__num">Chapter 11</p>
+    <h2 id="colour-title">Colours and fonts</h2>
+    <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png" alt="" width="96" height="96" loading="lazy">
+  </header>
+  <p>You can write the same colour in different ways. They all mean exactly the same yellow!</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart LR
+    Y(("Pikachu<br/>yellow")) --> N["gold<br/>a name"]
+    Y --> H["#35;ffcb05<br/>hex"]
+    Y --> R["rgb(255 203 5)<br/>red green blue"]
+    Y --> S["hsl(48 100% 51%)<br/>hue, strength, brightness"]
+    style Y fill:#ffcb05,stroke:#1b2a55
+    </pre>
+  </figure>
+  <p>Fonts are just as easy: <code>font-family</code> picks the letters, <code>font-size</code> makes them bigger or smaller, and <code>font-weight: bold</code> makes them thick.</p>
+<div class="try"><b>Try it:</b> play “Match the type!” in the <a href="workshop.html#lab-mixer">Colour Mixer</a>. Can you score 95%?</div>
+</section>
+
+<section class="chapter" id="animation" aria-labelledby="animation-title">
+  <header class="chapter__head">
+    <p class="chapter__num">Chapter 12</p>
+    <h2 id="animation-title">Making things move</h2>
+    <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png" alt="" width="96" height="96" loading="lazy">
+  </header>
+  <p>An animation is a list of steps called <b>keyframes</b>. You say what the Pokémon looks like at the start (0%), the middle (50%) and the end (100%). The browser fills in everything between!</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart LR
+    A["0%<br/>on the ground"] --> B["50%<br/>up in the air!"] --> C["100%<br/>back on the ground"]
+    C -.->|"infinite: do it again"| A
+    </pre>
+  </figure>
+  <pre><code>@keyframes hop {
+  0%   { translate: 0 0; }
+  50%  { translate: 0 -60px; }
+  100% { translate: 0 0; }
+}
+
+.pikachu {
+  animation: hop 1s ease-in-out infinite;
+}</code></pre>
+</section>
+
+<section class="chapter" id="cascade" aria-labelledby="cascade-title">
+  <header class="chapter__head">
+    <p class="chapter__num">Chapter 13</p>
+    <h2 id="cascade-title">When two rules argue</h2>
+    <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png" alt="" width="96" height="96" loading="lazy">
+  </header>
+  <p>Sometimes two CSS rules want to change the same thing. One says red, one says blue. Who wins? The browser follows these steps, in this order.</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart TD
+    A{"Two rules disagree!"} --> B{"Is one more specific?<br/>id beats class<br/>class beats tag"}
+    B -->|"Yes"| W1["The more specific one wins"]
+    B -->|"No, it's a tie"| W2["The one written LAST wins"]
+    </pre>
+  </figure>
+  <div class="try"><b>Try it:</b> set up battles in the <a href="workshop.html#lab-showdown">Specificity Showdown</a>. Can ten classes beat one id?</div>
+</section>
+
+<section class="chapter" id="games" aria-labelledby="games-title">
+  <header class="chapter__head">
+    <p class="chapter__num">Chapter 14</p>
+    <h2 id="games-title">How AshTech’s games remember</h2>
+    <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png" alt="" width="96" height="96" loading="lazy">
+  </header>
+  <p>Our games use a clever trick. A <code>&lt;label&gt;</code> clicks a hidden checkbox for you. CSS notices the box is ticked with <code>:checked</code>, and changes the page. No JavaScript needed!</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+sequenceDiagram
+    actor Kid
+    participant L as label
+    participant C as hidden checkbox
+    participant S as CSS
+    Kid->>L: Clicks the Poké Ball
+    L->>C: Tick!
+    C->>S: I am checked now
+    S-->>Kid: The ball opens and Charmander pops out!
+    </pre>
+  </figure>
+  <pre><code>#p-charmander:checked + label .ball-top {
+  rotate: -110deg;
+}</code></pre>
+</section>
+
+<section class="chapter" id="build" aria-labelledby="build-title">
+  <header class="chapter__head">
+    <p class="chapter__num">Chapter 15</p>
+    <h2 id="build-title">Build your own page</h2>
+    <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="" width="96" height="96" loading="lazy">
+  </header>
+  <p>Now it’s your turn! Real web builders follow these steps. Don’t worry about bugs: every builder finds them, and fixing them is part of the fun.</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart LR
+    A["1. Plan<br/>draw it on paper"] --> B["2. HTML<br/>write the content"] --> C["3. CSS<br/>make it look great"] --> D["4. Test<br/>on a phone too"] --> E["5. Share<br/>show a friend!"]
+    D -->|"found a bug?"| B
+    </pre>
+  </figure>
+  <ul class="checklist">
+  <li>My page has a <code>&lt;title&gt;</code></li>
+  <li>My page has one <code>&lt;h1&gt;</code></li>
+  <li>Every picture has <code>alt</code> words</li>
+  <li>Every form box has a <code>&lt;label&gt;</code></li>
+  <li>I used at least one class in my CSS</li>
+  <li>My page looks good on a phone</li>
+</ul>
+</section>
+
+<section class="chapter" id="next" aria-labelledby="next-title">
+  <header class="chapter__head">
+    <p class="chapter__num">Chapter 16</p>
+    <h2 id="next-title">What comes next?</h2>
+    <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png" alt="" width="96" height="96" loading="lazy">
+  </header>
+  <p>Once you love HTML and CSS, the next stop on the route is <b>JavaScript</b>. It’s the language behind the Trainer Card download and the Workshop labs. After that? Apps, games, robots, even space rockets use code. Every expert was once a beginner, just like you.</p>
+  <figure class="diagram">
+    <pre class="mermaid">
+flowchart LR
+    H["HTML<br/>you are here"] --> C["CSS<br/>you are here too!"] --> J["JavaScript<br/>next stop"] --> F["Games, apps,<br/>robots and more!"]
+    style H fill:#9bd770,stroke:#1b2a55
+    style C fill:#9bd770,stroke:#1b2a55
+    style J fill:#f7df1e,stroke:#1b2a55
+    </pre>
+  </figure>
+  
+</section>
+
+  <section class="chapter quiz" id="quiz" aria-labelledby="quiz-title">
+    <header class="chapter__head">
+      <p class="chapter__num">Test yourself</p>
+      <h2 id="quiz-title">Quick quiz</h2>
+      <img class="sprite chapter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/201.png" alt="" width="96" height="96" loading="lazy">
+    </header>
+    <p>Answer these with a friend. Click a question to check your answer.</p>
+    <ol class="quiz__list">
+      <li><details><summary>Which language says what things ARE?</summary><p>HTML</p></details></li>
+      <li><details><summary>What does the <code>/</code> in <code>&lt;/p&gt;</code> mean?</summary><p>It’s a closing tag: the paragraph ends here.</p></details></li>
+      <li><details><summary>Which list should you use for the steps of a recipe?</summary><p><code>&lt;ol&gt;</code>, because the order matters.</p></details></li>
+      <li><details><summary>Why do pictures need <code>alt</code> words?</summary><p>So people who can’t see the picture can still know what it shows.</p></details></li>
+      <li><details><summary>In <code>h1 { color: red; }</code>, which part is the selector?</summary><p><code>h1</code></p></details></li>
+      <li><details><summary>Which wins: <code>#partner</code> or <code>.fire</code>?</summary><p><code>#partner</code>. An id beats a class.</p></details></li>
+      <li><details><summary>Name the four layers of the box model, inside to outside.</summary><p>Content, padding, border, margin.</p></details></li>
+      <li><details><summary>You want Pokémon cards in rows and columns. Flex or grid?</summary><p>Grid!</p></details></li>
+    </ol>
+  </section>
+
+  <section class="chapter certificate" aria-labelledby="cert-title">
+    <h2 id="cert-title">Certificate of Web Building</h2>
+    <p>This is to say that</p>
+    <p class="certificate__line"></p>
+    <p>has finished the AshTech Kids’ Handbook and can build web pages with HTML and CSS!</p>
+    <div class="certificate__sign">
+      <span>Teacher’s signature</span>
+      <span>Date</span>
+    </div>
+  </section>
+</div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pokedex.html">Pokédex</a></li>
+            <li><a href="types.html">Types</a></li>
+            <li><a href="evolution.html">Evolution</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+            <li><a href="theater.html">Theater</a></li>
+            <li><a href="academy.html">Academy</a></li>
+            <li><a href="workshop.html">Workshop</a></li>
+            <li><a href="teachers.html">Teachers</a></li>
+            <li><a href="handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

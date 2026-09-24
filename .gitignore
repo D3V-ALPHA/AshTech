@@ -1,0 +1,14 @@
+# Files that don't belong in the website
+SKILL.md
+.vscode/
+.idea/
+
+# Build and deploy leftovers
+node_modules/
+.vercel/
+*.log
+
+# Operating system clutter
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,619 @@
+/* =====================================================================
+   ASHTECH — battle.css
+   A whole battle with no JavaScript. The trick: every choice you make
+   checks a hidden radio button. :has() turns those choices into CSS
+   variables, and calc() does the maths for the HP bars.
+   (The long lists of selectors at the bottom were generated, because
+   typing 16 nearly identical rules by hand is no fun.)
+   ===================================================================== */
+@layer pages {
+
+  /* ---------- The battle "brain": all the numbers ---------- */
+  .battle {
+    /* Damage done on each turn (0 until you pick a move) */
+    --d1: 0; --d2: 0; --d3: 0; --d4: 0;
+    /* Has each turn been played yet? (0 = no, 1 = yes) */
+    --t1: 0; --t2: 0; --t3: 0; --t4: 0;
+
+    /* Total damage so far, after each turn */
+    --s1: var(--d1);
+    --s2: calc(var(--d1) + var(--d2));
+    --s3: calc(var(--d1) + var(--d2) + var(--d3));
+    --s4: calc(var(--d1) + var(--d2) + var(--d3) + var(--d4));
+
+    /* Is Gyarados still standing after each turn? clamp() squeezes the
+       answer to 0 (fainted) or 1 (still up). */
+    --a1: clamp(0, 100 - var(--s1), 1);
+    --a2: clamp(0, 100 - var(--s2), 1);
+    --a3: clamp(0, 100 - var(--s3), 1);
+    --a4: clamp(0, 100 - var(--s4), 1);
+
+    /* Gyarados hits back once per turn, but only while it's standing */
+    --hits: calc(var(--t1) * var(--a1) + var(--t2) * var(--a2) + var(--t3) * var(--a3) + var(--t4) * var(--a4));
+
+    --foe-hp: max(0, 100 - var(--s4));
+    --me-hp: max(0, 100 - 25 * var(--hits));
+
+    /* 1 when someone has fainted */
+    --gone: calc(1 - clamp(0, 100 - var(--s4), 1));
+    --lost: calc(1 - clamp(0, var(--me-hp), 1));
+    --over: max(var(--gone), var(--lost));
+
+    display: grid;
+    background: #f8f8f0;
+  }
+
+  /* ---------- The arena ---------- */
+  .arena {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "foeinfo foe"
+      "me meinfo";
+    min-height: 400px;
+    padding: var(--space-m) var(--space-l);
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse 40% 20% at 78% 42%, #b8e08f 0 60%, transparent 62%),
+      radial-gradient(ellipse 45% 18% at 24% 92%, #b8e08f 0 60%, transparent 62%),
+      linear-gradient(#cfeaff 0 55%, #e7f5d4 55%);
+  }
+
+  .infobox {
+    align-self: center;
+    justify-self: center;
+    width: min(100%, 300px);
+    padding: 0.6rem 0.9rem;
+    font-family: var(--font-pixel);
+    font-size: 0.7rem;
+    background: #fdfdf5;
+    border: 4px solid var(--ink);
+    border-radius: 6px 22px 6px 22px;
+    box-shadow: 5px 5px 0 var(--ink);
+  }
+
+  .infobox--foe { grid-area: foeinfo; animation: slide-right 0.6s 1s both; }
+  .infobox--me { grid-area: meinfo; animation: slide-left 0.6s 1.2s both; }
+
+  .infobox p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+  }
+
+  .hp {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 3px 5px;
+    background: var(--ink);
+    border-radius: 6px;
+    color: #ffd166;
+    font-size: 0.55rem;
+  }
+
+  .hp__bar {
+    flex: 1;
+    height: 10px;
+    border-radius: 4px;
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* The coloured part of the bar. Its width IS the HP, and its hue
+     slides from green (120) to red (0) as HP goes down. */
+  .hp__bar::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: calc(var(--hp) * 1%);
+    background: hsl(calc(var(--hp) * 1.2) 75% 45%);
+    transition: width 0.8s ease-out, background-color 0.8s;
+  }
+
+  .hp__bar--foe { --hp: var(--foe-hp); }
+  .hp__bar--foe::before { transition-delay: 0.5s; }
+  .hp__bar--me { --hp: var(--me-hp); }
+  .hp__bar--me::before { transition-delay: 1.7s; }
+
+  /* The HP number: a CSS counter set to the HP value */
+  .hp__num {
+    justify-content: flex-end !important;
+    margin: 0.4rem 0 0 !important;
+    counter-reset: hp var(--me-hp);
+  }
+
+  .hp__now::before {
+    content: counter(hp);
+  }
+
+  /* ---------- The Pokémon ---------- */
+  .foe,
+  .me {
+    position: relative;
+    display: grid;
+    place-items: end center;
+  }
+
+  .foe { grid-area: foe; }
+  .me { grid-area: me; }
+
+  .platform {
+    position: absolute;
+    bottom: 0;
+    width: 80%;
+    height: 34px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, #8fcf6a, #6fae50);
+    border: 3px solid rgb(27 42 85 / 0.25);
+  }
+
+  .foe__mon,
+  .me__mon {
+    position: relative;
+    height: 150px;
+    width: auto;
+    margin-bottom: 12px;
+    transition: opacity 0.6s, translate 0.6s;
+  }
+
+  .foe__mon {
+    height: 170px;
+    animation: enter-foe 0.9s 0.6s both;
+    /* Faints: sinks and fades once --gone is 1 */
+    opacity: calc(1 - var(--gone));
+    translate: 0 calc(var(--gone) * 70%);
+    transition-delay: 1s;
+  }
+
+  .me__mon {
+    animation: enter-me 0.9s 0.8s both;
+    opacity: calc(1 - var(--lost));
+    translate: 0 calc(var(--lost) * 70%);
+    transition-delay: 2.2s;
+  }
+
+  @keyframes enter-foe {
+    from { transform: translateX(120%); filter: brightness(0.3); }
+  }
+
+  @keyframes enter-me {
+    from { transform: translateX(-140%); }
+  }
+
+  @keyframes slide-right {
+    from { transform: translateX(-130%); }
+  }
+
+  @keyframes slide-left {
+    from { transform: translateX(130%); }
+  }
+
+  /* Two copies of each hit animation, so switching names restarts it */
+  @keyframes flinch-a {
+    0%, 100% { transform: none; opacity: 1; }
+    20%, 60% { transform: translateX(-12px); opacity: 0.2; }
+    40%, 80% { transform: translateX(12px); opacity: 1; }
+  }
+
+  @keyframes flinch-b {
+    0%, 100% { transform: none; opacity: 1; }
+    20%, 60% { transform: translateX(-12px); opacity: 0.2; }
+    40%, 80% { transform: translateX(12px); opacity: 1; }
+  }
+
+  /* --amp is 1 when Gyarados attacks, 0 when it has fainted */
+  @keyframes ouch-a {
+    0%, 100% { transform: none; }
+    25%, 75% { transform: translateX(calc(var(--amp) * -12px)); filter: brightness(calc(1 + var(--amp))); }
+    50% { transform: translateX(calc(var(--amp) * 12px)); }
+  }
+
+  @keyframes ouch-b {
+    0%, 100% { transform: none; }
+    25%, 75% { transform: translateX(calc(var(--amp) * -12px)); filter: brightness(calc(1 + var(--amp))); }
+    50% { transform: translateX(calc(var(--amp) * 12px)); }
+  }
+
+  /* ---------- Move effects ---------- */
+  .fx,
+  .fx i {
+    display: none;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .fx {
+    inset: 0;
+  }
+
+  /* Thunderbolt: a zig-zag bolt cut out with clip-path, flashing */
+  .fx__tb {
+    left: 42%;
+    top: -30%;
+    width: 70px;
+    height: 120%;
+    background: #ffe14d;
+    filter: drop-shadow(0 0 12px #fff36b);
+    clip-path: polygon(40% 0, 90% 0, 60% 38%, 95% 38%, 20% 100%, 42% 52%, 8% 52%);
+    animation: bolt 0.7s steps(2, jump-none) 0.1s both;
+  }
+
+  @keyframes bolt {
+    0% { opacity: 0; }
+    20%, 60% { opacity: 1; }
+    40%, 100% { opacity: 0; }
+  }
+
+  /* Quick Attack: white speed lines whooshing past */
+  .fx__qa {
+    left: 0;
+    top: 40%;
+    width: 120px;
+    height: 6px;
+    border-radius: 3px;
+    background: #fff;
+    box-shadow: 20px -30px #fff, -30px 30px #fff, 40px 60px #fff;
+    animation: whoosh 0.5s 0.2s ease-in both;
+  }
+
+  @keyframes whoosh {
+    from { translate: -150px 0; opacity: 1; }
+    to { translate: 400px 0; opacity: 0; }
+  }
+
+  /* Iron Tail: a steel-grey crescent swipe */
+  .fx__it {
+    left: 25%;
+    top: 20%;
+    width: 160px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border-top: 12px solid #c7cbd6;
+    border-right: 12px solid #9aa0b0;
+    animation: swipe 0.5s 0.2s ease-out both;
+  }
+
+  @keyframes swipe {
+    from { rotate: -120deg; opacity: 0; }
+    50% { opacity: 1; }
+    to { rotate: 40deg; opacity: 0; }
+  }
+
+  /* Growl: little music notes float up */
+  .fx__gr::before {
+    content: "♪ ♫ ♪";
+    font-size: 2rem;
+    color: var(--ink);
+  }
+
+  .fx__gr {
+    left: 30%;
+    top: 30%;
+    animation: notes 1.2s ease-out both;
+  }
+
+  @keyframes notes {
+    from { translate: 0 30px; opacity: 0; }
+    30% { opacity: 1; }
+    to { translate: 0 -60px; opacity: 0; }
+  }
+
+  /* ---------- Opening wipe: two black halves slide away ---------- */
+  .wipe span {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: var(--ink);
+    z-index: 5;
+  }
+
+  .wipe span:first-child { top: 0; animation: wipe-up 0.6s 0.3s ease-in both; }
+  .wipe span:last-child { bottom: 0; animation: wipe-down 0.6s 0.3s ease-in both; }
+
+  @keyframes wipe-up { to { translate: 0 -100%; } }
+  @keyframes wipe-down { to { translate: 0 100%; } }
+
+  /* ---------- Console: messages + move menu ---------- */
+  .console {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--space-s);
+    padding: var(--space-s);
+    background: var(--ink);
+  }
+
+  .log-area {
+    min-height: 8.5rem;
+  }
+
+  .log {
+    display: none;
+  }
+
+  .use {
+    display: none;
+  }
+
+  .log__foe {
+    display: grid;
+    margin-top: 0.6rem;
+    animation: type-in 0.8s 1.2s steps(18) both;
+  }
+
+  .foe-act,
+  .foe-faint {
+    grid-area: 1 / 1;
+  }
+
+  .menus {
+    display: grid;
+    /* Hidden (scaled to nothing) once someone faints */
+    scale: calc(1 - var(--over));
+    transition: scale 0.3s;
+  }
+
+  .menu {
+    grid-area: 1 / 1;
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-inline-size: 0;
+    animation: menu-in 0.3s 1.8s both;
+  }
+
+  /* The first menu shouldn't wait for an attack that hasn't happened */
+  .menu-1 {
+    animation-delay: 1.4s;
+  }
+
+  @keyframes menu-in {
+    from { opacity: 0; pointer-events: none; }
+    to { opacity: 1; pointer-events: auto; }
+  }
+
+  .move {
+    position: relative;
+    display: grid;
+    padding: 0.55rem 0.7rem;
+    font-family: var(--font-pixel);
+    font-size: 0.62rem;
+    line-height: 1.6;
+    color: var(--ink);
+    text-decoration: none;
+    background: #fdfdf5;
+    border: 3px solid var(--ink);
+    border-left: 10px solid var(--c, var(--ink));
+    border-radius: 8px;
+    cursor: pointer;
+    transition: translate 0.12s, background-color 0.12s;
+  }
+
+  .move small {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    color: var(--ink-soft);
+    text-transform: capitalize;
+  }
+
+  .move:hover {
+    translate: 4px 0;
+    background: var(--yellow-soft);
+    color: var(--ink);
+  }
+
+  /* A little arrow appears next to the move you're pointing at */
+  .move:hover::before {
+    content: "▶";
+    position: absolute;
+    left: -9px;
+    top: 50%;
+    translate: 0 -50%;
+    font-size: 0.6rem;
+    color: var(--white);
+  }
+
+  .move--run {
+    grid-column: 1 / -1;
+    text-align: center;
+    background: #e6e8f0;
+  }
+
+  /* ---------- Win / lose screens ---------- */
+  .ending {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: var(--space-m);
+    padding: var(--space-l);
+    text-align: center;
+    overflow: hidden;
+    transition: scale 0.5s var(--ease-bounce), opacity 0.4s;
+  }
+
+  .ending--win {
+    background: radial-gradient(circle, #fff6c2, var(--yellow));
+    scale: var(--gone);
+    opacity: var(--gone);
+    /* Wait for the faint animation before showing (only when winning) */
+    transition-delay: calc(var(--gone) * 2.4s);
+  }
+
+  .ending--lose {
+    background: radial-gradient(circle, #e8ecf8, #9fb0d6);
+    scale: var(--lost);
+    opacity: var(--lost);
+    transition-delay: calc(var(--lost) * 3.2s);
+  }
+
+  .ending h2 {
+    font-size: var(--step-5);
+    color: var(--white);
+    -webkit-text-stroke: 0.18em var(--ink);
+    paint-order: stroke fill;
+  }
+
+  .ending p {
+    max-width: 44ch;
+    font-size: var(--step-1);
+  }
+
+  .ending img {
+    width: 170px;
+    filter: drop-shadow(5px 5px 0 var(--ink));
+    animation: float 2s ease-in-out infinite;
+  }
+
+  @media (max-width: 760px) {
+    .arena {
+      min-height: 320px;
+      padding: var(--space-s);
+    }
+
+    .foe__mon { height: 110px; }
+    .me__mon { height: 100px; }
+
+    .infobox {
+      font-size: 0.55rem;
+      padding: 0.4rem 0.5rem;
+    }
+
+    .console {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Each chosen move sets that turn's damage (--d1 … --d4) and marks the turn as taken (--t1 … --t4) */
+  .battle:has([name="t1"]:checked) { --t1: 1; }
+  .battle:has(#t1-tb:checked) { --d1: 60; }
+  .battle:has(#t1-qa:checked) { --d1: 20; }
+  .battle:has(#t1-it:checked) { --d1: 10; }
+  .battle:has([name="t2"]:checked) { --t2: 1; }
+  .battle:has(#t2-tb:checked) { --d2: 60; }
+  .battle:has(#t2-qa:checked) { --d2: 20; }
+  .battle:has(#t2-it:checked) { --d2: 10; }
+  .battle:has([name="t3"]:checked) { --t3: 1; }
+  .battle:has(#t3-tb:checked) { --d3: 60; }
+  .battle:has(#t3-qa:checked) { --d3: 20; }
+  .battle:has(#t3-it:checked) { --d3: 10; }
+  .battle:has([name="t4"]:checked) { --t4: 1; }
+  .battle:has(#t4-tb:checked) { --d4: 60; }
+  .battle:has(#t4-qa:checked) { --d4: 20; }
+  .battle:has(#t4-it:checked) { --d4: 10; }
+
+  /* Show the menu for the next turn only */
+  .battle:not(:has([name="t1"]:checked)) .menu-1,
+  .battle:has([name="t1"]:checked):not(:has([name="t2"]:checked)) .menu-2,
+  .battle:has([name="t2"]:checked):not(:has([name="t3"]:checked)) .menu-3,
+  .battle:has([name="t3"]:checked):not(:has([name="t4"]:checked)) .menu-4 {
+    display: grid;
+  }
+
+  /* Show the message for the most recent turn only */
+  .battle:not(:has([name="t1"]:checked)) .log-0,
+  .battle:has([name="t1"]:checked):not(:has([name="t2"]:checked)) .log-1,
+  .battle:has([name="t2"]:checked):not(:has([name="t3"]:checked)) .log-2,
+  .battle:has([name="t3"]:checked):not(:has([name="t4"]:checked)) .log-3,
+  .battle:has([name="t4"]:checked) .log-4 {
+    display: block;
+  }
+
+  /* Inside that message, show the move you picked */
+  .battle:has(#t1-tb:checked) .log-1 .use-tb,
+  .battle:has(#t1-qa:checked) .log-1 .use-qa,
+  .battle:has(#t1-it:checked) .log-1 .use-it,
+  .battle:has(#t1-gr:checked) .log-1 .use-gr,
+  .battle:has(#t2-tb:checked) .log-2 .use-tb,
+  .battle:has(#t2-qa:checked) .log-2 .use-qa,
+  .battle:has(#t2-it:checked) .log-2 .use-it,
+  .battle:has(#t2-gr:checked) .log-2 .use-gr,
+  .battle:has(#t3-tb:checked) .log-3 .use-tb,
+  .battle:has(#t3-qa:checked) .log-3 .use-qa,
+  .battle:has(#t3-it:checked) .log-3 .use-it,
+  .battle:has(#t3-gr:checked) .log-3 .use-gr,
+  .battle:has(#t4-tb:checked) .log-4 .use-tb,
+  .battle:has(#t4-qa:checked) .log-4 .use-qa,
+  .battle:has(#t4-it:checked) .log-4 .use-it,
+  .battle:has(#t4-gr:checked) .log-4 .use-gr {
+    display: inline;
+  }
+
+  /* Did Gyarados survive this turn? --a1 … --a4 are 1 (yes) or 0 (no) */
+  .log-1 .foe-act { opacity: var(--a1); }
+  .log-1 .foe-faint { opacity: calc(1 - var(--a1)); }
+  .log-2 .foe-act { opacity: var(--a2); }
+  .log-2 .foe-faint { opacity: calc(1 - var(--a2)); }
+  .log-3 .foe-act { opacity: var(--a3); }
+  .log-3 .foe-faint { opacity: calc(1 - var(--a3)); }
+  .log-4 .foe-act { opacity: var(--a4); }
+  .log-4 .foe-faint { opacity: calc(1 - var(--a4)); }
+
+  /* Attack effects: the newest turn's effect box appears, so its animation plays */
+  .battle:has([name="t1"]:checked):not(:has([name="t2"]:checked)) .fx-1,
+  .battle:has([name="t2"]:checked):not(:has([name="t3"]:checked)) .fx-2,
+  .battle:has([name="t3"]:checked):not(:has([name="t4"]:checked)) .fx-3,
+  .battle:has([name="t4"]:checked) .fx-4 {
+    display: block;
+  }
+  .battle:has(#t1-tb:checked) .fx-1 .fx__tb,
+  .battle:has(#t1-qa:checked) .fx-1 .fx__qa,
+  .battle:has(#t1-it:checked) .fx-1 .fx__it,
+  .battle:has(#t1-gr:checked) .fx-1 .fx__gr,
+  .battle:has(#t2-tb:checked) .fx-2 .fx__tb,
+  .battle:has(#t2-qa:checked) .fx-2 .fx__qa,
+  .battle:has(#t2-it:checked) .fx-2 .fx__it,
+  .battle:has(#t2-gr:checked) .fx-2 .fx__gr,
+  .battle:has(#t3-tb:checked) .fx-3 .fx__tb,
+  .battle:has(#t3-qa:checked) .fx-3 .fx__qa,
+  .battle:has(#t3-it:checked) .fx-3 .fx__it,
+  .battle:has(#t3-gr:checked) .fx-3 .fx__gr,
+  .battle:has(#t4-tb:checked) .fx-4 .fx__tb,
+  .battle:has(#t4-qa:checked) .fx-4 .fx__qa,
+  .battle:has(#t4-it:checked) .fx-4 .fx__it,
+  .battle:has(#t4-gr:checked) .fx-4 .fx__gr {
+    display: block;
+  }
+
+  /* Gyarados flinches when hit. Switching between two animation names restarts it every turn. */
+  .battle:has(#t1-tb:checked, #t1-qa:checked, #t1-it:checked):not(:has([name="t2"]:checked)) .foe__mon { animation: flinch-a 0.6s 0.5s; }
+  .battle:has(#t2-tb:checked, #t2-qa:checked, #t2-it:checked):not(:has([name="t3"]:checked)) .foe__mon { animation: flinch-b 0.6s 0.5s; }
+  .battle:has(#t3-tb:checked, #t3-qa:checked, #t3-it:checked):not(:has([name="t4"]:checked)) .foe__mon { animation: flinch-a 0.6s 0.5s; }
+  .battle:has(#t4-tb:checked, #t4-qa:checked, #t4-it:checked) .foe__mon { animation: flinch-b 0.6s 0.5s; }
+
+  /* Pikachu gets hit back, but only if Gyarados is still standing (--amp is 0 or 1) */
+  .battle:has([name="t1"]:checked):not(:has([name="t2"]:checked)) .me__mon { --amp: var(--a1); animation: ouch-a 0.6s 1.6s; }
+  .battle:has([name="t2"]:checked):not(:has([name="t3"]:checked)) .me__mon { --amp: var(--a2); animation: ouch-b 0.6s 1.6s; }
+  .battle:has([name="t3"]:checked):not(:has([name="t4"]:checked)) .me__mon { --amp: var(--a3); animation: ouch-a 0.6s 1.6s; }
+  .battle:has([name="t4"]:checked) .me__mon { --amp: var(--a4); animation: ouch-b 0.6s 1.6s; }
+
+  /* Keyboard focus on a hidden radio shows on its label */
+  .battle:has(#t1-tb:focus-visible) [for="t1-tb"],
+  .battle:has(#t1-qa:focus-visible) [for="t1-qa"],
+  .battle:has(#t1-it:focus-visible) [for="t1-it"],
+  .battle:has(#t1-gr:focus-visible) [for="t1-gr"],
+  .battle:has(#t2-tb:focus-visible) [for="t2-tb"],
+  .battle:has(#t2-qa:focus-visible) [for="t2-qa"],
+  .battle:has(#t2-it:focus-visible) [for="t2-it"],
+  .battle:has(#t2-gr:focus-visible) [for="t2-gr"],
+  .battle:has(#t3-tb:focus-visible) [for="t3-tb"],
+  .battle:has(#t3-qa:focus-visible) [for="t3-qa"],
+  .battle:has(#t3-it:focus-visible) [for="t3-it"],
+  .battle:has(#t3-gr:focus-visible) [for="t3-gr"],
+  .battle:has(#t4-tb:focus-visible) [for="t4-tb"],
+  .battle:has(#t4-qa:focus-visible) [for="t4-qa"],
+  .battle:has(#t4-it:focus-visible) [for="t4-it"],
+  .battle:has(#t4-gr:focus-visible) [for="t4-gr"] {
+    outline: 4px solid var(--yellow);
+    outline-offset: 2px;
+  }
+}

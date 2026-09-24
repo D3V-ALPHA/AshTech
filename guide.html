@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="The complete guide to how AshTech is built: every HTML tag, every CSS technique, and the few places JavaScript is used.">
+  <meta name="theme-color" content="#e3350d">
+  <title>Teacher’s guide to AshTech | AshTech</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/guide.css">
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pokedex.html">Pokédex</a></li>
+          <li><a href="types.html">Types</a></li>
+          <li><a href="evolution.html">Evolution</a></li>
+          <li><a href="regions.html">Regions</a></li>
+          <li><a href="arcade.html">Arcade</a></li>
+          <li><a href="theater.html">Theater</a></li>
+          <li><a href="academy.html">Academy</a></li>
+          <li><a href="workshop.html">Workshop</a></li>
+          <li><a href="teachers.html" aria-current="page">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<header class="page-head wrap">
+  <div>
+    <h1 class="logo-type">The full guide</h1>
+    <p>Everything about how AshTech was built: every tag, every CSS trick and every line of JavaScript, explained. It’s long, so it’s best for teachers and older students. Younger trainers will love the <a href="handbook.html">Kids’ Handbook</a>.</p>
+  </div>
+  <img class="page-head__art" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/66.png" alt="Machop, the builder" width="220" height="220">
+</header>
+
+<!-- This page is made from learn.md, the Markdown file in the project folder -->
+<article class="wrap prose">
+<p>AshTech is a Pokémon field guide for young trainers. It has a Pokédex, a type chart, an evolution lab, a tour of the regions, a theater, a sign-up form, and three games.</p>
+<p>It is built almost entirely with <strong>two languages: HTML and CSS</strong>. Every game, filter and animation works with no JavaScript at all. A few jobs that HTML and CSS truly can&#39;t do (making a PDF of your trainer card, reacting to what you type in the Workshop labs, drawing the handbook&#39;s diagrams) use a small amount of <strong>JavaScript</strong>. Each one is explained in <a href="#88-when-we-do-use-javascript">When we DO use JavaScript</a>. There is no framework and no build step. Every file in this folder is something you could write by hand in a plain text editor.</p>
+<p>This guide explains how the whole site was made, what every tag is for, and how the CSS tricks work. Read it from top to bottom, or jump to the part you need.</p>
+<hr>
+<h2 id="contents">Contents</h2>
+<ol>
+<li><a href="#1-opening-the-site">Opening the site</a></li>
+<li><a href="#2-whats-in-the-folder">What&#39;s in the folder</a></li>
+<li><a href="#3-how-the-site-was-planned">How the site was planned</a></li>
+<li><a href="#4-html-basics">HTML basics</a></li>
+<li><a href="#5-every-html-tag-used-in-ashtech">Every HTML tag used in AshTech</a></li>
+<li><a href="#6-css-basics">CSS basics</a></li>
+<li><a href="#7-css-topic-by-topic">CSS, topic by topic</a></li>
+<li><a href="#8-remembering-clicks-without-javascript">Remembering clicks without JavaScript</a></li>
+<li><a href="#9-a-tour-of-every-page">A tour of every page</a></li>
+<li><a href="#10-accessibility-a-site-for-everyone">Accessibility: a site for everyone</a></li>
+<li><a href="#11-try-it-yourself-challenges">Try it yourself: challenges</a></li>
+<li><a href="#12-glossary">Glossary</a></li>
+<li><a href="#13-credits">Credits</a></li>
+</ol>
+<hr>
+<h2 id="1-opening-the-site">1. Opening the site</h2>
+<ol>
+<li>Open the <code>pokemon</code> folder.</li>
+<li>Double-click <strong><code>index.html</code></strong>. It opens in your web browser.</li>
+<li>That&#39;s it! Click around.</li>
+</ol>
+<p><strong>The YouTube video needs a real web address.</strong> YouTube won&#39;t play embedded videos on a page opened by double-clicking (a <code>file://</code> address). It plays fine on the live website, or when you open the folder with a local server such as the “Live Server” extension in VS Code.</p>
+<p><strong>You need the internet</strong> for the Pokémon pictures, the Pokémon cries, the fonts and the YouTube video. They are loaded from other websites (see <a href="#13-credits">Credits</a>). The flower video is stored in this folder, so it works offline.</p>
+<p><strong>Use a modern browser.</strong> The newest Chrome, Edge, Firefox or Safari will show everything. A few very new tricks (page transitions and scroll-linked animations) only appear in some browsers. The site still works without them; you just miss a little sparkle.</p>
+<p><strong>To see the code of any page</strong>, press <kbd>Ctrl</kbd> + <kbd>U</kbd> in the browser. To explore a page live, press <kbd>F12</kbd> to open the Developer Tools. Click the arrow icon, then click anything on the page to see its HTML and CSS.</p>
+<p><strong>To edit the site</strong>, open any file in a code editor such as <a href="https://code.visualstudio.com/">Visual Studio Code</a>. Save the file, then refresh the browser to see your change.</p>
+<hr>
+<h2 id="2-whats-in-the-folder">2. What&#39;s in the folder</h2>
+<pre><code>pokemon/
+├── index.html          Home: the moving scene, starter picker and route map
+├── pokedex.html        63 Pokémon cards with filters, sorting and flip-over stats
+├── types.html          The 18 types and the full type chart
+├── evolution.html      The evolution lab and Eevee&#39;s eight evolutions
+├── regions.html        All nine regions, plus Kanto&#39;s eight gyms
+├── arcade.html         The game menu
+├── quiz.html           Game 1: Who&#39;s That Pokémon?
+├── battle.html         Game 2: Pikachu vs Gyarados
+├── catch.html          Game 3: Safari Catch
+├── theater.html        Video, audio, iframe, picture and image map
+├── academy.html        The Trainer Academy sign-up form
+├── trainer-card.html   The printable trainer card (the form sends you here)
+├── workshop.html       Behind the scenes, with live labs for learning and teaching
+├── teachers.html       Lesson plans for teachers
+├── handbook.html       The Kids&#39; Handbook (read online)
+├── handbook.pdf        The Kids&#39; Handbook (to download and print)
+├── worksheets.html     Eight worksheets and an answer key (view online)
+├── worksheets.pdf      The same worksheets, ready to print
+├── guide.html          This guide, as a web page
+│
+├── css/
+│   ├── base.css        Shared by EVERY page: colours, fonts, header, footer, buttons
+│   ├── badges.css      The 8 gym badges drawn in CSS (regions + trainer card)
+│   ├── games.css       Shared by the 3 games: game screen, message box, confetti
+│   ├── home.css        Only for index.html
+│   ├── pokedex.css     Only for pokedex.html
+│   ├── types.css       Only for types.html
+│   ├── evolution.css   Only for evolution.html
+│   ├── regions.css     Only for regions.html
+│   ├── arcade.css      Only for arcade.html
+│   ├── quiz.css        Only for quiz.html
+│   ├── battle.css      Only for battle.html
+│   ├── catch.css       Only for catch.html
+│   ├── theater.css     Only for theater.html
+│   ├── academy.css     Only for academy.html
+│   ├── card.css        Only for trainer-card.html
+│   ├── workshop.css    Only for workshop.html
+│   ├── teachers.css    Only for teachers.html
+│   ├── handbook.css    Only for handbook.html (with print styles for the PDF)
+│   ├── worksheets.css  Only for worksheets.html (one A4 sheet per worksheet)
+│   └── guide.css       Only for guide.html
+│
+├── js/                 The only JavaScript, in four small files
+│   ├── academy.js      Keeps your trainer photo for the card
+│   ├── card.js         Fills in the trainer card and makes the PDF
+│   ├── workshop.js     Powers the Workshop labs marked &quot;JS&quot;
+│   └── handbook.js     Draws the handbook&#39;s diagrams with Mermaid
+│
+├── media/
+│   ├── flower.webm     The flower video (WebM format)
+│   ├── flower.mp4      The same video (MP4 format, for other browsers)
+│   └── flower.vtt      Captions for the video
+│
+└── learn.md            This guide
+</code></pre>
+<h3 id="why-so-many-files">Why so many files?</h3>
+<ul>
+<li><strong>One HTML file per page.</strong> Each page has its own address, so you can bookmark it and use the browser&#39;s Back button. Small files are also easier to read.</li>
+<li><strong>One shared stylesheet plus one per page.</strong> <code>base.css</code> holds everything the pages have in common, so the header looks the same everywhere. Each page then adds its own small stylesheet. If you want to change the Pokédex, open <code>pokedex.css</code> and you won&#39;t break the battle game.</li>
+<li><strong>Shared pieces get their own file.</strong> The badges appear on two pages, so they live in <code>badges.css</code>, and both pages link to it.</li>
+</ul>
+<p>Every page links to its stylesheets in its <code>&lt;head&gt;</code>:</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;css/base.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;css/pokedex.css&quot;&gt;
+</code></pre>
+<p>The order matters: <code>base.css</code> comes first, then the page&#39;s own file.</p>
+<h3 id="why-is-the-header-copied-into-every-page">&quot;Why is the header copied into every page?&quot;</h3>
+<p>HTML has no built-in way to say &quot;put the header file here&quot;. Websites usually use a server or JavaScript to join pages together. AshTech uses neither, so each page has its own copy of the header and footer. If you change the menu, change it in every page. (That&#39;s one of the reasons real websites use extra tools!)</p>
+<hr>
+<h2 id="3-how-the-site-was-planned">3. How the site was planned</h2>
+<p>A good website starts before the first line of code. Here is how AshTech was planned.</p>
+<h3 id="step-1-who-is-it-for-and-what-is-it-for">Step 1: who is it for, and what is it for?</h3>
+<ul>
+<li><strong>Who:</strong> kids who like Pokémon and are learning about the web.</li>
+<li><strong>What:</strong> a place to explore Pokémon facts and play, where every part also shows off an HTML or CSS feature.</li>
+<li><strong>The rule:</strong> HTML and CSS only.</li>
+</ul>
+<h3 id="step-2-pick-a-look-that-belongs-to-pokémon">Step 2: pick a look that belongs to Pokémon</h3>
+<p>Instead of a generic &quot;website look&quot;, the design is taken from things in the Pokémon world:</p>
+<ul>
+<li><strong>The header is a Pokédex.</strong> It&#39;s red like the real device, and has the big blue glowing lens and three little lights.</li>
+<li><strong>The pages are a researcher&#39;s notebook.</strong> The pale blue background has a grid drawn on it, like graph paper.</li>
+<li><strong>Boxes look like stickers or trading cards.</strong> They have thick navy outlines and a solid &quot;hard&quot; shadow.</li>
+<li><strong>Titles look like the Pokémon logo:</strong> yellow letters with a thick blue outline.</li>
+<li><strong>The name &quot;AshTech&quot;</strong> is a nod to Ash, the most famous Pokémon trainer of all, plus the tech you learn here.</li>
+</ul>
+<h3 id="step-3-design-tokens">Step 3: design tokens</h3>
+<p><strong>Tokens</strong> are the few basic decisions everything else is built from. In AshTech they are stored as CSS variables at the top of <code>base.css</code>.</p>
+<p><strong>Colours</strong> (from the Pokédex and the Pokémon logo):</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">Name</th><th scope="col">Colour</th><th scope="col">Used for</th></tr></thead><tbody><tr><td><code>--red</code></td><td><code>#e3350d</code></td><td>The Pokédex header, important buttons</td></tr>
+<tr><td><code>--yellow</code></td><td><code>#ffcb05</code></td><td>Title letters, main buttons, highlights</td></tr>
+<tr><td><code>--logo-blue</code></td><td><code>#3c5aa6</code></td><td>The outline around title letters</td></tr>
+<tr><td><code>--ink</code></td><td><code>#1b2a55</code></td><td>Text, outlines and shadows (our &quot;black&quot;)</td></tr>
+<tr><td><code>--grass</code></td><td><code>#4fa64a</code></td><td>Tall grass and success messages</td></tr>
+<tr><td><code>--sky</code></td><td><code>#eef6ff</code></td><td>The notebook-paper background</td></tr></tbody></table></div>
+<p>There is also one colour for each of the 18 Pokémon types, like <code>--t-fire</code> and <code>--t-water</code>.</p>
+<p><strong>Fonts:</strong></p>
+<ul>
+<li><strong>Lilita One</strong> for headings. It&#39;s chunky and round, like a toy label.</li>
+<li><strong>Lexend</strong> for reading. It was designed to make reading easier, which is great for young readers.</li>
+<li><strong>Press Start 2P</strong> appears only inside the game screens, to look like the old Game Boy games.</li>
+</ul>
+<p><strong>Sizes:</strong> text sizes grow step by step. Each step is 1.25 times bigger than the one before (<code>--step-0</code>, <code>--step-1</code>…). Spacing works the same way (<code>--space-s</code>, <code>--space-m</code>, <code>--space-l</code>…).</p>
+<h3 id="step-4-build-test-fix">Step 4: build, test, fix</h3>
+<p>The pages were built one at a time. Each was tested in a browser at desktop size and phone size, and each game was played to check that it really works. Bugs were found and fixed along the way. (One of them taught a useful lesson: see <a href="#gotcha-counters-skip-hidden-things">the counter gotcha</a>.)</p>
+<hr>
+<h2 id="4-html-basics">4. HTML basics</h2>
+<p><strong>HTML</strong> (HyperText Markup Language) describes what things on a page <strong>are</strong>: a heading, a paragraph, a picture, a link, a button.</p>
+<h3 id="tags-and-elements">Tags and elements</h3>
+<p>HTML is made of <strong>tags</strong> written in angle brackets:</p>
+<pre><code class="language-html">&lt;p&gt;Pikachu is an Electric-type Pokémon.&lt;/p&gt;
+</code></pre>
+<ul>
+<li><code>&lt;p&gt;</code> is the <strong>opening tag</strong>. <code>p</code> means &quot;paragraph&quot;.</li>
+<li><code>&lt;/p&gt;</code> is the <strong>closing tag</strong>. The <code>/</code> means &quot;end&quot;.</li>
+<li>Everything from the opening tag to the closing tag is one <strong>element</strong>.</li>
+</ul>
+<p>Some elements have no content, so they have no closing tag. They are called <strong>empty</strong> or <strong>void</strong> elements:</p>
+<pre><code class="language-html">&lt;img src=&quot;pikachu.png&quot; alt=&quot;Pikachu&quot;&gt;
+&lt;br&gt;
+&lt;input type=&quot;checkbox&quot;&gt;
+</code></pre>
+<h3 id="attributes">Attributes</h3>
+<p><strong>Attributes</strong> give extra information. They go inside the opening tag, as <code>name=&quot;value&quot;</code>:</p>
+<pre><code class="language-html">&lt;a href=&quot;pokedex.html&quot; class=&quot;btn&quot;&gt;Open the Pokédex&lt;/a&gt;
+</code></pre>
+<ul>
+<li><code>href</code> says where the link goes.</li>
+<li><code>class</code> gives the element a name that CSS can use.</li>
+</ul>
+<p>Attributes you&#39;ll see everywhere in AshTech:</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">Attribute</th><th scope="col">What it does</th></tr></thead><tbody><tr><td><code>id=&quot;…&quot;</code></td><td>A unique name. Only ONE element per page can have each id.</td></tr>
+<tr><td><code>class=&quot;…&quot;</code></td><td>A group name. Many elements can share a class, and one element can have several (<code>class=&quot;btn btn--light&quot;</code>).</td></tr>
+<tr><td><code>style=&quot;…&quot;</code></td><td>CSS written straight onto one element. AshTech uses it only to set variables, like <code>style=&quot;--c: var(--t-fire);&quot;</code>.</td></tr>
+<tr><td><code>lang=&quot;…&quot;</code></td><td>The language of the text. <code>&lt;html lang=&quot;en&quot;&gt;</code> means English.</td></tr>
+<tr><td><code>alt=&quot;…&quot;</code></td><td>A text description of a picture, for people who can&#39;t see it.</td></tr>
+<tr><td><code>hidden</code>, <code>required</code>, <code>checked</code></td><td>&quot;Boolean&quot; attributes: just being there switches them on.</td></tr>
+<tr><td><code>aria-…</code></td><td>Extra information for screen readers (see <a href="#10-accessibility-a-site-for-everyone">Accessibility</a>).</td></tr>
+<tr><td><code>data-…</code></td><td>Your own custom information. The type badges use <code>data-type=&quot;fire&quot;</code>.</td></tr></tbody></table></div>
+<h3 id="nesting">Nesting</h3>
+<p>Elements go inside other elements, like boxes in boxes. Close them in the reverse order you opened them:</p>
+<pre><code class="language-html">&lt;p&gt;I &lt;strong&gt;love&lt;/strong&gt; Eevee.&lt;/p&gt;        ✔ correct
+&lt;p&gt;I &lt;strong&gt;love&lt;/p&gt; Eevee.&lt;/strong&gt;        ✘ tangled
+</code></pre>
+<h3 id="comments">Comments</h3>
+<p>Anything between <code>&lt;!--</code> and <code>--&gt;</code> is a <strong>comment</strong>. The browser ignores it. Comments are notes for humans, and AshTech&#39;s pages are full of them:</p>
+<pre><code class="language-html">&lt;!-- The whole game is one form. --&gt;
+</code></pre>
+<h3 id="the-skeleton-of-every-page">The skeleton of every page</h3>
+<p>Every page in AshTech starts like this:</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;meta name=&quot;description&quot; content=&quot;A short summary for search engines.&quot;&gt;
+  &lt;meta name=&quot;theme-color&quot; content=&quot;#e3350d&quot;&gt;
+  &lt;title&gt;Pokédex | AshTech&lt;/title&gt;
+  &lt;link rel=&quot;icon&quot; type=&quot;image/png&quot; href=&quot;…poke-ball.png&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;css/base.css&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;header&gt;…&lt;/header&gt;
+  &lt;main id=&quot;main&quot;&gt;…&lt;/main&gt;
+  &lt;footer&gt;…&lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<ul>
+<li><code>&lt;!DOCTYPE html&gt;</code> tells the browser &quot;this is modern HTML&quot;.</li>
+<li><code>&lt;html&gt;</code> wraps the whole page.</li>
+<li><code>&lt;head&gt;</code> holds information <strong>about</strong> the page. Nothing in it appears on the page itself.</li>
+<li><code>&lt;body&gt;</code> holds everything you can see.</li>
+</ul>
+<hr>
+<h2 id="5-every-html-tag-used-in-ashtech">5. Every HTML tag used in AshTech</h2>
+<p>The tables below list every tag the site uses, what it means, and where to find it.</p>
+<h3 id="51-document-and-head-tags">5.1 Document and head tags</h3>
+<div class="table-scroll"><table><thead><tr><th scope="col">Tag</th><th scope="col">What it&#39;s for</th><th scope="col">Where</th></tr></thead><tbody><tr><td><code>&lt;!DOCTYPE html&gt;</code></td><td>Says &quot;this is an HTML5 page&quot;. Always the very first line.</td><td>every page</td></tr>
+<tr><td><code>&lt;html&gt;</code></td><td>The root that wraps everything. <code>lang=&quot;en&quot;</code> sets the language.</td><td>every page</td></tr>
+<tr><td><code>&lt;head&gt;</code></td><td>Information about the page.</td><td>every page</td></tr>
+<tr><td><code>&lt;meta charset=&quot;UTF-8&quot;&gt;</code></td><td>Lets the page use any letter or symbol, like é in Pokémon or ピカチュウ.</td><td>every page</td></tr>
+<tr><td><code>&lt;meta name=&quot;viewport&quot;&gt;</code></td><td>Makes the page fit phone screens instead of looking tiny.</td><td>every page</td></tr>
+<tr><td><code>&lt;meta name=&quot;description&quot;&gt;</code></td><td>The summary search engines show.</td><td>every page</td></tr>
+<tr><td><code>&lt;meta name=&quot;theme-color&quot;&gt;</code></td><td>Tints the browser bar red on some phones.</td><td>every page</td></tr>
+<tr><td><code>&lt;title&gt;</code></td><td>The name in the browser tab and in bookmarks.</td><td>every page</td></tr>
+<tr><td><code>&lt;link rel=&quot;stylesheet&quot;&gt;</code></td><td>Loads a CSS file.</td><td>every page</td></tr>
+<tr><td><code>&lt;link rel=&quot;icon&quot;&gt;</code></td><td>The little tab icon (a Poké Ball).</td><td>every page</td></tr>
+<tr><td><code>&lt;link rel=&quot;preconnect&quot;&gt;</code></td><td>Starts connecting to the font server early, so fonts load faster.</td><td>every page</td></tr></tbody></table></div>
+<h3 id="52-page-structure-landmarks">5.2 Page structure (landmarks)</h3>
+<p>These tags split a page into meaningful areas. Screen readers let people jump between them.</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">Tag</th><th scope="col">What it&#39;s for</th><th scope="col">Where</th></tr></thead><tbody><tr><td><code>&lt;header&gt;</code></td><td>The top of the page, or the top of a section.</td><td>the red Pokédex bar; each page&#39;s title block</td></tr>
+<tr><td><code>&lt;nav&gt;</code></td><td>A group of navigation links.</td><td>the main menu, the footer links, the region timeline</td></tr>
+<tr><td><code>&lt;main&gt;</code></td><td>The main content. Only one per page.</td><td>every page</td></tr>
+<tr><td><code>&lt;section&gt;</code></td><td>A themed part of a page, usually with a heading.</td><td>every page</td></tr>
+<tr><td><code>&lt;article&gt;</code></td><td>Something that makes sense on its own, like a card or a post.</td><td>Pokédex cards, evolution chains, spotlight slides, region cards</td></tr>
+<tr><td><code>&lt;aside&gt;</code></td><td>Extra content on the side.</td><td>the fact ticker, game &quot;How it works&quot; boxes, Academy tips</td></tr>
+<tr><td><code>&lt;footer&gt;</code></td><td>The bottom of a page or section.</td><td>the tall-grass footer; quote credits</td></tr>
+<tr><td><code>&lt;address&gt;</code></td><td>Contact information.</td><td>the footer</td></tr>
+<tr><td><code>&lt;search&gt;</code></td><td>Marks a search area.</td><td>the Bulbapedia search on the Pokédex</td></tr>
+<tr><td><code>&lt;div&gt;</code></td><td>A plain box with no meaning, used for layout.</td><td>everywhere</td></tr>
+<tr><td><code>&lt;span&gt;</code></td><td>A plain inline box with no meaning, used for styling.</td><td>everywhere</td></tr></tbody></table></div>
+<h3 id="53-headings-and-blocks-of-text">5.3 Headings and blocks of text</h3>
+<div class="table-scroll"><table><thead><tr><th scope="col">Tag</th><th scope="col">What it&#39;s for</th><th scope="col">Where</th></tr></thead><tbody><tr><td><code>&lt;h1&gt;</code>…<code>&lt;h6&gt;</code></td><td>Headings. <code>&lt;h1&gt;</code> is the page title (one per page), <code>&lt;h2&gt;</code> for sections, <code>&lt;h3&gt;</code> inside those. Never skip a level.</td><td>every page (AshTech uses h1–h3)</td></tr>
+<tr><td><code>&lt;p&gt;</code></td><td>A paragraph.</td><td>everywhere</td></tr>
+<tr><td><code>&lt;blockquote&gt;</code></td><td>A long quotation. <code>cite=&quot;…&quot;</code> can hold the web address it came from.</td><td>Pokédex entries; Professor Oak&#39;s quote on Regions</td></tr>
+<tr><td><code>&lt;pre&gt;</code></td><td>Preformatted text: spaces and line breaks are kept exactly.</td><td>code examples on Arcade and Workshop</td></tr>
+<tr><td><code>&lt;hr&gt;</code></td><td>A change of topic. Ours is styled as a row of Poké Balls.</td><td>Workshop</td></tr>
+<tr><td><code>&lt;br&gt;</code></td><td>A line break inside text, like in a poem or an address.</td><td>footer address, Workshop</td></tr></tbody></table></div>
+<h3 id="54-tags-that-give-words-meaning">5.4 Tags that give words meaning</h3>
+<p>These go around words inside a paragraph. The Workshop page has a live table of all of them.</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">Tag</th><th scope="col">What it means</th><th scope="col">Example</th></tr></thead><tbody><tr><td><code>&lt;strong&gt;</code></td><td>Very important</td><td>Never wake a sleeping <strong>Snorlax</strong>!</td></tr>
+<tr><td><code>&lt;em&gt;</code></td><td>Say it with emphasis</td><td>I <em>love</em> Eevee.</td></tr>
+<tr><td><code>&lt;b&gt;</code></td><td>Stand out, without extra importance</td><td>Pokémon names in paragraphs</td></tr>
+<tr><td><code>&lt;i&gt;</code></td><td>A different voice, like a foreign word</td><td><em>Pikachū</em> (with <code>lang=&quot;ja&quot;</code>)</td></tr>
+<tr><td><code>&lt;u&gt;</code></td><td>A marked word, like a spelling mistake</td><td>Pikachoo</td></tr>
+<tr><td><code>&lt;s&gt;</code></td><td>No longer true</td><td><del>10 coins</del> Sold out!</td></tr>
+<tr><td><code>&lt;mark&gt;</code></td><td>Highlighted</td><td>Water beats Fire</td></tr>
+<tr><td><code>&lt;small&gt;</code></td><td>Small print</td><td>the footer and credits</td></tr>
+<tr><td><code>&lt;del&gt;</code> / <code>&lt;ins&gt;</code></td><td>Deleted / inserted text</td><td>There are <del>17</del> 18 types</td></tr>
+<tr><td><code>&lt;sub&gt;</code> / <code>&lt;sup&gt;</code></td><td>Lower / higher text</td><td>H₂O, 2ⁿᵈ</td></tr>
+<tr><td><code>&lt;abbr title=&quot;…&quot;&gt;</code></td><td>An abbreviation. Hover to see the full words.</td><td>HP, STAB, Sp. Atk</td></tr>
+<tr><td><code>&lt;dfn&gt;</code></td><td>The term being defined</td><td>&quot;That&#39;s called <em>evolution</em>&quot;</td></tr>
+<tr><td><code>&lt;q&gt;</code></td><td>A short quote. The browser adds the quote marks.</td><td>&quot;Gotta catch &#39;em all!&quot;</td></tr>
+<tr><td><code>&lt;cite&gt;</code></td><td>The title of a work</td><td><em>Pokémon Red and Blue</em></td></tr>
+<tr><td><code>&lt;code&gt;</code></td><td>Computer code</td><td><code>&lt;p&gt;</code></td></tr>
+<tr><td><code>&lt;kbd&gt;</code></td><td>Keys to press</td><td><kbd>Ctrl</kbd> + <kbd>U</kbd></td></tr>
+<tr><td><code>&lt;samp&gt;</code></td><td>What a computer prints</td><td><code>Saved!</code></td></tr>
+<tr><td><code>&lt;var&gt;</code></td><td>A variable in maths or code</td><td>damage = <em>power</em> × <em>bonus</em></td></tr>
+<tr><td><code>&lt;time datetime=&quot;…&quot;&gt;</code></td><td>A date that computers can read</td><td><code>&lt;time datetime=&quot;1996-02-27&quot;&gt;1996&lt;/time&gt;</code></td></tr>
+<tr><td><code>&lt;data value=&quot;…&quot;&gt;</code></td><td>A number or code that computers can read</td><td>Pokédex numbers on cards</td></tr>
+<tr><td><code>&lt;ruby&gt;</code>, <code>&lt;rt&gt;</code>, <code>&lt;rp&gt;</code></td><td>Small reading help above letters, used in Japanese</td><td>ピカチュウ with &quot;Pikachū&quot; above it</td></tr>
+<tr><td><code>&lt;wbr&gt;</code></td><td>&quot;The line may break here&quot;</td><td>a very long word on Workshop</td></tr>
+<tr><td><code>&lt;bdi&gt;</code> / <code>&lt;bdo&gt;</code></td><td>Right-to-left text, like Arabic</td><td>Workshop</td></tr></tbody></table></div>
+<h3 id="55-lists">5.5 Lists</h3>
+<div class="table-scroll"><table><thead><tr><th scope="col">Tag</th><th scope="col">What it&#39;s for</th><th scope="col">Where</th></tr></thead><tbody><tr><td><code>&lt;ul&gt;</code> + <code>&lt;li&gt;</code></td><td>An <strong>unordered</strong> list, where order doesn&#39;t matter.</td><td>menus, cards, tiles</td></tr>
+<tr><td><code>&lt;ol&gt;</code> + <code>&lt;li&gt;</code></td><td>An <strong>ordered</strong> list, where order matters: steps, rankings, timelines.</td><td>the eight gyms (you beat them in order); evolution steps; the region timeline; the &quot;Start with three&quot; rules</td></tr>
+<tr><td><code>&lt;dl&gt;</code>, <code>&lt;dt&gt;</code>, <code>&lt;dd&gt;</code></td><td>A <strong>description list</strong>: terms and their descriptions.</td><td>Height/Weight on cards; the glossary on Types; the trainer card</td></tr></tbody></table></div>
+<h3 id="56-links">5.6 Links</h3>
+<pre><code class="language-html">&lt;a href=&quot;pokedex.html&quot;&gt;Pokédex&lt;/a&gt;                  a page in the same folder
+&lt;a href=&quot;#fact-ears&quot;&gt;Ears&lt;/a&gt;                       a spot on the same page (the element with id=&quot;fact-ears&quot;)
+&lt;a href=&quot;https://pokeapi.co&quot;&gt;PokéAPI&lt;/a&gt;            another website
+&lt;a href=&quot;mailto:professor@ashtech.example&quot;&gt;…&lt;/a&gt;  opens an email program
+</code></pre>
+<ul>
+<li><code>aria-current=&quot;page&quot;</code> marks the menu link for the page you&#39;re on. CSS uses it to colour that link yellow.</li>
+<li><code>target=&quot;_blank&quot;</code> opens a link in a new tab. The Bulbapedia search uses it.</li>
+</ul>
+<h3 id="57-pictures-video-and-sound">5.7 Pictures, video and sound</h3>
+<div class="table-scroll"><table><thead><tr><th scope="col">Tag</th><th scope="col">What it&#39;s for</th><th scope="col">Where</th></tr></thead><tbody><tr><td><code>&lt;img&gt;</code></td><td>A picture. Always give <code>alt</code> text. Give <code>width</code> and <code>height</code> so the page doesn&#39;t jump while loading. <code>loading=&quot;lazy&quot;</code> waits until you scroll near it.</td><td>everywhere</td></tr>
+<tr><td><code>&lt;picture&gt;</code> + <code>&lt;source&gt;</code></td><td>Several versions of one picture. The browser picks the first <code>&lt;source&gt;</code> whose <code>media</code> condition matches.</td><td>Theater: Charizard becomes a pixel sprite on small screens</td></tr>
+<tr><td><code>&lt;figure&gt;</code> + <code>&lt;figcaption&gt;</code></td><td>A picture or media with a caption.</td><td>the flower video, the cry lab</td></tr>
+<tr><td><code>&lt;video&gt;</code></td><td>Plays a video. <code>controls</code> shows the buttons, <code>preload=&quot;metadata&quot;</code> loads only the length at first, and <code>playsinline</code> stops phones going full screen.</td><td>Theater</td></tr>
+<tr><td><code>&lt;source&gt;</code> (inside video/audio)</td><td>One file choice. We give WebM <em>and</em> MP4 so every browser finds one it can play.</td><td>Theater, Pokédex</td></tr>
+<tr><td><code>&lt;track&gt;</code></td><td>Captions or subtitles, stored in a <code>.vtt</code> file.</td><td><code>media/flower.vtt</code></td></tr>
+<tr><td><code>&lt;audio&gt;</code></td><td>Plays sound.</td><td>Pokémon cries in the Pokédex and the cry lab</td></tr>
+<tr><td><code>&lt;iframe&gt;</code></td><td>A window showing another web page inside ours.</td><td>the YouTube video inside the CSS TV</td></tr>
+<tr><td><code>&lt;map&gt;</code> + <code>&lt;area&gt;</code></td><td>An <strong>image map</strong>: clickable areas on one picture. <code>shape</code> can be <code>rect</code>, <code>circle</code> or <code>poly</code>, and <code>coords</code> are pixel positions.</td><td>Theater: &quot;Pikachu up close&quot;</td></tr></tbody></table></div>
+<p>Text inside <code>&lt;video&gt;</code> or <code>&lt;audio&gt;</code> (like &quot;Your browser can&#39;t play this sound&quot;) only shows if the browser can&#39;t play the media. It&#39;s a <strong>fallback</strong>.</p>
+<h3 id="58-tables">5.8 Tables</h3>
+<p>Tables are for data with rows and columns, never for page layout.</p>
+<pre><code class="language-html">&lt;table&gt;
+  &lt;caption&gt;What the table is about&lt;/caption&gt;
+  &lt;colgroup&gt; &lt;col&gt; &lt;col span=&quot;18&quot;&gt; &lt;/colgroup&gt;
+  &lt;thead&gt;  &lt;tr&gt; &lt;th scope=&quot;col&quot;&gt;Column heading&lt;/th&gt; … &lt;/tr&gt; &lt;/thead&gt;
+  &lt;tbody&gt;  &lt;tr&gt; &lt;th scope=&quot;row&quot;&gt;Row heading&lt;/th&gt; &lt;td&gt;Cell&lt;/td&gt; … &lt;/tr&gt; &lt;/tbody&gt;
+  &lt;tfoot&gt;  &lt;tr&gt; &lt;td colspan=&quot;19&quot;&gt;A footer across all 19 columns&lt;/td&gt; &lt;/tr&gt; &lt;/tfoot&gt;
+&lt;/table&gt;
+</code></pre>
+<div class="table-scroll"><table><thead><tr><th scope="col">Tag or attribute</th><th scope="col">What it&#39;s for</th><th scope="col">Where</th></tr></thead><tbody><tr><td><code>&lt;table&gt;</code></td><td>The table itself.</td><td>type chart, Pokédex stats, ways to evolve, Workshop</td></tr>
+<tr><td><code>&lt;caption&gt;</code></td><td>The table&#39;s title.</td><td>all tables</td></tr>
+<tr><td><code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code></td><td>The head, body and foot rows.</td><td>type chart</td></tr>
+<tr><td><code>&lt;tr&gt;</code></td><td>A table row.</td><td>all tables</td></tr>
+<tr><td><code>&lt;th&gt;</code></td><td>A heading cell. <code>scope=&quot;col&quot;</code> or <code>scope=&quot;row&quot;</code> says which cells it heads.</td><td>all tables</td></tr>
+<tr><td><code>&lt;td&gt;</code></td><td>A data cell.</td><td>all tables</td></tr>
+<tr><td><code>&lt;colgroup&gt;</code>, <code>&lt;col&gt;</code></td><td>Groups of columns.</td><td>type chart</td></tr>
+<tr><td><code>colspan</code> / <code>rowspan</code></td><td>Make one cell stretch across several columns or rows.</td><td>type chart footer (<code>colspan</code>), &quot;Ways to evolve&quot; (<code>rowspan=&quot;2&quot;</code>)</td></tr></tbody></table></div>
+<h3 id="59-forms">5.9 Forms</h3>
+<p>Forms collect answers. The Academy page uses almost every kind of form control.</p>
+<pre><code class="language-html">&lt;form action=&quot;trainer-card.html&quot; method=&quot;get&quot;&gt;
+  &lt;label for=&quot;name&quot;&gt;Trainer name&lt;/label&gt;
+  &lt;input type=&quot;text&quot; id=&quot;name&quot; name=&quot;name&quot; required&gt;
+  &lt;button type=&quot;submit&quot;&gt;Get my trainer card&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+<ul>
+<li><code>action</code> is the page that opens when you submit.</li>
+<li><code>method=&quot;get&quot;</code> puts the answers in the address bar, like <code>trainer-card.html?name=Ash</code>. Look for them after you submit!</li>
+<li><code>name</code> is the label each answer gets when it&#39;s sent.</li>
+<li><strong>Every input needs a <code>&lt;label&gt;</code>.</strong> The label&#39;s <code>for</code> must match the input&#39;s <code>id</code>. Clicking a label clicks its input, and screen readers read the label aloud.</li>
+</ul>
+<div class="table-scroll"><table><thead><tr><th scope="col">Tag</th><th scope="col">What it&#39;s for</th><th scope="col">Where</th></tr></thead><tbody><tr><td><code>&lt;form&gt;</code></td><td>Wraps the controls.</td><td>Academy, the games, the Pokédex filters</td></tr>
+<tr><td><code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code></td><td>Groups related controls, with a title.</td><td>Academy steps, filter groups, game menus</td></tr>
+<tr><td><code>&lt;label&gt;</code></td><td>The name of a control. It&#39;s also the secret of every game (see <a href="#8-remembering-clicks-without-javascript">section 8</a>).</td><td>everywhere</td></tr>
+<tr><td><code>&lt;input&gt;</code></td><td>A single control. Its <code>type</code> decides what kind (see below).</td><td>everywhere</td></tr>
+<tr><td><code>&lt;select&gt;</code> + <code>&lt;option&gt;</code></td><td>A drop-down list.</td><td>Hometown</td></tr>
+<tr><td><code>&lt;optgroup&gt;</code></td><td>A labelled group inside a drop-down.</td><td>Hometown, grouped by region</td></tr>
+<tr><td><code>&lt;datalist&gt;</code></td><td>Suggestions for an input, linked with <code>list=&quot;…&quot;</code>.</td><td>Favourite Pokémon (type &quot;Pi&quot;…) and the bravery slider</td></tr>
+<tr><td><code>&lt;textarea&gt;</code></td><td>Multi-line text.</td><td>&quot;Tell us about your dream team&quot;</td></tr>
+<tr><td><code>&lt;button&gt;</code></td><td>A button. <code>type=&quot;submit&quot;</code> sends the form, <code>type=&quot;reset&quot;</code> clears it, <code>type=&quot;button&quot;</code> does nothing by itself.</td><td>Academy, the games</td></tr>
+<tr><td><code>&lt;meter&gt;</code></td><td>A measurement in a known range. <code>low</code>, <code>high</code> and <code>optimum</code> change its colour.</td><td>base stats on Pokédex cards</td></tr>
+<tr><td><code>&lt;progress&gt;</code></td><td>How far along something is.</td><td>&quot;Pokédex seen&quot; on the trainer card</td></tr></tbody></table></div>
+<p><strong>Input types used in AshTech:</strong> <code>text</code>, <code>number</code>, <code>date</code>, <code>email</code>, <code>url</code>, <code>color</code>, <code>range</code>, <code>time</code>, <code>month</code>, <code>file</code>, <code>search</code>, <code>checkbox</code>, <code>radio</code> and <code>hidden</code>.</p>
+<p><strong>Rules the browser checks for you:</strong></p>
+<div class="table-scroll"><table><thead><tr><th scope="col">Attribute</th><th scope="col">Rule</th><th scope="col">Example</th></tr></thead><tbody><tr><td><code>required</code></td><td>Must be filled in</td><td>Trainer name</td></tr>
+<tr><td><code>minlength</code> / <code>maxlength</code></td><td>Shortest / longest text</td><td>name: 2 to 20 letters</td></tr>
+<tr><td><code>min</code> / <code>max</code></td><td>Smallest / largest number or date</td><td>age: 5 to 16</td></tr>
+<tr><td><code>pattern</code></td><td>Must match a pattern</td><td>trainer ID: <code>[0-9]{5}</code> means exactly five digits</td></tr>
+<tr><td><code>type=&quot;email&quot;</code> / <code>type=&quot;url&quot;</code></td><td>Must look like an email / web address</td><td>grown-up&#39;s email</td></tr>
+<tr><td><code>accept</code></td><td>Which files can be chosen</td><td><code>accept=&quot;image/*&quot;</code> means pictures only</td></tr></tbody></table></div>
+<p>Other helpful attributes: <code>placeholder</code> (grey hint text), <code>autocomplete</code>, <code>inputmode=&quot;numeric&quot;</code> (a number keypad on phones), <code>step</code>, and <code>value</code> (the starting value).</p>
+<h3 id="510-interactive-tags">5.10 Interactive tags</h3>
+<div class="table-scroll"><table><thead><tr><th scope="col">Tag or attribute</th><th scope="col">What it&#39;s for</th><th scope="col">Where</th></tr></thead><tbody><tr><td><code>&lt;details&gt;</code> + <code>&lt;summary&gt;</code></td><td>A box that opens and closes by itself. <code>name=&quot;faq&quot;</code> makes a group where only one is open at a time.</td><td>&quot;Questions trainers ask&quot; on Types</td></tr>
+<tr><td><code>popover</code> + <code>popovertarget</code></td><td>A pop-up that opens when you click a button. No JavaScript needed!</td><td>&quot;Read entry&quot; on every Pokédex card</td></tr></tbody></table></div>
+<h3 id="511-tags-we-didnt-use-and-why">5.11 Tags we didn&#39;t use (and why)</h3>
+<ul>
+<li><code>&lt;dialog&gt;</code>: a pop-up box. Opening it as a proper modal needs JavaScript, so we used <code>popover</code> instead.</li>
+<li><code>&lt;svg&gt;</code>: vector drawings. SVG is its own language, so every shape on the site is drawn with CSS instead. (The handbook&#39;s diagrams do become SVG, but the Mermaid library makes them, not us.)</li>
+<li><code>&lt;template&gt;</code>, <code>&lt;slot&gt;</code>: only useful for bigger JavaScript projects.</li>
+<li><code>&lt;object&gt;</code>, <code>&lt;embed&gt;</code>: old ways to embed things. <code>&lt;iframe&gt;</code>, <code>&lt;video&gt;</code> and <code>&lt;audio&gt;</code> do it better.</li>
+</ul>
+<p>And a few that only appear on the pages with JavaScript:</p>
+<ul>
+<li><code>&lt;script src=&quot;…&quot; defer&gt;</code>: loads a JavaScript file. <code>defer</code> means “wait until the page is ready”. It&#39;s in the <code>&lt;head&gt;</code> of the four pages that use JavaScript.</li>
+<li><code>&lt;noscript&gt;</code>: shown only when JavaScript is switched off. The Code Lab uses it to explain why it&#39;s empty.</li>
+<li><code>&lt;output&gt;</code>: shows a result that changes. The Workshop&#39;s sliders show their numbers in <code>&lt;output&gt;</code> tags.</li>
+<li><code>&lt;canvas&gt;</code>: a drawing board made of pixels. <code>card.js</code> creates one (with JavaScript, not in the HTML) to paint the trainer card before turning it into a PDF.</li>
+<li><code>input type=&quot;password&quot;</code> and <code>type=&quot;tel&quot;</code>: we don&#39;t ask kids for passwords or phone numbers!</li>
+</ul>
+<hr>
+<h2 id="6-css-basics">6. CSS basics</h2>
+<p><strong>CSS</strong> (Cascading Style Sheets) describes how things <strong>look</strong> and <strong>move</strong>: colours, sizes, layout and animation.</p>
+<h3 id="a-css-rule">A CSS rule</h3>
+<pre><code class="language-css">.btn {
+  background: yellow;
+  border-radius: 999px;
+}
+</code></pre>
+<ul>
+<li><code>.btn</code> is the <strong>selector</strong>: which elements to style.</li>
+<li><code>background</code> is a <strong>property</strong>: what to change.</li>
+<li><code>yellow</code> is the <strong>value</strong>: what to change it to.</li>
+<li><code>property: value;</code> together is a <strong>declaration</strong>. The <code>{ }</code> hold the declarations.</li>
+</ul>
+<h3 id="three-places-css-can-live">Three places CSS can live</h3>
+<ol>
+<li><strong>A separate file</strong>, linked with <code>&lt;link rel=&quot;stylesheet&quot;&gt;</code>. This is the best choice, and AshTech does it for everything.</li>
+<li><strong>A <code>&lt;style&gt;</code> tag</strong> in the <code>&lt;head&gt;</code>. Not used here.</li>
+<li><strong>A <code>style</code> attribute</strong> on one element. AshTech only uses this to pass a variable, like <code>style=&quot;--c: var(--t-fire);&quot;</code>.</li>
+</ol>
+<h3 id="comments">Comments</h3>
+<pre><code class="language-css">/* This is a CSS comment. The browser ignores it. */
+</code></pre>
+<h3 id="selectors">Selectors</h3>
+<div class="table-scroll"><table><thead><tr><th scope="col">Selector</th><th scope="col">Picks</th><th scope="col">Example in AshTech</th></tr></thead><tbody><tr><td><code>p</code></td><td>every <code>&lt;p&gt;</code> (<strong>type selector</strong>)</td><td>text width in <code>base.css</code></td></tr>
+<tr><td><code>.sticker</code></td><td>everything with that <strong>class</strong></td><td>the sticker boxes</td></tr>
+<tr><td><code>#main</code></td><td>the one element with that <strong>id</strong></td><td>the skip link target</td></tr>
+<tr><td><code>*</code></td><td>everything (<strong>universal</strong>)</td><td>the reset in <code>base.css</code></td></tr>
+<tr><td><code>[data-type=&quot;fire&quot;]</code></td><td>an <strong>attribute</strong> with an exact value</td><td>type badge colours</td></tr>
+<tr><td><code>[data-types~=&quot;fire&quot;]</code></td><td>an attribute that <strong>contains the word</strong></td><td>Pokédex type filter</td></tr>
+<tr><td><code>a[href^=&quot;http&quot;]</code></td><td>an attribute that <strong>starts with</strong></td><td>printing web addresses</td></tr>
+<tr><td><code>nav a</code></td><td><code>&lt;a&gt;</code> anywhere inside <code>&lt;nav&gt;</code> (<strong>descendant</strong>)</td><td>the menu</td></tr>
+<tr><td><code>.step &gt; legend</code></td><td>only direct children (<strong>child</strong>)</td><td>the Academy step titles</td></tr>
+<tr><td><code>input + label</code></td><td>the element <strong>right after</strong> (<strong>adjacent sibling</strong>)</td><td>every game</td></tr>
+<tr><td><code>input ~ .grid</code></td><td><strong>any later</strong> sibling (<strong>general sibling</strong>)</td><td>the Pokédex</td></tr>
+<tr><td><code>h2, h3</code></td><td>both (<strong>selector list</strong>)</td><td></td></tr>
+<tr><td><code>:is(a, b) c</code></td><td>a shorter way to write a list</td><td>Academy inputs</td></tr>
+<tr><td><code>:not(.right)</code></td><td>everything <strong>except</strong></td><td>wrong quiz answers</td></tr>
+<tr><td><code>:has(input:checked)</code></td><td>a <strong>parent that contains</strong> something</td><td>the starter picker, quiz, battle</td></tr></tbody></table></div>
+<p><strong>Pseudo-classes</strong> pick elements in a certain <strong>state</strong>. They start with one colon:</p>
+<p><code>:hover</code> (pointed at), <code>:active</code> (being pressed), <code>:focus</code> / <code>:focus-visible</code> (reached with the keyboard), <code>:checked</code> (ticked), <code>:valid</code> / <code>:user-invalid</code> / <code>:user-valid</code> (form checks), <code>:placeholder-shown</code> (the box is empty), <code>:target</code> (named in the address after <code>#</code>), <code>:empty</code> (has nothing inside), <code>:popover-open</code>, <code>:playing</code> (audio playing), <code>:first-child</code>, <code>:last-child</code>, <code>:nth-child(odd)</code>, <code>:nth-child(-n + 2)</code>, <code>:nth-of-type(2)</code>, <code>:first-of-type</code> and <code>:last-of-type</code>.</p>
+<p><strong>Pseudo-elements</strong> style a <strong>part</strong> of an element, or add extra boxes. They start with two colons:</p>
+<p><code>::before</code> and <code>::after</code> (extra boxes; they need <code>content</code>), <code>::marker</code> (list bullets and numbers), <code>::placeholder</code>, <code>::selection</code> (highlighted text), <code>::first-letter</code>, <code>::first-line</code>, <code>::backdrop</code> (behind a popover), <code>::file-selector-button</code>, <code>::cue</code> (video captions), <code>::details-content</code>, <code>::-webkit-slider-thumb</code> (the range slider knob), <code>::-webkit-meter-optimum-value</code> and <code>::-webkit-progress-value</code>.</p>
+<h3 id="the-cascade-who-wins">The cascade: who wins?</h3>
+<p>When two rules disagree, the browser decides using these steps, in order:</p>
+<ol>
+<li><strong>Importance.</strong> <code>!important</code> wins. Use it very rarely. AshTech uses it for the reduced-motion rules and for <code>.visually-hidden</code>.</li>
+<li><strong>Layers.</strong> Rules in a later <code>@layer</code> beat rules in an earlier one (see below).</li>
+<li><strong>Specificity.</strong> More specific selectors win. An id beats a class, and a class beats a tag. Roughly: count the ids, then the classes/attributes/pseudo-classes, then the tags.</li>
+<li><strong>Order.</strong> If everything else is equal, the rule written last wins.</li>
+</ol>
+<p><strong>Inheritance:</strong> some properties, like <code>color</code> and <code>font-family</code>, pass from parents to children. That&#39;s why setting the font on <code>&lt;body&gt;</code> changes the whole page.</p>
+<h3 id="cascade-layers-how-ashtech-stays-tidy">Cascade layers: how AshTech stays tidy</h3>
+<p>The first line of <code>base.css</code> is:</p>
+<pre><code class="language-css">@layer reset, tokens, base, layout, components, pages, utilities;
+</code></pre>
+<p>This makes seven &quot;drawers&quot; and puts them in order. Every rule goes in a drawer:</p>
+<pre><code class="language-css">@layer components {
+  .btn { … }
+}
+</code></pre>
+<p>A rule in <code>pages</code> always beats a rule in <code>components</code>, however complicated the <code>components</code> selector is. So each page can safely change shared pieces without a specificity fight.</p>
+<hr>
+<h2 id="7-css-topic-by-topic">7. CSS, topic by topic</h2>
+<h3 id="71-custom-properties-css-variables">7.1 Custom properties (CSS variables)</h3>
+<pre><code class="language-css">:root {
+  --red: #e3350d;          /* make a variable */
+}
+.btn--red {
+  background: var(--red);  /* use it */
+}
+</code></pre>
+<ul>
+<li>Change <code>--red</code> once, and it changes everywhere.</li>
+<li>Variables <strong>inherit</strong>, so a card can say <code>--c: var(--t-fire)</code> and everything inside it uses fire colours.</li>
+<li><code>var(--x, orange)</code> uses <code>orange</code> if <code>--x</code> isn&#39;t set.</li>
+<li>Variables can hold numbers, and <code>calc()</code> can do maths with them. The battle game is built on this (<a href="#86-doing-maths-in-css-the-battle-game">section 8.6</a>).</li>
+<li><strong><code>@property</code></strong> registers a variable with a type, like <code>&lt;angle&gt;</code>. Then it can be <strong>animated smoothly</strong>. The rainbow ring around Eevee turns this way (<code>evolution.css</code>).</li>
+</ul>
+<h3 id="72-units">7.2 Units</h3>
+<div class="table-scroll"><table><thead><tr><th scope="col">Unit</th><th scope="col">Means</th><th scope="col">Used for</th></tr></thead><tbody><tr><td><code>px</code></td><td>screen pixels</td><td>borders, shadows</td></tr>
+<tr><td><code>rem</code></td><td>the root font size (usually 16px)</td><td>text and spacing</td></tr>
+<tr><td><code>em</code></td><td>this element&#39;s font size</td><td>the logo outline (<code>0.2em</code>) grows with the text</td></tr>
+<tr><td><code>%</code></td><td>a percentage of the parent</td><td>widths, positions</td></tr>
+<tr><td><code>vw</code> / <code>vh</code></td><td>1% of the window width / height</td><td>the fluid title size</td></tr>
+<tr><td><code>dvh</code></td><td>like <code>vh</code>, but correct on phones</td><td>page minimum height</td></tr>
+<tr><td><code>ch</code></td><td>the width of the &quot;0&quot; character</td><td>text line length (<code>68ch</code>)</td></tr>
+<tr><td><code>fr</code></td><td>a share of the free space in a grid</td><td>grid columns</td></tr>
+<tr><td><code>deg</code> / <code>turn</code></td><td>angles</td><td>rotations</td></tr>
+<tr><td><code>s</code> / <code>ms</code></td><td>seconds / milliseconds</td><td>animations</td></tr></tbody></table></div>
+<h3 id="73-colours">7.3 Colours</h3>
+<p>AshTech writes colours in all these ways (see the Workshop&#39;s colour lab):</p>
+<pre><code class="language-css">#ffcb05                                  /* hex */
+rgb(227 53 13)                           /* red, green, blue */
+rgb(27 42 85 / 0.5)                      /* …with 50% see-through */
+hsl(210 64% 45%)                         /* hue, saturation, lightness */
+oklch(72% 0.17 135)                      /* a newer, smoother colour space */
+color-mix(in srgb, var(--c) 45%, white)  /* mix two colours */
+rebeccapurple                            /* a named colour */
+transparent
+</code></pre>
+<p><strong>The HP bar trick:</strong> <code>hsl(calc(var(--hp) * 1.2) 75% 45%)</code>. When HP is 100 the hue is 120 (green), and as HP drops the hue slides towards 0 (red).</p>
+<h3 id="74-the-box-model">7.4 The box model</h3>
+<p>Every element is a box made of four layers (the Workshop shows them in 3D):</p>
+<pre><code>┌──────────── margin (space outside) ────────────┐
+│  ┌──────────── border ─────────────────────┐   │
+│  │  ┌──────── padding (space inside) ───┐  │   │
+│  │  │            content                │  │   │
+│  │  └───────────────────────────────────┘  │   │
+│  └─────────────────────────────────────────┘   │
+└────────────────────────────────────────────────┘
+</code></pre>
+<p><code>box-sizing: border-box</code> (set on everything in the reset) makes <code>width</code> include the padding and border. That makes sizes much easier to predict.</p>
+<p>Related properties: <code>width</code>, <code>height</code>, <code>min-height</code>, <code>max-width</code>, <code>aspect-ratio</code> (Pokédex cards are <code>5 / 7</code>, like a trading card), <code>overflow</code> (<code>hidden</code>, <code>auto</code>, <code>clip</code>), and the logical properties <code>margin-inline</code>, <code>padding-block</code> and <code>inset</code>.</p>
+<h3 id="75-display">7.5 Display</h3>
+<ul>
+<li><code>display: block</code> takes the full width and starts a new line.</li>
+<li><code>display: inline</code> flows inside text.</li>
+<li><code>display: inline-block</code> flows like text, but can have a size.</li>
+<li><code>display: none</code> removes the element completely.</li>
+<li><code>display: flex</code> and <code>display: grid</code> are layout systems (next sections).</li>
+</ul>
+<p><code>visibility: hidden</code> hides an element but <strong>keeps its space</strong>. The quiz relies on this difference (see <a href="#gotcha-counters-skip-hidden-things">the counter gotcha</a>).</p>
+<h3 id="76-flexbox-lining-things-up">7.6 Flexbox: lining things up</h3>
+<pre><code class="language-css">.row {
+  display: flex;
+  justify-content: space-between;  /* along the row */
+  align-items: center;             /* across the row */
+  gap: 1rem;                       /* space between items */
+  flex-wrap: wrap;                 /* allow new lines */
+}
+</code></pre>
+<p>Try it live in the <strong>Workshop&#39;s flexbox playground</strong>. AshTech uses flexbox for the header, buttons, chips and the Safari scoreboard. <code>order</code> changes the visual order without changing the HTML (the Pokédex count and Safari scoreboard use this trick).</p>
+<h3 id="77-grid-rows-and-columns">7.7 Grid: rows and columns</h3>
+<pre><code class="language-css">.dex__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 2rem 1.25rem;
+}
+</code></pre>
+<p>This one line of columns means: &quot;fit as many columns as you can, each at least 210px wide, and share out the extra space.&quot; It&#39;s how the Pokédex fills any screen size without a single media query.</p>
+<p>More grid tools used in AshTech:</p>
+<ul>
+<li><strong>Named areas.</strong> The battle arena is laid out like a map:<pre><code class="language-css">grid-template-areas:
+  &quot;foeinfo foe&quot;
+  &quot;me      meinfo&quot;;
+</code></pre>
+and then <code>grid-area: foe;</code> puts the enemy in its spot.</li>
+<li><strong>Stacking.</strong> <code>grid-area: 1 / 1</code> on several children makes them sit on top of each other. The card faces, quiz rounds and evolution Pokémon all work this way.</li>
+<li><strong>Spanning.</strong> <code>grid-row: span 2</code> stretches an item over two rows. That makes the zig-zag route on the home page.</li>
+<li><strong>Placement:</strong> <code>justify-items</code>, <code>align-items</code>, <code>place-items: center</code> and <code>justify-self</code>.</li>
+</ul>
+<p>Try it in the <strong>Workshop&#39;s grid playground</strong>.</p>
+<h3 id="78-positioning">7.8 Positioning</h3>
+<div class="table-scroll"><table><thead><tr><th scope="col">Value</th><th scope="col">Behaviour</th><th scope="col">Example</th></tr></thead><tbody><tr><td><code>static</code></td><td>normal (the default)</td><td></td></tr>
+<tr><td><code>relative</code></td><td>normal, but becomes the anchor for absolute children</td><td>the diorama</td></tr>
+<tr><td><code>absolute</code></td><td>placed exactly, relative to the nearest positioned parent</td><td>clouds, Pikachu, sparkles</td></tr>
+<tr><td><code>fixed</code></td><td>stuck to the window</td><td>the reading progress bar</td></tr>
+<tr><td><code>sticky</code></td><td>scrolls normally, then sticks</td><td>the red header bar, the Academy submit bar</td></tr></tbody></table></div>
+<p>Use <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code> or <code>inset</code> to place things. <code>z-index</code> decides who&#39;s on top.</p>
+<h3 id="79-typography">7.9 Typography</h3>
+<p><code>font-family</code>, <code>font-size</code>, <code>font-weight</code>, <code>line-height</code>, <code>letter-spacing</code>, <code>text-align</code>, <code>text-transform: capitalize</code> (type badges), <code>text-decoration</code> (wavy underlines on hover!), <code>text-underline-offset</code>, <code>white-space: nowrap</code>, and <code>text-wrap: balance</code>, which evens out heading lines.</p>
+<p><strong>The logo lettering:</strong></p>
+<pre><code class="language-css">.logo-type {
+  color: var(--yellow);
+  -webkit-text-stroke: 0.2em var(--logo-blue);  /* an outline around each letter */
+  paint-order: stroke fill;                     /* draw the outline BEHIND the fill */
+  text-shadow: 0.05em 0.07em 0 var(--ink);      /* a solid shadow */
+}
+</code></pre>
+<p><strong>Storybook drop cap</strong> (Regions page):</p>
+<pre><code class="language-css">p:first-of-type::first-letter { float: left; font-size: 4.4em; }
+p:first-of-type::first-line   { font-weight: 700; }
+</code></pre>
+<p><strong>Multi-column text:</strong> <code>columns: 2 22rem;</code> makes two newspaper-style columns (Kanto section and footer links). <code>break-inside: avoid</code> stops a quote splitting between columns.</p>
+<p><strong>Text around a circle:</strong> <code>float: right</code> plus <code>shape-outside: circle(48%)</code> makes the Kanto text wrap around round Pikachu.</p>
+<h3 id="710-backgrounds-and-gradients">7.10 Backgrounds and gradients</h3>
+<p>You can stack many backgrounds, separated by commas. The first one is on top.</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">Gradient</th><th scope="col">Example in AshTech</th></tr></thead><tbody><tr><td><code>linear-gradient(…)</code></td><td>the sky in the diorama</td></tr>
+<tr><td><code>radial-gradient(…)</code></td><td>the Pokédex lens, hills, spotlights</td></tr>
+<tr><td><code>conic-gradient(…)</code></td><td>the sun&#39;s rays, the type wheel, the Thunder badge</td></tr>
+<tr><td><code>repeating-linear-gradient(…)</code></td><td>the notebook grid, TV wood grain, scan lines</td></tr>
+<tr><td><code>repeating-conic-gradient(…)</code></td><td>&quot;Who&#39;s That Pokémon?&quot; light rays</td></tr>
+<tr><td><code>repeating-radial-gradient(…)</code></td><td>the Marsh badge rings</td></tr></tbody></table></div>
+<p>The notebook paper is just two gradients, one horizontal and one vertical, repeated every 28px:</p>
+<pre><code class="language-css">background-image:
+  linear-gradient(var(--grid) 1px, transparent 1px),
+  linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+background-size: 28px 28px;
+</code></pre>
+<p><strong>The CSS Poké Ball</strong> is one element with hard colour stops (no fading):</p>
+<pre><code class="language-css">background: linear-gradient(to bottom, red 0 45%, navy 45% 55%, white 55% 100%);
+border-radius: 50%;
+</code></pre>
+<p>Its white button is an <code>::after</code> circle in the middle.</p>
+<h3 id="711-borders-corners-and-shadows">7.11 Borders, corners and shadows</h3>
+<ul>
+<li><code>border: 3px solid var(--ink)</code>, plus <code>dashed</code> and <code>dotted</code> styles.</li>
+<li><code>border-radius</code>: <code>50%</code> makes a circle, <code>999px</code> makes a pill, and <code>0 50% 50% 50%</code> makes a raindrop (the Cascade badge).</li>
+<li><code>box-shadow: 6px 6px 0 var(--ink)</code> is the sticker&#39;s hard shadow. <code>inset</code> shadows go inside. Several shadows can be stacked with commas, and the confetti and sparkles are ONE tiny element copied many times with <code>box-shadow</code>!</li>
+<li><code>outline</code> is like a border that doesn&#39;t take up space. It&#39;s used for focus rings.</li>
+<li><code>filter: drop-shadow(…)</code> follows the shape of a transparent picture instead of its square box.</li>
+</ul>
+<h3 id="712-shapes-clip-path-and-mask">7.12 Shapes: clip-path and mask</h3>
+<p><code>clip-path</code> cuts an element into a shape. Everything outside the shape disappears:</p>
+<pre><code class="language-css">clip-path: polygon(50% 0, 61% 26%, 85% 15%, …);   /* the Thunder badge star */
+clip-path: ellipse(70% 60% at 30% 100%);          /* hills on the Regions page */
+clip-path: circle(0% at 44px 38px);               /* the lens page transition */
+clip-path: path(&quot;M32 58 L7 33 A13.5 …&quot;);          /* the Soul badge heart */
+clip-path: inset(0 100% 0 0);                     /* the typing effect in games */
+</code></pre>
+<p><code>mask</code> uses an image or gradient to hide parts of an element. The diorama sun fades out at its edges with a radial mask.</p>
+<h3 id="713-transforms">7.13 Transforms</h3>
+<p><code>transform</code> (and the newer single properties <code>translate</code>, <code>rotate</code> and <code>scale</code>) move, turn and resize things <strong>without</strong> disturbing the layout:</p>
+<pre><code class="language-css">translate: 0 -12px;      /* move */
+rotate: -4deg;           /* turn (the tilted logo) */
+scale: 1.12;             /* resize */
+transform: rotateY(180deg);        /* 3D: flip a Pokédex card */
+</code></pre>
+<p><strong>3D needs three helpers:</strong></p>
+<ul>
+<li><code>perspective: 1000px</code> on the parent adds depth.</li>
+<li><code>transform-style: preserve-3d</code> keeps children in 3D.</li>
+<li><code>backface-visibility: hidden</code> hides a card&#39;s face when it&#39;s turned away.</li>
+</ul>
+<p><strong>Placing things in a circle.</strong> The type wheel spins each Pokémon to its angle, pushes it outwards, then spins it back upright:</p>
+<pre><code class="language-css">transform: rotate(calc(var(--i) * 120deg)) translateY(-120px) rotate(calc(var(--i) * -120deg));
+</code></pre>
+<p>The Eevee wheel does the same thing with <strong>CSS trigonometry</strong>:</p>
+<pre><code class="language-css">left: calc(50% + cos(var(--angle)) * var(--r));
+top:  calc(50% + sin(var(--angle)) * var(--r));
+</code></pre>
+<h3 id="714-transitions-smooth-changes">7.14 Transitions: smooth changes</h3>
+<p>A <strong>transition</strong> animates between two states, like normal and hover:</p>
+<pre><code class="language-css">.btn {
+  transition: transform 0.15s var(--ease-bounce), box-shadow 0.15s;
+}
+.btn:hover {
+  transform: translateY(-3px);
+}
+</code></pre>
+<p><code>--ease-bounce</code> is <code>cubic-bezier(0.34, 1.56, 0.64, 1)</code>, a timing curve that overshoots a little, so buttons feel springy.</p>
+<p><code>transition-delay</code> waits before starting. The battle game&#39;s HP bars wait until the attack animation has played. <code>transition-behavior: allow-discrete</code> plus <code>@starting-style</code> let even pop-ups animate as they appear and disappear (the Pokédex entry popover).</p>
+<h3 id="715-animations-with-keyframes">7.15 Animations with @keyframes</h3>
+<p>A <strong>keyframe animation</strong> runs by itself, as many times as you like:</p>
+<pre><code class="language-css">@keyframes float {
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -12px; }
+}
+.page-head__art {
+  animation: float 4s ease-in-out infinite;
+}
+</code></pre>
+<div class="table-scroll"><table><thead><tr><th scope="col">Property</th><th scope="col">What it controls</th><th scope="col">Example</th></tr></thead><tbody><tr><td><code>animation-name</code></td><td>which <code>@keyframes</code> to use</td><td><code>float</code></td></tr>
+<tr><td><code>animation-duration</code></td><td>how long one loop takes</td><td><code>4s</code></td></tr>
+<tr><td><code>animation-timing-function</code></td><td>the speed curve</td><td><code>ease-in-out</code>, <code>linear</code>, <code>steps(18)</code></td></tr>
+<tr><td><code>animation-delay</code></td><td>wait before starting</td><td>slideshow slides start 6s apart</td></tr>
+<tr><td><code>animation-iteration-count</code></td><td>how many times</td><td><code>infinite</code>, <code>3</code> (the Poké Ball wobbles 3 times)</td></tr>
+<tr><td><code>animation-direction</code></td><td>forwards, backwards, or back and forth</td><td><code>alternate</code> (swaying grass), <code>reverse</code> (type wheel)</td></tr>
+<tr><td><code>animation-fill-mode</code></td><td>keep the first/last frame</td><td><code>both</code>, <code>forwards</code> (Time&#39;s up!)</td></tr>
+<tr><td><code>animation-play-state</code></td><td>pause or play</td><td>Safari waits for Start, the ticker pauses on hover</td></tr></tbody></table></div>
+<p><strong>Some of the many animations in AshTech:</strong> the glowing lens, blinking lights, drifting clouds, spinning sun, hopping Pikachu, Butterfree flying along a curved path (<code>offset-path</code>), swaying grass, peeking Pokémon, the logo drop, the fact ticker, the slideshow, card flips, the evolution flash, the spinning type wheel, cartridges lifting, lightning bolts, Poké Ball throws and wobbles, falling confetti, the badge shine and the shimmering trainer card.</p>
+<p><strong>Motion paths:</strong> <code>offset-path: path(&quot;M -60 140 C 80 20, …&quot;)</code> draws an invisible curve, and animating <code>offset-distance</code> from <code>0%</code> to <code>100%</code> makes Butterfree fly along it.</p>
+<p><strong>Steps:</strong> <code>steps(18)</code> jumps in 18 steps instead of moving smoothly. That makes the retro &quot;typing&quot; of the game text.</p>
+<p><strong>Several animations at once:</strong> separate them with commas:</p>
+<pre><code class="language-css">animation: throw 0.45s ease-out both, wobble 0.6s 0.5s ease-in-out 3;
+</code></pre>
+<h3 id="716-scroll-effects">7.16 Scroll effects</h3>
+<ul>
+<li><code>scroll-behavior: smooth</code> makes <code>#links</code> glide instead of jumping.</li>
+<li><code>scroll-padding-top</code> stops the sticky header covering the target.</li>
+<li><strong>Scroll snap</strong> makes the Regions track &quot;click&quot; each card into place:<pre><code class="language-css">.flight { scroll-snap-type: x mandatory; }
+.region { scroll-snap-align: center; }
+</code></pre>
+</li>
+<li><strong>Scroll-driven animations</strong> link an animation to scrolling instead of time:<pre><code class="language-css">animation-timeline: scroll(root);     /* the reading bar at the top of long pages */
+animation-timeline: view(inline);     /* region cards grow as they slide in */
+</code></pre>
+</li>
+<li><code>overscroll-behavior: contain</code> stops scrolling inside a box from scrolling the whole page.</li>
+</ul>
+<h3 id="717-responsive-design-every-screen-size">7.17 Responsive design: every screen size</h3>
+<ul>
+<li><strong><code>@media</code> queries</strong> change styles at different screen widths:<pre><code class="language-css">@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; }   /* stack on phones */
+}
+</code></pre>
+</li>
+<li><strong><code>@container</code> queries</strong> look at the width of a <strong>box</strong>, not the whole screen. Each Pokédex card is a container (<code>container-type: inline-size</code>), so a card shrinks its own text when IT is small, wherever it sits.</li>
+<li><strong>Fluid sizes</strong> with <code>clamp(min, preferred, max)</code>: <code>font-size: clamp(2.6rem, 6.5vw, 4.8rem)</code> grows with the window but never gets too small or too big. <code>min()</code> and <code>max()</code> work in a similar way.</li>
+<li>The phone menu is a CSS-only &quot;burger&quot; button (see <a href="#8-remembering-clicks-without-javascript">section 8</a>).</li>
+</ul>
+<h3 id="718-other-at-rules">7.18 Other at-rules</h3>
+<div class="table-scroll"><table><thead><tr><th scope="col">At-rule</th><th scope="col">What it does</th><th scope="col">Where</th></tr></thead><tbody><tr><td><code>@layer</code></td><td>cascade layers</td><td>every CSS file</td></tr>
+<tr><td><code>@keyframes</code></td><td>animations</td><td>everywhere</td></tr>
+<tr><td><code>@media</code></td><td>screen size, <code>print</code>, <code>prefers-reduced-motion</code></td><td>everywhere</td></tr>
+<tr><td><code>@container</code></td><td>size of a parent box</td><td><code>pokedex.css</code></td></tr>
+<tr><td><code>@supports</code></td><td>&quot;only use this if the browser understands it&quot;</td><td>reading bar in <code>base.css</code>; the checks at the bottom of the Workshop</td></tr>
+<tr><td><code>@property</code></td><td>a typed, animatable variable</td><td><code>evolution.css</code></td></tr>
+<tr><td><code>@starting-style</code></td><td>the &quot;before&quot; look for appearing elements</td><td><code>pokedex.css</code> popover</td></tr>
+<tr><td><code>@view-transition</code></td><td>animate between pages</td><td><code>base.css</code></td></tr>
+<tr><td><code>@page</code></td><td>paper size and margins for printing</td><td><code>card.css</code></td></tr></tbody></table></div>
+<p>(<code>@import</code> and <code>@font-face</code> also exist. We load fonts with a <code>&lt;link&gt;</code> to Google Fonts instead, which writes the <code>@font-face</code> rules for us.)</p>
+<h3 id="719-page-transitions">7.19 Page transitions</h3>
+<p>These two lines in <code>base.css</code> make the browser animate between pages:</p>
+<pre><code class="language-css">@view-transition { navigation: auto; }
+
+::view-transition-new(root) {
+  animation: lens-open 0.55s;   /* the new page grows out of the Pokédex lens */
+}
+</code></pre>
+<p>The header has <code>view-transition-name: dex-top</code>, so it stays still while the page underneath changes. Browsers that don&#39;t support this yet just switch pages normally.</p>
+<h3 id="720-styling-form-controls">7.20 Styling form controls</h3>
+<ul>
+<li><code>accent-color: var(--red)</code> tints checkboxes, radios and sliders in one line.</li>
+<li><code>appearance: none</code> removes the browser&#39;s own look, so you can draw your own (the Academy type checkboxes and the Poké Ball slider knob).</li>
+<li><code>caret-color</code> colours the blinking text cursor.</li>
+<li><code>resize: vertical</code> lets people drag a textarea taller but not wider.</li>
+<li><code>::placeholder</code>, <code>::file-selector-button</code>, <code>::-webkit-slider-thumb</code>, <code>::-moz-range-thumb</code>, the <code>meter</code> and <code>progress</code> pseudo-elements.</li>
+<li><code>:user-invalid</code> turns a box red only <strong>after</strong> someone has typed and left it.</li>
+<li>The floating label uses <code>input:not(:placeholder-shown) + label</code>: if the placeholder isn&#39;t showing, there&#39;s text in the box, so the label floats up.</li>
+</ul>
+<h3 id="721-printing">7.21 Printing</h3>
+<p><code>@media print</code> changes how the page looks on paper. <code>base.css</code> hides the header and footer and prints web addresses after links:</p>
+<pre><code class="language-css">a[href^=&quot;http&quot;]::after { content: &quot; (&quot; attr(href) &quot;)&quot;; }
+</code></pre>
+<p>The trainer card page prints only the card, on a landscape page, with its colours kept (<code>print-color-adjust: exact</code>).</p>
+<hr>
+<h2 id="8-remembering-clicks-without-javascript">8. Remembering clicks without JavaScript</h2>
+<p>Normally a web page needs JavaScript to remember what you clicked. AshTech&#39;s games, filters and buttons use a few clever CSS tricks instead. This is the most important part of the guide!</p>
+<h3 id="81-the-label-trick">8.1 The label trick</h3>
+<p>A <code>&lt;label&gt;</code> with <code>for=&quot;x&quot;</code> clicks the input with <code>id=&quot;x&quot;</code>, <strong>even if that input is hidden</strong>:</p>
+<pre><code class="language-html">&lt;input type=&quot;checkbox&quot; id=&quot;light&quot; class=&quot;visually-hidden&quot;&gt;
+&lt;label for=&quot;light&quot;&gt;Switch&lt;/label&gt;
+&lt;div class=&quot;bulb&quot;&gt;&lt;/div&gt;
+</code></pre>
+<p>Now the label is the button, and the checkbox quietly remembers whether it&#39;s on or off.</p>
+<h3 id="82-checked-plus-siblings">8.2 <code>:checked</code> plus siblings</h3>
+<pre><code class="language-css">#light:checked ~ .bulb { background: yellow; }
+</code></pre>
+<p>&quot;When the checkbox is ticked, find a <code>.bulb</code> that comes after it, and light it up.&quot; This is the demo on the Arcade page.</p>
+<ul>
+<li><code>+</code> means &quot;the very next sibling&quot;.</li>
+<li><code>~</code> means &quot;any later sibling&quot;.</li>
+</ul>
+<p><strong>The catch:</strong> these only look forwards and sideways, never up or back. That&#39;s why the hidden inputs are always written <strong>first</strong> in the HTML.</p>
+<p><strong>Checkbox or radio?</strong></p>
+<ul>
+<li>A <strong>checkbox</strong> remembers on/off: menus, card flips, &quot;caught!&quot;, &quot;Show in 3D&quot;.</li>
+<li><strong>Radios</strong> with the same <code>name</code> remember <strong>one choice out of many</strong>: filters, quiz answers, battle moves, evolution stages.</li>
+</ul>
+<p>Where you&#39;ll find this trick:</p>
+<ul>
+<li>The phone menu (<code>#nav-toggle:checked ~ .site-nav</code>).</li>
+<li>The Pokédex card flip (<code>.flip:checked + .card__inner</code>).</li>
+<li>The Pokédex filters: <code>#f-fire:checked ~ .dex__grid .card:not([data-types~=&quot;fire&quot;]) { display: none; }</code>.</li>
+<li>The Pokédex sorting: <code>#s-weight:checked ~ .dex__grid .card { order: var(--w); }</code>. Each card carries its own weight as a variable!</li>
+</ul>
+<h3 id="83-has-the-parent-selector">8.3 <code>:has()</code>: the parent selector</h3>
+<p><code>:has()</code> lets a parent react to what&#39;s inside it, so the input can be anywhere:</p>
+<pre><code class="language-css">.partner:has(#p-charmander:checked) { --partner: var(--t-fire); }
+</code></pre>
+<p>&quot;If the partner section <strong>has</strong> a checked Charmander radio, turn the table fire-coloured.&quot; It&#39;s used on the home page, quiz, battle, catch game, evolution lab and Workshop labs.</p>
+<p><code>:has()</code> can count, too. &quot;There is no round without a right answer&quot; means a perfect score:</p>
+<pre><code class="language-css">.quiz:not(:has(.round:not(:has(.right:checked)))) .results__perfect { display: block; }
+</code></pre>
+<h3 id="84-counters-css-can-count">8.4 Counters: CSS can count</h3>
+<pre><code class="language-css">.quiz         { counter-reset: score; }          /* start at 0 */
+.right:checked { counter-increment: score; }     /* +1 for each right answer */
+.results__num::before { content: counter(score); } /* show the number */
+</code></pre>
+<p>Used for the quiz score, the number of Pokémon shown in the Pokédex, the Pokémon caught in Safari, the Academy progress, the gym numbers and the evolution step numbers.</p>
+<p><strong>The counter must be shown AFTER the things it counts</strong> in the HTML. When the scoreboard needs to be at the top, it&#39;s written at the bottom and moved up with the <code>order</code> property (Safari and the Pokédex).</p>
+<p><a id="gotcha-counters-skip-hidden-things"></a></p>
+<h4 id="gotcha-counters-skip-hidden-things">Gotcha! Counters skip hidden things</h4>
+<p>At first the quiz always said &quot;0 out of 8&quot;. Why? The finished rounds were hidden with <code>display: none</code>, and <strong>counters skip elements that aren&#39;t displayed</strong>. The fix was to hide finished rounds with <code>visibility: hidden</code> instead. They&#39;re still invisible, but they still count. (The Pokédex count uses this on purpose: hidden cards <em>shouldn&#39;t</em> be counted.)</p>
+<h3 id="85-restarting-an-animation">8.5 Restarting an animation</h3>
+<p>An animation plays again when an element <strong>appears</strong> (goes from <code>display: none</code> to shown), or when its <code>animation-name</code> <strong>changes</strong>.</p>
+<ul>
+<li><strong>Evolution:</strong> each new Pokémon image starts hidden, so it plays the &quot;evolve&quot; flash as it appears.</li>
+<li><strong>Battle:</strong> Gyarados flinches with <code>flinch-a</code> on odd turns and <code>flinch-b</code> on even turns. Two identical animations with different names, so it replays every turn.</li>
+</ul>
+<h3 id="86-doing-maths-in-css-the-battle-game">8.6 Doing maths in CSS: the battle game</h3>
+<p>The battle game stores its whole &quot;brain&quot; in CSS variables (<code>battle.css</code>):</p>
+<pre><code class="language-css">.battle:has(#t1-tb:checked) { --d1: 60; }   /* Thunderbolt on turn 1 does 60 damage */
+
+.battle {
+  --s4: calc(var(--d1) + var(--d2) + var(--d3) + var(--d4));  /* total damage */
+  --foe-hp: max(0, 100 - var(--s4));                          /* Gyarados&#39; HP */
+  --gone: calc(1 - clamp(0, 100 - var(--s4), 1));             /* 1 = fainted */
+}
+
+.hp__bar::before { width: calc(var(--hp) * 1%); }             /* the HP bar */
+.foe__mon { opacity: calc(1 - var(--gone)); }                 /* fade away when fainted */
+.ending--win { scale: var(--gone); }                          /* show the win screen */
+</code></pre>
+<p><code>clamp(0, x, 1)</code> squashes any number into 0 or 1, so the numbers work like yes/no switches. The HP number is even written by CSS: <code>counter-reset: hp var(--me-hp)</code>, then <code>content: counter(hp)</code>.</p>
+<h3 id="87-other-no-javascript-helpers">8.7 Other no-JavaScript helpers</h3>
+<ul>
+<li><strong><code>:target</code></strong> styles the element named after <code>#</code> in the address. The Pikachu image map links to <code>#fact-ears</code>, and that fact lights up.</li>
+<li><strong><code>popover</code></strong> opens a pop-up from a button with <code>popovertarget=&quot;…&quot;</code>. The browser handles closing it (click outside or press <kbd>Esc</kbd>).</li>
+<li><strong><code>&lt;details&gt;</code></strong> opens and closes by itself.</li>
+<li><strong><code>&lt;button type=&quot;reset&quot;&gt;</code></strong> puts every input in a form back to the start. That&#39;s &quot;Play again&quot; in the quiz and battle.</li>
+<li><strong>A link to the same page</strong> (<code>href=&quot;catch.html&quot;</code>) reloads it, which restarts every animation. That&#39;s &quot;Play again&quot; in Safari Catch.</li>
+<li><strong><code>animation-play-state: paused</code></strong> freezes the Safari game until Start is ticked.</li>
+</ul>
+<h3 id="what-css-still-cant-do">What CSS still can&#39;t do</h3>
+<p>CSS can&#39;t read what you <strong>type</strong>, can&#39;t make a new <strong>file</strong>, can&#39;t remember anything after you leave the page, and can&#39;t pick <strong>random</strong> numbers. That&#39;s why Pokémon in Safari pop up in a set pattern. For the few jobs AshTech really needed, we used JavaScript.</p>
+<h3 id="88-when-we-do-use-javascript">8.8 When we DO use JavaScript</h3>
+<p>JavaScript is the third language of the web. If HTML is the skeleton and CSS is the clothes, JavaScript is the muscles. AshTech uses it in exactly four places, and every page that does has a yellow <strong>“Why JavaScript here?”</strong> box explaining it.</p>
+<div class="table-scroll"><table><thead><tr><th scope="col">File</th><th scope="col">Page</th><th scope="col">What it does</th><th scope="col">Why HTML and CSS couldn&#39;t</th></tr></thead><tbody><tr><td><code>js/academy.js</code></td><td>Academy</td><td>Shrinks your trainer photo and keeps it in the browser&#39;s <code>sessionStorage</code></td><td>A photo is too big to travel in the address bar</td></tr>
+<tr><td><code>js/card.js</code></td><td>Trainer Card</td><td>Reads your answers from the address bar, writes them on the card, paints the card on a <code>&lt;canvas&gt;</code> and builds a real PDF file</td><td>CSS can&#39;t read the address bar or make files</td></tr>
+<tr><td><code>js/workshop.js</code></td><td>Workshop</td><td>Powers the Code Lab, Measure the box, Selector Detective, Specificity Showdown, Colour Mixer, Move Studio and the Present buttons</td><td>These react to typing and sliders instantly</td></tr>
+<tr><td><code>js/handbook.js</code></td><td>Kids&#39; Handbook</td><td>Loads Mermaid, which turns text like <code>A --&gt; B</code> into diagrams</td><td>Drawing arrows between boxes needs calculations</td></tr></tbody></table></div>
+<p>Every script follows the same three steps. Look for them when you read the code:</p>
+<pre><code class="language-js">const button = document.querySelector(&#39;#download-card&#39;);   // 1. find a part of the page
+button.addEventListener(&#39;click&#39;, () =&gt; {                     // 2. wait for something to happen
+  status.textContent = &#39;Drawing your card…&#39;;                 // 3. change the page
+});
+</code></pre>
+<p>A few safety habits you&#39;ll spot in the code:</p>
+<ul>
+<li><strong><code>textContent</code>, not <code>innerHTML</code></strong>, for anything a person typed. Then a name like <code>&lt;b&gt;Ash&lt;/b&gt;</code> stays as plain letters and can&#39;t turn into HTML.</li>
+<li><strong>Checking values</strong> before using them. The team colour must look like <code>#e3350d</code>, or it isn&#39;t used.</li>
+<li><strong>The Code Lab preview is a <code>sandbox</code>ed <code>&lt;iframe&gt;</code></strong>, so nothing typed into it can run scripts.</li>
+<li><strong>Nothing leaves your computer.</strong> There are no trackers, and nothing is uploaded anywhere.</li>
+</ul>
+<p><strong>How the PDF is made, without any library:</strong> a PDF file is text plus bytes, arranged as numbered “objects” (a catalogue, a page list, one page, a picture, and drawing instructions), then an index called <code>xref</code> that says where each object starts. <code>card.js</code> writes those pieces by hand, puts the card picture inside as a JPEG, and hands you the file. Open <code>js/card.js</code> and find <code>makePdf</code> to see all of it in about 50 lines!</p>
+<hr>
+<h2 id="9-a-tour-of-every-page">9. A tour of every page</h2>
+<h3 id="home-indexhtml-homecss">Home (<code>index.html</code>, <code>home.css</code>)</h3>
+<ul>
+<li><strong>The diorama:</strong> a whole scene built from positioned <code>&lt;div&gt;</code>s and gradients. The sun spins, clouds drift (<code>::before</code>/<code>::after</code> make their puffs), Pikachu hops with squash-and-stretch, Butterfree follows an <code>offset-path</code>, Bulbasaur peeks from the grass, and a CSS Poké Ball wobbles. <code>role=&quot;img&quot;</code> and <code>aria-label</code> describe the scene for screen readers.</li>
+<li><strong>Choose your partner:</strong> three radios hidden behind Poké Ball labels. When one is checked, its lid rotates open (<code>transform-origin</code> sets the hinge), the Pokémon pops out, the table changes colour through <code>:has()</code>, and a message fades in.</li>
+<li><strong>The fact ticker:</strong> a list written twice, slid left by exactly 50% forever, so it loops without a gap.</li>
+<li><strong>Places along the route:</strong> a zig-zag grid (<code>grid-row: n / span 2</code>) along a dashed dirt path. On phones it becomes one column.</li>
+<li><strong>Spotlight:</strong> five slides stacked on top of each other, each with the same animation but a different <code>animation-delay</code>.</li>
+</ul>
+<h3 id="pokédex-pokedexhtml-pokedexcss">Pokédex (<code>pokedex.html</code>, <code>pokedex.css</code>)</h3>
+<ul>
+<li>63 cards, each an <code>&lt;article&gt;</code> inside a <code>&lt;li&gt;</code>, with the Pokédex number in <code>&lt;data&gt;</code>.</li>
+<li>Type filters and sorting (hidden radios, <code>~</code>, attribute selectors, <code>order</code>).</li>
+<li>3D card flips (a checkbox, <code>rotateY</code>, <code>backface-visibility</code>).</li>
+<li>Base stats in a <code>&lt;table&gt;</code> with coloured <code>&lt;meter&gt;</code> bars.</li>
+<li>&quot;Read entry&quot; opens a <code>popover</code> with the Japanese name in <code>&lt;ruby&gt;</code>, a <code>&lt;blockquote&gt;</code>, and the Pokémon&#39;s cry in <code>&lt;audio&gt;</code>.</li>
+<li>A live count made with a CSS counter.</li>
+<li>A real, working <code>&lt;search&gt;</code> form that sends you to Bulbapedia.</li>
+</ul>
+<h3 id="types-typeshtml-typescss">Types (<code>types.html</code>, <code>types.css</code>)</h3>
+<ul>
+<li>A turning wheel of the three starter types (conic gradient, rotations, <code>reverse</code> animations).</li>
+<li>18 type tiles with pixel sprites (<code>image-rendering: pixelated</code> keeps them crisp).</li>
+<li>The full 18×18 type chart: <code>&lt;caption&gt;</code>, <code>&lt;colgroup&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, <code>&lt;tfoot&gt;</code>, <code>colspan</code>, sticky headers, and a hover highlight for both the row AND the column (<code>:has()</code> with <code>:nth-child()</code>).</li>
+<li>A <code>&lt;dl&gt;</code> glossary with <code>&lt;dfn&gt;</code>.</li>
+<li>An FAQ of <code>&lt;details&gt;</code> that open smoothly (<code>interpolate-size</code> and <code>::details-content</code>).</li>
+</ul>
+<h3 id="evolution-evolutionhtml-evolutioncss">Evolution (<code>evolution.html</code>, <code>evolution.css</code>)</h3>
+<ul>
+<li>Seven evolution chains. Hidden radios remember the stage, and each new stage plays the white flashing &quot;evolve&quot; animation, sparkles and the &quot;What? … is evolving!&quot; message.</li>
+<li>The steps are an <code>&lt;ol&gt;</code> numbered with a CSS counter, lit up with <code>:nth-child(-n + 2)</code>.</li>
+<li>Eevee&#39;s eight evolutions placed around a circle with <code>cos()</code> and <code>sin()</code>, and a rainbow halo turned by an <code>@property</code> variable.</li>
+<li>A table with <code>rowspan</code> and zebra stripes (<code>:nth-child(even)</code>).</li>
+</ul>
+<h3 id="regions-regionshtml-badgescss-regionscss">Regions (<code>regions.html</code>, <code>badges.css</code>, <code>regions.css</code>)</h3>
+<ul>
+<li>A timeline <code>&lt;nav&gt;</code> of <code>#links</code> using <code>&lt;time&gt;</code>.</li>
+<li>A sideways scroll-snap track of nine region cards, each with its own landscape colours passed in as variables, scroll-driven entry animations, and a <code>:target</code> highlight.</li>
+<li>A magazine layout: <code>columns</code>, a drop cap, <code>::first-line</code>, a floated circle with <code>shape-outside</code>, and a <code>&lt;blockquote&gt;</code> with <code>&lt;cite&gt;</code>.</li>
+<li>The eight Kanto gym badges, each drawn with a different CSS shape technique, with a shine on hover.</li>
+</ul>
+<h3 id="arcade-and-the-three-games">Arcade and the three games</h3>
+<ul>
+<li><strong>Arcade</strong> (<code>arcade.html</code>, <code>arcade.css</code>): cartridges shaped with <code>clip-path</code> that lift on hover, plus a live light-switch demo of the checkbox trick.</li>
+<li><strong>Who&#39;s That Pokémon?</strong> (<code>quiz.html</code>, <code>quiz.css</code>): <code>filter: brightness(0)</code> turns a picture into a black silhouette. Rounds appear one after another with <code>:has()</code> and <code>+</code>. The score is a CSS counter, and <code>&lt;button type=&quot;reset&quot;&gt;</code> restarts the game.</li>
+<li><strong>Battle!</strong> (<code>battle.html</code>, <code>battle.css</code>): 16 hidden radios, CSS maths for HP, effects for each move, a Game Boy-style text box, and win/lose screens that appear through <code>scale</code>.</li>
+<li><strong>Safari Catch</strong> (<code>catch.html</code>, <code>catch.css</code>): Pokémon pop up with their own speed and delay (<code>--dur</code> and <code>--delay</code> variables). <code>overflow: hidden</code> means a hiding Pokémon can&#39;t be clicked. A 40-second timer bar, and a &quot;Time&#39;s up&quot; panel with a 40-second <code>animation-delay</code>.</li>
+</ul>
+<h3 id="theater-theaterhtml-theatercss">Theater (<code>theater.html</code>, <code>theater.css</code>)</h3>
+<ul>
+<li>A YouTube <code>&lt;iframe&gt;</code> inside a TV drawn in CSS: antennas made from pseudo-elements, wood grain, knobs that turn on hover, and scan lines with <code>pointer-events: none</code>.</li>
+<li>A <code>&lt;video&gt;</code> with two <code>&lt;source&gt;</code>s, a <code>&lt;track&gt;</code> of captions styled with <code>::cue</code>, inside a <code>&lt;figure&gt;</code>.</li>
+<li>The cry lab: eight <code>&lt;audio&gt;</code> players. The card bounces while its cry <code>:playing</code>.</li>
+<li>A <code>&lt;picture&gt;</code> that swaps to a 1996 pixel sprite on narrow screens.</li>
+<li>A Pikachu image map (<code>&lt;map&gt;</code>, <code>&lt;area&gt;</code>) that lights up facts with <code>:target</code>.</li>
+</ul>
+<h3 id="academy-and-trainer-card-academyhtml-academycss-trainer-cardhtml-cardcss">Academy and Trainer Card (<code>academy.html</code>, <code>academy.css</code>, <code>trainer-card.html</code>, <code>card.css</code>)</h3>
+<ul>
+<li>A three-step form using nearly every input type, with the browser&#39;s own checks.</li>
+<li>A floating label, red and green <code>:user-invalid</code>/<code>:user-valid</code> borders, custom checkboxes, a Poké Ball slider, and a styled file button.</li>
+<li>A sticky progress bar that fills as the must-do boxes are finished (<code>:valid</code>, counters and variables).</li>
+<li>The trainer card: your answers written onto <code>&lt;dl&gt;</code> lines, your photo or partner Pokémon, your team colour as a CSS variable, a <code>&lt;progress&gt;</code> and a <code>&lt;meter&gt;</code>, grey badges that light up on hover (<code>zoom</code> and <code>filter</code>), and a holographic shimmer.</li>
+<li><strong>Download my card (PDF)</strong> paints the whole card on a canvas and saves it as a real PDF (see <a href="#88-when-we-do-use-javascript">section 8.8</a>).</li>
+</ul>
+<h3 id="workshop-workshophtml-workshopcss-workshopjs">Workshop (<code>workshop.html</code>, <code>workshop.css</code>, <code>workshop.js</code>)</h3>
+<p>A behind-the-scenes page made for learning AND teaching, with 13 labs:</p>
+<ul>
+<li><strong>CSS-only labs:</strong> the anatomy of a tag, a 3D box model, flexbox and grid playgrounds that rewrite their own code with <code>::after { content: … }</code>, a table of selectors, a table of text tags, six ways to write a colour, and live <code>@supports</code> checks.</li>
+<li><strong>JavaScript labs</strong> (marked JS): the <strong>Code Lab</strong> (edit HTML and CSS and see the result instantly), <strong>Measure the box</strong> (sliders and box maths), <strong>Selector Detective</strong> (eight missions), <strong>Specificity Showdown</strong>, the <strong>Colour Mixer</strong> with its “Match the type!” game, and the <strong>Move Studio</strong> for transforms and animations.</li>
+<li>Every lab has a green <strong>For teachers</strong> panel (a <code>&lt;details&gt;</code>), and a <strong>Present</strong> button that uses the Fullscreen API for projectors.</li>
+</ul>
+<h3 id="teachers-handbook-and-worksheets">Teachers, Handbook and Worksheets</h3>
+<ul>
+<li><strong>Teachers</strong> (<code>teachers.html</code>, <code>teachers.css</code>): eight 40-minute lesson plans, each with goals, pages to use, steps and an exit question, plus a curriculum table.</li>
+<li><strong>Kids&#39; Handbook</strong> (<code>handbook.html</code>, <code>handbook.css</code>, <code>handbook.js</code>): 16 short chapters, each built around a Mermaid diagram, with a quiz and a certificate. Its print styles (<code>@page</code>, <code>break-before: page</code>, page numbers in <code>@bottom-center</code>) turn the same page into <code>handbook.pdf</code>.</li>
+<li><strong>Worksheets</strong> (<code>worksheets.html</code>, <code>worksheets.css</code>): one A4 sheet per lesson, sized in millimetres (<code>mm</code>), with writing lines made from a repeating gradient. The same page prints as <code>worksheets.pdf</code>.</li>
+<li><strong>Guide</strong> (<code>guide.html</code>): this very file, <code>learn.md</code>, turned into a web page so it&#39;s easy to read in a browser.</li>
+</ul>
+<hr>
+<h2 id="10-accessibility-a-site-for-everyone">10. Accessibility: a site for everyone</h2>
+<p>Some visitors can&#39;t see well, can&#39;t use a mouse, or get dizzy from motion. AshTech is built for them too.</p>
+<ul>
+<li><strong>Real tags for real things.</strong> Buttons are <code>&lt;button&gt;</code> or <code>&lt;label&gt;</code>, lists are lists, and headings go in order. Screen readers understand the page because of this.</li>
+<li><strong><code>alt</code> text on every picture.</strong> Pictures that are only decoration get <code>alt=&quot;&quot;</code>, so screen readers skip them.</li>
+<li><strong>Labels for every form control.</strong></li>
+<li><strong>A skip link.</strong> Press <kbd>Tab</kbd> on any page and &quot;Skip to content&quot; appears first.</li>
+<li><strong>Visible focus.</strong> Everything you can reach with <kbd>Tab</kbd> gets a thick yellow-and-navy ring (<code>:focus-visible</code>). Hidden radios pass their focus ring to their label, for example <code>input:focus-visible + label</code>.</li>
+<li><strong><code>.visually-hidden</code></strong> hides things from eyes but not from screen readers. It&#39;s used for the hidden game inputs and extra labels.</li>
+<li><strong>ARIA:</strong><ul>
+<li><code>aria-label</code> names something that has no visible text.</li>
+<li><code>aria-labelledby</code> points to the heading that names a section.</li>
+<li><code>aria-describedby</code> links a hint to its input.</li>
+<li><code>aria-hidden=&quot;true&quot;</code> hides decorations from screen readers.</li>
+<li><code>aria-current=&quot;page&quot;</code> marks the current page in the menu.</li>
+<li><code>aria-live=&quot;polite&quot;</code> announces messages that change.</li>
+<li><code>role=&quot;img&quot;</code> treats the CSS diorama as one picture.</li>
+<li><code>role=&quot;region&quot;</code> with <code>tabindex=&quot;0&quot;</code> lets keyboard users scroll the wide type chart.</li>
+</ul>
+</li>
+<li><strong>Less motion.</strong> People can switch on &quot;reduce motion&quot; on their computer or phone. Then this rule in <code>base.css</code> nearly switches off every animation:<pre><code class="language-css">@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</code></pre>
+Safari Catch has its own version: the Pokémon simply stand still in the grass, so the game can still be played.</li>
+<li><strong>Good contrast.</strong> Dark navy text on light backgrounds is easy to read.</li>
+<li><strong>Short lines.</strong> Paragraphs stop at about 68 characters (<code>max-width: 68ch</code>), so your eyes don&#39;t get lost.</li>
+</ul>
+<hr>
+<h2 id="11-try-it-yourself-challenges">11. Try it yourself: challenges</h2>
+<p>Start easy and work your way down. Save the file and refresh the browser after each change.</p>
+<p><strong>Easy</strong></p>
+<ol>
+<li>Change <code>--red</code> in <code>base.css</code> to <code>#7a3cff</code>. What changes across the site?</li>
+<li>Add a new fact to the home page ticker. (Hint: it&#39;s in <code>index.html</code>, and remember there are <strong>two</strong> copies of the list.)</li>
+<li>Change the Pokédex card shape from <code>5 / 7</code> to <code>1 / 1</code> in <code>pokedex.css</code>.</li>
+<li>Make the diorama clouds drift faster by changing their <code>animation-duration</code>.</li>
+<li>Add your favourite Pokémon to the Academy&#39;s <code>&lt;datalist&gt;</code>.</li>
+</ol>
+<p><strong>Medium</strong></p>
+<ol start="6">
+<li>Add a ninth round to the quiz. Copy a whole <code>&lt;section class=&quot;round&quot;&gt;</code>, change the ids (<code>r9-0</code>…, <code>next-9</code>), and update &quot;of 8&quot;.</li>
+<li>Add a new Pokémon card to the Pokédex. Its picture address is <code>https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/NUMBER.png</code>.</li>
+<li>Add a <code>&lt;details&gt;</code> question of your own to the Types FAQ.</li>
+<li>Give Pikachu a fifth move in the battle game. You&#39;ll need four new radios (one per turn), four new labels and the CSS for its damage.</li>
+<li>Make the type chart&#39;s &quot;super effective&quot; cells bounce when you hover them.</li>
+</ol>
+<p><strong>Tricky</strong></p>
+<ol start="11">
+<li>Add a ninth patch of grass to Safari Catch. Don&#39;t forget the belt slot, the counter total and the &quot;all caught&quot; rule!</li>
+<li>Make a new page, <code>berries.html</code>. Copy the skeleton of another page, add it to the menu on <strong>every</strong> page, and give it its own stylesheet.</li>
+<li>Draw a new gym badge in <code>badges.css</code> using <code>clip-path: polygon(…)</code>.</li>
+<li>Build a dark mode with <code>@media (prefers-color-scheme: dark)</code> that swaps the colour variables.</li>
+</ol>
+<hr>
+<h2 id="12-glossary">12. Glossary</h2>
+<div class="table-scroll"><table><thead><tr><th scope="col">Word</th><th scope="col">Meaning</th></tr></thead><tbody><tr><td><strong>Attribute</strong></td><td>Extra information inside an opening tag, like <code>href=&quot;…&quot;</code>.</td></tr>
+<tr><td><strong>Browser</strong></td><td>The program that shows web pages: Chrome, Edge, Firefox, Safari.</td></tr>
+<tr><td><strong>Cascade</strong></td><td>The rules CSS uses to decide which style wins.</td></tr>
+<tr><td><strong>Class</strong></td><td>A reusable name for elements, used by CSS.</td></tr>
+<tr><td><strong>Container query</strong></td><td>A rule based on the size of a parent box.</td></tr>
+<tr><td><strong>Custom property</strong></td><td>A CSS variable, like <code>--red</code>.</td></tr>
+<tr><td><strong>Declaration</strong></td><td>One <code>property: value;</code> pair.</td></tr>
+<tr><td><strong>Element</strong></td><td>A tag plus everything inside it.</td></tr>
+<tr><td><strong>Fallback</strong></td><td>What&#39;s shown when something doesn&#39;t work, like the text inside <code>&lt;video&gt;</code>.</td></tr>
+<tr><td><strong>Keyframes</strong></td><td>The steps of an animation.</td></tr>
+<tr><td><strong>Layer</strong></td><td>A drawer of CSS rules that stacks in a set order (<code>@layer</code>).</td></tr>
+<tr><td><strong>Media query</strong></td><td>A rule based on the screen, printer or user settings.</td></tr>
+<tr><td><strong>Property</strong></td><td>What CSS changes, like <code>color</code>.</td></tr>
+<tr><td><strong>Pseudo-class</strong></td><td>A state, like <code>:hover</code> or <code>:checked</code>.</td></tr>
+<tr><td><strong>Pseudo-element</strong></td><td>A part of an element, or an extra box, like <code>::before</code>.</td></tr>
+<tr><td><strong>Responsive</strong></td><td>Works well on any screen size.</td></tr>
+<tr><td><strong>Screen reader</strong></td><td>A program that reads web pages aloud for people who can&#39;t see them.</td></tr>
+<tr><td><strong>Selector</strong></td><td>The part of a CSS rule that picks elements.</td></tr>
+<tr><td><strong>Semantic HTML</strong></td><td>Using the tag that describes what something IS.</td></tr>
+<tr><td><strong>Specificity</strong></td><td>How &quot;strong&quot; a selector is.</td></tr>
+<tr><td><strong>Tag</strong></td><td>A name in angle brackets, like <code>&lt;p&gt;</code>.</td></tr>
+<tr><td><strong>Viewport</strong></td><td>The visible part of the page in the browser window.</td></tr></tbody></table></div>
+<hr>
+<h2 id="13-credits">13. Credits</h2>
+<ul>
+<li><strong>Pokémon pictures, sprites and cries:</strong> the open <a href="https://pokeapi.co/">PokéAPI</a> project, loaded from its <a href="https://github.com/PokeAPI/sprites">sprites</a> and <a href="https://github.com/PokeAPI/cries">cries</a> collections.</li>
+<li><strong>Pokémon facts</strong> (types, sizes, stats and Pokédex entries): PokéAPI. Some entries were rewritten in gentler, simpler words for young readers.</li>
+<li><strong>&quot;Pi-Pi-Pi-Pi☆Pikachu!&quot; video:</strong> the official <a href="https://www.youtube.com/@pokemonkidstv">Pokémon Kids TV</a> YouTube channel, shown in an <code>&lt;iframe&gt;</code>.</li>
+<li><strong>Flower video:</strong> public domain (CC0), from the <a href="https://developer.mozilla.org/">MDN Web Docs</a> examples.</li>
+<li><strong>Fonts:</strong> <a href="https://fonts.google.com/specimen/Lilita+One">Lilita One</a>, <a href="https://fonts.google.com/specimen/Lexend">Lexend</a> and <a href="https://fonts.google.com/specimen/Press+Start+2P">Press Start 2P</a>, from Google Fonts.</li>
+<li><strong>Diagrams:</strong> drawn by <a href="https://mermaid.js.org/">Mermaid</a>, an open-source library.</li>
+<li><strong>Pokémon</strong> and all Pokémon character names belong to Nintendo, Creatures Inc., GAME FREAK and The Pokémon Company. AshTech is a free, non-commercial fan project made for learning, and is not connected to them.</li>
+</ul>
+<p><strong>Made by</strong> Muhammad Ali Ashraf, software engineer and proud alumnus of Sir Syed School &amp; College Campus-V, for the students learning HTML and CSS there, and for curious trainers everywhere.</p>
+<p><strong>Where to learn more:</strong></p>
+<ul>
+<li><a href="https://developer.mozilla.org/">MDN Web Docs</a>: the best reference for every HTML tag and CSS property.</li>
+<li><a href="https://web.dev/learn/css">web.dev Learn CSS</a> and <a href="https://web.dev/learn/html">Learn HTML</a>: free courses.</li>
+<li><a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/">CSS-Tricks: A Complete Guide to Flexbox</a> and <a href="https://css-tricks.com/snippets/css/complete-guide-grid/">to Grid</a>.</li>
+</ul>
+<p>Now go and build something! Every trainer&#39;s journey starts with one small step.</p>
+
+</article>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pokedex.html">Pokédex</a></li>
+            <li><a href="types.html">Types</a></li>
+            <li><a href="evolution.html">Evolution</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+            <li><a href="theater.html">Theater</a></li>
+            <li><a href="academy.html">Academy</a></li>
+            <li><a href="workshop.html">Workshop</a></li>
+            <li><a href="teachers.html">Teachers</a></li>
+            <li><a href="handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

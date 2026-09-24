@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A fast catching game in the tall grass, built with only HTML and CSS.">
+  <meta name="theme-color" content="#e3350d">
+  <title>Safari Catch | AshTech Arcade</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/games.css">
+  <link rel="stylesheet" href="css/catch.css">
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pokedex.html">Pokédex</a></li>
+          <li><a href="types.html">Types</a></li>
+          <li><a href="evolution.html">Evolution</a></li>
+          <li><a href="regions.html">Regions</a></li>
+          <li><a href="arcade.html" aria-current="page">Arcade</a></li>
+          <li><a href="theater.html">Theater</a></li>
+          <li><a href="academy.html">Academy</a></li>
+          <li><a href="workshop.html">Workshop</a></li>
+          <li><a href="teachers.html">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<header class="page-head wrap">
+  <div>
+    <h1 class="logo-type">Safari Catch</h1>
+    <p>Wild Pokémon keep popping out of the tall grass. Tap each one before it hides again. You have 40 seconds to catch all 8!</p>
+  </div>
+  <img class="page-head__art" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/safari-ball.png" alt="A Safari Ball" width="120" height="120">
+</header>
+
+<div class="wrap game">
+  <form class="safari screen" aria-label="Safari Catch game">
+    <input type="checkbox" id="start" class="visually-hidden">
+
+    <!-- The field comes BEFORE the scoreboard in the code, so the CSS counter
+         has already counted the caught Pokémon when the scoreboard shows it. -->
+    <div class="field">
+      <div class="patch" style="--dur: 3.1s; --delay: 0.2s;">
+        <input type="checkbox" id="c1" class="catch visually-hidden">
+        <label for="c1" class="wild"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/16.gif" alt=""><span class="visually-hidden">Catch Pidgey</span></label>
+        <span class="ball" aria-hidden="true"></span>
+        <span class="gotcha" aria-hidden="true">Gotcha!</span>
+        <span class="tuft" aria-hidden="true"></span>
+      </div>
+      <div class="patch" style="--dur: 2.6s; --delay: 1.4s;">
+        <input type="checkbox" id="c2" class="catch visually-hidden">
+        <label for="c2" class="wild"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/19.gif" alt=""><span class="visually-hidden">Catch Rattata</span></label>
+        <span class="ball" aria-hidden="true"></span>
+        <span class="gotcha" aria-hidden="true">Gotcha!</span>
+        <span class="tuft" aria-hidden="true"></span>
+      </div>
+      <div class="patch" style="--dur: 3.6s; --delay: 0.8s;">
+        <input type="checkbox" id="c3" class="catch visually-hidden">
+        <label for="c3" class="wild"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/10.gif" alt=""><span class="visually-hidden">Catch Caterpie</span></label>
+        <span class="ball" aria-hidden="true"></span>
+        <span class="gotcha" aria-hidden="true">Gotcha!</span>
+        <span class="tuft" aria-hidden="true"></span>
+      </div>
+      <div class="patch" style="--dur: 2.9s; --delay: 2.3s;">
+        <input type="checkbox" id="c4" class="catch visually-hidden">
+        <label for="c4" class="wild"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/43.gif" alt=""><span class="visually-hidden">Catch Oddish</span></label>
+        <span class="ball" aria-hidden="true"></span>
+        <span class="gotcha" aria-hidden="true">Gotcha!</span>
+        <span class="tuft" aria-hidden="true"></span>
+      </div>
+      <div class="patch" style="--dur: 3.3s; --delay: 1.9s;">
+        <input type="checkbox" id="c5" class="catch visually-hidden">
+        <label for="c5" class="wild"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/69.gif" alt=""><span class="visually-hidden">Catch Bellsprout</span></label>
+        <span class="ball" aria-hidden="true"></span>
+        <span class="gotcha" aria-hidden="true">Gotcha!</span>
+        <span class="tuft" aria-hidden="true"></span>
+      </div>
+      <div class="patch" style="--dur: 2.4s; --delay: 3s;">
+        <input type="checkbox" id="c6" class="catch visually-hidden">
+        <label for="c6" class="wild"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/25.gif" alt=""><span class="visually-hidden">Catch Pikachu</span></label>
+        <span class="ball" aria-hidden="true"></span>
+        <span class="gotcha" aria-hidden="true">Gotcha!</span>
+        <span class="tuft" aria-hidden="true"></span>
+      </div>
+      <div class="patch" style="--dur: 3s; --delay: 0.5s;">
+        <input type="checkbox" id="c7" class="catch visually-hidden">
+        <label for="c7" class="wild"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/29.gif" alt=""><span class="visually-hidden">Catch Nidoran</span></label>
+        <span class="ball" aria-hidden="true"></span>
+        <span class="gotcha" aria-hidden="true">Gotcha!</span>
+        <span class="tuft" aria-hidden="true"></span>
+      </div>
+      <div class="patch" style="--dur: 2.7s; --delay: 2.7s;">
+        <input type="checkbox" id="c8" class="catch visually-hidden">
+        <label for="c8" class="wild"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/13.gif" alt=""><span class="visually-hidden">Catch Weedle</span></label>
+        <span class="ball" aria-hidden="true"></span>
+        <span class="gotcha" aria-hidden="true">Gotcha!</span>
+        <span class="tuft" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <div class="hud">
+      <p class="belt" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></p>
+      <p class="score" aria-live="polite">Caught <span class="score__num"></span> of 8</p>
+      <div class="timer" aria-hidden="true"><i></i></div>
+    </div>
+
+    <div class="panel panel--start">
+      <h2>Ready, trainer?</h2>
+      <p>Tap a Pokémon while it’s out of the grass to throw a Poké Ball.</p>
+      <label for="start" class="btn">Start!</label>
+    </div>
+
+    <div class="panel panel--time">
+      <h2>Time’s up!</h2>
+      <p>You caught <span class="score__num"></span> of 8 Pokémon.</p>
+      <!-- A link to the same page reloads it, which restarts every animation -->
+      <a class="btn" href="catch.html">Play again</a>
+    </div>
+
+    <div class="panel panel--all">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="" width="160" height="160">
+      <h2>You caught them all!</h2>
+      <p>Amazing reflexes! Professor Oak will be so proud.</p>
+      <a class="btn" href="catch.html">Play again</a>
+      <span class="confetti" aria-hidden="true"></span>
+      <span class="confetti confetti--2" aria-hidden="true"></span>
+    </div>
+  </form>
+
+  <aside class="game-rules">
+    <h2>How it works</h2>
+    <ul>
+      <li>Each Pokémon is a <code>&lt;label&gt;</code> for a hidden checkbox. Tapping it checks the box.</li>
+      <li>They pop up with <code>@keyframes</code>. Each one has its own speed and <code>animation-delay</code>, set with CSS variables.</li>
+      <li>Everything waits with <code>animation-play-state: paused</code> until you press Start.</li>
+      <li>The timer is one long animation. When it ends, the “Time’s up” panel slides over the field.</li>
+    </ul>
+    <p><a href="arcade.html">Back to the Arcade</a></p>
+  </aside>
+</div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pokedex.html">Pokédex</a></li>
+            <li><a href="types.html">Types</a></li>
+            <li><a href="evolution.html">Evolution</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+            <li><a href="theater.html">Theater</a></li>
+            <li><a href="academy.html">Academy</a></li>
+            <li><a href="workshop.html">Workshop</a></li>
+            <li><a href="teachers.html">Teachers</a></li>
+            <li><a href="handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

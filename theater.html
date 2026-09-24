@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Watch a Pokémon song, a real flower blooming, listen to Pokémon cries, and explore Pikachu up close.">
+  <meta name="theme-color" content="#e3350d">
+  <title>Theater | AshTech</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/theater.css">
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress-bar" aria-hidden="true"></div>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pokedex.html">Pokédex</a></li>
+          <li><a href="types.html">Types</a></li>
+          <li><a href="evolution.html">Evolution</a></li>
+          <li><a href="regions.html">Regions</a></li>
+          <li><a href="arcade.html">Arcade</a></li>
+          <li><a href="theater.html" aria-current="page">Theater</a></li>
+          <li><a href="academy.html">Academy</a></li>
+          <li><a href="workshop.html">Workshop</a></li>
+          <li><a href="teachers.html">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<header class="page-head wrap">
+  <div>
+    <h1 class="logo-type">Theater</h1>
+    <p>Grab a seat! This is where the site plays videos and sounds, and shows pictures in clever ways. Every screen here uses a different HTML tag.</p>
+  </div>
+  <img class="page-head__art" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/39.png" alt="Jigglypuff, ready to sing" width="220" height="220">
+</header>
+
+<!-- ============ TV: an <iframe> shows a page from another website ============ -->
+<section class="section wrap now-showing" aria-labelledby="tv-title">
+  <div class="section-head">
+    <h2 id="tv-title">Now showing on Pokémon TV</h2>
+    <p>This video comes from the official Pokémon Kids TV channel. An <code>&lt;iframe&gt;</code> puts a window to another website inside ours.</p>
+  </div>
+  <div class="tv">
+    <span class="tv__antenna" aria-hidden="true"></span>
+    <div class="tv__body">
+      <div class="tv__screen">
+        <iframe
+          src="https://www.youtube.com/embed/h4-ftQE3zEQ?rel=0&amp;playsinline=1"
+          title="Pi-Pi-Pi-Pi Pikachu! A Pokémon song from Pokémon Kids TV"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+      </div>
+      <div class="tv__panel" aria-hidden="true">
+        <span class="tv__knob"></span>
+        <span class="tv__knob tv__knob--small"></span>
+        <span class="tv__speaker"></span>
+      </div>
+    </div>
+  </div>
+  <!-- YouTube only plays embedded videos on a real website address, so there's always a backup link -->
+  <p class="tv__fallback">Video not playing? <a href="https://www.youtube.com/watch?v=h4-ftQE3zEQ" target="_blank" rel="noopener">Watch it on YouTube</a> (opens in a new tab).</p>
+</section>
+
+<!-- ============ <video>: a video file stored in our own project ============ -->
+<section class="section wrap sunlight" aria-labelledby="sun-title">
+  <div class="sunlight__text">
+    <h2 id="sun-title">Bulbasaur’s sunlight lesson</h2>
+    <p>Grass-type Pokémon get their energy from the sun, just like real plants. Venusaur’s giant flower even opens up to catch more sunlight. Press play to watch a real flower do the same thing.</p>
+    <p>This one uses the <code>&lt;video&gt;</code> tag. It has two <code>&lt;source&gt;</code> files so every browser can find one it knows, and a <code>&lt;track&gt;</code> with captions. Turn them on with the <kbd>CC</kbd> button.</p>
+    <p class="credit"><small>Flower video: public domain (CC0), from the MDN Web Docs examples.</small></p>
+  </div>
+  <figure class="sunlight__player">
+    <video controls preload="metadata" width="640" height="360" playsinline>
+      <source src="media/flower.webm" type="video/webm">
+      <source src="media/flower.mp4" type="video/mp4">
+      <track kind="captions" src="media/flower.vtt" srclang="en" label="English">
+      Sorry, your browser can’t play this video. <a href="media/flower.mp4">Download it instead</a>.
+    </video>
+    <figcaption>A flower opening, sped up.</figcaption>
+    <img class="sunlight__venusaur" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png" alt="" width="200" height="200">
+  </figure>
+</section>
+
+<!-- ============ <audio>: Pokémon cries ============ -->
+<section class="section wrap" aria-labelledby="cry-title">
+  <div class="section-head">
+    <h2 id="cry-title">The cry lab</h2>
+    <p>Every Pokémon makes its own sound, called a <dfn>cry</dfn>. These are the original cries from the very first games. Each player is an <code>&lt;audio&gt;</code> tag.</p>
+  </div>
+  <ul class="cries">
+    <li>
+      <figure>
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="" width="96" height="96" loading="lazy">
+        <figcaption>Pikachu</figcaption>
+        <audio controls preload="none">
+          <source src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/25.ogg" type="audio/ogg">
+          Your browser can’t play this sound.
+        </audio>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="" width="96" height="96" loading="lazy">
+        <figcaption>Bulbasaur</figcaption>
+        <audio controls preload="none">
+          <source src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/1.ogg" type="audio/ogg">
+          Your browser can’t play this sound.
+        </audio>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" alt="" width="96" height="96" loading="lazy">
+        <figcaption>Charmander</figcaption>
+        <audio controls preload="none">
+          <source src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/4.ogg" type="audio/ogg">
+          Your browser can’t play this sound.
+        </audio>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" alt="" width="96" height="96" loading="lazy">
+        <figcaption>Squirtle</figcaption>
+        <audio controls preload="none">
+          <source src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/7.ogg" type="audio/ogg">
+          Your browser can’t play this sound.
+        </audio>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png" alt="" width="96" height="96" loading="lazy">
+        <figcaption>Jigglypuff</figcaption>
+        <audio controls preload="none">
+          <source src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/39.ogg" type="audio/ogg">
+          Your browser can’t play this sound.
+        </audio>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png" alt="" width="96" height="96" loading="lazy">
+        <figcaption>Snorlax</figcaption>
+        <audio controls preload="none">
+          <source src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/143.ogg" type="audio/ogg">
+          Your browser can’t play this sound.
+        </audio>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png" alt="" width="96" height="96" loading="lazy">
+        <figcaption>Gengar</figcaption>
+        <audio controls preload="none">
+          <source src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/94.ogg" type="audio/ogg">
+          Your browser can’t play this sound.
+        </audio>
+      </figure>
+    </li>
+    <li>
+      <figure>
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png" alt="" width="96" height="96" loading="lazy">
+        <figcaption>Mewtwo</figcaption>
+        <audio controls preload="none">
+          <source src="https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/150.ogg" type="audio/ogg">
+          Your browser can’t play this sound.
+        </audio>
+      </figure>
+    </li>
+  </ul>
+  <p class="cries__note">Tip: some browsers, like older Safari, can’t play <code>.ogg</code> sound files. Try a different browser if a cry stays quiet.</p>
+</section>
+
+<!-- ============ <picture>: a different image for different screens ============ -->
+<section class="section wrap pic" aria-labelledby="pic-title">
+  <div class="pic__text">
+    <h2 id="pic-title">A picture that changes</h2>
+    <p>Make your browser window narrow and watch this Charizard. On small screens it switches to the old pixel sprite from 1996!</p>
+    <p>The <code>&lt;picture&gt;</code> tag holds several <code>&lt;source&gt;</code> images, each with a <code>media</code> condition. The browser picks the first one that matches and falls back to the <code>&lt;img&gt;</code>.</p>
+  </div>
+  <picture class="pic__frame">
+    <source media="(max-width: 700px)" srcset="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-i/red-blue/transparent/6.png">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png" alt="Charizard" width="360" height="360" loading="lazy">
+  </picture>
+</section>
+
+<!-- ============ <map> and <area>: clickable parts of one picture ============ -->
+<section class="section wrap anatomy" aria-labelledby="map-title">
+  <div class="section-head">
+    <h2 id="map-title">Pikachu up close</h2>
+    <p>Click Pikachu’s ears, cheeks, paws or tail. This is an <dfn>image map</dfn>: <code>&lt;area&gt;</code> tags turn parts of a picture into links.</p>
+  </div>
+  <div class="anatomy__grid">
+    <div class="anatomy__pic">
+      <!-- The map only works at the picture's real size (475 × 475), so we never shrink it -->
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Pikachu. Click a body part to learn about it." width="475" height="475" usemap="#pikachu-map">
+      <map name="pikachu-map">
+        <area shape="poly" coords="80,30 130,40 118,150 84,150" href="#fact-ears" alt="Pikachu’s ears">
+        <area shape="poly" coords="190,120 340,92 348,112 250,170" href="#fact-ears" alt="Pikachu’s ears">
+        <area shape="circle" coords="62,215 24" href="#fact-cheeks" alt="Pikachu’s cheeks">
+        <area shape="circle" coords="178,190 24" href="#fact-cheeks" alt="Pikachu’s cheeks">
+        <area shape="circle" coords="205,262 26" href="#fact-paws" alt="Pikachu’s paws">
+        <area shape="rect" coords="10,255 80,305" href="#fact-paws" alt="Pikachu’s paws">
+        <area shape="poly" coords="290,190 375,105 432,78 410,180 345,245 330,275 335,355 312,345 300,300 322,262 288,215" href="#fact-tail" alt="Pikachu’s tail">
+      </map>
+    </div>
+    <ul class="facts">
+      <li id="fact-ears"><b>Ears</b> Pikachu’s long ears have black tips. It uses them to listen for danger and to show how it’s feeling.</li>
+      <li id="fact-cheeks"><b>Cheeks</b> The red circles are electric pouches. Pikachu stores electricity in them and lets it out as sparks.</li>
+      <li id="fact-paws"><b>Paws</b> Pikachu’s tiny paws are great for holding berries. It even zaps hard berries with electricity to make them soft enough to eat.</li>
+      <li id="fact-tail"><b>Tail</b> Shaped like a lightning bolt! Pikachu raises it to check its surroundings, and it sometimes gets struck by lightning.</li>
+    </ul>
+  </div>
+</section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pokedex.html">Pokédex</a></li>
+            <li><a href="types.html">Types</a></li>
+            <li><a href="evolution.html">Evolution</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+            <li><a href="theater.html">Theater</a></li>
+            <li><a href="academy.html">Academy</a></li>
+            <li><a href="workshop.html">Workshop</a></li>
+            <li><a href="teachers.html">Teachers</a></li>
+            <li><a href="handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

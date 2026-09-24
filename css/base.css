@@ -1,0 +1,1019 @@
+/* =====================================================================
+   ASHTECH — base.css
+   Shared by every page. Read it top to bottom: it goes from the most
+   general rules (reset, colours) to the most specific (components).
+
+   @layer puts our rules into "layers". A later layer always wins over
+   an earlier one, no matter how specific the selectors are. This keeps
+   the cascade predictable. Page stylesheets use the "pages" layer.
+   ===================================================================== */
+@layer reset, tokens, base, layout, components, pages, utilities;
+
+/* ---------------------------------------------------------------------
+   1. RESET — remove the browser's default quirks
+   --------------------------------------------------------------------- */
+@layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box; /* width includes padding + border */
+  }
+
+  * {
+    margin: 0;
+  }
+
+  img,
+  video,
+  iframe,
+  picture {
+    display: block;
+    max-width: 100%;
+  }
+
+  input,
+  button,
+  select,
+  textarea {
+    font: inherit; /* form controls don't inherit fonts by default */
+  }
+
+  h1, h2, h3, h4 {
+    text-wrap: balance; /* nicer line breaks in headings */
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   2. TOKENS — custom properties (CSS variables) used everywhere
+   --------------------------------------------------------------------- */
+@layer tokens {
+  :root {
+    /* Core palette, taken from the Pokédex and the Pokémon logo */
+    --red: #e3350d;
+    --red-deep: #a8260a;
+    --yellow: #ffcb05;
+    --yellow-soft: #fff1b0;
+    --logo-blue: #3c5aa6;
+    --blue: #2a75bb;
+    --ink: #1b2a55;          /* our "black": a deep navy ink */
+    --ink-soft: #46547f;
+    --grass: #4fa64a;
+    --grass-deep: #2f7a3a;
+    --grass-light: #9bd770;
+    --sky: #eef6ff;          /* notebook paper */
+    --grid: #d5e5f7;         /* notebook grid lines */
+    --white: #ffffff;
+
+    /* The 18 Pokémon types */
+    --t-normal: #a8a77a;
+    --t-fire: #ee8130;
+    --t-water: #6390f0;
+    --t-electric: #f7d02c;
+    --t-grass: #7ac74c;
+    --t-ice: #96d9d6;
+    --t-fighting: #c22e28;
+    --t-poison: #a33ea1;
+    --t-ground: #e2bf65;
+    --t-flying: #a98ff3;
+    --t-psychic: #f95587;
+    --t-bug: #a6b91a;
+    --t-rock: #b6a136;
+    --t-ghost: #735797;
+    --t-dragon: #6f35fc;
+    --t-dark: #705746;
+    --t-steel: #b7b7ce;
+    --t-fairy: #d685ad;
+
+    /* Type: two families. Lilita One is chunky like a toy label;
+       Lexend was designed to make reading easier. */
+    --font-display: "Lilita One", "Arial Rounded MT Bold", system-ui, sans-serif;
+    --font-body: "Lexend", system-ui, sans-serif;
+    --font-pixel: "Press Start 2P", ui-monospace, monospace;
+
+    /* Type scale: each step is 1.25× the one before (a "major third") */
+    --step--1: 0.8rem;
+    --step-0: 1.0625rem;
+    --step-1: 1.3281rem;
+    --step-2: 1.66rem;
+    --step-3: 2.075rem;
+    --step-4: 2.594rem;
+    --step-5: clamp(2.6rem, 6.5vw, 4.8rem);
+
+    /* Space scale */
+    --space-xs: 0.375rem;
+    --space-s: 0.75rem;
+    --space-m: 1.25rem;
+    --space-l: 2rem;
+    --space-xl: 3.5rem;
+    --space-2xl: clamp(4rem, 9vw, 7rem);
+
+    /* Shapes: bigger things get rounder corners */
+    --r-sm: 10px;
+    --r-md: 18px;
+    --r-lg: 28px;
+    --r-pill: 999px;
+    --line: 3px solid var(--ink);
+    --lift: 6px 6px 0 var(--ink);
+    --lift-hover: 9px 9px 0 var(--ink);
+
+    --wrap: 1180px;
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Poké Ball item image, reused as a cursor and bullet */
+    --pokeball-img: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png");
+
+    color-scheme: light;
+    accent-color: var(--red);     /* tints checkboxes, radios, range */
+    scrollbar-color: var(--red) var(--sky);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   3. BASE — how plain HTML elements look
+   --------------------------------------------------------------------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;   /* in-page #links glide instead of jump */
+    scroll-padding-top: 6rem;  /* keep targets clear of the sticky header */
+  }
+
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    line-height: 1.6;
+    color: var(--ink);
+    /* Notebook paper: two repeating gradients draw the grid */
+    background-color: var(--sky);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 28px 28px;
+    display: flex;
+    flex-direction: column;
+    overflow-x: clip; /* nothing may poke out sideways (clip keeps sticky working) */
+  }
+
+  main {
+    flex: 1; /* pushes the footer to the bottom on short pages */
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 400; /* Lilita One only has one weight */
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+  }
+
+  h2 { font-size: var(--step-4); }
+  h3 { font-size: var(--step-2); }
+  h4 { font-size: var(--step-1); }
+
+  p,
+  li,
+  dd {
+    max-width: 68ch; /* "ch" = width of the 0 character; keeps lines short */
+  }
+
+  a {
+    color: var(--blue);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+  }
+
+  a:hover {
+    color: var(--red);
+    text-decoration-style: wavy;
+  }
+
+  /* Visible keyboard focus: important for everyone who uses Tab */
+  :focus-visible {
+    outline: 4px solid var(--yellow);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 7px var(--ink);
+  }
+
+  ::selection {
+    background: var(--yellow);
+    color: var(--ink);
+  }
+
+  strong, b { font-weight: 700; }
+
+  mark {
+    background: linear-gradient(transparent 45%, var(--yellow) 45%);
+    color: inherit;
+    padding-inline: 0.1em;
+  }
+
+  abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+  }
+
+  kbd {
+    font-family: var(--font-body);
+    font-size: 0.85em;
+    font-weight: 700;
+    padding: 0.1em 0.5em;
+    border: 2px solid var(--ink);
+    border-bottom-width: 4px;
+    border-radius: 6px;
+    background: var(--white);
+  }
+
+  code,
+  samp,
+  pre {
+    font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+    font-size: 0.9em;
+  }
+
+  :not(pre) > code {
+    background: var(--yellow-soft);
+    padding: 0.1em 0.35em;
+    border-radius: 6px;
+  }
+
+  hr {
+    border: 0;
+    height: 18px;
+    margin-block: var(--space-xl);
+    /* A row of little Poké Balls made from a repeating radial gradient */
+    background:
+      radial-gradient(circle at center, var(--white) 0 3px, var(--ink) 3px 4.5px, transparent 5px) 0 0 / 36px 18px,
+      linear-gradient(var(--red) 0 0) 0 0 / 36px 9px;
+    background-repeat: repeat-x;
+    mask: radial-gradient(circle 8px at 18px 9px, #000 97%, transparent) 0 0 / 36px 18px repeat-x;
+  }
+
+  img {
+    height: auto;
+  }
+
+  /* Pixel-art sprites must stay crisp when scaled up */
+  .sprite {
+    image-rendering: pixelated;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   4. LAYOUT — page containers and the header/footer shell
+   --------------------------------------------------------------------- */
+@layer layout {
+  .wrap {
+    width: min(100% - 2rem, var(--wrap));
+    margin-inline: auto;
+  }
+
+  .section {
+    padding-block: var(--space-2xl) 0;
+  }
+
+  .section > h2,
+  .section-head {
+    margin-bottom: var(--space-l);
+  }
+
+  .section-head p {
+    margin-top: var(--space-s);
+    font-size: var(--step-1);
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Skip link: first thing a keyboard user reaches ---------- */
+  .skip {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: 100;
+    padding: 0.6rem 1rem;
+    background: var(--yellow);
+    color: var(--ink);
+    border: var(--line);
+    border-radius: var(--r-sm);
+    font-weight: 700;
+    transition: top 0.2s;
+  }
+
+  .skip:focus {
+    top: 1rem;
+  }
+
+  /* ---------- Header: the top half of a Pokédex ---------- */
+  .dex-top {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--red);
+    border-bottom: var(--line);
+    view-transition-name: dex-top; /* stays still while pages change */
+  }
+
+  /* The dark stripe with the famous Pokédex "step" */
+  .dex-top::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 -15px 0;
+    height: 12px;
+    background: var(--red-deep);
+    border-bottom: var(--line);
+    clip-path: polygon(0 0, 100% 0, 100% 0, 38% 0, 34% 100%, 0 100%);
+    pointer-events: none;
+  }
+
+  .dex-top__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-m);
+    min-height: 76px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+
+  .brand:hover {
+    color: var(--white);
+  }
+
+  /* The big blue lens: layered radial gradients make it look like glass */
+  .lens {
+    width: 52px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 5px solid var(--white);
+    outline: 3px solid var(--ink);
+    background:
+      radial-gradient(circle at 32% 30%, #fff 0 9%, transparent 10%),
+      radial-gradient(circle at 40% 40%, #8fd8ff, var(--blue) 55%, #123f7a);
+    animation: lens-glow 3s ease-in-out infinite;
+  }
+
+  @keyframes lens-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgb(143 216 255 / 0); }
+    50% { box-shadow: 0 0 18px 6px rgb(143 216 255 / 0.8); }
+  }
+
+  .leds {
+    display: flex;
+    gap: 6px;
+    align-self: flex-start;
+    margin-top: 12px;
+  }
+
+  .leds i {
+    width: 12px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 2px solid var(--ink);
+    background: #ff6b6b;
+    animation: blink 1.8s steps(1) infinite;
+  }
+
+  .leds i:nth-child(2) { background: var(--yellow); animation-delay: 0.6s; }
+  .leds i:nth-child(3) { background: #5ce37a; animation-delay: 1.2s; }
+
+  @keyframes blink {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(0.55); }
+  }
+
+  .brand__name {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    line-height: 1;
+    color: var(--yellow);
+    -webkit-text-stroke: 7px var(--logo-blue);
+    paint-order: stroke fill;
+    text-shadow: 2px 3px 0 var(--ink);
+    letter-spacing: 0.02em;
+  }
+
+  /* ---------- Main navigation ---------- */
+  .site-nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    list-style: none;
+    padding: 0;
+  }
+
+  .site-nav a {
+    display: block;
+    padding: 0.3rem 0.62rem;
+    font-weight: 700;
+    font-size: 0.86rem;
+    color: var(--ink);
+    text-decoration: none;
+    background: var(--white);
+    border: 2.5px solid var(--ink);
+    border-radius: var(--r-pill);
+    box-shadow: 0 3px 0 var(--ink);
+    transition: transform 0.15s var(--ease-bounce), box-shadow 0.15s, background-color 0.15s;
+  }
+
+  .site-nav a:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 0 var(--ink);
+    background: var(--yellow-soft);
+  }
+
+  .site-nav a:active {
+    transform: translateY(2px);
+    box-shadow: 0 1px 0 var(--ink);
+  }
+
+  /* aria-current="page" marks the page you're on. We style it with an
+     attribute selector, so the same markup does accessibility AND looks. */
+  .site-nav a[aria-current="page"] {
+    background: var(--yellow);
+  }
+
+  /* The menu button only shows on small screens (see media query) */
+  .nav-toggle,
+  .nav-button {
+    display: none;
+  }
+
+  /* ---------- Small screens: CSS-only menu with the checkbox trick ---------- */
+  @media (max-width: 1200px) {
+    .nav-button {
+      display: grid;
+      place-items: center;
+      width: 52px;
+      aspect-ratio: 1;
+      border: var(--line);
+      border-radius: var(--r-sm);
+      background: var(--yellow);
+      box-shadow: 0 4px 0 var(--ink);
+      cursor: pointer;
+    }
+
+    /* Three bars drawn with one element + two pseudo-elements */
+    .nav-button span[aria-hidden],
+    .nav-button span[aria-hidden]::before,
+    .nav-button span[aria-hidden]::after {
+      display: block;
+      width: 24px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--ink);
+      transition: transform 0.25s, opacity 0.2s;
+    }
+
+    .nav-button span[aria-hidden] {
+      position: relative;
+    }
+
+    .nav-button span[aria-hidden]::before,
+    .nav-button span[aria-hidden]::after {
+      content: "";
+      position: absolute;
+      left: 0;
+    }
+
+    .nav-button span[aria-hidden]::before { top: -8px; }
+    .nav-button span[aria-hidden]::after { top: 8px; }
+
+    /* The checkbox is hidden, but still focusable for keyboards */
+    .nav-toggle {
+      display: block;
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+    }
+
+    .nav-toggle:focus-visible + .nav-button {
+      outline: 4px solid var(--yellow);
+      outline-offset: 3px;
+    }
+
+    /* Burger turns into an X when open */
+    .nav-toggle:checked + .nav-button span[aria-hidden] { background: transparent; }
+    .nav-toggle:checked + .nav-button span[aria-hidden]::before { transform: translateY(8px) rotate(45deg); }
+    .nav-toggle:checked + .nav-button span[aria-hidden]::after { transform: translateY(-8px) rotate(-45deg); }
+
+    .site-nav {
+      position: absolute;
+      inset: 100% 0 auto 0;
+      background: var(--red);
+      border-bottom: var(--line);
+      padding: 1rem;
+      /* Closed: squashed to zero height */
+      clip-path: inset(0 0 100% 0);
+      visibility: hidden;
+      transition: clip-path 0.35s ease, visibility 0.35s;
+    }
+
+    /* "~" = general sibling: any .site-nav that comes after a checked toggle */
+    .nav-toggle:checked ~ .site-nav {
+      clip-path: inset(0 0 0 0);
+      visibility: visible;
+    }
+
+    .site-nav ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    }
+
+    .site-nav a {
+      text-align: center;
+      padding-block: 0.6rem;
+    }
+  }
+
+  /* ---------- Footer: tall grass with Pokémon hiding in it ---------- */
+  .site-foot {
+    margin-top: var(--space-2xl);
+    position: relative;
+    color: var(--white);
+  }
+
+  .grass-band {
+    position: relative;
+    height: 110px;
+    overflow: hidden;
+  }
+
+  .grass-band .blades {
+    position: absolute;
+    inset: auto -40px 0 -40px;
+    height: 80px;
+    background: var(--grass);
+    border-top: 0;
+    /* A zig-zag top edge: every blade is a point of the polygon */
+    clip-path: polygon(0 100%, 0 40%, 2% 0, 4% 45%, 6% 5%, 8% 42%, 10% 0, 12% 40%, 14% 8%, 16% 45%, 18% 0, 20% 40%, 22% 6%, 24% 44%, 26% 0, 28% 42%, 30% 4%, 32% 45%, 34% 0, 36% 40%, 38% 8%, 40% 44%, 42% 0, 44% 42%, 46% 6%, 48% 45%, 50% 0, 52% 40%, 54% 5%, 56% 44%, 58% 0, 60% 42%, 62% 8%, 64% 45%, 66% 0, 68% 40%, 70% 6%, 72% 44%, 74% 0, 76% 42%, 78% 4%, 80% 45%, 82% 0, 84% 40%, 86% 8%, 88% 44%, 90% 0, 92% 42%, 94% 6%, 96% 45%, 98% 0, 100% 40%, 100% 100%);
+    transform-origin: bottom center;
+    animation: sway 4s ease-in-out infinite alternate;
+  }
+
+  .grass-band .blades--back {
+    height: 100px;
+    background: var(--grass-light);
+    animation-duration: 5s;
+    animation-delay: -2s;
+    left: -10px;
+  }
+
+  @keyframes sway {
+    from { transform: skewX(-4deg); }
+    to { transform: skewX(4deg); }
+  }
+
+  /* Pokémon that pop up out of the grass now and then */
+  .peek {
+    position: absolute;
+    bottom: 10px;
+    width: 96px;
+    translate: 0 100%;
+    animation: peek 9s ease-in-out infinite;
+  }
+
+  .peek:nth-of-type(1) { left: 12%; }
+  .peek:nth-of-type(2) { left: 48%; animation-delay: 3s; }
+  .peek:nth-of-type(3) { left: 80%; animation-delay: 6s; }
+
+  @keyframes peek {
+    0%, 70%, 100% { translate: 0 100%; }
+    78%, 90% { translate: 0 30%; }
+    84% { translate: 0 25%; rotate: -6deg; }
+  }
+
+  .foot-inner {
+    background: var(--grass-deep);
+    border-top: var(--line);
+    padding-block: var(--space-xl);
+  }
+
+  .foot-inner .wrap {
+    display: grid;
+    grid-template-columns: 1.2fr 2fr 1.4fr;
+    gap: var(--space-l);
+    align-items: start;
+  }
+
+  .foot-brand {
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    line-height: 1;
+    color: var(--yellow);
+    -webkit-text-stroke: 8px var(--logo-blue);
+    paint-order: stroke fill;
+  }
+
+  .foot-inner ul {
+    list-style: none;
+    padding: 0;
+    columns: 2;           /* multi-column layout */
+    column-gap: var(--space-l);
+  }
+
+  .foot-inner li {
+    padding-block: 0.15rem;
+    break-inside: avoid;
+  }
+
+  .foot-inner a {
+    color: var(--white);
+  }
+
+  .foot-inner a:hover {
+    color: var(--yellow);
+  }
+
+  .foot-inner address {
+    font-style: normal;
+  }
+
+  .foot-inner small {
+    display: block;
+    margin-top: var(--space-m);
+    opacity: 0.85;
+    font-size: var(--step--1);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 760px) {
+    .foot-inner .wrap {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------
+   5. COMPONENTS — reusable building blocks
+   --------------------------------------------------------------------- */
+@layer components {
+  /* ---------- Page heading block ---------- */
+  .page-head {
+    padding-block: var(--space-xl) var(--space-l);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: var(--space-l);
+  }
+
+  .page-head p {
+    font-size: var(--step-1);
+    margin-top: var(--space-m);
+    max-width: 52ch;
+  }
+
+  .page-head__art {
+    width: clamp(120px, 20vw, 220px);
+    filter: drop-shadow(6px 6px 0 var(--ink));
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { translate: 0 0; }
+    50% { translate: 0 -12px; }
+  }
+
+  @media (max-width: 640px) {
+    .page-head {
+      grid-template-columns: 1fr;
+    }
+    .page-head__art {
+      grid-row: 1;
+      width: 110px;
+    }
+  }
+
+  /* The logo treatment for big titles: yellow letters, blue outline,
+     ink shadow. paint-order draws the stroke BEHIND the fill. */
+  .logo-type {
+    font-family: var(--font-display);
+    font-size: var(--step-5);
+    line-height: 1;
+    color: var(--yellow);
+    -webkit-text-stroke: 0.2em var(--logo-blue);
+    paint-order: stroke fill;
+    text-shadow: 0.05em 0.07em 0 var(--ink);
+    letter-spacing: 0.015em;
+  }
+
+  /* ---------- Sticker: our signature box ---------- */
+  .sticker {
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-md);
+    box-shadow: var(--lift);
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.3rem;
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    line-height: 1.1;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    background: var(--yellow);
+    border: var(--line);
+    border-radius: var(--r-pill);
+    box-shadow: 0 5px 0 var(--ink);
+    cursor: pointer;
+    transition: transform 0.15s var(--ease-bounce), box-shadow 0.15s;
+  }
+
+  .btn:hover {
+    color: var(--ink);
+    text-decoration: none;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 0 var(--ink);
+  }
+
+  .btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 2px 0 var(--ink);
+  }
+
+  .btn--light { background: var(--white); }
+  .btn--red { background: var(--red); color: var(--white); }
+  .btn--red:hover { color: var(--white); }
+
+  /* ---------- Type badges ---------- */
+  .type {
+    --c: var(--t-normal);
+    --fg: var(--ink);
+    display: inline-block;
+    padding: 0.1rem 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--fg);
+    background: var(--c);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-pill);
+    text-transform: capitalize;
+  }
+
+  /* The attribute selector [data-type="…"] picks the colour */
+  .type[data-type="normal"] { --c: var(--t-normal); }
+  .type[data-type="fire"] { --c: var(--t-fire); }
+  .type[data-type="water"] { --c: var(--t-water); }
+  .type[data-type="electric"] { --c: var(--t-electric); }
+  .type[data-type="grass"] { --c: var(--t-grass); }
+  .type[data-type="ice"] { --c: var(--t-ice); }
+  .type[data-type="fighting"] { --c: var(--t-fighting); --fg: var(--white); }
+  .type[data-type="poison"] { --c: var(--t-poison); --fg: var(--white); }
+  .type[data-type="ground"] { --c: var(--t-ground); }
+  .type[data-type="flying"] { --c: var(--t-flying); }
+  .type[data-type="psychic"] { --c: var(--t-psychic); }
+  .type[data-type="bug"] { --c: var(--t-bug); }
+  .type[data-type="rock"] { --c: var(--t-rock); }
+  .type[data-type="ghost"] { --c: var(--t-ghost); --fg: var(--white); }
+  .type[data-type="dragon"] { --c: var(--t-dragon); --fg: var(--white); }
+  .type[data-type="dark"] { --c: var(--t-dark); --fg: var(--white); }
+  .type[data-type="steel"] { --c: var(--t-steel); }
+  .type[data-type="fairy"] { --c: var(--t-fairy); }
+
+  /* ---------- A Poké Ball drawn only with CSS ---------- */
+  .pokeball {
+    --size: 60px;
+    position: relative;
+    display: inline-block;
+    width: var(--size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: calc(var(--size) * 0.06) solid var(--ink);
+    /* Hard colour stops (no fading) make crisp stripes */
+    background: linear-gradient(
+      to bottom,
+      var(--red) 0 45%,
+      var(--ink) 45% 55%,
+      var(--white) 55% 100%
+    );
+  }
+
+  .pokeball::after {
+    content: "";
+    position: absolute;
+    inset: 50% auto auto 50%;
+    width: 34%;
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    border-radius: 50%;
+    background: var(--white);
+    border: calc(var(--size) * 0.06) solid var(--ink);
+    box-shadow: inset 0 0 0 calc(var(--size) * 0.03) #ddd;
+  }
+
+  /* ---------- Speech bubble ---------- */
+  .bubble {
+    position: relative;
+    display: inline-block;
+    padding: 0.6rem 1rem;
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-md);
+    font-weight: 500;
+  }
+
+  .bubble::after {
+    content: "";
+    position: absolute;
+    left: 24px;
+    bottom: -13px;
+    width: 20px;
+    height: 20px;
+    background: var(--white);
+    border-right: var(--line);
+    border-bottom: var(--line);
+    transform: rotate(45deg);
+  }
+
+  /* ---------- Callout tip box ---------- */
+  .tip {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-m);
+    align-items: start;
+    padding: var(--space-m) var(--space-l);
+    background: var(--yellow-soft);
+    border: var(--line);
+    border-radius: var(--r-md);
+  }
+
+  .tip img {
+    width: 64px;
+  }
+
+  /* ---------- Reading progress bar (scroll-driven animation) ---------- */
+  .progress-bar {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 6px;
+    z-index: 60;
+    background: linear-gradient(90deg, var(--yellow), var(--grass-light));
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+
+  @supports (animation-timeline: scroll()) {
+    .progress-bar {
+      animation: grow-bar linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+
+  @keyframes grow-bar {
+    to { transform: scaleX(1); }
+  }
+}
+
+/* ---------------------------------------------------------------------
+   6. UTILITIES — tiny single-purpose helpers
+   --------------------------------------------------------------------- */
+@layer utilities {
+  /* Hidden on screen, still read aloud by screen readers */
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .center { text-align: center; }
+}
+
+/* ---------------------------------------------------------------------
+   7. PAGE TRANSITIONS — animate between separate HTML pages.
+   Works in browsers that support cross-document View Transitions.
+   --------------------------------------------------------------------- */
+@view-transition {
+  navigation: auto;
+}
+
+/* The new page opens like a circle growing from the Pokédex lens */
+::view-transition-new(root) {
+  animation: lens-open 0.55s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+::view-transition-old(root) {
+  animation: none;
+}
+
+@keyframes lens-open {
+  from { clip-path: circle(0% at 44px 38px); }
+  to { clip-path: circle(150% at 44px 38px); }
+}
+
+/* ---------------------------------------------------------------------
+   8. ACCESSIBILITY — respect "reduce motion" settings
+   --------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   9. PRINT — what the page looks like on paper
+   --------------------------------------------------------------------- */
+@media print {
+  .dex-top,
+  .site-foot,
+  .progress-bar,
+  .skip {
+    display: none !important;
+  }
+
+  body {
+    background: none;
+    font-size: 12pt;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")"; /* print the address after outside links */
+    font-size: 0.8em;
+  }
+
+  .sticker {
+    box-shadow: none;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   10. "WHY JAVASCRIPT?" NOTES
+   A few pages use a little JavaScript. Each one explains why in a box
+   like this, so curious trainers know which language is doing what.
+   (Layers can be opened again later in a file; this adds to "components".)
+   --------------------------------------------------------------------- */
+@layer components {
+  .why-js {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: var(--space-m);
+    align-items: start;
+    padding: var(--space-m) var(--space-l);
+    background: #fffbe0;
+    border: 3px dashed var(--ink);
+    border-radius: var(--r-md);
+  }
+
+  /* The yellow square is JavaScript's unofficial logo colour */
+  .why-js__badge {
+    display: grid;
+    place-items: end;
+    width: 56px;
+    aspect-ratio: 1;
+    padding: 4px 6px;
+    font-family: ui-monospace, Consolas, monospace;
+    font-weight: 700;
+    font-size: 1.3rem;
+    line-height: 1;
+    background: #f7df1e;
+    color: var(--ink);
+    border: 3px solid var(--ink);
+    border-radius: 8px;
+    rotate: -6deg;
+  }
+
+  .why-js h2,
+  .why-js h3 {
+    font-size: var(--step-1);
+    margin-bottom: 0.3rem;
+  }
+
+  .why-js p + p {
+    margin-top: 0.4rem;
+  }
+
+  .site-foot .maker {
+    font-style: normal;
+    line-height: 1.5;
+  }
+
+  .site-foot .maker strong {
+    color: var(--yellow);
+  }
+}

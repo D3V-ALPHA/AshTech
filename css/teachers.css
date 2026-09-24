@@ -1,0 +1,213 @@
+/* =====================================================================
+   ASHTECH — teachers.css
+   ===================================================================== */
+@layer pages {
+
+  /* ---------- Download cards ---------- */
+  .downloads__list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-l);
+  }
+
+  .downloads__list li {
+    display: grid;
+    align-content: start;
+    gap: 0.4rem;
+    padding: var(--space-l);
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+  }
+
+  .downloads__list img {
+    width: 96px;
+    margin: -1rem 0 -0.5rem -0.8rem;
+  }
+
+  .downloads__links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-m);
+    margin-top: 0.4rem;
+  }
+
+  /* ---------- Tips ---------- */
+  .tips__list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-m);
+  }
+
+  .tips__list li {
+    padding: var(--space-m);
+    background: var(--white);
+    border-left: 8px solid var(--grass);
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+  }
+
+  /* ---------- Curriculum map ---------- */
+  .table-scroll {
+    overflow-x: auto;
+    border: var(--line);
+    border-radius: var(--r-md);
+    box-shadow: var(--lift);
+    background: var(--white);
+  }
+
+  .map {
+    width: 100%;
+    min-width: 640px;
+    border-collapse: collapse;
+  }
+
+  .map th,
+  .map td {
+    padding: 0.7rem 1rem;
+    text-align: left;
+    vertical-align: top;
+    border-top: 1px solid var(--grid);
+  }
+
+  .map thead th {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--step-1);
+    color: var(--white);
+    background: var(--ink);
+  }
+
+  .map tbody tr:nth-child(even) {
+    background: var(--sky);
+  }
+
+  .map tbody th {
+    white-space: nowrap;
+  }
+
+  /* ---------- Lesson plans ---------- */
+  .plans {
+    display: grid;
+    gap: var(--space-m);
+    interpolate-size: allow-keywords;
+  }
+
+  .plan {
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+    overflow: hidden;
+  }
+
+  .plan summary {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    grid-template-rows: auto auto;
+    column-gap: var(--space-m);
+    align-items: center;
+    padding: var(--space-s) var(--space-l);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .plan summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .plan summary img {
+    grid-row: span 2;
+    width: 72px;
+  }
+
+  .plan__num {
+    font-weight: 700;
+    color: var(--red);
+  }
+
+  .plan__title {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.1;
+  }
+
+  .plan summary:hover {
+    background: var(--yellow-soft);
+  }
+
+  .plan[open] summary {
+    border-bottom: 3px dotted var(--grid);
+  }
+
+  /* Smooth opening, like the FAQ on the Types page */
+  .plan::details-content {
+    block-size: 0;
+    overflow: hidden;
+    transition: block-size 0.4s ease, content-visibility 0.4s allow-discrete;
+  }
+
+  .plan[open]::details-content {
+    block-size: auto;
+  }
+
+  .plan__body {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: var(--space-l);
+    padding: var(--space-l);
+  }
+
+  .plan__col h3 {
+    font-size: var(--step-1);
+    margin: var(--space-m) 0 0.3rem;
+  }
+
+  .plan__col h3:first-child {
+    margin-top: 0;
+  }
+
+  .plan__col ul {
+    padding-left: 1.3rem;
+    display: grid;
+    gap: 0.2rem;
+  }
+
+  .plan__steps {
+    padding-left: 1.4rem;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .plan__steps li::marker {
+    font-family: var(--font-display);
+    color: var(--red);
+  }
+
+  .plan__steps b {
+    display: block;
+  }
+
+  .plan__exit {
+    margin-top: var(--space-m);
+    padding: 0.6rem 1rem;
+    background: var(--yellow-soft);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-sm);
+  }
+
+  @media (max-width: 760px) {
+    .plan__body {
+      grid-template-columns: 1fr;
+      padding: var(--space-m);
+    }
+    .plan summary {
+      padding-inline: var(--space-m);
+    }
+  }
+}

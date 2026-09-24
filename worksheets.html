@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Eight printable HTML and CSS worksheets for kids, one for each AshTech lesson, with an answer key.">
+  <meta name="theme-color" content="#e3350d">
+  <title>Worksheets | AshTech</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/worksheets.css">
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pokedex.html">Pokédex</a></li>
+          <li><a href="types.html">Types</a></li>
+          <li><a href="evolution.html">Evolution</a></li>
+          <li><a href="regions.html">Regions</a></li>
+          <li><a href="arcade.html">Arcade</a></li>
+          <li><a href="theater.html">Theater</a></li>
+          <li><a href="academy.html">Academy</a></li>
+          <li><a href="workshop.html">Workshop</a></li>
+          <li><a href="teachers.html" aria-current="page">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<header class="page-head wrap">
+  <div>
+    <h1 class="logo-type">Worksheets</h1>
+    <p>One worksheet for each lesson. Download the whole pack as a PDF to print, or read them here. The answer key is on the last page.</p>
+    <p><a class="btn" href="worksheets.pdf" download>Download the PDF</a> <a class="btn btn--light" href="teachers.html">Back to lesson plans</a></p>
+  </div>
+</header>
+
+<div class="wrap sheets">
+  <section class="sheet" id="ws-1" aria-labelledby="ws-1-title">
+    <header class="sheet__head">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/137.png" alt="" width="96" height="96">
+      <div>
+        <p class="sheet__kicker">AshTech worksheet 1</p>
+        <h2 id="ws-1-title">What is a web page?</h2>
+      </div>
+      <dl class="sheet__who">
+        <div><dt>Name</dt><dd></dd></div>
+        <div><dt>Class</dt><dd></dd></div>
+        <div><dt>Date</dt><dd></dd></div>
+      </dl>
+    </header>
+    <ol class="tasks">
+    <li>
+      <p>Label the five parts of this tag. Write the letter in each box.</p>
+      <p class="big-code"><span class="lbl">A</span>&lt;a <span class="lbl">B</span>href=<span class="lbl">C</span>"pokedex.html"&gt; <span class="lbl">D</span>Open the Pokédex <span class="lbl">E</span>&lt;/a&gt;</p>
+      <table class="match">
+        <tr><td>Opening tag ☐</td><td>Attribute name ☐</td><td>Attribute value ☐</td><td>Content ☐</td><td>Closing tag ☐</td></tr>
+      </table>
+    </li>
+    <li>
+      <p>Each line has one mistake. Circle it, then write the fix.</p>
+      <pre class="code">&lt;p&gt;Pikachu is yellow&lt;p&gt;
+&lt;h1&gt;My team&lt;/h2&gt;
+&lt;img src="eevee.png"&gt;</pre>
+      <div class="lines"><span></span><span></span><span></span></div>
+    </li>
+    <li>
+      <p>Match each language to its job. Draw a line.</p>
+      <table class="match match--lines">
+        <tr><td>HTML</td><td class="gap"></td><td>How things LOOK</td></tr>
+        <tr><td>CSS</td><td class="gap"></td><td>What things DO</td></tr>
+        <tr><td>JavaScript</td><td class="gap"></td><td>What things ARE</td></tr>
+      </table>
+    </li>
+  </ol>
+  </section>
+
+  <section class="sheet" id="ws-2" aria-labelledby="ws-2-title">
+    <header class="sheet__head">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/92.png" alt="" width="96" height="96">
+      <div>
+        <p class="sheet__kicker">AshTech worksheet 2</p>
+        <h2 id="ws-2-title">The page skeleton and text tags</h2>
+      </div>
+      <dl class="sheet__who">
+        <div><dt>Name</dt><dd></dd></div>
+        <div><dt>Class</dt><dd></dd></div>
+        <div><dt>Date</dt><dd></dd></div>
+      </dl>
+    </header>
+    <ol class="tasks">
+    <li>
+      <p>Fill in the missing words to finish the page skeleton.</p>
+      <p class="wordbank">Word bank: <b>html</b>, <b>title</b>, <b>body</b>, <b>head</b>, <b>h1</b></p>
+      <pre class="code">&lt;!DOCTYPE html&gt;
+&lt;<span class="blank" style="--w: 4em;"></span> lang="en"&gt;
+&lt;<span class="blank" style="--w: 4em;"></span>&gt;
+  &lt;<span class="blank" style="--w: 4em;"></span>&gt;My Pokémon Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;<span class="blank" style="--w: 4em;"></span>&gt;
+  &lt;<span class="blank" style="--w: 3em;"></span>&gt;Gotta learn them all&lt;/h1&gt;
+  &lt;p&gt;This is my first page.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+    </li>
+    <li>
+      <p>Which tag would you use? Write it in the box.</p>
+      <table class="match">
+        <tr><td>A very important warning</td><td class="box"></td></tr>
+        <tr><td>A word said with feeling</td><td class="box"></td></tr>
+        <tr><td>A highlighted word</td><td class="box"></td></tr>
+        <tr><td>“HP”, with its full name when you hover</td><td class="box"></td></tr>
+      </table>
+    </li>
+    <li>
+      <p>Draw the page skeleton as a family tree. Start with <code>&lt;html&gt;</code> at the top.</p>
+      <div class="draw" style="--h: 60mm;"></div>
+    </li>
+  </ol>
+  </section>
+
+  <section class="sheet" id="ws-3" aria-labelledby="ws-3-title">
+    <header class="sheet__head">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png" alt="" width="96" height="96">
+      <div>
+        <p class="sheet__kicker">AshTech worksheet 3</p>
+        <h2 id="ws-3-title">Lists, links and pictures</h2>
+      </div>
+      <dl class="sheet__who">
+        <div><dt>Name</dt><dd></dd></div>
+        <div><dt>Class</dt><dd></dd></div>
+        <div><dt>Date</dt><dd></dd></div>
+      </dl>
+    </header>
+    <ol class="tasks">
+    <li>
+      <p>Tick the best list for each one.</p>
+      <table class="match">
+        <tr><th></th><th>&lt;ol&gt;</th><th>&lt;ul&gt;</th><th>&lt;dl&gt;</th></tr>
+        <tr><td>Steps to evolve Charmander</td><td>☐</td><td>☐</td><td>☐</td></tr>
+        <tr><td>My favourite snacks</td><td>☐</td><td>☐</td><td>☐</td></tr>
+        <tr><td>Pokémon types and what they beat</td><td>☐</td><td>☐</td><td>☐</td></tr>
+        <tr><td>The eight gyms, in order</td><td>☐</td><td>☐</td><td>☐</td></tr>
+      </table>
+    </li>
+    <li>
+      <p>Write a link that goes to <code>types.html</code> and says “Learn the types”.</p>
+      <div class="lines"><span></span><span></span></div>
+    </li>
+    <li>
+      <p>Write an <code>&lt;img&gt;</code> tag for a picture called <code>squirtle.png</code>. Give it good alt words.</p>
+      <div class="lines"><span></span><span></span></div>
+    </li>
+    <li>
+      <p>Why do pictures need alt words? Explain in one sentence.</p>
+      <div class="lines"><span></span><span></span></div>
+    </li>
+  </ol>
+  </section>
+
+  <section class="sheet" id="ws-4" aria-labelledby="ws-4-title">
+    <header class="sheet__head">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/113.png" alt="" width="96" height="96">
+      <div>
+        <p class="sheet__kicker">AshTech worksheet 4</p>
+        <h2 id="ws-4-title">Forms and inputs</h2>
+      </div>
+      <dl class="sheet__who">
+        <div><dt>Name</dt><dd></dd></div>
+        <div><dt>Class</dt><dd></dd></div>
+        <div><dt>Date</dt><dd></dd></div>
+      </dl>
+    </header>
+    <ol class="tasks">
+    <li>
+      <p>You are designing a check-in form for a Pokémon Centre. Choose the best input type for each question.</p>
+      <p class="wordbank">Types: <b>text</b>, <b>number</b>, <b>date</b>, <b>color</b>, <b>checkbox</b>, <b>email</b></p>
+      <table class="match">
+        <tr><td>Trainer’s name</td><td class="box"></td></tr>
+        <tr><td>How many Pokémon need healing?</td><td class="box"></td></tr>
+        <tr><td>Date of visit</td><td class="box"></td></tr>
+        <tr><td>“I agree to wait patiently”</td><td class="box"></td></tr>
+        <tr><td>A grown-up’s email</td><td class="box"></td></tr>
+      </table>
+    </li>
+    <li>
+      <p>Finish the code so the label is joined to its input.</p>
+      <pre class="code">&lt;label for="<span class="blank" style="--w: 5em;"></span>"&gt;Trainer name&lt;/label&gt;
+&lt;input type="text" id="trainer"&gt;</pre>
+    </li>
+    <li>
+      <p>Draw your form. Show every box, its label and the button.</p>
+      <div class="draw" style="--h: 70mm;"></div>
+    </li>
+  </ol>
+  </section>
+
+  <section class="sheet" id="ws-5" aria-labelledby="ws-5-title">
+    <header class="sheet__head">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png" alt="" width="96" height="96">
+      <div>
+        <p class="sheet__kicker">AshTech worksheet 5</p>
+        <h2 id="ws-5-title">CSS rules and selectors</h2>
+      </div>
+      <dl class="sheet__who">
+        <div><dt>Name</dt><dd></dd></div>
+        <div><dt>Class</dt><dd></dd></div>
+        <div><dt>Date</dt><dd></dd></div>
+      </dl>
+    </header>
+    <ol class="tasks">
+    <li>
+      <p>Here is a mini web page. Read it carefully.</p>
+      <pre class="code">&lt;ul class="party"&gt;
+  &lt;li class="mon fire"&gt;Charmander&lt;/li&gt;
+  &lt;li class="mon water"&gt;Squirtle&lt;/li&gt;
+  &lt;li class="mon electric" id="partner"&gt;Pikachu&lt;/li&gt;
+  &lt;li class="mon fire"&gt;Growlithe&lt;/li&gt;
+&lt;/ul&gt;</pre>
+      <p>Which Pokémon does each selector pick? Write their names.</p>
+      <table class="match">
+        <tr><td><code>.fire</code></td><td class="box box--wide"></td></tr>
+        <tr><td><code>#partner</code></td><td class="box box--wide"></td></tr>
+        <tr><td><code>li</code></td><td class="box box--wide"></td></tr>
+        <tr><td><code>.water</code></td><td class="box box--wide"></td></tr>
+      </table>
+    </li>
+    <li>
+      <p>Label the parts of this CSS rule: <b>selector</b>, <b>property</b>, <b>value</b>.</p>
+      <p class="big-code">h1 { color: red; }</p>
+      <div class="lines"><span></span></div>
+    </li>
+    <li>
+      <p>Which rule wins? Circle it.</p>
+      <table class="match">
+        <tr><td><code>p</code> or <code>.mouse</code></td></tr>
+        <tr><td><code>.electric</code> or <code>#pika</code></td></tr>
+        <tr><td><code>.electric</code> or <code>.mouse</code> (written second)</td></tr>
+      </table>
+    </li>
+  </ol>
+  </section>
+
+  <section class="sheet" id="ws-6" aria-labelledby="ws-6-title">
+    <header class="sheet__head">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" alt="" width="96" height="96">
+      <div>
+        <p class="sheet__kicker">AshTech worksheet 6</p>
+        <h2 id="ws-6-title">The box model and colours</h2>
+      </div>
+      <dl class="sheet__who">
+        <div><dt>Name</dt><dd></dd></div>
+        <div><dt>Class</dt><dd></dd></div>
+        <div><dt>Date</dt><dd></dd></div>
+      </dl>
+    </header>
+    <ol class="tasks">
+    <li>
+      <p>Label the four layers of the box: <b>content</b>, <b>padding</b>, <b>border</b>, <b>margin</b>.</p>
+      <div class="boxdiagram"><div><div><div><span>?</span></div></div></div></div>
+    </li>
+    <li>
+      <p>Box maths! Work out the whole width of each box. (Width = margin + border + padding + content + padding + border + margin.)</p>
+      <table class="match">
+        <tr><th>Content</th><th>Padding</th><th>Border</th><th>Margin</th><th>Whole width</th></tr>
+        <tr><td>100</td><td>10</td><td>5</td><td>0</td><td class="box"></td></tr>
+        <tr><td>200</td><td>20</td><td>2</td><td>10</td><td class="box"></td></tr>
+        <tr><td>50</td><td>0</td><td>10</td><td>20</td><td class="box"></td></tr>
+      </table>
+    </li>
+    <li>
+      <p>These all mean the same yellow. Write what each one is called: <b>name</b>, <b>hex</b>, <b>rgb</b> or <b>hsl</b>.</p>
+      <table class="match">
+        <tr><td><code>#ffcb05</code></td><td class="box"></td><td><code>rgb(255 203 5)</code></td><td class="box"></td></tr>
+        <tr><td><code>gold</code></td><td class="box"></td><td><code>hsl(48 100% 51%)</code></td><td class="box"></td></tr>
+      </table>
+    </li>
+  </ol>
+  </section>
+
+  <section class="sheet" id="ws-7" aria-labelledby="ws-7-title">
+    <header class="sheet__head">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/81.png" alt="" width="96" height="96">
+      <div>
+        <p class="sheet__kicker">AshTech worksheet 7</p>
+        <h2 id="ws-7-title">Layout with flexbox and grid</h2>
+      </div>
+      <dl class="sheet__who">
+        <div><dt>Name</dt><dd></dd></div>
+        <div><dt>Class</dt><dd></dd></div>
+        <div><dt>Date</dt><dd></dd></div>
+      </dl>
+    </header>
+    <ol class="tasks">
+    <li>
+      <p>Flex or grid? Tick one for each design.</p>
+      <table class="match">
+        <tr><th></th><th>flex</th><th>grid</th></tr>
+        <tr><td>A menu bar with five links in a row</td><td>☐</td><td>☐</td></tr>
+        <tr><td>A photo gallery with 3 columns and 4 rows</td><td>☐</td><td>☐</td></tr>
+        <tr><td>Three buttons side by side</td><td>☐</td><td>☐</td></tr>
+        <tr><td>A chessboard</td><td>☐</td><td>☐</td></tr>
+      </table>
+    </li>
+    <li>
+      <p>Draw three Poké Balls in each row to show where <code>justify-content</code> puts them.</p>
+      <div class="rows">
+        <p><code>flex-start</code></p><div class="row-box"></div>
+        <p><code>center</code></p><div class="row-box"></div>
+        <p><code>space-between</code></p><div class="row-box"></div>
+      </div>
+    </li>
+    <li>
+      <p>Write the CSS for a grid with 4 equal columns.</p>
+      <div class="lines"><span></span><span></span><span></span></div>
+    </li>
+  </ol>
+  </section>
+
+  <section class="sheet" id="ws-8" aria-labelledby="ws-8-title">
+    <header class="sheet__head">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="" width="96" height="96">
+      <div>
+        <p class="sheet__kicker">AshTech worksheet 8</p>
+        <h2 id="ws-8-title">Animation and the final project</h2>
+      </div>
+      <dl class="sheet__who">
+        <div><dt>Name</dt><dd></dd></div>
+        <div><dt>Class</dt><dd></dd></div>
+        <div><dt>Date</dt><dd></dd></div>
+      </dl>
+    </header>
+    <ol class="tasks">
+    <li>
+      <p>Plan your own “My Pokémon” page. Draw it here: where do the title, picture, facts and colours go?</p>
+      <div class="draw" style="--h: 80mm;"></div>
+    </li>
+    <li>
+      <p>Describe one animation for your page. What moves, how long does it take, and does it repeat?</p>
+      <div class="lines"><span></span><span></span></div>
+    </li>
+    <li>
+      <p>Checklist. Tick each one when it’s done!</p>
+      <ul class="checks">
+        <li>☐ My page has a <code>&lt;title&gt;</code> and one <code>&lt;h1&gt;</code></li>
+        <li>☐ Every picture has alt words</li>
+        <li>☐ I used a class in my CSS</li>
+        <li>☐ I used flexbox or grid</li>
+        <li>☐ Something on my page moves</li>
+        <li>☐ A friend checked my page and gave it ★ ★ ★ ☆ ☆</li>
+      </ul>
+    </li>
+  </ol>
+  </section>
+
+  <section class="sheet sheet--answers" id="answers" aria-labelledby="answers-title">
+    <header class="sheet__head">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/65.png" alt="" width="96" height="96">
+      <div>
+        <p class="sheet__kicker">For teachers</p>
+        <h2 id="answers-title">Answer key</h2>
+      </div>
+    </header>
+    <dl class="answers">
+      <div><dt>Worksheet 1</dt><dd>A opening tag, B attribute name, C attribute value, D content, E closing tag. Mistakes: the first &lt;p&gt; should close with &lt;/p&gt;; &lt;h1&gt; closes with &lt;/h2&gt;, it should be &lt;/h1&gt;; the &lt;img&gt; needs alt="…". HTML = what things are, CSS = how they look, JavaScript = what they do.</dd></div>
+      <div><dt>Worksheet 2</dt><dd>html, head, title, body, h1. Tags: &lt;strong&gt;, &lt;em&gt;, &lt;mark&gt;, &lt;abbr&gt;. Tree: html at the top, with head (title) and body (h1, p) below it.</dd></div>
+      <div><dt>Worksheet 3</dt><dd>ol, ul, dl, ol. &lt;a href="types.html"&gt;Learn the types&lt;/a&gt;. &lt;img src="squirtle.png" alt="Squirtle, a little blue turtle Pokémon"&gt;. Alt words let people who can’t see the picture know what it shows.</dd></div>
+      <div><dt>Worksheet 4</dt><dd>text, number, date, checkbox, email. The for must be "trainer".</dd></div>
+      <div><dt>Worksheet 5</dt><dd>.fire: Charmander and Growlithe. #partner: Pikachu. li: all four. .water: Squirtle. h1 is the selector, color the property, red the value. Winners: .mouse, #pika, .mouse (tie, so the last one wins).</dd></div>
+      <div><dt>Worksheet 6</dt><dd>Inside to outside: content, padding, border, margin. Widths: 130, 264, 110. #ffcb05 hex, rgb(…) rgb, gold name, hsl(…) hsl.</dd></div>
+      <div><dt>Worksheet 7</dt><dd>flex, grid, flex, grid. flex-start: all on the left; center: all in the middle; space-between: one at each end and one in the middle. .grid { display: grid; grid-template-columns: repeat(4, 1fr); }</dd></div>
+      <div><dt>Worksheet 8</dt><dd>Answers will vary. Look for a clear plan, a real animation idea and an honest checklist.</dd></div>
+    </dl>
+  </section>
+</div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pokedex.html">Pokédex</a></li>
+            <li><a href="types.html">Types</a></li>
+            <li><a href="evolution.html">Evolution</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+            <li><a href="theater.html">Theater</a></li>
+            <li><a href="academy.html">Academy</a></li>
+            <li><a href="workshop.html">Workshop</a></li>
+            <li><a href="teachers.html">Teachers</a></li>
+            <li><a href="handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="See how AshTech is built: tags, the box model, flexbox, grid, selectors and more, with live CSS demos.">
+  <meta name="theme-color" content="#e3350d">
+  <title>Workshop | AshTech</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/workshop.css">
+
+  <!-- This page uses a little JavaScript. Look for "Why JavaScript?" on the page to see what it does. -->
+  <script src="js/workshop.js" defer></script>
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress-bar" aria-hidden="true"></div>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pokedex.html">Pokédex</a></li>
+          <li><a href="types.html">Types</a></li>
+          <li><a href="evolution.html">Evolution</a></li>
+          <li><a href="regions.html">Regions</a></li>
+          <li><a href="arcade.html">Arcade</a></li>
+          <li><a href="theater.html">Theater</a></li>
+          <li><a href="academy.html">Academy</a></li>
+          <li><a href="workshop.html" aria-current="page">Workshop</a></li>
+          <li><a href="teachers.html">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<header class="page-head wrap">
+  <div>
+    <h1 class="logo-type">Workshop</h1>
+    <p>Welcome behind the scenes! AshTech is built mostly from two languages. <abbr title="HyperText Markup Language">HTML</abbr> says what things <em>are</em>. <abbr title="Cascading Style Sheets">CSS</abbr> says how they <em>look</em> and <em>move</em>. Let’s take them apart.</p>
+    <p class="source-tip">Want to see the real code of any page? Press <kbd>Ctrl</kbd> + <kbd>U</kbd>. To poke around inside it, press <kbd>F12</kbd>.</p>
+  </div>
+  <img class="page-head__art" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/66.png" alt="Machop, ready to build" width="220" height="220">
+</header>
+
+<!-- ============ LAB INDEX ============ -->
+<nav class="wrap lab-index" aria-label="Workshop labs">
+  <p class="lab-index__title">Pick a lab</p>
+  <ol>
+    <li><a href="#lab-tag">Anatomy of a tag</a></li>
+    <li><a href="#lab-code">Code Lab <span class="lab-tag">JS</span></a></li>
+    <li><a href="#lab-box">Every element is a box</a></li>
+    <li><a href="#lab-measure">Measure the box <span class="lab-tag">JS</span></a></li>
+    <li><a href="#lab-flex">Flexbox playground</a></li>
+    <li><a href="#lab-grid">Grid playground</a></li>
+    <li><a href="#lab-selectors">Selectors</a></li>
+    <li><a href="#lab-detective">Selector Detective <span class="lab-tag">JS</span></a></li>
+    <li><a href="#lab-showdown">Specificity Showdown <span class="lab-tag">JS</span></a></li>
+    <li><a href="#lab-colour">Colours</a></li>
+    <li><a href="#lab-mixer">Colour Mixer <span class="lab-tag">JS</span></a></li>
+    <li><a href="#lab-studio">Move Studio <span class="lab-tag">JS</span></a></li>
+    <li><a href="#lab-words">Tags for words</a></li>
+  </ol>
+</nav>
+
+<div class="wrap workshop-why">
+  <aside class="why-js">
+    <span class="why-js__badge" aria-hidden="true">JS</span>
+    <div>
+      <h2>Why do some labs say JS?</h2>
+      <p>The labs without a badge are pure HTML and CSS, just like the rest of AshTech. The labs marked <span class="lab-tag">JS</span> use a third language, <strong>JavaScript</strong>, because they need to <em>read what you type</em> or <em>move a slider</em> and then change the page straight away.</p>
+      <p>Think of it like this: HTML is the <b>skeleton</b>, CSS is the <b>clothes and paint</b>, and JavaScript is the <b>muscles and brain</b>. Once you love HTML and CSS, JavaScript is the next adventure on the route!</p>
+    </div>
+  </aside>
+  <p class="teacher-hint">Teachers: every lab has a <b>For teachers</b> panel with a goal, questions to ask and a quick activity. The <b>Present</b> button fills the whole screen, which is great for a classroom projector. There are full lesson plans on the <a href="teachers.html">Teachers page</a>.</p>
+</div>
+
+<!-- ============ ANATOMY OF A TAG ============ -->
+<section class="section wrap lab" id="lab-tag" aria-labelledby="tag-title">
+  <div class="section-head">
+    <h2 id="tag-title">Anatomy of a tag</h2>
+    <p>HTML is made of <dfn>tags</dfn>. Hover over (or tap) each coloured part to learn its name.</p>
+  </div>
+  <div class="tag-anatomy">
+    <p class="tag-anatomy__code" aria-label="Example: an a tag with an href attribute">
+      <span class="part part--open" tabindex="0">&lt;a</span>
+      <span class="part part--attr" tabindex="0">href</span>=<span class="part part--value" tabindex="0">"pokedex.html"</span><span class="part part--open">&gt;</span>
+      <span class="part part--content" tabindex="0">Open the Pokédex</span>
+      <span class="part part--close" tabindex="0">&lt;/a&gt;</span>
+    </p>
+    <ul class="tag-anatomy__notes">
+      <li class="note note--open"><b>Opening tag.</b> Says what kind of thing this is. <code>&lt;a&gt;</code> means “a link”.</li>
+      <li class="note note--attr"><b>Attribute name.</b> Extra information about the tag. <code>href</code> means “where the link goes”.</li>
+      <li class="note note--value"><b>Attribute value.</b> The information itself, always in quotes.</li>
+      <li class="note note--content"><b>Content.</b> What people see on the page.</li>
+      <li class="note note--close"><b>Closing tag.</b> The same name with a <code>/</code>. It says “the link ends here”.</li>
+    </ul>
+  </div>
+<details class="teach">
+    <summary>For teachers</summary>
+    <div class="teach__body">
+      <p><b>Goal:</b> students can name the five parts of an HTML element.</p>
+      <p><b>Ask the class:</b></p>
+      <ul>
+        <li>Which part would you change to send the link to a different page?</li>
+        <li>What would happen if the closing tag was missing?</li>
+      </ul>
+      <p><b>Quick activity:</b> write <code>&lt;img src="pikachu.png" alt="Pikachu"&gt;</code> on the board. Students point out the tag name, each attribute and each value. Why does <code>&lt;img&gt;</code> have no closing tag?</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ CODE LAB (JavaScript) ============ -->
+<section class="section wrap lab" id="lab-code" aria-labelledby="code-title">
+  <div class="section-head">
+    <h2 id="code-title">Code Lab <span class="lab-tag">JS</span></h2>
+    <p>Write real HTML and CSS and watch your page change as you type. Pick a starter project, or clear it and start from nothing.</p>
+  </div>
+
+  <div class="codelab">
+    <div class="codelab__presets" role="group" aria-label="Starter projects">
+      <button type="button" class="chip-btn" data-preset="card" aria-pressed="true">Pokémon card</button>
+      <button type="button" class="chip-btn" data-preset="ball" aria-pressed="false">CSS Poké Ball</button>
+      <button type="button" class="chip-btn" data-preset="team" aria-pressed="false">Flexbox team</button>
+      <button type="button" class="chip-btn" data-preset="move" aria-pressed="false">Make it move</button>
+      <button type="button" class="chip-btn" data-preset="blank" aria-pressed="false">Blank page</button>
+    </div>
+
+    <div class="codelab__editors">
+      <div class="codelab__editor">
+        <label for="code-html">HTML <span>what things are</span></label>
+        <textarea id="code-html" spellcheck="false" autocapitalize="off" autocomplete="off" wrap="off"></textarea>
+      </div>
+      <div class="codelab__editor">
+        <label for="code-css">CSS <span>how things look</span></label>
+        <textarea id="code-css" spellcheck="false" autocapitalize="off" autocomplete="off" wrap="off"></textarea>
+      </div>
+    </div>
+
+    <div class="codelab__preview">
+      <p class="codelab__bar"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span> Your page</p>
+      <!-- sandbox with nothing allowed = no scripts can run inside the preview. Safe for everyone. -->
+      <iframe id="code-preview" title="Live preview of your code" sandbox></iframe>
+    </div>
+
+    <!-- <noscript> only shows when JavaScript is switched off -->
+    <noscript><p class="codelab__noscript">The Code Lab needs JavaScript switched on. All the other CSS-only labs still work!</p></noscript>
+  </div>
+
+  <div class="try">
+    <p class="try__title">Try this</p>
+    <ol>
+      <li>In the Pokémon card, change <code>#f7d02c</code> to <code>#ee8130</code>. What type is it now?</li>
+      <li>Change <code>border-radius: 20px</code> to <code>0</code>, then to <code>50%</code>.</li>
+      <li>Add a second <code>&lt;p&gt;</code> with your own fact about Pikachu.</li>
+      <li>In “Make it move”, change <code>1s</code> to <code>0.3s</code>. Too fast?</li>
+    </ol>
+  </div>
+
+  <details class="teach">
+    <summary>For teachers</summary>
+    <div class="teach__body">
+      <p><b>Goal:</b> students see that HTML and CSS are separate jobs, and that small edits have instant, visible results.</p>
+      <p><b>Ask the class:</b></p>
+      <ul>
+        <li>If you delete all the CSS, does the content disappear? (No, only the look changes.)</li>
+        <li>What happens if you forget a closing tag or a <code>;</code>? Try it together and read what the browser does.</li>
+      </ul>
+      <p><b>Quick activity (10 min):</b> pairs start from the Pokémon card and change it into their own favourite Pokémon, with a new picture number, name, type colour and fact. Picture addresses end in the Pokédex number, like <code>…/official-artwork/<b>133</b>.png</code> for Eevee.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ BOX MODEL ============ -->
+<section class="section wrap lab" id="lab-box" aria-labelledby="box-title">
+  <div class="section-head">
+    <h2 id="box-title">Every element is a box</h2>
+    <p>Each box has four layers: the <b>content</b>, then <b>padding</b> (space inside), then a <b>border</b>, then <b>margin</b> (space outside). Switch on 3D to pull the layers apart.</p>
+  </div>
+  <div class="boxlab">
+    <input type="checkbox" id="explode" class="visually-hidden">
+    <label for="explode" class="btn boxlab__toggle">Show in 3D</label>
+    <div class="boxlab__stage">
+      <div class="layer layer--margin"><span>margin</span>
+        <div class="layer layer--border"><span>border</span>
+          <div class="layer layer--padding"><span>padding</span>
+            <div class="layer layer--content"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Pikachu as the content of the box" width="120" height="120"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<details class="teach">
+    <summary>For teachers</summary>
+    <div class="teach__body">
+      <p><b>Goal:</b> students can name the four layers of the box model, from the inside out.</p>
+      <p><b>Ask the class:</b></p>
+      <ul>
+        <li>Which layer has a colour you can see: margin, border or padding?</li>
+        <li>Where does the background colour stop: at the padding or at the margin?</li>
+      </ul>
+      <p><b>Quick activity:</b> press F12 on any AshTech page, click an element, and find the coloured box-model diagram in the Styles panel. It matches this one!</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ MEASURE THE BOX (JavaScript) ============ -->
+<section class="section wrap lab" id="lab-measure" aria-labelledby="measure-title">
+  <div class="section-head">
+    <h2 id="measure-title">Measure the box <span class="lab-tag">JS</span></h2>
+    <p>Slide the numbers and watch the box grow. The maths at the bottom shows how wide the whole box really is on the screen.</p>
+  </div>
+
+  <div class="measure">
+    <form class="measure__controls" aria-label="Box sizes">
+      <label for="m-width">width <output id="m-width-out" for="m-width">120</output>px</label>
+      <input type="range" id="m-width" min="60" max="220" value="120">
+
+      <label for="m-padding">padding <output id="m-padding-out" for="m-padding">20</output>px</label>
+      <input type="range" id="m-padding" min="0" max="60" value="20">
+
+      <label for="m-border">border <output id="m-border-out" for="m-border">8</output>px</label>
+      <input type="range" id="m-border" min="0" max="30" value="8">
+
+      <label for="m-margin">margin <output id="m-margin-out" for="m-margin">24</output>px</label>
+      <input type="range" id="m-margin" min="0" max="60" value="24">
+
+      <fieldset>
+        <legend><code>box-sizing</code></legend>
+        <label><input type="radio" name="m-sizing" value="content-box" checked> content-box</label>
+        <label><input type="radio" name="m-sizing" value="border-box"> border-box</label>
+      </fieldset>
+    </form>
+
+    <div class="measure__stage">
+      <div class="measure__margin" id="m-margin-box">
+        <div class="measure__box" id="m-box">
+          <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="Pikachu inside the box" width="96" height="96">
+        </div>
+      </div>
+    </div>
+
+    <div class="measure__maths">
+      <p class="measure__sum" id="m-sum" aria-live="polite"></p>
+      <pre class="lab-code"><code id="m-code"></code></pre>
+    </div>
+  </div>
+
+  <details class="teach">
+    <summary>For teachers</summary>
+    <div class="teach__body">
+      <p><b>Goal:</b> students can add up content, padding, border and margin, and explain what <code>box-sizing: border-box</code> changes.</p>
+      <p><b>Ask the class:</b></p>
+      <ul>
+        <li>With <code>content-box</code>, if width is 120 and padding is 20, why is the box wider than 120?</li>
+        <li>Switch to <code>border-box</code>. What stays the same now when you add padding? What gets smaller?</li>
+      </ul>
+      <p><b>Quick activity:</b> call out a target (“make the whole box exactly 200px wide, with a 10px border”) and let students race to find the settings.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ FLEXBOX ============ -->
+<section class="section wrap lab" id="lab-flex" aria-labelledby="flex-title">
+  <div class="section-head">
+    <h2 id="flex-title">Flexbox playground</h2>
+    <p>Flexbox lines things up in a row (or a column). Pick different settings and watch the Poké Balls move. The code updates too!</p>
+  </div>
+  <div class="flexlab">
+    <input type="radio" name="jc" id="jc-flex-start" class="visually-hidden" checked>
+    <input type="radio" name="jc" id="jc-center" class="visually-hidden">
+    <input type="radio" name="jc" id="jc-flex-end" class="visually-hidden">
+    <input type="radio" name="jc" id="jc-space-between" class="visually-hidden">
+    <input type="radio" name="jc" id="jc-space-evenly" class="visually-hidden">
+    <input type="radio" name="ai" id="ai-flex-start" class="visually-hidden">
+    <input type="radio" name="ai" id="ai-center" class="visually-hidden" checked>
+    <input type="radio" name="ai" id="ai-flex-end" class="visually-hidden">
+    <div class="lab-controls">
+      <fieldset>
+        <legend><code>justify-content</code></legend>
+        <label for="jc-flex-start">flex-start</label>
+        <label for="jc-center">center</label>
+        <label for="jc-flex-end">flex-end</label>
+        <label for="jc-space-between">space-between</label>
+        <label for="jc-space-evenly">space-evenly</label>
+      </fieldset>
+      <fieldset>
+        <legend><code>align-items</code></legend>
+        <label for="ai-flex-start">flex-start</label>
+        <label for="ai-center">center</label>
+        <label for="ai-flex-end">flex-end</label>
+      </fieldset>
+    </div>
+    <div class="flexlab__row">
+      <span class="pokeball"></span>
+      <span class="pokeball flexlab__big"></span>
+      <span class="pokeball"></span>
+    </div>
+    <pre class="lab-code"><code>.row {
+  display: flex;
+  justify-content: <b class="out-jc"></b>;
+  align-items: <b class="out-ai"></b>;
+}</code></pre>
+  </div>
+<details class="teach">
+    <summary>For teachers</summary>
+    <div class="teach__body">
+      <p><b>Goal:</b> students can line items up in a row with <code>display: flex</code>, <code>justify-content</code> and <code>align-items</code>.</p>
+      <p><b>Ask the class:</b></p>
+      <ul>
+        <li>Which setting spreads the Poké Balls out to the edges?</li>
+        <li>What is the difference between <code>space-between</code> and <code>space-evenly</code>?</li>
+      </ul>
+      <p><b>Quick activity:</b> students predict where the balls will go BEFORE clicking each option, then check. Keep score!</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ GRID ============ -->
+<section class="section wrap lab" id="lab-grid" aria-labelledby="grid-title">
+  <div class="section-head">
+    <h2 id="grid-title">Grid playground</h2>
+    <p>Grid makes rows <em>and</em> columns at the same time. The Pokédex uses it for its cards. How many columns do you want?</p>
+  </div>
+  <div class="gridlab">
+    <input type="radio" name="cols" id="cols-1" class="visually-hidden">
+    <input type="radio" name="cols" id="cols-2" class="visually-hidden">
+    <input type="radio" name="cols" id="cols-3" class="visually-hidden">
+    <input type="radio" name="cols" id="cols-4" class="visually-hidden" checked>
+    <div class="lab-controls">
+      <fieldset>
+        <legend>Columns</legend>
+        <label for="cols-1">1</label>
+        <label for="cols-2">2</label>
+        <label for="cols-3">3</label>
+        <label for="cols-4">4</label>
+      </fieldset>
+    </div>
+    <ul class="gridlab__grid">
+      <li><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="" width="96" height="96" loading="lazy"></li>
+      <li><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" alt="" width="96" height="96" loading="lazy"></li>
+      <li><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" alt="" width="96" height="96" loading="lazy"></li>
+      <li><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="" width="96" height="96" loading="lazy"></li>
+      <li><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png" alt="" width="96" height="96" loading="lazy"></li>
+      <li><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png" alt="" width="96" height="96" loading="lazy"></li>
+      <li><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png" alt="" width="96" height="96" loading="lazy"></li>
+      <li><img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png" alt="" width="96" height="96" loading="lazy"></li>
+    </ul>
+    <pre class="lab-code"><code>.grid {
+  display: grid;
+  grid-template-columns: repeat(<b class="out-cols"></b>, 1fr);
+  gap: 1rem;
+}</code></pre>
+  </div>
+<details class="teach">
+    <summary>For teachers</summary>
+    <div class="teach__body">
+      <p><b>Goal:</b> students can make a grid of columns with <code>grid-template-columns</code> and <code>repeat()</code>.</p>
+      <p><b>Ask the class:</b></p>
+      <ul>
+        <li>With 8 Pokémon and 3 columns, how many rows do we get? Why is the last row not full?</li>
+        <li>When would you use grid instead of flexbox?</li>
+      </ul>
+      <p><b>Quick activity:</b> open the Pokédex page and make the window narrower. Count how the columns change. That is <code>repeat(auto-fill, minmax(210px, 1fr))</code> at work.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ SELECTORS ============ -->
+<section class="section wrap lab" id="lab-selectors" aria-labelledby="sel-title">
+  <div class="section-head">
+    <h2 id="sel-title">Picking things with selectors</h2>
+    <p>A CSS rule starts with a <dfn>selector</dfn>: it chooses which parts of the page to style. These are the ones AshTech uses most.</p>
+  </div>
+  <div class="table-scroll">
+    <table class="sel-table">
+      <caption class="visually-hidden">CSS selectors used on this site</caption>
+      <thead>
+        <tr><th scope="col">Selector</th><th scope="col">What it picks</th><th scope="col">Its name</th><th scope="col">Used in</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>p</code></td><td>Every paragraph</td><td>Tag (type) selector</td><td>base.css</td></tr>
+        <tr><td><code>.sticker</code></td><td>Everything with class="sticker"</td><td>Class selector</td><td>base.css</td></tr>
+        <tr><td><code>#main</code></td><td>The one element with id="main"</td><td>ID selector</td><td>the skip link</td></tr>
+        <tr><td><code>[data-type="fire"]</code></td><td>Elements whose data-type is fire</td><td>Attribute selector</td><td>type badges</td></tr>
+        <tr><td><code>nav a</code></td><td>Links anywhere inside a nav</td><td>Descendant (space)</td><td>the menu</td></tr>
+        <tr><td><code>.round > h2</code></td><td>An h2 directly inside .round</td><td>Child (&gt;)</td><td>the quiz</td></tr>
+        <tr><td><code>input:checked + label</code></td><td>The label right after a checked input</td><td>Adjacent sibling (+)</td><td>every game</td></tr>
+        <tr><td><code>#f-fire:checked ~ .grid</code></td><td>A .grid anywhere after the checked radio</td><td>General sibling (~)</td><td>the Pokédex filters</td></tr>
+        <tr><td><code>:hover, :focus-visible</code></td><td>Something pointed at, or reached by Tab</td><td>Pseudo-classes</td><td>buttons and links</td></tr>
+        <tr><td><code>:has(input:checked)</code></td><td>A parent that contains a checked input</td><td>The “parent” selector</td><td>home, quiz, battle</td></tr>
+        <tr><td><code>li:nth-child(odd)</code></td><td>List items 1, 3, 5…</td><td>Counting pseudo-class</td><td>the home route</td></tr>
+        <tr><td><code>::before, ::after</code></td><td>Extra boxes CSS adds before/after content</td><td>Pseudo-elements</td><td>badges, bubbles, counters</td></tr>
+        <tr><td><code>:target</code></td><td>The element named in the #address</td><td>Pseudo-class</td><td>Pikachu up close</td></tr>
+      </tbody>
+    </table>
+  </div>
+<details class="teach">
+    <summary>For teachers</summary>
+    <div class="teach__body">
+      <p><b>Goal:</b> students recognise the main selector types and can read a selector aloud in plain words.</p>
+      <p><b>Ask the class:</b></p>
+      <ul>
+        <li>How would you say <code>nav a</code> in plain English? (“every link inside a nav”)</li>
+        <li>Why can there be many elements with the same class, but only one with the same id?</li>
+      </ul>
+      <p><b>Quick activity:</b> go straight on to the Selector Detective below. It turns this table into missions.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ SELECTOR DETECTIVE (JavaScript) ============ -->
+<section class="section wrap lab" id="lab-detective" aria-labelledby="detective-title">
+  <div class="section-head">
+    <h2 id="detective-title">Selector Detective <span class="lab-tag">JS</span></h2>
+    <p>Type a CSS selector and every Pokémon it picks lights up. Can you solve all the missions? Read the code on the right to find the clues.</p>
+  </div>
+
+  <div class="detective">
+    <div class="detective__scene" id="det-scene">
+<div class="party">
+  <h3>Ash’s party</h3>
+  <ul>
+    <li class="mon fire">Charmander</li>
+    <li class="mon water">Squirtle</li>
+    <li class="mon grass">Bulbasaur</li>
+    <li class="mon electric" id="partner">Pikachu</li>
+    <li class="mon fire">Growlithe</li>
+  </ul>
+</div>
+<div class="box">
+  <h3>PC Box</h3>
+  <ul>
+    <li class="mon ice">Lapras</li>
+    <li class="mon ghost">Gengar</li>
+  </ul>
+</div>
+<p>Rival: <span class="mon normal">Eevee</span></p>
+    </div>
+
+    <div class="detective__code">
+      <p class="detective__label">The code of this mini page</p>
+      <pre><code id="det-code"></code></pre>
+    </div>
+
+    <div class="detective__panel">
+      <label for="det-input" class="detective__label">Your selector</label>
+      <input type="text" id="det-input" placeholder="try: .fire" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <p id="det-result" class="detective__result" aria-live="polite">Type a selector to start.</p>
+
+      <p class="detective__label">Missions</p>
+      <ol class="missions" id="missions">
+        <li data-answer=".mon"><button type="button">Pick <b>every</b> Pokémon</button></li>
+        <li data-answer=".fire"><button type="button">Pick only the <b>Fire</b> types</button></li>
+        <li data-answer="#partner"><button type="button">Pick your <b>partner</b> (look for an id)</button></li>
+        <li data-answer=".box .mon"><button type="button">Pick the Pokémon <b>in the PC Box</b></button></li>
+        <li data-answer=".party > ul > li:first-child"><button type="button">Pick the <b>first</b> Pokémon in the party</button></li>
+        <li data-answer=".water + li"><button type="button">Pick the Pokémon <b>right after</b> Squirtle</button></li>
+        <li data-answer="li:not(.fire)"><button type="button">Pick every <b>party or box</b> Pokémon that is <b>not</b> Fire</button></li>
+        <li data-answer="span.mon"><button type="button">Pick only the <b>rival’s</b> Pokémon</button></li>
+      </ol>
+      <p class="detective__score" id="det-score"></p>
+    </div>
+  </div>
+
+  <details class="teach">
+    <summary>For teachers</summary>
+    <div class="teach__body">
+      <p><b>Goal:</b> students choose elements by tag, class, id, descendant (space), child (<code>&gt;</code>), sibling (<code>+</code>) and <code>:not()</code>.</p>
+      <p><b>Ask the class:</b></p>
+      <ul>
+        <li>Why does <code>li:first-child</code> pick TWO Pokémon? How can we make it pick only one?</li>
+        <li>What is the difference between <code>.box .mon</code> and <code>.box.mon</code>? (A space means “inside”.)</li>
+      </ul>
+      <p><b>Quick activity:</b> each mission can be solved in more than one way. Ask groups to find two different selectors for the same mission and explain them.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ SPECIFICITY SHOWDOWN (JavaScript) ============ -->
+<section class="section wrap lab" id="lab-showdown" aria-labelledby="showdown-title">
+  <div class="section-head">
+    <h2 id="showdown-title">Specificity Showdown <span class="lab-tag">JS</span></h2>
+    <p>When two CSS rules both want to colour the same thing, who wins? The more <dfn>specific</dfn> selector! IDs beat classes, and classes beat tags. If it’s a tie, the rule written last wins.</p>
+  </div>
+
+  <div class="showdown">
+    <div class="showdown__rule showdown__rule--red">
+      <label for="rule-1">Rule 1 paints it <b>red</b></label>
+      <input type="text" id="rule-1" value="#pika" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <div class="score" id="score-1" aria-live="polite"></div>
+    </div>
+
+    <div class="showdown__arena">
+      <p class="showdown__vs" aria-hidden="true">VS</p>
+      <div class="showdown__target" id="spec-arena">
+        <p id="pika" class="electric mouse">Pikachu</p>
+      </div>
+      <pre class="showdown__html"><code>&lt;p id="pika" class="electric mouse"&gt;Pikachu&lt;/p&gt;</code></pre>
+      <p class="showdown__verdict" id="spec-verdict" aria-live="polite"></p>
+    </div>
+
+    <div class="showdown__rule showdown__rule--blue">
+      <label for="rule-2">Rule 2 paints it <b>blue</b></label>
+      <input type="text" id="rule-2" value=".electric.mouse" autocomplete="off" autocapitalize="off" spellcheck="false">
+      <div class="score" id="score-2" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <div class="try">
+    <p class="try__title">Try these battles</p>
+    <ol>
+      <li><code>p</code> vs <code>.mouse</code></li>
+      <li><code>.electric</code> vs <code>.mouse</code> (a tie! Which one is written last?)</li>
+      <li><code>p.electric.mouse</code> vs <code>#pika</code></li>
+      <li><code>:where(#pika)</code> vs <code>p</code> (<code>:where</code> counts as zero!)</li>
+    </ol>
+  </div>
+
+  <details class="teach">
+    <summary>For teachers</summary>
+    <div class="teach__body">
+      <p><b>Goal:</b> students understand that specificity is counted in three columns (IDs, classes, tags) and compared left to right, like a score.</p>
+      <p><b>Ask the class:</b> can ten classes ever beat one ID? (No! The ID column is checked first.)</p>
+      <p><b>Quick activity:</b> write a selector on the board and have students hold up fingers for its three numbers before checking here.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ TEXT TAGS ============ -->
+<section class="section wrap lab" id="lab-words" aria-labelledby="words-title">
+  <div class="section-head">
+    <h2 id="words-title">Tags that give words meaning</h2>
+    <p>Some tags don’t make boxes. They wrap single words to say what those words mean.</p>
+  </div>
+  <div class="table-scroll">
+    <table class="words-table">
+      <caption class="visually-hidden">Text-level HTML tags with examples</caption>
+      <thead>
+        <tr><th scope="col">Tag</th><th scope="col">Looks like</th><th scope="col">What it means</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>&lt;strong&gt;</code></td><td>Never wake a sleeping <strong>Snorlax</strong>!</td><td>This is really important</td></tr>
+        <tr><td><code>&lt;em&gt;</code></td><td>I <em>love</em> Eevee.</td><td>Say this word with extra feeling</td></tr>
+        <tr><td><code>&lt;b&gt;</code> <code>&lt;i&gt;</code></td><td><b>Pikachu</b> is called <i lang="ja">Pikachū</i> in Japan.</td><td>Stand out, or a different voice, without extra importance</td></tr>
+        <tr><td><code>&lt;mark&gt;</code></td><td>Water beats <mark>Fire</mark>.</td><td>Highlighted, like with a marker pen</td></tr>
+        <tr><td><code>&lt;del&gt;</code> <code>&lt;ins&gt;</code></td><td>There are <del>17</del> <ins>18</ins> types.</td><td>Something removed, something added</td></tr>
+        <tr><td><code>&lt;s&gt;</code></td><td><s>Pokémon cards: 10 coins</s> Sold out!</td><td>Not true or not correct any more</td></tr>
+        <tr><td><code>&lt;u&gt;</code></td><td>Is it spelled <u>Pikachoo</u>?</td><td>Marks a word, like a spelling mistake</td></tr>
+        <tr><td><code>&lt;small&gt;</code></td><td>Win a Master Ball! <small>Only one per trainer.</small></td><td>Small print</td></tr>
+        <tr><td><code>&lt;sub&gt;</code> <code>&lt;sup&gt;</code></td><td>Water is H<sub>2</sub>O. Johto is the 2<sup>nd</sup> region.</td><td>Text written lower or higher</td></tr>
+        <tr><td><code>&lt;abbr&gt;</code></td><td><abbr title="Hit Points">HP</abbr> (hover it!)</td><td>A short form, with the full words in <code>title</code></td></tr>
+        <tr><td><code>&lt;dfn&gt;</code></td><td>An <dfn>evolution</dfn> is when a Pokémon changes form.</td><td>The word being explained</td></tr>
+        <tr><td><code>&lt;q&gt;</code> <code>&lt;cite&gt;</code></td><td><q>Gotta catch ’em all!</q> comes from <cite>the Pokémon theme song</cite>.</td><td>A short quote, and the name of a work</td></tr>
+        <tr><td><code>&lt;code&gt;</code> <code>&lt;kbd&gt;</code> <code>&lt;samp&gt;</code></td><td>Type <code>&lt;p&gt;</code>, press <kbd>Enter</kbd>, and see <samp>Saved!</samp></td><td>Code, keys to press, and what a computer prints</td></tr>
+        <tr><td><code>&lt;var&gt;</code></td><td>damage = <var>power</var> × <var>bonus</var></td><td>A variable in maths or code</td></tr>
+        <tr><td><code>&lt;time&gt;</code> <code>&lt;data&gt;</code></td><td>Released <time datetime="1996-02-27">27 February 1996</time>. Pikachu is number <data value="25">twenty-five</data>.</td><td>A date or number computers can read</td></tr>
+        <tr><td><code>&lt;ruby&gt;</code></td><td lang="ja"><ruby>ピカチュウ<rp>(</rp><rt>Pikachū</rt><rp>)</rp></ruby></td><td>Little reading help above letters</td></tr>
+        <tr><td><code>&lt;wbr&gt;</code></td><td>Super<wbr>califragilistic<wbr>expialidocious<wbr>Pokémon</td><td>“You may break the line here”</td></tr>
+        <tr><td><code>&lt;bdi&gt;</code> <code>&lt;bdo&gt;</code></td><td>Water in Arabic: <bdi>ماء</bdi>. Backwards: <bdo dir="rtl">Pikachu</bdo></td><td>Text that reads right-to-left</td></tr>
+        <tr><td><code>&lt;br&gt;</code></td><td>Roses are red,<br>Squirtle is blue</td><td>A line break inside a paragraph</td></tr>
+      </tbody>
+    </table>
+  </div>
+<details class="teach">
+    <summary>For teachers</summary>
+    <div class="teach__body">
+      <p><b>Goal:</b> students choose tags by <em>meaning</em>, not by looks.</p>
+      <p><b>Ask the class:</b></p>
+      <ul>
+        <li><code>&lt;strong&gt;</code> and <code>&lt;b&gt;</code> both look bold. Why do we have two?</li>
+        <li>Who benefits when we use <code>&lt;abbr&gt;</code> or <code>&lt;time&gt;</code>? (Screen readers, search engines, translators.)</li>
+      </ul>
+      <p><b>Quick activity:</b> give each group a short Pokémon fact to mark up with at least three different text tags, then swap and check.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ COLOURS ============ -->
+<section class="section wrap lab" id="lab-colour" aria-labelledby="colour-title">
+  <div class="section-head">
+    <h2 id="colour-title">Six ways to write a colour</h2>
+    <p>CSS understands colours written in many ways. These swatches all come from Pokémon.</p>
+  </div>
+  <ul class="swatches">
+    <li style="--sw: #ffcb05;"><b>Pikachu yellow</b><code>#ffcb05</code><span>Hex</span></li>
+    <li style="--sw: rgb(227 53 13);"><b>Pokédex red</b><code>rgb(227 53 13)</code><span>Red, green, blue</span></li>
+    <li style="--sw: hsl(210 64% 45%);"><b>Squirtle blue</b><code>hsl(210 64% 45%)</code><span>Hue, saturation, lightness</span></li>
+    <li style="--sw: oklch(72% 0.17 135);"><b>Bulbasaur green</b><code>oklch(72% 0.17 135)</code><span>A newer, smoother way</span></li>
+    <li style="--sw: color-mix(in srgb, #ee8130, #6390f0);"><b>Fire + Water</b><code>color-mix(…)</code><span>Two colours mixed</span></li>
+    <li style="--sw: rebeccapurple;"><b>Gengar purple</b><code>rebeccapurple</code><span>A named colour</span></li>
+  </ul>
+<details class="teach">
+    <summary>For teachers</summary>
+    <div class="teach__body">
+      <p><b>Goal:</b> students know that colours can be written as names, hex, rgb() and hsl().</p>
+      <p><b>Ask the class:</b></p>
+      <ul>
+        <li>What do the six characters in <code>#ffcb05</code> stand for? (red, green, blue: two characters each)</li>
+        <li>Why might designers like HSL better than hex?</li>
+      </ul>
+      <p><b>Quick activity:</b> try the Colour Mixer below and read how the same colour is written three ways.</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ COLOUR MIXER (JavaScript) ============ -->
+<section class="section wrap lab" id="lab-mixer" aria-labelledby="mixer-title">
+  <div class="section-head">
+    <h2 id="mixer-title">Colour Mixer <span class="lab-tag">JS</span></h2>
+    <p>Mix a colour with <b>hue</b> (which colour of the rainbow), <b>saturation</b> (how strong) and <b>lightness</b> (how bright). Then try to match a Pokémon type colour!</p>
+  </div>
+
+  <div class="mixer">
+    <form class="mixer__controls" aria-label="Colour sliders">
+      <label for="mx-h">Hue <output id="mx-h-out" for="mx-h">210</output></label>
+      <input type="range" id="mx-h" min="0" max="360" value="210" class="mixer__hue">
+
+      <label for="mx-s">Saturation <output id="mx-s-out" for="mx-s">70</output>%</label>
+      <input type="range" id="mx-s" min="0" max="100" value="70">
+
+      <label for="mx-l">Lightness <output id="mx-l-out" for="mx-l">55</output>%</label>
+      <input type="range" id="mx-l" min="0" max="100" value="55">
+
+      <label for="mx-a">See-through <output id="mx-a-out" for="mx-a">100</output>%</label>
+      <input type="range" id="mx-a" min="0" max="100" value="100">
+    </form>
+
+    <div class="mixer__result">
+      <div class="mixer__swatch" id="mx-swatch">
+        <!-- The Pokémon shape is a CSS mask filled with your colour -->
+        <span class="mixer__mon" aria-hidden="true"></span>
+      </div>
+      <dl class="mixer__codes">
+        <div><dt>HSL</dt><dd><code id="mx-hsl"></code></dd></div>
+        <div><dt>RGB</dt><dd><code id="mx-rgb"></code></dd></div>
+        <div><dt>Hex</dt><dd><code id="mx-hex"></code></dd></div>
+      </dl>
+    </div>
+
+    <div class="mixer__game">
+      <p class="detective__label">Match the type!</p>
+      <div class="mixer__target" id="mx-target"><span class="type" id="mx-target-name"></span></div>
+      <meter id="mx-meter" min="0" max="100" low="60" high="90" optimum="100" value="0"></meter>
+      <p id="mx-score" aria-live="polite"></p>
+      <button type="button" class="btn btn--light" id="mx-new">New type</button>
+    </div>
+  </div>
+
+  <details class="teach">
+    <summary>For teachers</summary>
+    <div class="teach__body">
+      <p><b>Goal:</b> students learn that one colour can be written in several ways (HSL, RGB, hex) and what each HSL number does.</p>
+      <p><b>Ask the class:</b> what happens to any colour when lightness is 0%? And at 100%? Why do all colours look grey when saturation is 0?</p>
+      <p><b>Quick activity:</b> the “Match the type!” game. Who can get 95% or more? Ask the winners to explain their strategy (hue first, then the others).</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ MOVE STUDIO (JavaScript) ============ -->
+<section class="section wrap lab" id="lab-studio" aria-labelledby="studio-title">
+  <div class="section-head">
+    <h2 id="studio-title">Move Studio <span class="lab-tag">JS</span></h2>
+    <p>Every animation on AshTech uses <code>transform</code> and <code>@keyframes</code>. Drag the sliders to move Pikachu, then press play to try an animation.</p>
+  </div>
+
+  <div class="studio">
+    <form class="studio__controls" aria-label="Transform and animation settings">
+      <fieldset>
+        <legend><code>transform</code></legend>
+        <label for="st-rotate">rotate <output id="st-rotate-out" for="st-rotate">0</output>deg</label>
+        <input type="range" id="st-rotate" min="-180" max="180" value="0">
+        <label for="st-scale">scale <output id="st-scale-out" for="st-scale">1</output></label>
+        <input type="range" id="st-scale" min="0.3" max="2" step="0.1" value="1">
+        <label for="st-move">translateX <output id="st-move-out" for="st-move">0</output>px</label>
+        <input type="range" id="st-move" min="-120" max="120" value="0">
+        <label for="st-skew">skewX <output id="st-skew-out" for="st-skew">0</output>deg</label>
+        <input type="range" id="st-skew" min="-45" max="45" value="0">
+      </fieldset>
+
+      <fieldset>
+        <legend><code>animation</code></legend>
+        <label for="st-anim">Moves</label>
+        <select id="st-anim">
+          <option value="hop">hop</option>
+          <option value="spin">spin</option>
+          <option value="wobble">wobble</option>
+          <option value="pulse">pulse</option>
+          <option value="zoom-across">zoom-across</option>
+        </select>
+        <label for="st-timing">Timing</label>
+        <select id="st-timing">
+          <option value="ease">ease</option>
+          <option value="linear">linear</option>
+          <option value="ease-in">ease-in</option>
+          <option value="ease-out">ease-out</option>
+          <option value="ease-in-out">ease-in-out</option>
+          <option value="steps(5)">steps(5)</option>
+          <option value="cubic-bezier(0.34, 1.56, 0.64, 1)">bouncy cubic-bezier</option>
+        </select>
+        <label for="st-duration">Duration <output id="st-duration-out" for="st-duration">1</output>s</label>
+        <input type="range" id="st-duration" min="0.2" max="4" step="0.1" value="1">
+        <label for="st-count">Repeat</label>
+        <select id="st-count">
+          <option value="1">1 time</option>
+          <option value="3">3 times</option>
+          <option value="infinite">forever</option>
+        </select>
+      </fieldset>
+      <div class="studio__buttons">
+        <button type="button" class="btn" id="st-play">Play</button>
+        <button type="reset" class="btn btn--light">Reset</button>
+      </div>
+    </form>
+
+    <div class="studio__stage">
+      <div class="studio__ghost" aria-hidden="true"></div>
+      <img id="st-mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Pikachu, moved by your settings" width="160" height="160">
+    </div>
+
+    <pre class="lab-code studio__code"><code id="st-code"></code></pre>
+  </div>
+
+  <details class="teach">
+    <summary>For teachers</summary>
+    <div class="teach__body">
+      <p><b>Goal:</b> students know the four basic transforms and the parts of the <code>animation</code> shorthand (name, duration, timing, repeat).</p>
+      <p><b>Ask the class:</b> the dashed outline shows where Pikachu really is in the layout. Why does it stay still when Pikachu moves? (Transforms don’t push other things around.)</p>
+      <p><b>Quick activity:</b> compare <code>linear</code>, <code>ease-in-out</code> and <code>steps(5)</code> with the same animation. Which one feels most like a real jump? Which feels like an old video game?</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ @supports ============ -->
+<section class="section wrap" aria-labelledby="sup-title">
+  <div class="section-head">
+    <h2 id="sup-title">Does your browser know the new tricks?</h2>
+    <p>Browsers learn new CSS all the time. <code>@supports</code> asks “do you understand this?” and only uses the rule if the answer is yes.</p>
+  </div>
+  <ul class="checks">
+    <li class="check check--has"><b><code>:has()</code></b> <span class="yes">Yes! The games will work.</span><span class="no">Not yet. Try a newer browser for the games.</span></li>
+    <li class="check check--scroll"><b>Scroll-driven animations</b> <span class="yes">Yes! Watch the bar at the top as you scroll.</span><span class="no">Not yet. The top bar won’t fill up.</span></li>
+    <li class="check check--vt"><b>Page transitions</b> <span class="yes">Yes! Pages open like a camera lens.</span><span class="no">Not yet. Pages just appear.</span></li>
+  </ul>
+</section>
+
+<!-- <hr> is a "thematic break": a change of topic. Ours is styled as a row of Poké Balls. -->
+<div class="wrap"><hr></div>
+
+<section class="wrap">
+  <div class="tip">
+    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/63.png" alt="" width="64" height="64">
+    <p><b>Want to keep learning?</b> Download the <a href="handbook.html">Kids’ Handbook</a>, a picture guide to HTML and CSS with diagrams. Teachers can find lesson plans and worksheets on the <a href="teachers.html">Teachers page</a>.</p>
+  </div>
+</section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pokedex.html">Pokédex</a></li>
+            <li><a href="types.html">Types</a></li>
+            <li><a href="evolution.html">Evolution</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+            <li><a href="theater.html">Theater</a></li>
+            <li><a href="academy.html">Academy</a></li>
+            <li><a href="workshop.html">Workshop</a></li>
+            <li><a href="teachers.html">Teachers</a></li>
+            <li><a href="handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

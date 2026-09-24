@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Free lesson plans, printable worksheets and a kids’ handbook for teaching HTML and CSS with AshTech.">
+  <meta name="theme-color" content="#e3350d">
+  <title>For teachers | AshTech</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/teachers.css">
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pokedex.html">Pokédex</a></li>
+          <li><a href="types.html">Types</a></li>
+          <li><a href="evolution.html">Evolution</a></li>
+          <li><a href="regions.html">Regions</a></li>
+          <li><a href="arcade.html">Arcade</a></li>
+          <li><a href="theater.html">Theater</a></li>
+          <li><a href="academy.html">Academy</a></li>
+          <li><a href="workshop.html">Workshop</a></li>
+          <li><a href="teachers.html" aria-current="page">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<header class="page-head wrap">
+  <div>
+    <h1 class="logo-type">For teachers</h1>
+    <p>AshTech is free to use in class, with no sign-ups, no ads and no data collected. Here are eight ready-to-go lessons, printable worksheets and a picture handbook for your students.</p>
+  </div>
+  <img class="page-head__art" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/65.png" alt="Alakazam, a very clever Pokémon" width="220" height="220">
+</header>
+
+<!-- ============ DOWNLOADS ============ -->
+<section class="wrap downloads" aria-labelledby="dl-title">
+  <h2 id="dl-title" class="visually-hidden">Downloads</h2>
+  <ul class="downloads__list">
+    <li>
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/63.png" alt="" width="96" height="96">
+      <h3>Kids’ Handbook</h3>
+      <p>A 23-page picture guide with a diagram in every chapter, a quiz and a certificate.</p>
+      <p class="downloads__links"><a class="btn" href="handbook.pdf" download>Download PDF</a> <a href="handbook.html">Read online</a></p>
+    </li>
+    <li>
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/113.png" alt="" width="96" height="96">
+      <h3>Worksheet pack</h3>
+      <p>Eight one-page worksheets, one for each lesson, plus an answer key.</p>
+      <p class="downloads__links"><a class="btn" href="worksheets.pdf" download>Download PDF</a> <a href="worksheets.html">View online</a></p>
+    </li>
+    <li>
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/66.png" alt="" width="96" height="96">
+      <h3>Teacher’s guide</h3>
+      <p>How every tag and every CSS trick on this site works, in detail. Great for planning.</p>
+      <p class="downloads__links"><a class="btn btn--light" href="guide.html">Read the guide</a></p>
+    </li>
+  </ul>
+</section>
+
+<!-- ============ HOW TO USE ============ -->
+<section class="section wrap tips" aria-labelledby="tips-title">
+  <div class="section-head">
+    <h2 id="tips-title">Using AshTech in class</h2>
+  </div>
+  <ul class="tips__list">
+    <li><b>Projector ready.</b> Every Workshop lab has a <b>Present</b> button that fills the screen.</li>
+    <li><b>Teacher notes built in.</b> Open the green <b>For teachers</b> panel under any Workshop lab for questions to ask and a quick activity.</li>
+    <li><b>View the code.</b> Students can press <kbd>Ctrl</kbd> + <kbd>U</kbd> on any page to read its real HTML, full of comments written for learners.</li>
+    <li><b>Internet needed.</b> Pokémon pictures, sounds and fonts load from the web. The worksheets and handbook work offline once downloaded.</li>
+    <li><b>Private by design.</b> Nothing students type is sent anywhere. The Trainer Card is made inside their own browser.</li>
+    <li><b>Mostly HTML and CSS.</b> The games use no JavaScript at all, which makes them great “how did they do that?” puzzles for older students.</li>
+  </ul>
+</section>
+
+<!-- ============ CURRICULUM MAP ============ -->
+<section class="section wrap" aria-labelledby="map-title">
+  <div class="section-head">
+    <h2 id="map-title">The eight lessons at a glance</h2>
+    <p>Each lesson takes about 40 minutes. They build on each other, so teach them in order.</p>
+  </div>
+  <div class="table-scroll">
+    <table class="map">
+      <caption class="visually-hidden">Lesson overview</caption>
+      <thead>
+        <tr><th scope="col">Lesson</th><th scope="col">Students will learn to…</th><th scope="col">Handbook chapters</th><th scope="col">Worksheet</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row"><a href="#lesson-1">1. What is a web page?</a></th>
+          <td>Explain what a browser and a server do</td>
+          <td>1, 2, 3</td>
+          <td><a href="worksheets.html#ws-1">Worksheet 1</a></td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="#lesson-2">2. The page skeleton and text tags</a></th>
+          <td>Write the basic structure of an HTML page</td>
+          <td>4</td>
+          <td><a href="worksheets.html#ws-2">Worksheet 2</a></td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="#lesson-3">3. Lists, links and pictures</a></th>
+          <td>Choose between ol, ul and dl</td>
+          <td>5</td>
+          <td><a href="worksheets.html#ws-3">Worksheet 3</a></td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="#lesson-4">4. Forms and inputs</a></th>
+          <td>Connect a label to an input with for and id</td>
+          <td>6</td>
+          <td><a href="worksheets.html#ws-4">Worksheet 4</a></td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="#lesson-5">5. CSS rules and selectors</a></th>
+          <td>Name the parts of a CSS rule</td>
+          <td>7, 8, 13</td>
+          <td><a href="worksheets.html#ws-5">Worksheet 5</a></td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="#lesson-6">6. The box model and colours</a></th>
+          <td>Name the four layers of the box model</td>
+          <td>9, 11</td>
+          <td><a href="worksheets.html#ws-6">Worksheet 6</a></td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="#lesson-7">7. Layout with flexbox and grid</a></th>
+          <td>Line items up in a row with flexbox</td>
+          <td>10</td>
+          <td><a href="worksheets.html#ws-7">Worksheet 7</a></td>
+        </tr>
+        <tr>
+          <th scope="row"><a href="#lesson-8">8. Animation and the final project</a></th>
+          <td>Write a simple @keyframes animation</td>
+          <td>12, 15, 16</td>
+          <td><a href="worksheets.html#ws-8">Worksheet 8</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ LESSON PLANS ============ -->
+<section class="section wrap" aria-labelledby="plans-title">
+  <div class="section-head">
+    <h2 id="plans-title">Lesson plans</h2>
+    <p>Open a lesson to see its goals, the pages to use, a step-by-step plan and an exit question.</p>
+  </div>
+  <div class="plans">
+    <details class="plan" id="lesson-1" open>
+      <summary>
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/137.png" alt="" width="72" height="72">
+        <span class="plan__num">Lesson 1</span>
+        <span class="plan__title">What is a web page?</span>
+      </summary>
+      <div class="plan__body">
+        <div class="plan__col">
+          <h3>By the end, students can…</h3>
+          <ul>
+            <li>Explain what a browser and a server do</li>
+            <li>Name the three languages of the web and their jobs</li>
+            <li>Point out the parts of an HTML tag</li>
+          </ul>
+          <h3>Use these pages</h3>
+          <ul>
+            <li><a href="workshop.html#lab-tag">Workshop: Anatomy of a tag</a></li>
+            <li><a href="index.html">Home page (look at the source with Ctrl+U)</a></li>
+            <li>Kids’ Handbook, chapter 1, 2, 3</li>
+            <li><a href="worksheets.html#ws-1">Worksheet 1</a></li>
+          </ul>
+        </div>
+        <div class="plan__col">
+          <h3>The lesson</h3>
+          <ol class="plan__steps">
+            <li><b>Warm up (5 min)</b> Ask: “What happens between typing an address and seeing a page?” Draw the Handbook chapter 1 diagram on the board together.</li>
+            <li><b>Explore (15 min)</b> On the Workshop, hover each coloured part of the tag. Then press Ctrl+U on the Home page and hunt for five tags.</li>
+            <li><b>Make (15 min)</b> Worksheet 1: label a tag and spot the mistakes.</li>
+            <li><b>Wrap up (5 min)</b> Skeleton, clothes, muscles: which language is which?</li>
+          </ol>
+          <p class="plan__exit"><b>Exit question:</b> Write one HTML tag and label its opening and closing parts.</p>
+        </div>
+      </div>
+    </details>
+    <details class="plan" id="lesson-2">
+      <summary>
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/92.png" alt="" width="72" height="72">
+        <span class="plan__num">Lesson 2</span>
+        <span class="plan__title">The page skeleton and text tags</span>
+      </summary>
+      <div class="plan__body">
+        <div class="plan__col">
+          <h3>By the end, students can…</h3>
+          <ul>
+            <li>Write the basic structure of an HTML page</li>
+            <li>Use headings and paragraphs</li>
+            <li>Choose text tags by meaning (strong, em, mark)</li>
+          </ul>
+          <h3>Use these pages</h3>
+          <ul>
+            <li><a href="workshop.html#lab-code">Workshop: Code Lab (Blank page)</a></li>
+            <li><a href="workshop.html#lab-words">Workshop: Tags for words</a></li>
+            <li>Kids’ Handbook, chapter 4</li>
+            <li><a href="worksheets.html#ws-2">Worksheet 2</a></li>
+          </ul>
+        </div>
+        <div class="plan__col">
+          <h3>The lesson</h3>
+          <ol class="plan__steps">
+            <li><b>Warm up (5 min)</b> Show the skeleton diagram (Handbook chapter 4). What goes in the head? What goes in the body?</li>
+            <li><b>Explore (10 min)</b> Read the “Tags that give words meaning” table together. Why do strong and b both exist?</li>
+            <li><b>Make (20 min)</b> In the Code Lab’s blank page, write a short “About my favourite Pokémon” page with an h1, two paragraphs and one strong word. Then Worksheet 2.</li>
+            <li><b>Wrap up (5 min)</b> Share one page on the projector using Present mode.</li>
+          </ol>
+          <p class="plan__exit"><b>Exit question:</b> Put these in order: body, html, head.</p>
+        </div>
+      </div>
+    </details>
+    <details class="plan" id="lesson-3">
+      <summary>
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png" alt="" width="72" height="72">
+        <span class="plan__num">Lesson 3</span>
+        <span class="plan__title">Lists, links and pictures</span>
+      </summary>
+      <div class="plan__body">
+        <div class="plan__col">
+          <h3>By the end, students can…</h3>
+          <ul>
+            <li>Choose between ol, ul and dl</li>
+            <li>Write a working link</li>
+            <li>Add a picture with helpful alt text</li>
+          </ul>
+          <h3>Use these pages</h3>
+          <ul>
+            <li><a href="pokedex.html">Pokédex (cards are a list!)</a></li>
+            <li><a href="regions.html">Regions (links to #spots on the page)</a></li>
+            <li>Kids’ Handbook, chapter 5</li>
+            <li><a href="worksheets.html#ws-3">Worksheet 3</a></li>
+          </ul>
+        </div>
+        <div class="plan__col">
+          <h3>The lesson</h3>
+          <ol class="plan__steps">
+            <li><b>Warm up (5 min)</b> Close your eyes while I read out a picture’s alt text. Can you guess the picture?</li>
+            <li><b>Explore (10 min)</b> Find a list, a link and a picture on the Pokédex page. Use F12 to check which tags they are.</li>
+            <li><b>Make (20 min)</b> In the Code Lab, add a list of your three favourite Pokémon, each with a picture and alt text. Then Worksheet 3.</li>
+            <li><b>Wrap up (5 min)</b> Why is the gym list on the Regions page an ol and not a ul?</li>
+          </ol>
+          <p class="plan__exit"><b>Exit question:</b> Write an img tag for Eevee with good alt text.</p>
+        </div>
+      </div>
+    </details>
+    <details class="plan" id="lesson-4">
+      <summary>
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/113.png" alt="" width="72" height="72">
+        <span class="plan__num">Lesson 4</span>
+        <span class="plan__title">Forms and inputs</span>
+      </summary>
+      <div class="plan__body">
+        <div class="plan__col">
+          <h3>By the end, students can…</h3>
+          <ul>
+            <li>Connect a label to an input with for and id</li>
+            <li>Pick the right input type for a question</li>
+            <li>Explain what happens when a form is sent</li>
+          </ul>
+          <h3>Use these pages</h3>
+          <ul>
+            <li><a href="academy.html">Trainer Academy (the big form)</a></li>
+            <li><a href="trainer-card.html">Trainer Card (where the answers go)</a></li>
+            <li>Kids’ Handbook, chapter 6</li>
+            <li><a href="worksheets.html#ws-4">Worksheet 4</a></li>
+          </ul>
+        </div>
+        <div class="plan__col">
+          <h3>The lesson</h3>
+          <ol class="plan__steps">
+            <li><b>Warm up (5 min)</b> List real forms students know: logins, quizzes, orders. What do they all have?</li>
+            <li><b>Explore (15 min)</b> Everyone fills in the Academy form, submits it, and finds their answers in the address bar. Then download the Trainer Card!</li>
+            <li><b>Make (15 min)</b> Worksheet 4: design a Pokémon Centre check-in form on paper.</li>
+            <li><b>Wrap up (5 min)</b> Why does every input need a label? (Think about screen readers.)</li>
+          </ol>
+          <p class="plan__exit"><b>Exit question:</b> Which input type would you use for a birthday? For a favourite colour?</p>
+        </div>
+      </div>
+    </details>
+    <details class="plan" id="lesson-5">
+      <summary>
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png" alt="" width="72" height="72">
+        <span class="plan__num">Lesson 5</span>
+        <span class="plan__title">CSS rules and selectors</span>
+      </summary>
+      <div class="plan__body">
+        <div class="plan__col">
+          <h3>By the end, students can…</h3>
+          <ul>
+            <li>Name the parts of a CSS rule</li>
+            <li>Use tag, class and id selectors</li>
+            <li>Explain which rule wins when two disagree</li>
+          </ul>
+          <h3>Use these pages</h3>
+          <ul>
+            <li><a href="workshop.html#lab-detective">Workshop: Selector Detective</a></li>
+            <li><a href="workshop.html#lab-showdown">Workshop: Specificity Showdown</a></li>
+            <li>Kids’ Handbook, chapter 7, 8, 13</li>
+            <li><a href="worksheets.html#ws-5">Worksheet 5</a></li>
+          </ul>
+        </div>
+        <div class="plan__col">
+          <h3>The lesson</h3>
+          <ol class="plan__steps">
+            <li><b>Warm up (5 min)</b> Show a CSS rule and label selector, property and value together (Handbook chapter 7).</li>
+            <li><b>Explore (20 min)</b> Pairs solve the eight Selector Detective missions. Then try three Specificity Showdown battles.</li>
+            <li><b>Make (10 min)</b> Worksheet 5: Selector Detective on paper.</li>
+            <li><b>Wrap up (5 min)</b> Can ten classes beat one id? Vote, then check in the Showdown.</li>
+          </ol>
+          <p class="plan__exit"><b>Exit question:</b> Write a selector that picks every element with class="water".</p>
+        </div>
+      </div>
+    </details>
+    <details class="plan" id="lesson-6">
+      <summary>
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" alt="" width="72" height="72">
+        <span class="plan__num">Lesson 6</span>
+        <span class="plan__title">The box model and colours</span>
+      </summary>
+      <div class="plan__body">
+        <div class="plan__col">
+          <h3>By the end, students can…</h3>
+          <ul>
+            <li>Name the four layers of the box model</li>
+            <li>Calculate the total width of a box</li>
+            <li>Write one colour in hex, rgb and hsl</li>
+          </ul>
+          <h3>Use these pages</h3>
+          <ul>
+            <li><a href="workshop.html#lab-box">Workshop: Every element is a box (3D)</a></li>
+            <li><a href="workshop.html#lab-measure">Workshop: Measure the box</a></li>
+            <li><a href="workshop.html#lab-mixer">Workshop: Colour Mixer</a></li>
+            <li>Kids’ Handbook, chapter 9, 11</li>
+            <li><a href="worksheets.html#ws-6">Worksheet 6</a></li>
+          </ul>
+        </div>
+        <div class="plan__col">
+          <h3>The lesson</h3>
+          <ol class="plan__steps">
+            <li><b>Warm up (5 min)</b> Switch on the 3D box model. Name the layers from the inside out.</li>
+            <li><b>Explore (15 min)</b> Use Measure the box to answer: “make the whole box 200px wide with a 10px border.” Then play Match the type! in the Colour Mixer.</li>
+            <li><b>Make (15 min)</b> Worksheet 6: box maths and colour codes.</li>
+            <li><b>Wrap up (5 min)</b> What does box-sizing: border-box change?</li>
+          </ol>
+          <p class="plan__exit"><b>Exit question:</b> Content 100, padding 10, border 5, no margin. How wide is the box?</p>
+        </div>
+      </div>
+    </details>
+    <details class="plan" id="lesson-7">
+      <summary>
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/81.png" alt="" width="72" height="72">
+        <span class="plan__num">Lesson 7</span>
+        <span class="plan__title">Layout with flexbox and grid</span>
+      </summary>
+      <div class="plan__body">
+        <div class="plan__col">
+          <h3>By the end, students can…</h3>
+          <ul>
+            <li>Line items up in a row with flexbox</li>
+            <li>Build rows and columns with grid</li>
+            <li>Choose flex or grid for a design</li>
+          </ul>
+          <h3>Use these pages</h3>
+          <ul>
+            <li><a href="workshop.html#lab-flex">Workshop: Flexbox playground</a></li>
+            <li><a href="workshop.html#lab-grid">Workshop: Grid playground</a></li>
+            <li><a href="pokedex.html">Pokédex (a real grid)</a></li>
+            <li>Kids’ Handbook, chapter 10</li>
+            <li><a href="worksheets.html#ws-7">Worksheet 7</a></li>
+          </ul>
+        </div>
+        <div class="plan__col">
+          <h3>The lesson</h3>
+          <ol class="plan__steps">
+            <li><b>Warm up (5 min)</b> Predict where the Poké Balls go for each justify-content value, then click to check.</li>
+            <li><b>Explore (15 min)</b> Change the grid columns from 1 to 4. Then make the Pokédex window narrower and watch its grid adapt.</li>
+            <li><b>Make (15 min)</b> In the Code Lab, open “Flexbox team” and add a fifth Pokémon. Then Worksheet 7.</li>
+            <li><b>Wrap up (5 min)</b> Flex or grid: a photo gallery? A menu bar? A chessboard?</li>
+          </ol>
+          <p class="plan__exit"><b>Exit question:</b> Draw where three boxes go with justify-content: space-between.</p>
+        </div>
+      </div>
+    </details>
+    <details class="plan" id="lesson-8">
+      <summary>
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="" width="72" height="72">
+        <span class="plan__num">Lesson 8</span>
+        <span class="plan__title">Animation and the final project</span>
+      </summary>
+      <div class="plan__body">
+        <div class="plan__col">
+          <h3>By the end, students can…</h3>
+          <ul>
+            <li>Write a simple @keyframes animation</li>
+            <li>Use transform to move, turn and resize</li>
+            <li>Plan and build a small page of their own</li>
+          </ul>
+          <h3>Use these pages</h3>
+          <ul>
+            <li><a href="workshop.html#lab-studio">Workshop: Move Studio</a></li>
+            <li><a href="evolution.html">Evolution lab</a></li>
+            <li><a href="workshop.html#lab-code">Workshop: Code Lab (Make it move)</a></li>
+            <li>Kids’ Handbook, chapter 12, 15, 16</li>
+            <li><a href="worksheets.html#ws-8">Worksheet 8</a></li>
+          </ul>
+        </div>
+        <div class="plan__col">
+          <h3>The lesson</h3>
+          <ol class="plan__steps">
+            <li><b>Warm up (5 min)</b> Watch an evolution. Which CSS properties do you think are changing?</li>
+            <li><b>Explore (10 min)</b> Move Studio: compare linear, ease-in-out and steps(5) on the same animation.</li>
+            <li><b>Make (20 min)</b> Worksheet 8: plan a “My Pokémon” page, then start building it in the Code Lab.</li>
+            <li><b>Wrap up (5 min)</b> Gallery walk. Hand out Handbook certificates to finishers!</li>
+          </ol>
+          <p class="plan__exit"><b>Exit question:</b> Name the three parts of the animation shorthand you used.</p>
+        </div>
+      </div>
+    </details>
+  </div>
+</section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pokedex.html">Pokédex</a></li>
+            <li><a href="types.html">Types</a></li>
+            <li><a href="evolution.html">Evolution</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+            <li><a href="theater.html">Theater</a></li>
+            <li><a href="academy.html">Academy</a></li>
+            <li><a href="workshop.html">Workshop</a></li>
+            <li><a href="teachers.html">Teachers</a></li>
+            <li><a href="handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

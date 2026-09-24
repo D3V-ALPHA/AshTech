@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Fly across the nine Pokémon regions, from Kanto to Paldea, and visit all eight Kanto gyms.">
+  <meta name="theme-color" content="#e3350d">
+  <title>Regions | AshTech</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/badges.css">
+  <link rel="stylesheet" href="css/regions.css">
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress-bar" aria-hidden="true"></div>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pokedex.html">Pokédex</a></li>
+          <li><a href="types.html">Types</a></li>
+          <li><a href="evolution.html">Evolution</a></li>
+          <li><a href="regions.html" aria-current="page">Regions</a></li>
+          <li><a href="arcade.html">Arcade</a></li>
+          <li><a href="theater.html">Theater</a></li>
+          <li><a href="academy.html">Academy</a></li>
+          <li><a href="workshop.html">Workshop</a></li>
+          <li><a href="teachers.html">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<header class="page-head wrap">
+  <div>
+    <h1 class="logo-type">Regions</h1>
+    <p>The Pokémon world is split into regions. Each new set of games visits a new one, and each region is based on a real place on Earth. Scroll sideways to fly from one to the next.</p>
+  </div>
+  <img class="page-head__art" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/18.png" alt="Pidgeot, a Flying-type Pokémon that can carry trainers between towns" width="220" height="220">
+</header>
+
+<!-- ============ TIMELINE NAV ============ -->
+<nav class="wrap timeline" aria-label="Jump to a region">
+  <ol>
+    <li><a href="#kanto"><time datetime="1996-02-27">1996</time> Kanto</a></li>
+    <li><a href="#johto"><time datetime="1999-11-21">1999</time> Johto</a></li>
+    <li><a href="#hoenn"><time datetime="2002-11-21">2002</time> Hoenn</a></li>
+    <li><a href="#sinnoh"><time datetime="2006-09-28">2006</time> Sinnoh</a></li>
+    <li><a href="#unova"><time datetime="2010-09-18">2010</time> Unova</a></li>
+    <li><a href="#kalos"><time datetime="2013-10-12">2013</time> Kalos</a></li>
+    <li><a href="#alola"><time datetime="2016-11-18">2016</time> Alola</a></li>
+    <li><a href="#galar"><time datetime="2019-11-15">2019</time> Galar</a></li>
+    <li><a href="#paldea"><time datetime="2022-11-18">2022</time> Paldea</a></li>
+  </ol>
+</nav>
+
+<!-- ============ THE FLIGHT: a horizontal scroll-snap track ============ -->
+<div class="flight" tabindex="0" role="region" aria-label="Regions, scroll sideways">
+  <ul class="flight__track">
+    <li id="kanto" class="region" style="--sky1: #8fd3ff; --sky2: #e8f7ff; --land1: #6fbf4f; --land2: #3f8f3a;">
+      <article>
+        <div class="region__scene" aria-hidden="true">
+          <span class="region__sun"></span>
+          <span class="region__hills"></span>
+          <span class="region__hills region__hills--front"></span>
+          <div class="region__starters">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png" alt="" width="120" height="120" loading="lazy">
+          </div>
+        </div>
+        <div class="region__text">
+          <p class="region__gen">Generation 1</p>
+          <h2>Kanto</h2>
+          <p>First visited in <cite>Pokémon Red and Green</cite> in <time datetime="1996-02-27">1996</time>. Kanto is based on the Kantō area of Japan, around Tokyo.</p>
+          <p class="region__prof">Professor Oak hands out the starters.</p>
+        </div>
+      </article>
+    </li>
+    <li id="johto" class="region" style="--sky1: #ffb870; --sky2: #ffe9c7; --land1: #d8893a; --land2: #9b5a24;">
+      <article>
+        <div class="region__scene" aria-hidden="true">
+          <span class="region__sun"></span>
+          <span class="region__hills"></span>
+          <span class="region__hills region__hills--front"></span>
+          <div class="region__starters">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/152.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/155.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/158.png" alt="" width="120" height="120" loading="lazy">
+          </div>
+        </div>
+        <div class="region__text">
+          <p class="region__gen">Generation 2</p>
+          <h2>Johto</h2>
+          <p>First visited in <cite>Pokémon Gold and Silver</cite> in <time datetime="1999-11-21">1999</time>. Johto is based on the Kansai area of Japan, with its old temples.</p>
+          <p class="region__prof">Professor Elm hands out the starters.</p>
+        </div>
+      </article>
+    </li>
+    <li id="hoenn" class="region" style="--sky1: #4fc3f7; --sky2: #c9f3ff; --land1: #1e88c9; --land2: #136a9e;">
+      <article>
+        <div class="region__scene" aria-hidden="true">
+          <span class="region__sun"></span>
+          <span class="region__hills"></span>
+          <span class="region__hills region__hills--front"></span>
+          <div class="region__starters">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/252.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/255.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/258.png" alt="" width="120" height="120" loading="lazy">
+          </div>
+        </div>
+        <div class="region__text">
+          <p class="region__gen">Generation 3</p>
+          <h2>Hoenn</h2>
+          <p>First visited in <cite>Pokémon Ruby and Sapphire</cite> in <time datetime="2002-11-21">2002</time>. Hoenn is based on Kyūshū, a warm and sunny island of Japan.</p>
+          <p class="region__prof">Professor Birch hands out the starters.</p>
+        </div>
+      </article>
+    </li>
+    <li id="sinnoh" class="region" style="--sky1: #b9c3ff; --sky2: #f1f3ff; --land1: #ffffff; --land2: #b8c2e0;">
+      <article>
+        <div class="region__scene" aria-hidden="true">
+          <span class="region__sun"></span>
+          <span class="region__hills"></span>
+          <span class="region__hills region__hills--front"></span>
+          <div class="region__starters">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/387.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/390.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/393.png" alt="" width="120" height="120" loading="lazy">
+          </div>
+        </div>
+        <div class="region__text">
+          <p class="region__gen">Generation 4</p>
+          <h2>Sinnoh</h2>
+          <p>First visited in <cite>Pokémon Diamond and Pearl</cite> in <time datetime="2006-09-28">2006</time>. Sinnoh is based on Hokkaidō, the snowy north of Japan.</p>
+          <p class="region__prof">Professor Rowan hands out the starters.</p>
+        </div>
+      </article>
+    </li>
+    <li id="unova" class="region" style="--sky1: #3a2f7a; --sky2: #8a6fd1; --land1: #2b2b45; --land2: #16162a;">
+      <article>
+        <div class="region__scene" aria-hidden="true">
+          <span class="region__sun"></span>
+          <span class="region__hills"></span>
+          <span class="region__hills region__hills--front"></span>
+          <div class="region__starters">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/495.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/498.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/501.png" alt="" width="120" height="120" loading="lazy">
+          </div>
+        </div>
+        <div class="region__text">
+          <p class="region__gen">Generation 5</p>
+          <h2>Unova</h2>
+          <p>First visited in <cite>Pokémon Black and White</cite> in <time datetime="2010-09-18">2010</time>. Unova is based on New York City and the land around it.</p>
+          <p class="region__prof">Professor Juniper hands out the starters.</p>
+        </div>
+      </article>
+    </li>
+    <li id="kalos" class="region" style="--sky1: #ffc4d8; --sky2: #fff0f5; --land1: #e89bb6; --land2: #b9678a;">
+      <article>
+        <div class="region__scene" aria-hidden="true">
+          <span class="region__sun"></span>
+          <span class="region__hills"></span>
+          <span class="region__hills region__hills--front"></span>
+          <div class="region__starters">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/650.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/653.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/656.png" alt="" width="120" height="120" loading="lazy">
+          </div>
+        </div>
+        <div class="region__text">
+          <p class="region__gen">Generation 6</p>
+          <h2>Kalos</h2>
+          <p>First visited in <cite>Pokémon X and Y</cite> in <time datetime="2013-10-12">2013</time>. Kalos is based on France, home of the Eiffel Tower.</p>
+          <p class="region__prof">Professor Sycamore hands out the starters.</p>
+        </div>
+      </article>
+    </li>
+    <li id="alola" class="region" style="--sky1: #ff9a5a; --sky2: #ffe08a; --land1: #2bb5a0; --land2: #15806f;">
+      <article>
+        <div class="region__scene" aria-hidden="true">
+          <span class="region__sun"></span>
+          <span class="region__hills"></span>
+          <span class="region__hills region__hills--front"></span>
+          <div class="region__starters">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/722.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/725.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/728.png" alt="" width="120" height="120" loading="lazy">
+          </div>
+        </div>
+        <div class="region__text">
+          <p class="region__gen">Generation 7</p>
+          <h2>Alola</h2>
+          <p>First visited in <cite>Pokémon Sun and Moon</cite> in <time datetime="2016-11-18">2016</time>. Alola is based on the islands of Hawaiʻi.</p>
+          <p class="region__prof">Professor Kukui hands out the starters.</p>
+        </div>
+      </article>
+    </li>
+    <li id="galar" class="region" style="--sky1: #9fb4c7; --sky2: #e4edf5; --land1: #7aa35a; --land2: #4f7a3a;">
+      <article>
+        <div class="region__scene" aria-hidden="true">
+          <span class="region__sun"></span>
+          <span class="region__hills"></span>
+          <span class="region__hills region__hills--front"></span>
+          <div class="region__starters">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/810.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/813.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/816.png" alt="" width="120" height="120" loading="lazy">
+          </div>
+        </div>
+        <div class="region__text">
+          <p class="region__gen">Generation 8</p>
+          <h2>Galar</h2>
+          <p>First visited in <cite>Pokémon Sword and Shield</cite> in <time datetime="2019-11-15">2019</time>. Galar is based on Great Britain.</p>
+          <p class="region__prof">Professor Magnolia hands out the starters.</p>
+        </div>
+      </article>
+    </li>
+    <li id="paldea" class="region" style="--sky1: #ff8f6b; --sky2: #ffe3b3; --land1: #e0a052; --land2: #a8612b;">
+      <article>
+        <div class="region__scene" aria-hidden="true">
+          <span class="region__sun"></span>
+          <span class="region__hills"></span>
+          <span class="region__hills region__hills--front"></span>
+          <div class="region__starters">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/906.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/909.png" alt="" width="120" height="120" loading="lazy">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/912.png" alt="" width="120" height="120" loading="lazy">
+          </div>
+        </div>
+        <div class="region__text">
+          <p class="region__gen">Generation 9</p>
+          <h2>Paldea</h2>
+          <p>First visited in <cite>Pokémon Scarlet and Violet</cite> in <time datetime="2022-11-18">2022</time>. Paldea is based on Spain and Portugal.</p>
+          <p class="region__prof">Professor Sada and Turo hands out the starters.</p>
+        </div>
+      </article>
+    </li>
+  </ul>
+</div>
+
+<!-- ============ A CLOSER LOOK AT KANTO ============ -->
+<section class="section wrap kanto" aria-labelledby="kanto-title">
+  <h2 id="kanto-title">A closer look at Kanto</h2>
+
+  <div class="kanto__read">
+    <!-- shape-outside makes the text wrap around the circle, not the square -->
+    <img class="kanto__float" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="Pikachu" width="260" height="260">
+    <p>Kanto is where it all began. Your journey starts in tiny Pallet Town, where Professor Oak lives next door. From there, Route 1 leads north through tall grass to Viridian City.</p>
+    <p>Kanto has ten towns and cities. Some are named after colours: <b>Viridian</b> is green, <b>Cerulean</b> is sky blue, <b>Vermilion</b> is red-orange, <b>Celadon</b> is pale green, <b>Fuchsia</b> is pink, <b>Saffron</b> is golden yellow, and <b>Cinnabar</b> is bright red. Lavender Town is purple, of course. Pewter is a grey metal.</p>
+    <p>Professor Oak gave the very first Pokédex to two young trainers and asked them to complete it. As he put it:</p>
+    <blockquote cite="https://bulbapedia.bulbagarden.net/wiki/Professor_Oak">
+      <p>Your very own Pokémon legend is about to unfold!</p>
+      <footer>Professor Oak, <cite>Pokémon Red and Blue</cite></footer>
+    </blockquote>
+    <p>Kanto’s biggest secret is hidden in Cerulean Cave, where the powerful Mewtwo waits for the strongest trainers. The three legendary birds hide here too: Articuno in an icy cave, Zapdos in an old power plant, and Moltres along the mountain road to the League.</p>
+  </div>
+
+  <h3 class="gyms__title">The eight gyms</h3>
+  <p class="gyms__intro">To enter the Pokémon League, a trainer must beat all eight gym leaders in order and collect their badges. Hover a badge to make it shine.</p>
+  <ol class="gyms">
+    <li style="--c: var(--t-rock);">
+      <span class="badge badge--boulder" aria-hidden="true"></span>
+      <b>Boulder Badge</b>
+      <span>Brock in Pewter City</span>
+      <span class="type" data-type="rock">rock</span>
+    </li>
+    <li style="--c: var(--t-water);">
+      <span class="badge badge--cascade" aria-hidden="true"></span>
+      <b>Cascade Badge</b>
+      <span>Misty in Cerulean City</span>
+      <span class="type" data-type="water">water</span>
+    </li>
+    <li style="--c: var(--t-electric);">
+      <span class="badge badge--thunder" aria-hidden="true"></span>
+      <b>Thunder Badge</b>
+      <span>Lt. Surge in Vermilion City</span>
+      <span class="type" data-type="electric">electric</span>
+    </li>
+    <li style="--c: var(--t-grass);">
+      <span class="badge badge--rainbow" aria-hidden="true"></span>
+      <b>Rainbow Badge</b>
+      <span>Erika in Celadon City</span>
+      <span class="type" data-type="grass">grass</span>
+    </li>
+    <li style="--c: var(--t-poison);">
+      <span class="badge badge--soul" aria-hidden="true"></span>
+      <b>Soul Badge</b>
+      <span>Koga in Fuchsia City</span>
+      <span class="type" data-type="poison">poison</span>
+    </li>
+    <li style="--c: var(--t-psychic);">
+      <span class="badge badge--marsh" aria-hidden="true"></span>
+      <b>Marsh Badge</b>
+      <span>Sabrina in Saffron City</span>
+      <span class="type" data-type="psychic">psychic</span>
+    </li>
+    <li style="--c: var(--t-fire);">
+      <span class="badge badge--volcano" aria-hidden="true"></span>
+      <b>Volcano Badge</b>
+      <span>Blaine in Cinnabar Island</span>
+      <span class="type" data-type="fire">fire</span>
+    </li>
+    <li style="--c: var(--t-ground);">
+      <span class="badge badge--earth" aria-hidden="true"></span>
+      <b>Earth Badge</b>
+      <span>Giovanni in Viridian City</span>
+      <span class="type" data-type="ground">ground</span>
+    </li>
+  </ol>
+</section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pokedex.html">Pokédex</a></li>
+            <li><a href="types.html">Types</a></li>
+            <li><a href="evolution.html">Evolution</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+            <li><a href="theater.html">Theater</a></li>
+            <li><a href="academy.html">Academy</a></li>
+            <li><a href="workshop.html">Workshop</a></li>
+            <li><a href="teachers.html">Teachers</a></li>
+            <li><a href="handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

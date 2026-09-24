@@ -1,0 +1,503 @@
+/* =====================================================================
+   ASHTECH — academy.css  (the sign-up form)
+   ===================================================================== */
+@layer pages {
+  .academy {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .academy__side {
+    position: sticky;
+    top: 110px;
+    display: grid;
+    gap: var(--space-m);
+  }
+
+  @media (max-width: 900px) {
+    .academy {
+      grid-template-columns: 1fr;
+    }
+    .academy__side {
+      position: static;
+      grid-row: 1;
+    }
+  }
+
+  /* ---------- Form sections ---------- */
+  .signup {
+    display: grid;
+    gap: var(--space-l);
+    counter-reset: done step;
+    /* Each must-do box sets its own flag to 1 when finished (see below) */
+    --f1: 0; --f2: 0; --f3: 0; --f4: 0; --f5: 0;
+  }
+
+  .step {
+    display: grid;
+    gap: var(--space-m);
+    padding: var(--space-l);
+    padding-top: var(--space-xl);
+    margin: 0;
+    min-inline-size: 0;
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+    counter-increment: step;
+    position: relative;
+  }
+
+  /* The legend becomes a tab sticking out of the top of the box.
+     The steps ARE a sequence, so numbering them makes sense. */
+  .step > legend {
+    position: absolute;
+    top: -22px;
+    left: var(--space-l);
+    padding: 0.3rem 1.1rem;
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    background: var(--yellow);
+    border: var(--line);
+    border-radius: var(--r-pill);
+  }
+
+  .step > legend::before {
+    content: counter(step) ". ";
+    color: var(--red);
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-m);
+  }
+
+  @media (max-width: 560px) {
+    .row { grid-template-columns: 1fr; }
+    .step { padding-inline: var(--space-m); }
+  }
+
+  /* ---------- Fields ---------- */
+  .field {
+    display: grid;
+    gap: 0.3rem;
+    position: relative;
+  }
+
+  .field > label,
+  .starters legend,
+  .likes legend {
+    font-weight: 700;
+  }
+
+  .field small {
+    color: var(--ink-soft);
+  }
+
+  .optional {
+    font-weight: 400;
+    color: var(--ink-soft);
+  }
+
+  abbr[title="required"] {
+    color: var(--red);
+    text-decoration: none;
+  }
+
+  /* One look for all the text-like boxes, picked with attribute selectors */
+  .signup :is(input[type="text"], input[type="number"], input[type="email"], input[type="url"], input[type="date"], input[type="time"], input[type="month"]),
+  .signup select,
+  .signup textarea {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    color: var(--ink);
+    background: var(--sky);
+    border: var(--line);
+    border-radius: var(--r-sm);
+    caret-color: var(--red);
+    transition: background-color 0.2s, box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .signup textarea {
+    resize: vertical;    /* only let people drag it taller, not wider */
+    min-height: 6rem;
+  }
+
+  .signup :is(input, select, textarea):focus {
+    background: var(--white);
+    box-shadow: 0 0 0 4px var(--yellow);
+    outline: none;
+  }
+
+  .signup ::placeholder {
+    color: #8792b5;
+    opacity: 1;
+  }
+
+  /* :user-invalid only turns red AFTER you've typed and left the box,
+     so the form doesn't shout at you before you start. */
+  .signup :is(input, select, textarea):user-invalid {
+    border-color: var(--red);
+    background: #fff0ec;
+  }
+
+  .signup :is(input, select, textarea):user-valid {
+    border-color: var(--grass-deep);
+  }
+
+  .error {
+    display: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--red-deep);
+  }
+
+  /* "~" finds the .error that comes after the invalid input */
+  input:user-invalid ~ .error {
+    display: block;
+    animation: nudge 0.3s;
+  }
+
+  @keyframes nudge {
+    30% { translate: -6px 0; }
+    70% { translate: 6px 0; }
+  }
+
+  /* ---------- Floating label ---------- */
+  .field--float {
+    padding-top: 0.6rem;
+  }
+
+  .field--float input {
+    font-size: var(--step-1);
+    padding-top: 1.1rem;
+  }
+
+  .field--float label {
+    position: absolute;
+    left: 0.9rem;
+    top: 1.55rem;
+    font-size: var(--step-1);
+    font-weight: 500;
+    color: var(--ink-soft);
+    pointer-events: none;
+    transition: top 0.2s, font-size 0.2s, color 0.2s, background-color 0.2s;
+  }
+
+  /* When the box has focus OR has text (placeholder no longer shown), float the label up */
+  .field--float input:focus + label,
+  .field--float input:not(:placeholder-shown) + label {
+    top: 0;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--ink);
+    padding: 0 0.4rem;
+    background: var(--yellow);
+    border-radius: var(--r-pill);
+  }
+
+  /* ---------- Starter cards (radios hidden behind labels) ---------- */
+  .starters,
+  .likes {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-inline-size: 0;
+  }
+
+  .starters {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-s);
+  }
+
+  .starters legend {
+    margin-bottom: 0.5rem;
+    padding: 0;
+  }
+
+  .starters label {
+    display: grid;
+    justify-items: center;
+    padding: 0.5rem;
+    font-weight: 700;
+    background: var(--sky);
+    border: var(--line);
+    border-radius: var(--r-md);
+    cursor: pointer;
+    transition: translate 0.2s var(--ease-bounce), background-color 0.2s;
+  }
+
+  .starters img {
+    width: 80px;
+    transition: scale 0.3s var(--ease-bounce);
+  }
+
+  .starters label:hover img {
+    scale: 1.12;
+  }
+
+  .starters input:checked + label {
+    background: var(--yellow);
+    translate: 0 -6px;
+    box-shadow: 0 6px 0 var(--ink);
+  }
+
+  .starters input:checked + label img {
+    animation: hop-small 0.5s var(--ease-bounce);
+  }
+
+  @keyframes hop-small {
+    50% { translate: 0 -14px; }
+  }
+
+  .starters input:focus-visible + label {
+    outline: 4px solid var(--yellow);
+    outline-offset: 3px;
+  }
+
+  @media (max-width: 560px) {
+    .starters { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* ---------- Type checkboxes ---------- */
+  .likes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .likes legend {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    padding: 0;
+  }
+
+  .likes label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    cursor: pointer;
+  }
+
+  /* Custom-drawn checkbox: appearance: none removes the browser's own */
+  .likes input {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+    background: var(--white);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .likes input::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background: var(--ink);
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    scale: 0;
+    transition: scale 0.2s var(--ease-bounce);
+  }
+
+  .likes input:checked::before {
+    scale: 1;
+  }
+
+  .likes input:checked + .type {
+    box-shadow: 0 0 0 3px var(--yellow), 0 0 0 5px var(--ink);
+  }
+
+  /* ---------- Colour, range and file ---------- */
+  .field--inline {
+    grid-template-columns: auto auto;
+    justify-content: start;
+    align-items: center;
+    gap: var(--space-m);
+  }
+
+  input[type="color"] {
+    width: 64px;
+    height: 44px;
+    padding: 3px;
+    border: var(--line);
+    border-radius: var(--r-sm);
+    background: var(--white);
+    cursor: pointer;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    accent-color: var(--red);
+    cursor: grab;
+  }
+
+  /* The thumb of the slider, drawn as a Poké Ball (Chrome/Safari and Firefox) */
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    margin-top: -11px;
+    border-radius: 50%;
+    border: 3px solid var(--ink);
+    background:
+      radial-gradient(circle, var(--white) 0 16%, var(--ink) 17% 28%, transparent 29%),
+      linear-gradient(var(--red) 0 44%, var(--ink) 44% 56%, var(--white) 56%);
+  }
+
+  input[type="range"]::-webkit-slider-runnable-track {
+    height: 10px;
+    border-radius: var(--r-pill);
+    border: 2px solid var(--ink);
+    background: linear-gradient(90deg, #cfe3ff, var(--t-fire));
+  }
+
+  input[type="range"] {
+    appearance: none;
+    background: transparent;
+    height: 32px;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 3px solid var(--ink);
+    background: linear-gradient(var(--red) 0 44%, var(--ink) 44% 56%, var(--white) 56%);
+  }
+
+  input[type="range"]::-moz-range-track {
+    height: 10px;
+    border-radius: var(--r-pill);
+    border: 2px solid var(--ink);
+    background: linear-gradient(90deg, #cfe3ff, var(--t-fire));
+  }
+
+  .range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  input[type="file"] {
+    font-size: 0.95rem;
+  }
+
+  /* ::file-selector-button styles the "Choose file" button */
+  input[type="file"]::file-selector-button {
+    margin-right: 0.8rem;
+    padding: 0.5rem 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--yellow);
+    border: var(--line);
+    border-radius: var(--r-pill);
+    cursor: pointer;
+  }
+
+  .promise {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1rem;
+    font-weight: 700;
+    background: var(--yellow-soft);
+    border: 2px dashed var(--ink);
+    border-radius: var(--r-md);
+    cursor: pointer;
+  }
+
+  .promise input {
+    width: 22px;
+    height: 22px;
+  }
+
+  /* ---------- Progress: CSS counts the finished must-do boxes ---------- */
+  .req:valid {
+    counter-increment: done;
+  }
+
+  .starters:has(:checked) {
+    counter-increment: done;
+  }
+
+  .signup:has(#name:valid) { --f1: 1; }
+  .signup:has(#age:valid) { --f2: 1; }
+  .signup:has(#trainer-id:valid) { --f3: 1; }
+  .signup:has([name="starter"]:checked) { --f4: 1; }
+  .signup:has([name="promise"]:checked) { --f5: 1; }
+
+  .submit-bar {
+    position: sticky;
+    bottom: 12px;
+    z-index: 5;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-m);
+    padding: var(--space-m);
+    background: var(--ink);
+    color: var(--white);
+    border-radius: var(--r-lg);
+    box-shadow: 0 8px 0 rgb(27 42 85 / 0.3);
+  }
+
+  .done {
+    flex: 1;
+    min-width: 200px;
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .done__num::before {
+    content: counter(done);
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    color: var(--yellow);
+  }
+
+  .done__bar {
+    height: 14px;
+    border-radius: var(--r-pill);
+    background: #34457a;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .done__bar::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    /* Add up the five flags, then turn them into a percentage */
+    width: calc((var(--f1) + var(--f2) + var(--f3) + var(--f4) + var(--f5)) * 20%);
+    background: linear-gradient(90deg, var(--grass-light), var(--grass));
+    border-radius: inherit;
+    transition: width 0.5s var(--ease-bounce);
+  }
+
+  /* All done: the submit button starts to glow */
+  .signup:valid .submit-bar button[type="submit"] {
+    animation: glow 1.2s ease-in-out infinite;
+  }
+
+  @keyframes glow {
+    50% { box-shadow: 0 5px 0 var(--ink), 0 0 0 8px rgb(255 203 5 / 0.45); }
+  }
+
+  .academy__side .tip {
+    grid-template-columns: 48px 1fr;
+    padding: var(--space-m);
+  }
+
+  .academy__side .tip img {
+    width: 48px;
+  }
+}

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Learn all 18 Pokémon types, which ones beat which, and read the full type chart.">
+  <meta name="theme-color" content="#e3350d">
+  <title>Pokémon types | AshTech</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/types.css">
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress-bar" aria-hidden="true"></div>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pokedex.html">Pokédex</a></li>
+          <li><a href="types.html" aria-current="page">Types</a></li>
+          <li><a href="evolution.html">Evolution</a></li>
+          <li><a href="regions.html">Regions</a></li>
+          <li><a href="arcade.html">Arcade</a></li>
+          <li><a href="theater.html">Theater</a></li>
+          <li><a href="academy.html">Academy</a></li>
+          <li><a href="workshop.html">Workshop</a></li>
+          <li><a href="teachers.html">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<header class="page-head wrap">
+  <div>
+    <h1 class="logo-type">Types</h1>
+    <p>Every Pokémon and every move has a type. Types work like a giant game of rock, paper, scissors: each one is strong against some types and weak against others.</p>
+  </div>
+  <img class="page-head__art" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/493.png" alt="Arceus, the Pokémon said to have shaped all the types" width="220" height="220">
+</header>
+
+<!-- ============ THE TRIANGLE ============ -->
+<section class="section wrap triangle" aria-labelledby="tri-title">
+  <div class="triangle__text">
+    <h2 id="tri-title">Start with three</h2>
+    <p>Every new trainer learns this first. The three starter types chase each other in a circle:</p>
+    <ol class="triangle__list">
+      <li><span class="type" data-type="fire">fire</span> burns <span class="type" data-type="grass">grass</span></li>
+      <li><span class="type" data-type="grass">grass</span> drinks up <span class="type" data-type="water">water</span></li>
+      <li><span class="type" data-type="water">water</span> puts out <span class="type" data-type="fire">fire</span></li>
+    </ol>
+    <p>Nobody wins every time. That’s what makes battles fun!</p>
+  </div>
+
+  <div class="wheel" role="img" aria-label="A turning wheel: Charmander points to Bulbasaur, Bulbasaur points to Squirtle, and Squirtle points back to Charmander.">
+    <div class="wheel__spin">
+      <div class="wheel__ring"></div>
+      <span class="wheel__arrow" style="--a: 60deg;"></span>
+      <span class="wheel__arrow" style="--a: 180deg;"></span>
+      <span class="wheel__arrow" style="--a: 300deg;"></span>
+      <span class="wheel__slot" style="--i: 0;"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png" alt=""></span>
+      <span class="wheel__slot" style="--i: 1;"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt=""></span>
+      <span class="wheel__slot" style="--i: 2;"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png" alt=""></span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 18 TYPES ============ -->
+<section class="section wrap" aria-labelledby="all-title">
+  <div class="section-head">
+    <h2 id="all-title">All 18 types</h2>
+    <p>Here is every type, with a Pokémon that belongs to it.</p>
+  </div>
+  <ul class="tiles">
+    <li class="tile" style="--c: var(--t-normal);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/143.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Normal</h3>
+      <p>Everyday Pokémon like Snorlax. Ghost moves pass right through them.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-fire);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Fire</h3>
+      <p>Hot and bright. Burns Grass, Ice, Bug and Steel. Afraid of Water, Rock and Ground.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-water);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Water</h3>
+      <p>Puts out Fire and washes away Rock and Ground. Watch out for Grass and Electric.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-electric);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Electric</h3>
+      <p>Zaps Water and Flying Pokémon, but does nothing at all to Ground types.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-grass);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Grass</h3>
+      <p>Soaks up Water, Ground and Rock. Burned by Fire, frozen by Ice, pecked by Flying.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-ice);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/471.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Ice</h3>
+      <p>Freezes Dragon, Flying, Grass and Ground types. Melts when Fire comes near.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-fighting);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/68.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Fighting</h3>
+      <p>Strong punches break Normal, Rock, Steel, Ice and Dark. Can’t touch Ghosts.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-poison);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/23.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Poison</h3>
+      <p>Poisons Grass and Fairy types. Steel Pokémon can’t be poisoned at all.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-ground);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/50.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Ground</h3>
+      <p>Shakes up Fire, Electric, Poison, Rock and Steel. Flying Pokémon float above it.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-flying);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/18.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Flying</h3>
+      <p>Swoops down on Grass, Fighting and Bug types. Gets zapped by Electric.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-psychic);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/196.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Psychic</h3>
+      <p>Mind power beats Fighting and Poison. Scared of Bug, Ghost and Dark.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-bug);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Bug</h3>
+      <p>Small but mighty against Grass, Psychic and Dark types.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-rock);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/74.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Rock</h3>
+      <p>Crushes Fire, Ice, Flying and Bug. Worn down by Water and Grass.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-ghost);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Ghost</h3>
+      <p>Spooks Psychic types and other Ghosts. Normal moves pass right through.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-dragon);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Dragon</h3>
+      <p>Super strong against other Dragons. Fairy types are completely safe from it.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-dark);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/197.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Dark</h3>
+      <p>Plays sneaky tricks on Psychic and Ghost types. Psychic moves can’t touch it.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-steel);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/208.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Steel</h3>
+      <p>Very hard to hurt. Only Fire, Fighting and Ground hit it really hard.</p>
+    </li>
+    <li class="tile" style="--c: var(--t-fairy);">
+      <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/700.png" alt="" width="96" height="96" loading="lazy">
+      <h3>Fairy</h3>
+      <p>Beats Dragon, Fighting and Dark. Dragon moves can’t hurt Fairy types at all.</p>
+    </li>
+  </ul>
+</section>
+
+<!-- ============ TYPE CHART ============ -->
+<section class="section wrap" aria-labelledby="chart-title">
+  <div class="section-head">
+    <h2 id="chart-title">The type chart</h2>
+    <p>This is the chart that real Pokémon players use. Hover over a box and its row and column light up.</p>
+  </div>
+<div class="chart-scroll" tabindex="0" role="region" aria-labelledby="chart-cap">
+  <table class="chart">
+    <caption id="chart-cap">How strong is each attack? Find the attacking type on the left, then the defending type along the top.</caption>
+    <colgroup>
+      <col class="chart__head-col">
+      <col span="18">
+    </colgroup>
+    <thead>
+      <tr>
+        <th scope="col"><span class="corner"><span>Attack</span> <span>Defend</span></span></th>
+        <th scope="col"><span class="type" data-type="normal"><abbr title="Normal">Nor</abbr></span></th>
+        <th scope="col"><span class="type" data-type="fire"><abbr title="Fire">Fir</abbr></span></th>
+        <th scope="col"><span class="type" data-type="water"><abbr title="Water">Wat</abbr></span></th>
+        <th scope="col"><span class="type" data-type="electric"><abbr title="Electric">Ele</abbr></span></th>
+        <th scope="col"><span class="type" data-type="grass"><abbr title="Grass">Gra</abbr></span></th>
+        <th scope="col"><span class="type" data-type="ice"><abbr title="Ice">Ice</abbr></span></th>
+        <th scope="col"><span class="type" data-type="fighting"><abbr title="Fighting">Fig</abbr></span></th>
+        <th scope="col"><span class="type" data-type="poison"><abbr title="Poison">Poi</abbr></span></th>
+        <th scope="col"><span class="type" data-type="ground"><abbr title="Ground">Gro</abbr></span></th>
+        <th scope="col"><span class="type" data-type="flying"><abbr title="Flying">Fly</abbr></span></th>
+        <th scope="col"><span class="type" data-type="psychic"><abbr title="Psychic">Psy</abbr></span></th>
+        <th scope="col"><span class="type" data-type="bug"><abbr title="Bug">Bug</abbr></span></th>
+        <th scope="col"><span class="type" data-type="rock"><abbr title="Rock">Roc</abbr></span></th>
+        <th scope="col"><span class="type" data-type="ghost"><abbr title="Ghost">Gho</abbr></span></th>
+        <th scope="col"><span class="type" data-type="dragon"><abbr title="Dragon">Dra</abbr></span></th>
+        <th scope="col"><span class="type" data-type="dark"><abbr title="Dark">Dar</abbr></span></th>
+        <th scope="col"><span class="type" data-type="steel"><abbr title="Steel">Ste</abbr></span></th>
+        <th scope="col"><span class="type" data-type="fairy"><abbr title="Fairy">Fai</abbr></span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row"><span class="type" data-type="normal">normal</span></th>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="x05"><data value="0.5">½</data></td><td class="x0"><data value="0">0</data></td><td></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="fire">fire</span></th>
+        <td></td><td class="x05"><data value="0.5">½</data></td><td class="x05"><data value="0.5">½</data></td><td></td><td class="x2"><data value="2">2×</data></td><td class="x2"><data value="2">2×</data></td><td></td><td></td><td></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td class="x05"><data value="0.5">½</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td><td class="x2"><data value="2">2×</data></td><td></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="water">water</span></th>
+        <td></td><td class="x2"><data value="2">2×</data></td><td class="x05"><data value="0.5">½</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="electric">electric</span></th>
+        <td></td><td></td><td class="x2"><data value="2">2×</data></td><td class="x05"><data value="0.5">½</data></td><td class="x05"><data value="0.5">½</data></td><td></td><td></td><td></td><td class="x0"><data value="0">0</data></td><td class="x2"><data value="2">2×</data></td><td></td><td></td><td></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="grass">grass</span></th>
+        <td></td><td class="x05"><data value="0.5">½</data></td><td class="x2"><data value="2">2×</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td><td></td><td class="x05"><data value="0.5">½</data></td><td class="x2"><data value="2">2×</data></td><td class="x05"><data value="0.5">½</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td class="x2"><data value="2">2×</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="ice">ice</span></th>
+        <td></td><td class="x05"><data value="0.5">½</data></td><td class="x05"><data value="0.5">½</data></td><td></td><td class="x2"><data value="2">2×</data></td><td class="x05"><data value="0.5">½</data></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td class="x2"><data value="2">2×</data></td><td></td><td></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="fighting">fighting</span></th>
+        <td class="x2"><data value="2">2×</data></td><td></td><td></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td class="x05"><data value="0.5">½</data></td><td class="x05"><data value="0.5">½</data></td><td class="x2"><data value="2">2×</data></td><td class="x0"><data value="0">0</data></td><td></td><td class="x2"><data value="2">2×</data></td><td class="x2"><data value="2">2×</data></td><td class="x05"><data value="0.5">½</data></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="poison">poison</span></th>
+        <td></td><td></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td></td><td></td><td class="x05"><data value="0.5">½</data></td><td class="x05"><data value="0.5">½</data></td><td></td><td></td><td></td><td class="x05"><data value="0.5">½</data></td><td class="x05"><data value="0.5">½</data></td><td></td><td></td><td class="x0"><data value="0">0</data></td><td class="x2"><data value="2">2×</data></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="ground">ground</span></th>
+        <td></td><td class="x2"><data value="2">2×</data></td><td></td><td class="x2"><data value="2">2×</data></td><td class="x05"><data value="0.5">½</data></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td></td><td class="x0"><data value="0">0</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td class="x2"><data value="2">2×</data></td><td></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="flying">flying</span></th>
+        <td></td><td></td><td></td><td class="x05"><data value="0.5">½</data></td><td class="x2"><data value="2">2×</data></td><td></td><td class="x2"><data value="2">2×</data></td><td></td><td></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td class="x05"><data value="0.5">½</data></td><td></td><td></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="psychic">psychic</span></th>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td class="x2"><data value="2">2×</data></td><td></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td><td></td><td></td><td></td><td class="x0"><data value="0">0</data></td><td class="x05"><data value="0.5">½</data></td><td></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="bug">bug</span></th>
+        <td></td><td class="x05"><data value="0.5">½</data></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td class="x05"><data value="0.5">½</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td class="x2"><data value="2">2×</data></td><td></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td><td class="x2"><data value="2">2×</data></td><td class="x05"><data value="0.5">½</data></td><td class="x05"><data value="0.5">½</data></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="rock">rock</span></th>
+        <td></td><td class="x2"><data value="2">2×</data></td><td></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td class="x05"><data value="0.5">½</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td class="x2"><data value="2">2×</data></td><td></td><td class="x2"><data value="2">2×</data></td><td></td><td></td><td></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="ghost">ghost</span></th>
+        <td class="x0"><data value="0">0</data></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td><td></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="dragon">dragon</span></th>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td class="x0"><data value="0">0</data></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="dark">dark</span></th>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td></td><td class="x05"><data value="0.5">½</data></td><td></td><td class="x05"><data value="0.5">½</data></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="steel">steel</span></th>
+        <td></td><td class="x05"><data value="0.5">½</data></td><td class="x05"><data value="0.5">½</data></td><td class="x05"><data value="0.5">½</data></td><td></td><td class="x2"><data value="2">2×</data></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td></td><td></td><td></td><td class="x05"><data value="0.5">½</data></td><td class="x2"><data value="2">2×</data></td>
+      </tr>
+      <tr>
+        <th scope="row"><span class="type" data-type="fairy">fairy</span></th>
+        <td></td><td class="x05"><data value="0.5">½</data></td><td></td><td></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td class="x05"><data value="0.5">½</data></td><td></td><td></td><td></td><td></td><td></td><td></td><td class="x2"><data value="2">2×</data></td><td class="x2"><data value="2">2×</data></td><td class="x05"><data value="0.5">½</data></td><td></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="19">
+          <span class="key x2">2×</span> super effective
+          <span class="key x05">½</span> not very effective
+          <span class="key x0">0</span> no effect
+          <span class="key">&nbsp;</span> normal damage
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+</section>
+
+<!-- ============ WORDS TO KNOW ============ -->
+<section class="section wrap words" aria-labelledby="words-title">
+  <h2 id="words-title">Words trainers use</h2>
+  <dl class="glossary">
+    <div>
+      <dt><dfn>Super effective</dfn></dt>
+      <dd>The attack does <strong>double</strong> damage. Water on Fire is super effective.</dd>
+    </div>
+    <div>
+      <dt><dfn>Not very effective</dfn></dt>
+      <dd>The attack only does <strong>half</strong> damage. Fire on Water is not very effective.</dd>
+    </div>
+    <div>
+      <dt><dfn>No effect</dfn></dt>
+      <dd>The attack does <strong>nothing</strong>. Electric moves can’t hurt Ground types.</dd>
+    </div>
+    <div>
+      <dt><dfn>Dual type</dfn></dt>
+      <dd>A Pokémon with two types, like Charizard (Fire and Flying). Both types count, so an attack can be 4× or ¼ as strong.</dd>
+    </div>
+    <div>
+      <dt><dfn><abbr title="Same-Type Attack Bonus">STAB</abbr></dfn></dt>
+      <dd>When a Pokémon uses a move of its own type, the move gets 1.5× stronger. Pikachu’s Thunderbolt gets STAB.</dd>
+    </div>
+  </dl>
+</section>
+
+<!-- ============ QUESTIONS ============ -->
+<section class="section wrap faq" aria-labelledby="faq-title">
+  <h2 id="faq-title">Questions trainers ask</h2>
+  <details name="faq" open>
+    <summary>Can a Pokémon change its type?</summary>
+    <p>Usually no, but evolving can add a type. Charmander is Fire, and when it becomes Charizard it gains Flying too. Eevee is the champion of change: it can evolve into eight different types!</p>
+  </details>
+  <details name="faq">
+    <summary>Which type is the newest?</summary>
+    <p>Fairy. It arrived in 2013 with Pokémon X and Y, to help stop Dragon types from being too strong.</p>
+  </details>
+  <details name="faq">
+    <summary>What does “4× damage” mean?</summary>
+    <p>If a Pokémon has two types that are both weak to the same attack, the damage doubles twice. Gyarados is Water and Flying, and both are weak to Electric, so a Thunderbolt does 4× damage. Try it in the <a href="battle.html">battle game</a>!</p>
+  </details>
+  <details name="faq">
+    <summary>Is any type the best?</summary>
+    <p>No. Every single type has at least one weakness. Even Normal types have to watch out for Fighting moves. Good trainers build a team with lots of different types.</p>
+  </details>
+</section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pokedex.html">Pokédex</a></li>
+            <li><a href="types.html">Types</a></li>
+            <li><a href="evolution.html">Evolution</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+            <li><a href="theater.html">Theater</a></li>
+            <li><a href="academy.html">Academy</a></li>
+            <li><a href="workshop.html">Workshop</a></li>
+            <li><a href="teachers.html">Teachers</a></li>
+            <li><a href="handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

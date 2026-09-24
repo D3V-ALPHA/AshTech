@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore Pokémon, learn their types, watch them evolve and play games. A free kids’ field guide for learning HTML and CSS.">
+  <meta name="theme-color" content="#e3350d">
+  <title>AshTech | A Pokémon field guide for young trainers</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="pokedex.html">Pokédex</a></li>
+          <li><a href="types.html">Types</a></li>
+          <li><a href="evolution.html">Evolution</a></li>
+          <li><a href="regions.html">Regions</a></li>
+          <li><a href="arcade.html">Arcade</a></li>
+          <li><a href="theater.html">Theater</a></li>
+          <li><a href="academy.html">Academy</a></li>
+          <li><a href="workshop.html">Workshop</a></li>
+          <li><a href="teachers.html">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<!-- ============ HERO ============ -->
+<section class="hero wrap" aria-labelledby="hero-title">
+  <div class="hero__copy">
+    <h1 id="hero-title" class="logo-type hero__title">AshTech</h1>
+    <p class="hero__lede">Every Pokémon trainer’s journey starts with one small step. AshTech is your field guide for the trip: meet more than 60 Pokémon, find out which types beat which, watch them evolve, and play three games.</p>
+    <p class="hero__note">Nearly all of this site, even the games, is made with just two languages: HTML and CSS. Want to see how? Visit the <a href="workshop.html">Workshop</a>.</p>
+    <div class="hero__actions">
+      <a class="btn" href="pokedex.html">Open the Pokédex</a>
+      <a class="btn btn--light" href="arcade.html">Play a game</a>
+    </div>
+  </div>
+
+  <!-- A picture made only from CSS shapes. role="img" + aria-label describe it for screen readers. -->
+  <div class="diorama" role="img" aria-label="Pikachu hopping in the tall grass on a sunny day, while Bulbasaur peeks out and a Butterfree flies by.">
+    <div class="sun"></div>
+    <div class="cloud cloud--1"></div>
+    <div class="cloud cloud--2"></div>
+    <div class="cloud cloud--3"></div>
+    <div class="hill hill--back"></div>
+    <div class="hill hill--front"></div>
+    <div class="ground"></div>
+    <div class="tallgrass tallgrass--light"></div>
+    <img class="butterfree" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/showdown/12.gif" alt="">
+    <div class="pika-shadow"></div>
+    <img class="pikachu" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+    <span class="pokeball ball-bounce"></span>
+    <img class="bulba-peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="">
+    <div class="tallgrass"></div>
+  </div>
+</section>
+
+<!-- ============ CHOOSE YOUR PARTNER ============ -->
+<section class="section wrap partner" aria-labelledby="partner-title">
+  <div class="section-head">
+    <h2 id="partner-title">Choose your partner</h2>
+    <p>Professor Oak left three Poké Balls on the table. Pick one to open it.</p>
+  </div>
+
+  <form class="partner__lab">
+    <fieldset class="partner__balls">
+      <legend class="visually-hidden">Starter Pokémon</legend>
+
+      <input type="radio" name="partner" id="p-bulbasaur" class="visually-hidden">
+      <label for="p-bulbasaur" class="starter">
+        <img class="starter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="">
+        <span class="starter__ball" aria-hidden="true"><span class="starter__top"></span><span class="starter__bottom"></span></span>
+        <span class="starter__name">Bulbasaur</span>
+        <span class="type" data-type="grass">grass</span>
+      </label>
+
+      <input type="radio" name="partner" id="p-charmander" class="visually-hidden">
+      <label for="p-charmander" class="starter">
+        <img class="starter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png" alt="">
+        <span class="starter__ball" aria-hidden="true"><span class="starter__top"></span><span class="starter__bottom"></span></span>
+        <span class="starter__name">Charmander</span>
+        <span class="type" data-type="fire">fire</span>
+      </label>
+
+      <input type="radio" name="partner" id="p-squirtle" class="visually-hidden">
+      <label for="p-squirtle" class="starter">
+        <img class="starter__mon" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png" alt="">
+        <span class="starter__ball" aria-hidden="true"><span class="starter__top"></span><span class="starter__bottom"></span></span>
+        <span class="starter__name">Squirtle</span>
+        <span class="type" data-type="water">water</span>
+      </label>
+    </fieldset>
+
+    <div class="partner__say" aria-live="polite">
+      <p class="say say--none">Tap a Poké Ball to see who is inside.</p>
+      <p class="say say--bulbasaur"><strong>Bulbasaur</strong> is ready! Grass types love the sun. Visit <a href="evolution.html">Evolution</a> to see it grow into Venusaur.</p>
+      <p class="say say--charmander"><strong>Charmander</strong> is ready! Keep its tail flame away from rain. Visit <a href="types.html">Types</a> to learn what Fire is strong against.</p>
+      <p class="say say--squirtle"><strong>Squirtle</strong> is ready! It hides in its shell when it’s shy. Try it out in the <a href="battle.html">battle game</a>.</p>
+    </div>
+  </form>
+</section>
+
+<!-- ============ FACT TICKER ============ -->
+<aside class="ticker" aria-label="Pokémon facts">
+  <div class="ticker__track">
+    <ul>
+      <li>Pikachu’s name comes from “pika”, the sound of a spark, and “chu”, the squeak of a mouse.</li>
+      <li>Snorlax eats around 400 kilograms of food every single day.</li>
+      <li>Rhydon was the very first Pokémon ever designed.</li>
+      <li>Magikarp can evolve into the mighty Gyarados.</li>
+      <li>Ditto can transform into any Pokémon it sees.</li>
+      <li>There are 18 Pokémon types, and Fairy was the last one added.</li>
+      <li>Gastly’s body is made of gas, so it weighs just 0.1 kilograms.</li>
+      <li>The Pokédex was invented by Professor Oak in the Kanto region.</li>
+    </ul>
+    <!-- A second copy of the list makes the loop seamless. aria-hidden stops screen readers reading it twice. -->
+    <ul aria-hidden="true">
+      <li>Pikachu’s name comes from “pika”, the sound of a spark, and “chu”, the squeak of a mouse.</li>
+      <li>Snorlax eats around 400 kilograms of food every single day.</li>
+      <li>Rhydon was the very first Pokémon ever designed.</li>
+      <li>Magikarp can evolve into the mighty Gyarados.</li>
+      <li>Ditto can transform into any Pokémon it sees.</li>
+      <li>There are 18 Pokémon types, and Fairy was the last one added.</li>
+      <li>Gastly’s body is made of gas, so it weighs just 0.1 kilograms.</li>
+      <li>The Pokédex was invented by Professor Oak in the Kanto region.</li>
+    </ul>
+  </div>
+</aside>
+
+<!-- ============ THE ROUTE ============ -->
+<section class="section wrap route" aria-labelledby="route-title">
+  <div class="section-head">
+    <h2 id="route-title">Places along the route</h2>
+    <p>Follow the path to explore. Each stop is a different page.</p>
+  </div>
+  <ul class="route__stops">
+    <li class="stop">
+      <a href="pokedex.html">
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/137.png" alt="" width="96" height="96" loading="lazy">
+        <strong>Pokédex</strong>
+        <span>63 Pokémon with their sizes, stats and real cries.</span>
+      </a>
+    </li>
+    <li class="stop">
+      <a href="types.html">
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/133.png" alt="" width="96" height="96" loading="lazy">
+        <strong>Types</strong>
+        <span>Fire beats Grass, Water beats Fire. Learn all 18 types.</span>
+      </a>
+    </li>
+    <li class="stop">
+      <a href="evolution.html">
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/129.png" alt="" width="96" height="96" loading="lazy">
+        <strong>Evolution</strong>
+        <span>Press a button and watch Pokémon grow up.</span>
+      </a>
+    </li>
+    <li class="stop">
+      <a href="regions.html">
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/16.png" alt="" width="96" height="96" loading="lazy">
+        <strong>Regions</strong>
+        <span>Fly over nine regions, from Kanto to Paldea.</span>
+      </a>
+    </li>
+    <li class="stop">
+      <a href="arcade.html">
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png" alt="" width="96" height="96" loading="lazy">
+        <strong>Arcade</strong>
+        <span>Three games: guess, battle and catch.</span>
+      </a>
+    </li>
+    <li class="stop">
+      <a href="theater.html">
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/39.png" alt="" width="96" height="96" loading="lazy">
+        <strong>Theater</strong>
+        <span>Videos, songs and Pokémon cries to watch and hear.</span>
+      </a>
+    </li>
+    <li class="stop">
+      <a href="academy.html">
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/113.png" alt="" width="96" height="96" loading="lazy">
+        <strong>Academy</strong>
+        <span>Sign up and get your own trainer card.</span>
+      </a>
+    </li>
+    <li class="stop">
+      <a href="workshop.html">
+        <img class="sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/81.png" alt="" width="96" height="96" loading="lazy">
+        <strong>Workshop</strong>
+        <span>Peek behind the scenes at how this site is built.</span>
+      </a>
+    </li>
+  </ul>
+</section>
+
+<!-- ============ SPOTLIGHT ============ -->
+<section class="section wrap spotlight" aria-labelledby="spot-title">
+  <div class="section-head">
+    <h2 id="spot-title">Pokémon in the spotlight</h2>
+    <p>A new Pokémon every six seconds. Hover to pause and read.</p>
+  </div>
+  <div class="spotlight__stage">
+    <article class="slide" style="--c: var(--t-normal);">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/143.png" alt="Snorlax" width="300" height="300" loading="lazy">
+      <div>
+        <h3>Snorlax</h3>
+        <p class="types"><span class="type" data-type="normal">normal</span></p>
+        <p>Snorlax sleeps almost all day and only wakes up to eat. Some even block roads while they nap!</p>
+      </div>
+    </article>
+    <article class="slide" style="--c: var(--t-ghost);">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png" alt="Gengar" width="300" height="300" loading="lazy">
+      <div>
+        <h3>Gengar</h3>
+        <p class="types"><span class="type" data-type="ghost">ghost</span> <span class="type" data-type="poison">poison</span></p>
+        <p>Gengar hides in shadows. When one is near, the air suddenly feels a few degrees colder.</p>
+      </div>
+    </article>
+    <article class="slide" style="--c: var(--t-water);">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/131.png" alt="Lapras" width="300" height="300" loading="lazy">
+      <div>
+        <h3>Lapras</h3>
+        <p class="types"><span class="type" data-type="water">water</span> <span class="type" data-type="ice">ice</span></p>
+        <p>Lapras is gentle and clever. It loves to carry people across the sea on its shell.</p>
+      </div>
+    </article>
+    <article class="slide" style="--c: var(--t-fire);">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png" alt="Charizard" width="300" height="300" loading="lazy">
+      <div>
+        <h3>Charizard</h3>
+        <p class="types"><span class="type" data-type="fire">fire</span> <span class="type" data-type="flying">flying</span></p>
+        <p>Charizard flies high in the sky looking for strong opponents. Its tail flame burns hotter when it gets excited.</p>
+      </div>
+    </article>
+    <article class="slide" style="--c: var(--t-fairy);">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/700.png" alt="Sylveon" width="300" height="300" loading="lazy">
+      <div>
+        <h3>Sylveon</h3>
+        <p class="types"><span class="type" data-type="fairy">fairy</span></p>
+        <p>Sylveon wraps its ribbon feelers around its trainer’s arm to show that it cares.</p>
+      </div>
+    </article>
+    <div class="timer" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  </div>
+</section>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pokedex.html">Pokédex</a></li>
+            <li><a href="types.html">Types</a></li>
+            <li><a href="evolution.html">Evolution</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+            <li><a href="theater.html">Theater</a></li>
+            <li><a href="academy.html">Academy</a></li>
+            <li><a href="workshop.html">Workshop</a></li>
+            <li><a href="teachers.html">Teachers</a></li>
+            <li><a href="handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

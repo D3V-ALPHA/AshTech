@@ -1,0 +1,315 @@
+/* =====================================================================
+   ASHTECH — regions.css
+   ===================================================================== */
+@layer pages {
+
+  /* ---------- Timeline links ---------- */
+  .timeline ol {
+    list-style: none;
+    padding: 0 0 0.6rem;
+    display: flex;
+    gap: 0.5rem;
+    overflow-x: auto;
+    position: relative;
+  }
+
+  .timeline li {
+    flex-shrink: 0;
+  }
+
+  .timeline a {
+    display: grid;
+    padding: 0.35rem 0.9rem;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    line-height: 1.1;
+    color: var(--ink);
+    text-decoration: none;
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-md);
+    box-shadow: 0 4px 0 var(--ink);
+    transition: translate 0.15s var(--ease-bounce), background-color 0.2s;
+  }
+
+  .timeline a:hover {
+    translate: 0 -3px;
+    background: var(--yellow);
+  }
+
+  .timeline time {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- The flight: horizontal scrolling with snap points ---------- */
+  .flight {
+    margin-top: var(--space-l);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;  /* each card "clicks" into place */
+    scroll-padding-inline: 50%;
+    padding-block: var(--space-m) var(--space-l);
+    overscroll-behavior-x: contain;
+  }
+
+  .flight:focus-visible {
+    outline-offset: -6px;
+  }
+
+  .flight__track {
+    list-style: none;
+    display: flex;
+    gap: var(--space-l);
+    width: max-content;
+    padding-inline: max(1rem, (100vw - var(--wrap)) / 2);
+  }
+
+  .region {
+    flex: 0 0 min(440px, 82vw);
+    max-width: none;
+    scroll-snap-align: center;
+  }
+
+  .region article {
+    height: 100%;
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+    overflow: hidden;
+    transition: outline-color 0.3s;
+  }
+
+  /* Scroll-driven animation: cards grow as they slide into view */
+  @supports (animation-timeline: view()) {
+    .region article {
+      animation: region-in linear both;
+      animation-timeline: view(inline);
+      animation-range: entry 0% cover 45%;
+    }
+  }
+
+  @keyframes region-in {
+    from { opacity: 0.4; scale: 0.85; rotate: 3deg; }
+  }
+
+  /* :target = the card whose id matches the #link you clicked */
+  .region:target article {
+    outline: 6px solid var(--yellow);
+    outline-offset: 4px;
+  }
+
+  /* ---------- Each region's little landscape ---------- */
+  .region__scene {
+    position: relative;
+    height: 230px;
+    overflow: hidden;
+    border-bottom: var(--line);
+    background: linear-gradient(var(--sky1), var(--sky2));
+  }
+
+  .region__sun {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    width: 56px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #fff5b8;
+    box-shadow: 0 0 30px 10px rgb(255 245 184 / 0.7);
+    animation: pulse 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    50% { scale: 1.12; }
+  }
+
+  .region__hills {
+    position: absolute;
+    inset: auto -10% 0 -10%;
+    height: 55%;
+    background: var(--land2);
+    /* Rolling hills: an ellipse clip-path */
+    clip-path: ellipse(70% 60% at 30% 100%);
+  }
+
+  .region__hills--front {
+    height: 40%;
+    background: var(--land1);
+    clip-path: ellipse(80% 75% at 75% 100%);
+  }
+
+  .region__starters {
+    position: absolute;
+    inset: auto 0 6px 0;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+  }
+
+  .region__starters img {
+    width: 31%;
+    filter: drop-shadow(3px 3px 0 var(--ink));
+    animation: hop-small 1.6s ease-in-out infinite;
+  }
+
+  .region__starters img:nth-child(2) { animation-delay: 0.2s; }
+  .region__starters img:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes hop-small {
+    0%, 60%, 100% { translate: 0 0; }
+    30% { translate: 0 -14px; }
+  }
+
+  .region__text {
+    padding: var(--space-m) var(--space-l) var(--space-l);
+  }
+
+  .region__gen {
+    font-weight: 700;
+    color: var(--red);
+  }
+
+  .region__text h2 {
+    font-size: var(--step-4);
+    margin-block: 0.1rem 0.5rem;
+  }
+
+  .region__text cite {
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  .region__prof {
+    margin-top: 0.6rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Closer look at Kanto: magazine-style reading ---------- */
+  .kanto > h2 {
+    margin-bottom: var(--space-l);
+  }
+
+  .kanto__read {
+    columns: 2 22rem;           /* 2 columns, each at least 22rem wide */
+    column-gap: var(--space-xl);
+    column-rule: 3px dotted var(--grid);
+    font-size: var(--step-0);
+    line-height: 1.7;
+  }
+
+  .kanto__read p + p {
+    margin-top: var(--space-m);
+  }
+
+  /* A giant first letter, like a storybook */
+  .kanto__read > p:first-of-type::first-letter {
+    float: left;
+    font-family: var(--font-display);
+    font-size: 4.4em;
+    line-height: 0.8;
+    margin: 0.08em 0.1em 0 0;
+    color: var(--red);
+    -webkit-text-stroke: 3px var(--ink);
+    paint-order: stroke fill;
+  }
+
+  /* ::first-line styles only the first line of text, however long it is */
+  .kanto__read > p:first-of-type::first-line {
+    font-weight: 700;
+  }
+
+  .kanto__float {
+    float: right;
+    width: 200px;
+    margin: 0 0 0.5rem 1rem;
+    /* The text flows around a circle instead of a rectangle */
+    shape-outside: circle(48%);
+    shape-margin: 0.6rem;
+    border-radius: 50%;
+    background: var(--yellow-soft);
+    border: var(--line);
+  }
+
+  .kanto__read blockquote {
+    margin: var(--space-m) 0;
+    padding: var(--space-m) var(--space-l);
+    background: var(--ink);
+    color: var(--white);
+    border-radius: var(--r-md);
+    break-inside: avoid;   /* don't split the quote across columns */
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    line-height: 1.2;
+  }
+
+  .kanto__read blockquote footer {
+    margin-top: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--yellow);
+  }
+
+  /* ---------- The gyms ---------- */
+  .gyms__title {
+    margin-top: var(--space-xl);
+    font-size: var(--step-3);
+  }
+
+  .gyms__intro {
+    margin-block: var(--space-s) var(--space-l);
+  }
+
+  .gyms {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: var(--space-m);
+    counter-reset: gym;
+  }
+
+  .gyms li {
+    position: relative;
+    display: grid;
+    justify-items: center;
+    gap: 0.3rem;
+    padding: var(--space-m);
+    text-align: center;
+    background: linear-gradient(color-mix(in srgb, var(--c) 30%, white), var(--white) 60%);
+    border: var(--line);
+    border-radius: var(--r-md);
+    box-shadow: var(--lift);
+    counter-increment: gym;
+  }
+
+  /* The gym number, from a CSS counter */
+  .gyms li::before {
+    content: counter(gym);
+    position: absolute;
+    top: 0.5rem;
+    left: 0.7rem;
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    color: var(--ink-soft);
+  }
+
+  .gyms .badge {
+    margin-block: 0.4rem 0.6rem;
+  }
+
+  .gyms b {
+    font-family: var(--font-display);
+    font-weight: 400;
+    font-size: var(--step-1);
+  }
+
+  @media (max-width: 640px) {
+    .kanto__float {
+      width: 140px;
+    }
+  }
+}

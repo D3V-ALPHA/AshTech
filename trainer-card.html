@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Your AshTech trainer card, filled in with your answers and ready to download as a PDF.">
+  <meta name="theme-color" content="#e3350d">
+  <title>Your trainer card | AshTech</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/badges.css">
+  <link rel="stylesheet" href="css/card.css">
+
+  <!-- This page uses a little JavaScript. Look for "Why JavaScript?" on the page to see what it does. -->
+  <script src="js/card.js" defer></script>
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pokedex.html">Pokédex</a></li>
+          <li><a href="types.html">Types</a></li>
+          <li><a href="evolution.html">Evolution</a></li>
+          <li><a href="regions.html">Regions</a></li>
+          <li><a href="arcade.html">Arcade</a></li>
+          <li><a href="theater.html">Theater</a></li>
+          <li><a href="academy.html" aria-current="page">Academy</a></li>
+          <li><a href="workshop.html">Workshop</a></li>
+          <li><a href="teachers.html">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<header class="page-head wrap">
+  <div>
+    <h1 class="logo-type">Welcome, trainer!</h1>
+    <p id="card-ready-note" hidden>You’re now a student of the Trainer Academy. Here is your very own trainer card. Download it, print it, and show it to your friends!</p>
+    <p id="card-empty-note">This card is still blank. <a href="academy.html">Fill in the Academy form</a> and your answers will appear here.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <!-- JavaScript fills in every [data-field] below with your answers -->
+  <article class="tcard" id="tcard" aria-labelledby="tcard-title">
+    <header class="tcard__top">
+      <h2 id="tcard-title">Trainer Card</h2>
+      <p>AshTech Academy</p>
+    </header>
+
+    <div class="tcard__photo">
+      <img id="card-photo" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="" width="200" height="200">
+      <p>Your photo goes here</p>
+    </div>
+
+    <dl class="tcard__info">
+      <div><dt>Name</dt><dd data-field="name"></dd></div>
+      <div><dt>ID No.</dt><dd data-field="id"></dd></div>
+      <div><dt>Age</dt><dd data-field="age"></dd></div>
+      <div><dt>Hometown</dt><dd data-field="hometown"></dd></div>
+      <div><dt>Partner</dt><dd data-field="starter"></dd></div>
+      <div><dt>Favourite</dt><dd data-field="favourite"></dd></div>
+    </dl>
+
+    <p class="tcard__dream" data-field="about"></p>
+
+    <div class="tcard__stats">
+      <label for="seen">Pokédex seen</label>
+      <progress id="seen" max="1025" value="63">63 of 1025</progress>
+      <label for="card-bravery">Bravery</label>
+      <meter id="card-bravery" min="0" max="10" low="3" high="7" optimum="10" value="5">5 of 10</meter>
+      <ul class="tcard__types" id="card-types" aria-label="Types I like"></ul>
+    </div>
+
+    <div class="tcard__badges">
+      <p>Badges</p>
+      <ul>
+        <li><span class="badge badge--boulder" aria-hidden="true"></span><span class="visually-hidden">Boulder Badge slot</span></li>
+        <li><span class="badge badge--cascade" aria-hidden="true"></span><span class="visually-hidden">Cascade Badge slot</span></li>
+        <li><span class="badge badge--thunder" aria-hidden="true"></span><span class="visually-hidden">Thunder Badge slot</span></li>
+        <li><span class="badge badge--rainbow" aria-hidden="true"></span><span class="visually-hidden">Rainbow Badge slot</span></li>
+        <li><span class="badge badge--soul" aria-hidden="true"></span><span class="visually-hidden">Soul Badge slot</span></li>
+        <li><span class="badge badge--marsh" aria-hidden="true"></span><span class="visually-hidden">Marsh Badge slot</span></li>
+        <li><span class="badge badge--volcano" aria-hidden="true"></span><span class="visually-hidden">Volcano Badge slot</span></li>
+        <li><span class="badge badge--earth" aria-hidden="true"></span><span class="visually-hidden">Earth Badge slot</span></li>
+      </ul>
+    </div>
+  </article>
+
+  <section class="card-help">
+    <div class="card-actions">
+      <button type="button" class="btn" id="download-card">Download my card (PDF)</button>
+      <a class="btn btn--light" href="academy.html">Change my answers</a>
+      <p id="download-status" class="card-actions__status" aria-live="polite"></p>
+    </div>
+
+    <aside class="why-js">
+      <span class="why-js__badge" aria-hidden="true">JS</span>
+      <div>
+        <h2>Why JavaScript here?</h2>
+        <p>Almost all of AshTech is made with just HTML and CSS. But HTML and CSS can’t <em>read</em> what you typed on another page, and they can’t <em>make</em> a new file.</p>
+        <p>That’s a job for the third language of the web: <strong>JavaScript</strong>. On this page it reads your answers from the address bar, writes them onto the card, then paints the card onto a <code>&lt;canvas&gt;</code> and packs it into a real PDF. If HTML is the skeleton and CSS is the clothes, JavaScript is the muscles that make things <em>do</em> stuff. Curious? Its code is in <code>js/card.js</code>, full of notes.</p>
+      </div>
+    </aside>
+  </section>
+</div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pokedex.html">Pokédex</a></li>
+            <li><a href="types.html">Types</a></li>
+            <li><a href="evolution.html">Evolution</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+            <li><a href="theater.html">Theater</a></li>
+            <li><a href="academy.html">Academy</a></li>
+            <li><a href="workshop.html">Workshop</a></li>
+            <li><a href="teachers.html">Teachers</a></li>
+            <li><a href="handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

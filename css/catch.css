@@ -1,0 +1,327 @@
+/* =====================================================================
+   ASHTECH — catch.css  (Safari Catch)
+   ===================================================================== */
+@layer pages {
+  .safari {
+    display: flex;
+    flex-direction: column;
+    min-height: 560px;
+    counter-reset: caught;
+    background:
+      radial-gradient(circle at 20% 10%, rgb(255 255 255 / 0.5) 0 8%, transparent 9%),
+      linear-gradient(#bfe6ff 0 18%, #8fd16a 18%);
+  }
+
+  /* Every checked checkbox adds one to the "caught" counter */
+  .catch:checked {
+    counter-increment: caught;
+  }
+
+  /* ---------- Scoreboard (moved to the top with "order") ---------- */
+  .hud {
+    order: -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-s) var(--space-l);
+    padding: var(--space-s) var(--space-m);
+    background: var(--ink);
+    color: var(--white);
+  }
+
+  .score {
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+  }
+
+  .score__num::before {
+    content: counter(caught);
+    color: var(--yellow);
+  }
+
+  /* Eight empty ball slots on the trainer's belt */
+  .belt {
+    display: flex;
+    gap: 6px;
+  }
+
+  .belt i {
+    width: 26px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 3px solid #56628f;
+    background: #2a3a6e;
+    transition: background 0.3s, scale 0.3s var(--ease-bounce), border-color 0.3s;
+  }
+
+  /* A slot fills with a Poké Ball for each catch.
+     :nth-child(n of .patch:has(:checked)) would be neater, but this
+     works everywhere: "if patch number N is caught, fill slot N". */
+  .safari:has(.patch:nth-child(1) .catch:checked) .belt i:nth-child(1),
+  .safari:has(.patch:nth-child(2) .catch:checked) .belt i:nth-child(2),
+  .safari:has(.patch:nth-child(3) .catch:checked) .belt i:nth-child(3),
+  .safari:has(.patch:nth-child(4) .catch:checked) .belt i:nth-child(4),
+  .safari:has(.patch:nth-child(5) .catch:checked) .belt i:nth-child(5),
+  .safari:has(.patch:nth-child(6) .catch:checked) .belt i:nth-child(6),
+  .safari:has(.patch:nth-child(7) .catch:checked) .belt i:nth-child(7),
+  .safari:has(.patch:nth-child(8) .catch:checked) .belt i:nth-child(8) {
+    border-color: var(--ink);
+    background:
+      radial-gradient(circle, var(--white) 0 16%, var(--ink) 17% 28%, transparent 29%),
+      linear-gradient(var(--red) 0 44%, var(--ink) 44% 56%, var(--white) 56%);
+    scale: 1.15;
+  }
+
+  /* The timer: a bar that shrinks over 40 seconds */
+  .timer {
+    flex: 1;
+    min-width: 160px;
+    height: 16px;
+    border: 3px solid var(--white);
+    border-radius: var(--r-pill);
+    overflow: hidden;
+  }
+
+  .timer i {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, var(--red), var(--yellow) 40%, var(--grass-light));
+    background-size: 250% 100%;
+    transform-origin: left;
+    animation: countdown 40s linear forwards;
+  }
+
+  @keyframes countdown {
+    from { transform: scaleX(1); background-position: 100% 0; }
+    to { transform: scaleX(0); background-position: 0 0; }
+  }
+
+  /* ---------- The field of tall grass ---------- */
+  .field {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-l) var(--space-m);
+    padding: var(--space-xl) var(--space-l) var(--space-l);
+    align-content: center;
+  }
+
+  .patch {
+    position: relative;
+    height: 150px;
+    overflow: hidden; /* the Pokémon is cut off (and can't be tapped) when it hides */
+    border-radius: 0 0 var(--r-md) var(--r-md);
+  }
+
+  /* A hole in the ground behind each patch */
+  .patch::before {
+    content: "";
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: 12px;
+    height: 26px;
+    border-radius: 50%;
+    background: #4a3a22;
+  }
+
+  .wild {
+    position: absolute;
+    left: 50%;
+    bottom: 20px;
+    width: 110px;
+    height: 110px;
+    margin-left: -55px;
+    display: grid;
+    place-items: end center;
+    cursor: var(--pokeball-img) 15 15, pointer;
+    translate: 0 120%;
+    animation: pop var(--dur) var(--delay) ease-in-out infinite;
+  }
+
+  .wild img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+  }
+
+  @keyframes pop {
+    0%, 45%, 100% { translate: 0 120%; }
+    58%, 86% { translate: 0 0; }
+    72% { translate: 0 -6px; }
+  }
+
+  /* Grass in front of the hole, so Pokémon hide behind it */
+  .tuft {
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 46px;
+    background: var(--grass-deep);
+    clip-path: polygon(0 100%, 0 30%, 8% 0, 15% 35%, 24% 5%, 32% 40%, 42% 0, 50% 35%, 58% 3%, 66% 40%, 76% 0, 84% 35%, 92% 5%, 100% 30%, 100% 100%);
+    pointer-events: none;
+    transform-origin: bottom;
+    animation: sway 2.5s ease-in-out infinite alternate;
+  }
+
+  /* ---------- Caught! ---------- */
+  .patch:has(.catch:checked) .wild {
+    pointer-events: none;
+    animation: absorb 0.5s ease-in forwards;
+  }
+
+  @keyframes absorb {
+    from { translate: 0 0; filter: brightness(1); }
+    50% { filter: brightness(0) invert(0.3) sepia(1) saturate(10) hue-rotate(-20deg); }
+    to { translate: 0 0; scale: 0; filter: brightness(0) invert(0.3) sepia(1) saturate(10); }
+  }
+
+  .ball,
+  .gotcha {
+    display: none;
+    position: absolute;
+    left: 50%;
+  }
+
+  .ball {
+    bottom: 40px;
+    width: 40px;
+    aspect-ratio: 1;
+    margin-left: -20px;
+    border-radius: 50%;
+    border: 3px solid var(--ink);
+    background:
+      radial-gradient(circle, var(--white) 0 15%, var(--ink) 16% 26%, transparent 27%),
+      linear-gradient(var(--red) 0 44%, var(--ink) 44% 56%, var(--white) 56%);
+    transform-origin: 50% 100%;
+    z-index: 2;
+  }
+
+  .patch:has(.catch:checked) .ball {
+    display: block;
+    /* Several animations at once, separated by commas */
+    animation:
+      throw 0.45s ease-out both,
+      wobble 0.6s 0.5s ease-in-out 3;
+  }
+
+  @keyframes throw {
+    from { translate: -140px 90px; rotate: -540deg; scale: 0.5; }
+  }
+
+  @keyframes wobble {
+    25% { rotate: -22deg; }
+    75% { rotate: 22deg; }
+  }
+
+  .gotcha {
+    top: 8px;
+    translate: -50% 0;
+    padding: 0.1rem 0.6rem;
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    border-radius: var(--r-pill);
+    white-space: nowrap;
+    z-index: 3;
+  }
+
+  .patch:has(.catch:checked) .gotcha {
+    display: block;
+    animation: pop-in 0.5s 2.3s var(--ease-bounce) both;
+  }
+
+  @keyframes pop-in {
+    from { scale: 0; }
+  }
+
+  /* ---------- Panels (start, time's up, caught them all) ---------- */
+  .panel {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: var(--space-m);
+    padding: var(--space-l);
+    text-align: center;
+    overflow: hidden;
+    background: rgb(27 42 85 / 0.82);
+    backdrop-filter: blur(3px);
+    color: var(--white);
+  }
+
+  .panel h2 {
+    font-size: var(--step-5);
+    color: var(--yellow);
+    -webkit-text-stroke: 0.18em var(--logo-blue);
+    paint-order: stroke fill;
+  }
+
+  .panel p {
+    font-size: var(--step-1);
+    max-width: 40ch;
+  }
+
+  .panel img {
+    width: 150px;
+    animation: float 2s ease-in-out infinite;
+  }
+
+  /* Start panel disappears once #start is checked */
+  .safari:has(#start:checked) .panel--start {
+    display: none;
+  }
+
+  /* Before Start is pressed, every animation is frozen */
+  .safari:not(:has(#start:checked)) :is(.wild, .timer i, .panel--time) {
+    animation-play-state: paused;
+  }
+
+  /* Time's up: hidden at first, then a 40s-delayed animation reveals it */
+  .panel--time {
+    opacity: 0;
+    visibility: hidden;
+    animation: times-up 0.4s 40s forwards;
+  }
+
+  @keyframes times-up {
+    to { opacity: 1; visibility: visible; }
+  }
+
+  /* Caught them all = there is no unchecked .catch left */
+  .panel--all {
+    display: none;
+    background: radial-gradient(circle, rgb(255 246 194 / 0.95), rgb(255 203 5 / 0.95));
+    color: var(--ink);
+  }
+
+  .safari:not(:has(.catch:not(:checked))) .panel--all {
+    display: grid;
+    animation: pop-in 0.5s 2s var(--ease-bounce) both;
+  }
+
+  .safari:not(:has(.catch:not(:checked))) .panel--time {
+    display: none;
+  }
+
+  .safari:not(:has(.catch:not(:checked))) .timer i {
+    animation-play-state: paused;
+  }
+
+  @media (max-width: 760px) {
+    .field {
+      grid-template-columns: repeat(2, 1fr);
+      padding: var(--space-m);
+    }
+  }
+
+  /* Reduced motion: Pokémon simply stand still in the grass */
+  @media (prefers-reduced-motion: reduce) {
+    .wild {
+      animation: none;
+      translate: 0 0;
+    }
+  }
+}

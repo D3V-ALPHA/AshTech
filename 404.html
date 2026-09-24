@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="This page wandered off into the tall grass.">
+  <meta name="theme-color" content="#e3350d">
+  <title>Page not found | AshTech</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="/css/base.css">
+
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="/index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/pokedex.html">Pokédex</a></li>
+          <li><a href="/types.html">Types</a></li>
+          <li><a href="/evolution.html">Evolution</a></li>
+          <li><a href="/regions.html">Regions</a></li>
+          <li><a href="/arcade.html">Arcade</a></li>
+          <li><a href="/theater.html">Theater</a></li>
+          <li><a href="/academy.html">Academy</a></li>
+          <li><a href="/workshop.html">Workshop</a></li>
+          <li><a href="/teachers.html">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<header class="page-head wrap">
+  <div>
+    <h1 class="logo-type">Oops! 404</h1>
+    <p>A wild <b>missing page</b> appeared! It must have wandered off into the tall grass. The address might have a typo, or the page may have moved.</p>
+    <p><a class="btn" href="/index.html">Back to the start</a> <a class="btn btn--light" href="/pokedex.html">Open the Pokédex</a></p>
+  </div>
+  <img class="page-head__art sprite" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/201.png" alt="Unown, a puzzling Pokémon shaped like a letter" width="220" height="220">
+</header>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="/pokedex.html">Pokédex</a></li>
+            <li><a href="/types.html">Types</a></li>
+            <li><a href="/evolution.html">Evolution</a></li>
+            <li><a href="/regions.html">Regions</a></li>
+            <li><a href="/arcade.html">Arcade</a></li>
+            <li><a href="/theater.html">Theater</a></li>
+            <li><a href="/academy.html">Academy</a></li>
+            <li><a href="/workshop.html">Workshop</a></li>
+            <li><a href="/teachers.html">Teachers</a></li>
+            <li><a href="/handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

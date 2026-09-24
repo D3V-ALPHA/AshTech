@@ -1,0 +1,332 @@
+/* =====================================================================
+   ASHTECH — quiz.css  ("Who's That Pokémon?")
+   ===================================================================== */
+@layer pages {
+  .quiz {
+    display: grid;
+    min-height: 560px;
+    color: var(--ink);
+    background: #2f6fd0;
+    counter-reset: score;  /* start the score at zero */
+  }
+
+  /* Spinning light rays behind everything, like the TV show */
+  .rays {
+    position: absolute;
+    inset: -50%;
+    background:
+      radial-gradient(circle at center, #ffe45c 0 12%, transparent 30%),
+      repeating-conic-gradient(from 0deg at 50% 50%, #5a9cf0 0 9deg, #2f6fd0 9deg 18deg);
+    animation: rays 30s linear infinite;
+  }
+
+  @keyframes rays {
+    to { rotate: 1turn; }
+  }
+
+  /* Every round (and the results) sits in the same grid cell.
+     We hide them with visibility, NOT display: none, because CSS
+     counters skip elements that aren't displayed, and we need the
+     hidden rounds to keep counting towards the score. */
+  .round,
+  .results {
+    grid-area: 1 / 1;
+    position: relative;
+    display: grid;
+    visibility: hidden;
+    opacity: 0;
+    translate: 60px 0;
+    transition: opacity 0.4s, translate 0.5s var(--ease-bounce), visibility 0.4s;
+  }
+
+  /* Show round 1 until its "Next" box is ticked … */
+  .round:first-of-type:not(:has(.next:checked)),
+  /* … then show the round right after any finished round. "+" means "the very next sibling". */
+  .round:has(.next:checked) + .round:not(:has(.next:checked)),
+  .round:has(.next:checked) + .results {
+    visibility: visible;
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  /* A finished round slides out to the left */
+  .round:has(.next:checked) {
+    translate: -60px 0;
+  }
+
+  .round {
+    grid-template-columns: 1.1fr 1fr;
+    grid-template-rows: auto 1fr auto auto;
+    grid-template-areas:
+      "num num"
+      "stage choices"
+      "stage verdict"
+      "stage next";
+    gap: var(--space-s) var(--space-l);
+    padding: var(--space-l);
+  }
+
+  @keyframes round-in {
+    from { opacity: 0; translate: 40px 0; }
+  }
+
+  .round__num {
+    grid-area: num;
+    justify-self: start;
+    padding: 0.2rem 1rem;
+    font-size: var(--step-2);
+    background: var(--yellow);
+    border: var(--line);
+    border-radius: var(--r-pill);
+    rotate: -3deg;
+  }
+
+  .round__num small {
+    font-size: 0.6em;
+  }
+
+  /* ---------- The silhouette ---------- */
+  .stage {
+    grid-area: stage;
+    display: grid;
+    place-items: center;
+    align-content: center;
+  }
+
+  .stage__mon {
+    width: min(100%, 320px);
+    filter: brightness(0) drop-shadow(0 0 0 transparent);  /* a solid black shadow shape */
+    animation: mystery 2.5s ease-in-out infinite;
+  }
+
+  @keyframes mystery {
+    50% { translate: 0 -8px; }
+  }
+
+  /* Answered: the colours come back with a pop */
+  .round:has([type="radio"]:checked) .stage__mon {
+    animation: reveal 0.7s var(--ease-bounce) both;
+  }
+
+  @keyframes reveal {
+    0% { filter: brightness(0); scale: 1; }
+    40% { filter: brightness(3); scale: 1.15; }
+    100% { filter: brightness(1) drop-shadow(6px 6px 0 var(--ink)); scale: 1; }
+  }
+
+  .stage__name {
+    font-family: var(--font-display);
+    font-size: var(--step-4);
+    line-height: 1;
+    color: var(--yellow);
+    -webkit-text-stroke: 0.2em var(--logo-blue);
+    paint-order: stroke fill;
+    text-shadow: 0.05em 0.07em 0 var(--ink);
+    opacity: 0;
+    scale: 0.4;
+    transition: opacity 0.3s 0.3s, scale 0.5s 0.3s var(--ease-bounce);
+  }
+
+  .round:has([type="radio"]:checked) .stage__name {
+    opacity: 1;
+    scale: 1;
+  }
+
+  /* ---------- Answer buttons ---------- */
+  .choices {
+    grid-area: choices;
+    display: grid;
+    align-content: center;
+    gap: 0.6rem;
+    border: 0;
+    padding: 0;
+    min-inline-size: 0;
+  }
+
+  .choices legend {
+    float: left;  /* lets the legend sit inside the grid like a normal item */
+    width: 100%;
+    margin-bottom: 0.4rem;
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    line-height: 1.1;
+    color: var(--white);
+    -webkit-text-stroke: 6px var(--ink);
+    paint-order: stroke fill;
+  }
+
+  .hint {
+    display: block;
+    margin-top: 0.4rem;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 500;
+    -webkit-text-stroke: 0;
+    color: var(--white);
+    opacity: 0.9;
+  }
+
+  .choices label {
+    padding: 0.7rem 1.2rem;
+    font-weight: 700;
+    font-size: var(--step-1);
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-md);
+    box-shadow: 0 5px 0 var(--ink);
+    cursor: pointer;
+    transition: translate 0.15s var(--ease-bounce), box-shadow 0.15s, background-color 0.2s;
+  }
+
+  .choices label:hover {
+    translate: 6px 0;
+    background: var(--yellow-soft);
+  }
+
+  .choices input:focus-visible + label {
+    outline: 4px solid var(--yellow);
+    outline-offset: 3px;
+  }
+
+  /* Once answered, the buttons are locked */
+  .round:has([type="radio"]:checked) .choices label {
+    pointer-events: none;
+    color: var(--ink-soft);
+    background: #dfe5f2;
+    box-shadow: 0 2px 0 var(--ink);
+  }
+
+  /* The right answer always turns green after you answer */
+  .round:has([type="radio"]:checked) .right + label {
+    color: var(--ink);
+    background: #9be07f;
+  }
+
+  /* A wrong pick turns red and shakes */
+  .choices input:not(.right):checked + label {
+    color: var(--ink);
+    background: #ff9b85;
+    animation: shake 0.4s;
+  }
+
+  @keyframes shake {
+    25% { translate: -8px 0; }
+    75% { translate: 8px 0; }
+  }
+
+  /* ---------- Verdict and Next ---------- */
+  .verdict {
+    grid-area: verdict;
+    display: none;
+    padding: 0.6rem 1rem;
+    font-weight: 500;
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-md);
+  }
+
+  .round:has(.right:checked) .verdict--right,
+  .round:has([type="radio"]:not(.right):checked) .verdict--wrong {
+    display: block;
+    animation: round-in 0.4s var(--ease-bounce);
+  }
+
+  .next-btn {
+    grid-area: next;
+    justify-self: start;
+    display: none;
+  }
+
+  .round:has([type="radio"]:checked) .next-btn {
+    display: inline-flex;
+  }
+
+  /* ---------- Score ---------- */
+  /* Every checked right answer adds 1 to the "score" counter */
+  .right:checked {
+    counter-increment: score;
+  }
+
+  .results {
+    place-content: center;
+    justify-items: center;
+    gap: var(--space-m);
+    padding: var(--space-xl) var(--space-l);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .results h2 {
+    font-size: var(--step-4);
+    color: var(--white);
+    -webkit-text-stroke: 8px var(--ink);
+    paint-order: stroke fill;
+  }
+
+  .results__score {
+    padding: var(--space-m) var(--space-xl);
+    font-family: var(--font-display);
+    font-size: var(--step-3);
+    background: var(--white);
+    border: var(--line);
+    border-radius: var(--r-lg);
+    box-shadow: var(--lift);
+  }
+
+  /* The score pops in only once the results are showing */
+  .round:has(.next:checked) + .results .results__score {
+    animation: pop-in 0.6s 0.2s var(--ease-bounce) both;
+  }
+
+  @keyframes pop-in {
+    from { scale: 0; rotate: -20deg; }
+  }
+
+  .results__num::before {
+    content: counter(score);
+    font-size: 2.2em;
+    color: var(--red);
+  }
+
+  .results__perfect,
+  .results__good {
+    max-width: 40ch;
+    padding: 0.5rem 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    background: var(--yellow);
+    border: var(--line);
+    border-radius: var(--r-md);
+  }
+
+  /* Perfect = there is NO round without a checked right answer */
+  .results__perfect,
+  .results .confetti {
+    display: none;
+  }
+
+  .quiz:not(:has(.round:not(:has(.right:checked)))) .results__perfect,
+  .quiz:not(:has(.round:not(:has(.right:checked)))) .results .confetti {
+    display: block;
+  }
+
+  .quiz:not(:has(.round:not(:has(.right:checked)))) .results__good {
+    display: none;
+  }
+
+  @media (max-width: 760px) {
+    .round {
+      grid-template-columns: 1fr;
+      grid-template-areas: "num" "stage" "choices" "verdict" "next";
+      padding: var(--space-m);
+    }
+
+    .stage__mon {
+      width: 200px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rays { animation: none; }
+  }
+}

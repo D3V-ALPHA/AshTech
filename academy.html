@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<!-- The line above tells the browser: "this is a modern HTML5 page". -->
+<html lang="en">
+<head>
+  <!-- <head> holds information ABOUT the page. None of it shows up inside the page itself. -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sign up for the Trainer Academy and get your own printable trainer card.">
+  <meta name="theme-color" content="#e3350d">
+  <title>Trainer Academy | AshTech</title>
+
+  <!-- The little icon in the browser tab -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png">
+
+  <!-- Fonts from Google Fonts. "preconnect" starts the connection early. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&family=Lilita+One&family=Press+Start+2P&display=swap">
+
+  <!-- Our own styles: base.css is shared, the second file is just for this page -->
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/academy.css">
+
+  <!-- This page uses a little JavaScript. Look for "Why JavaScript?" on the page to see what it does. -->
+  <script src="js/academy.js" defer></script>
+</head>
+<body>
+  <!-- Keyboard users can jump straight past the menu -->
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="dex-top">
+    <div class="dex-top__inner wrap">
+      <a class="brand" href="index.html">
+        <span class="lens" aria-hidden="true"></span>
+        <span class="leds" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="brand__name">AshTech</span>
+      </a>
+
+      <!-- The CSS-only menu: this checkbox opens and closes the menu on phones -->
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="nav-button"><span class="visually-hidden">Menu</span><span aria-hidden="true"></span></label>
+
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="pokedex.html">Pokédex</a></li>
+          <li><a href="types.html">Types</a></li>
+          <li><a href="evolution.html">Evolution</a></li>
+          <li><a href="regions.html">Regions</a></li>
+          <li><a href="arcade.html">Arcade</a></li>
+          <li><a href="theater.html">Theater</a></li>
+          <li><a href="academy.html" aria-current="page">Academy</a></li>
+          <li><a href="workshop.html">Workshop</a></li>
+          <li><a href="teachers.html">Teachers</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+<header class="page-head wrap">
+  <div>
+    <h1 class="logo-type">Trainer Academy</h1>
+    <p>Every great trainer starts at the Academy. Fill in your trainer form to get your very own trainer card, ready to download. Nothing you type leaves your computer.</p>
+  </div>
+  <img class="page-head__art" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/113.png" alt="Chansey, the nurse of every Pokémon Center" width="220" height="220">
+</header>
+
+<div class="wrap academy">
+  <!-- action = the page to open when you press submit. method="get" puts the answers in the address bar. -->
+  <form class="signup" action="trainer-card.html" method="get">
+    <!-- A hidden input is sent with the form, but never shown -->
+    <input type="hidden" name="rank" value="rookie">
+
+    <!-- ============ 1. ABOUT YOU ============ -->
+    <fieldset class="step">
+      <legend>About you</legend>
+
+      <div class="field field--float">
+        <!-- The placeholder is a single space so CSS can tell when the box is empty (:placeholder-shown) -->
+        <input type="text" id="name" name="name" placeholder=" " required minlength="2" maxlength="20" autocomplete="nickname" class="req">
+        <label for="name">Trainer name <abbr title="required">*</abbr></label>
+        <span class="error">Your name needs at least 2 letters.</span>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="age">Age <abbr title="required">*</abbr></label>
+          <input type="number" id="age" name="age" min="5" max="16" required class="req" inputmode="numeric">
+          <span class="error">Trainers here are 5 to 16 years old.</span>
+        </div>
+        <div class="field">
+          <label for="birthday">Birthday</label>
+          <input type="date" id="birthday" name="birthday" min="2008-01-01" max="2022-12-31">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="trainer-id">Choose a trainer ID <abbr title="required">*</abbr></label>
+        <input type="text" id="trainer-id" name="id" required pattern="[0-9]{5}" maxlength="5" inputmode="numeric" placeholder="12345" class="req" aria-describedby="id-help">
+        <small id="id-help">Exactly five numbers, like on a real trainer card.</small>
+        <span class="error">Use five numbers, no letters.</span>
+      </div>
+
+      <div class="field">
+        <label for="hometown">Hometown</label>
+        <select id="hometown" name="hometown">
+          <option value="">Pick a town…</option>
+          <optgroup label="Kanto">
+            <option>Pallet Town</option>
+            <option>Viridian City</option>
+            <option>Cerulean City</option>
+            <option>Lavender Town</option>
+          </optgroup>
+          <optgroup label="Johto">
+            <option>New Bark Town</option>
+            <option>Goldenrod City</option>
+            <option>Ecruteak City</option>
+          </optgroup>
+          <optgroup label="Hoenn">
+            <option>Littleroot Town</option>
+            <option>Lilycove City</option>
+          </optgroup>
+          <optgroup label="Sinnoh">
+            <option>Twinleaf Town</option>
+            <option>Snowpoint City</option>
+          </optgroup>
+          <optgroup label="Paldea">
+            <option>Mesagoza</option>
+            <option>Levincia</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="email">A grown-up’s email <span class="optional">(optional)</span></label>
+        <input type="email" id="email" name="email" placeholder="grown.up@example.com" autocomplete="off">
+        <span class="error">That doesn’t look like an email address.</span>
+      </div>
+    </fieldset>
+
+    <!-- ============ 2. YOUR TEAM ============ -->
+    <fieldset class="step">
+      <legend>Your team</legend>
+
+      <fieldset class="starters">
+        <legend>Pick your first partner <abbr title="required">*</abbr></legend>
+        <input type="radio" name="starter" id="st-1" value="Bulbasaur" class="visually-hidden" required>
+        <label for="st-1"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" alt="" width="100" height="100" loading="lazy">Bulbasaur</label>
+        <input type="radio" name="starter" id="st-4" value="Charmander" class="visually-hidden">
+        <label for="st-4"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png" alt="" width="100" height="100" loading="lazy">Charmander</label>
+        <input type="radio" name="starter" id="st-7" value="Squirtle" class="visually-hidden">
+        <label for="st-7"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png" alt="" width="100" height="100" loading="lazy">Squirtle</label>
+        <input type="radio" name="starter" id="st-25" value="Pikachu" class="visually-hidden">
+        <label for="st-25"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="" width="100" height="100" loading="lazy">Pikachu</label>
+      </fieldset>
+
+      <fieldset class="likes">
+        <legend>Types you like <span class="optional">(pick as many as you want)</span></legend>
+        <label><input type="checkbox" name="types" value="fire"> <span class="type" data-type="fire">fire</span></label>
+        <label><input type="checkbox" name="types" value="water"> <span class="type" data-type="water">water</span></label>
+        <label><input type="checkbox" name="types" value="grass"> <span class="type" data-type="grass">grass</span></label>
+        <label><input type="checkbox" name="types" value="electric"> <span class="type" data-type="electric">electric</span></label>
+        <label><input type="checkbox" name="types" value="psychic"> <span class="type" data-type="psychic">psychic</span></label>
+        <label><input type="checkbox" name="types" value="ghost"> <span class="type" data-type="ghost">ghost</span></label>
+        <label><input type="checkbox" name="types" value="dragon"> <span class="type" data-type="dragon">dragon</span></label>
+        <label><input type="checkbox" name="types" value="fairy"> <span class="type" data-type="fairy">fairy</span></label>
+        <label><input type="checkbox" name="types" value="rock"> <span class="type" data-type="rock">rock</span></label>
+        <label><input type="checkbox" name="types" value="ice"> <span class="type" data-type="ice">ice</span></label>
+      </fieldset>
+
+      <div class="field">
+        <label for="favourite">Favourite Pokémon</label>
+        <!-- list="…" connects this box to the <datalist> of suggestions -->
+        <input type="text" id="favourite" name="favourite" list="pokemon-names" placeholder="Start typing…">
+        <datalist id="pokemon-names">
+          <option value="Bulbasaur"></option>
+          <option value="Ivysaur"></option>
+          <option value="Venusaur"></option>
+          <option value="Charmander"></option>
+          <option value="Charmeleon"></option>
+          <option value="Charizard"></option>
+          <option value="Squirtle"></option>
+          <option value="Wartortle"></option>
+          <option value="Blastoise"></option>
+          <option value="Pikachu"></option>
+          <option value="Raichu"></option>
+          <option value="Jigglypuff"></option>
+          <option value="Meowth"></option>
+          <option value="Psyduck"></option>
+          <option value="Growlithe"></option>
+          <option value="Abra"></option>
+          <option value="Geodude"></option>
+          <option value="Gastly"></option>
+          <option value="Haunter"></option>
+          <option value="Gengar"></option>
+          <option value="Onix"></option>
+          <option value="Magikarp"></option>
+          <option value="Gyarados"></option>
+          <option value="Lapras"></option>
+          <option value="Ditto"></option>
+          <option value="Eevee"></option>
+          <option value="Vaporeon"></option>
+          <option value="Jolteon"></option>
+          <option value="Flareon"></option>
+          <option value="Snorlax"></option>
+          <option value="Dratini"></option>
+          <option value="Dragonair"></option>
+          <option value="Dragonite"></option>
+          <option value="Mewtwo"></option>
+          <option value="Mew"></option>
+          <option value="Chikorita"></option>
+          <option value="Cyndaquil"></option>
+          <option value="Totodile"></option>
+          <option value="Pichu"></option>
+          <option value="Togepi"></option>
+          <option value="Treecko"></option>
+          <option value="Torchic"></option>
+          <option value="Mudkip"></option>
+          <option value="Turtwig"></option>
+          <option value="Chimchar"></option>
+          <option value="Piplup"></option>
+          <option value="Lucario"></option>
+          <option value="Snivy"></option>
+          <option value="Tepig"></option>
+          <option value="Oshawott"></option>
+          <option value="Chespin"></option>
+          <option value="Fennekin"></option>
+          <option value="Froakie"></option>
+          <option value="Sylveon"></option>
+          <option value="Rowlet"></option>
+          <option value="Litten"></option>
+          <option value="Popplio"></option>
+          <option value="Grookey"></option>
+          <option value="Scorbunny"></option>
+          <option value="Sobble"></option>
+          <option value="Sprigatito"></option>
+          <option value="Fuecoco"></option>
+          <option value="Quaxly"></option>
+        </datalist>
+      </div>
+
+      <div class="field field--inline">
+        <label for="colour">Team colour</label>
+        <input type="color" id="colour" name="colour" value="#e3350d">
+      </div>
+    </fieldset>
+
+    <!-- ============ 3. TRAINER STYLE ============ -->
+    <fieldset class="step">
+      <legend>Trainer style</legend>
+
+      <div class="field">
+        <label for="bravery">How brave are you?</label>
+        <input type="range" id="bravery" name="bravery" min="0" max="10" step="1" value="5" list="bravery-marks">
+        <datalist id="bravery-marks">
+          <option value="0" label="Shy"></option>
+          <option value="5" label="Brave"></option>
+          <option value="10" label="Fearless"></option>
+        </datalist>
+        <div class="range-labels" aria-hidden="true"><span>Shy</span><span>Brave</span><span>Fearless</span></div>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="wake">Wake-up time</label>
+          <input type="time" id="wake" name="wake" value="07:30">
+        </div>
+        <div class="field">
+          <label for="start">Journey starts</label>
+          <input type="month" id="start" name="start">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="site">Your favourite Pokémon website <span class="optional">(optional)</span></label>
+        <input type="url" id="site" name="site" placeholder="https://…">
+        <span class="error">Web addresses start with https://</span>
+      </div>
+
+      <div class="field">
+        <label for="photo">Trainer photo <span class="optional">(optional)</span></label>
+        <input type="file" id="photo" name="photo" accept="image/*" aria-describedby="photo-help">
+        <small id="photo-help">It goes on your card. It stays on this computer and is never uploaded.</small>
+      </div>
+
+      <div class="field">
+        <label for="about">Tell us about your dream team</label>
+        <textarea id="about" name="about" rows="4" maxlength="200" placeholder="I want a team of six Eevee…"></textarea>
+      </div>
+
+      <label class="promise">
+        <input type="checkbox" name="promise" required class="req">
+        I promise to be kind to all Pokémon <abbr title="required">*</abbr>
+      </label>
+    </fieldset>
+
+    <!-- ============ SUBMIT BAR ============ -->
+    <!-- It comes last so the CSS counter has counted every finished required field -->
+    <div class="submit-bar">
+      <div class="done">
+        <p><span class="done__num"></span> of 5 must-do boxes done</p>
+        <span class="done__bar" aria-hidden="true"></span>
+      </div>
+      <button type="reset" class="btn btn--light">Start over</button>
+      <button type="submit" class="btn">Get my trainer card</button>
+    </div>
+  </form>
+
+  <aside class="academy__side">
+    <div class="tip">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/63.png" alt="" width="64" height="64">
+      <p><b>Try this:</b> type one letter in the name box, then click somewhere else. The box turns red and tells you what’s wrong. That’s the <code>:user-invalid</code> selector.</p>
+    </div>
+    <div class="tip">
+      <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/137.png" alt="" width="64" height="64">
+      <p><b>Try this too:</b> the green bar at the bottom fills up as you finish the boxes marked <abbr title="required">*</abbr>. CSS counts them with <code>:valid</code> and a counter.</p>
+    </div>
+    <aside class="why-js">
+      <span class="why-js__badge" aria-hidden="true">JS</span>
+      <div>
+        <h2>Why JavaScript here?</h2>
+        <p>A photo is too big to travel in the address bar with your other answers. A tiny script shrinks it and keeps it safe in your browser until your card is ready.</p>
+      </div>
+    </aside>
+  </aside>
+</div>
+  </main>
+
+  <footer class="site-foot">
+    <div class="grass-band" aria-hidden="true">
+      <div class="blades blades--back"></div>
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png" alt="">
+      <img class="peek" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png" alt="">
+      <div class="blades"></div>
+    </div>
+    <div class="foot-inner">
+      <div class="wrap">
+        <div>
+          <p class="foot-brand">AshTech</p>
+          <p>A field guide for young trainers.</p>
+        </div>
+        <nav aria-label="Footer">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="pokedex.html">Pokédex</a></li>
+            <li><a href="types.html">Types</a></li>
+            <li><a href="evolution.html">Evolution</a></li>
+            <li><a href="regions.html">Regions</a></li>
+            <li><a href="arcade.html">Arcade</a></li>
+            <li><a href="theater.html">Theater</a></li>
+            <li><a href="academy.html">Academy</a></li>
+            <li><a href="workshop.html">Workshop</a></li>
+            <li><a href="teachers.html">Teachers</a></li>
+            <li><a href="handbook.html">Kids’ Handbook</a></li>
+          </ul>
+        </nav>
+        <div>
+          <address class="maker">
+            Made with love by <strong>Muhammad Ali Ashraf</strong>, software engineer and proud alumnus of
+            <strong>Sir Syed School &amp; College Campus-V</strong>,
+            for the students learning HTML and CSS there, and for curious trainers everywhere.
+          </address>
+          <small>AshTech is a free, non-commercial fan project made for learning. It is not connected to Nintendo, Creatures Inc., GAME FREAK or The Pokémon Company, who own Pokémon and all its characters. Pictures and cries come from the open <a href="https://pokeapi.co">PokéAPI</a> project.</small>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
