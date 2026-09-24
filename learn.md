@@ -1276,7 +1276,7 @@ Start easy and work your way down. Save the file and refresh the browser after e
 - **Diagrams:** drawn by [Mermaid](https://mermaid.js.org/), an open-source library.
 - **Pokémon** and all Pokémon character names belong to Nintendo, Creatures Inc., GAME FREAK and The Pokémon Company. AshTech is a free, non-commercial fan project made for learning, and is not connected to them.
 
-**Made by** Muhammad Ali Ashraf, software engineer and proud alumnus of Sir Syed School & College Campus-V, for the students learning HTML and CSS there, and for curious trainers everywhere.
+**Made by** Engr. Muhammad Ali Ashraf, software engineer and proud alumnus of Sir Syed School & College Campus-V, for the students learning HTML and CSS there, and for curious trainers everywhere.
 
 **Where to learn more:**
 

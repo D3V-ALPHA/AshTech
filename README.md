@@ -79,7 +79,7 @@ You *can* double-click `index.html`, and nearly everything works, but YouTube re
 
 ## Credits
 
-- Made by **Muhammad Ali Ashraf**, software engineer and proud alumnus of Sir Syed School & College Campus-V.
+- Made by **Engr. Muhammad Ali Ashraf**, software engineer and proud alumnus of Sir Syed School & College Campus-V.
 - Pokémon pictures, sprites, cries and facts come from the open [PokéAPI](https://pokeapi.co/) project.
 - The video on the Theater page is from the official [Pokémon Kids TV](https://www.youtube.com/@pokemonkidstv) channel. The flower video is public domain (CC0), from the MDN Web Docs examples.
 - Fonts: [Lilita One](https://fonts.google.com/specimen/Lilita+One), [Lexend](https://fonts.google.com/specimen/Lexend) and [Press Start 2P](https://fonts.google.com/specimen/Press+Start+2P).
